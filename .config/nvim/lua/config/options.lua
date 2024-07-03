@@ -2,6 +2,7 @@ vim.o.hlsearch = false
 
 -- Make line numbers default
 vim.wo.number = true
+vim.wo.relativenumber = true
 
 -- add cursorline
 vim.wo.cursorline = true
