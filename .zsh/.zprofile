@@ -22,7 +22,7 @@ alias vi=nvim
 alias vim=nvim
 alias e=nvim
 
-function pyenv () { source "$HOME/.virtualenvs/$1/bin/activate" }
+function pyactivate () { source "$HOME/.pyenvs/$1/bin/activate" }
 
 # Setup paths
 path=($path  "/Users/hcq343/.local/bin")
