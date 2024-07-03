@@ -46,11 +46,11 @@ return {
       defaults = {
         mappings = {
           i = {
-            ["<C-u>"] = false,
             ["<CR>"] = select_one_or_multi,
+
           },
           n = {
-            ["<C-d>"] = require("telescope.actions").delete_buffer,
+            ["<C-D>"] = require("telescope.actions").delete_buffer,
           }, -- n
         },
       },
@@ -201,8 +201,8 @@ return {
       desc = "[F]ile [C]onfig",
     },
     { "<leader>sc", "<cmd>Telescope command_history<cr>", desc = "Command History" },
-    { "<leader>sC", "<cmd>Telescope commands<cr>", desc = "Commands" },
-    { "<leader>so", "<cmd>Telescope vim_options<cr>", desc = "Options" },
+    { "<leader>sC", "<cmd>Telescope commands<cr>",        desc = "Commands" },
+    { "<leader>so", "<cmd>Telescope vim_options<cr>",     desc = "Options" },
     {
       "<leader>ss",
       function()
