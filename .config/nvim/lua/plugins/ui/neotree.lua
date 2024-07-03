@@ -57,6 +57,9 @@ return {
     },
 
     filesystem = {
+      window = {
+        position = "float",
+      },
       bind_to_cwd = false,
       follow_current_file = { enabled = true },
       use_libuv_file_watcher = true,
@@ -93,6 +96,11 @@ return {
         },
       },
     },
+    buffers = {
+      window = {
+        position = 'float'
+      }
+    },
     git_status = {
       window = {
         mappings = {
@@ -116,9 +124,20 @@ return {
         expander_highlight = "NeoTreeExpander",
       },
     },
+    event_handlers = {
+
+      -- TODO: Should not apply for git view.
+      {
+        event = "file_open_requested",
+        handler = function(args)
+          -- auto close
+          -- vimc.cmd("Neotree close")
+          -- OR
+          if args.position == 'left' then
+            require("neo-tree.command").execute({ action = "close" })
+          end
+        end
+      },
+    }
   },
-  config = function(_, opts)
-    opts.event_handlers = opts.event_handlers or {}
-    require("neo-tree").setup(opts)
-  end,
 }
