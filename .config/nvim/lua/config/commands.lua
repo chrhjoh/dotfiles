@@ -73,11 +73,11 @@ end, {
 })
 
 vim.api.nvim_create_user_command("ToggleDiagnostics", function()
-  if not vim.diagnostic.is_enabled() then
-    vim.diagnostic.enable()
+  if not vim.diagnostic.is_enabled({ bufnr = 0 }) then
+    vim.diagnostic.enable(true, { bufnr = 0 })
     print("Enabled diagnostics")
   else
-    vim.diagnostic.enable(false)
+    vim.diagnostic.enable(false, { bufnr = 0 })
     print("Disabled diagnostics")
   end
 end, {

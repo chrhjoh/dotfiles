@@ -59,6 +59,7 @@ return {
     require("telescope").load_extension("directory")
     require("telescope").load_extension("aerial")
     require("telescope").load_extension("fzf")
+    require("telescope").load_extension("notify")
   end,
   keys = {
     {
@@ -163,6 +164,13 @@ return {
         require("telescope.builtin").resume()
       end,
       desc = "[S]earch [L]ast resume",
+    },
+    {
+      "<leader>sN",
+      function()
+        require('telescope').extensions.notify.notify()
+      end,
+      desc = "[S]earch [N]otifications"
     },
     {
       "<leader>fa",

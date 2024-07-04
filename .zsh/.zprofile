@@ -10,6 +10,8 @@ export RUSTUP_HOME="$HOME/.local/rustup"
 export CARGO_HOME="$HOME/.local/cargo"
 export DOCKER_CONFIG="$HOME/.config/docker"
 
+
+alias lazygit='LG_CONFIG_FILE="$HOME/.config/lazygit/config.yml" lazygit'
 # Set dir for dotfiles and config
 export DOTBARE_DIR="$HOME/.local/share/dotfiles/"
 export DOTBARE_TREE=$HOME
