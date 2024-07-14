@@ -38,9 +38,6 @@ local on_attach = function(client, bufnr)
       severity = { min = vim.diagnostic.severity.WARN },
     },
   })
-  if vim.bo.filetype == "snakemake" then
-    vim.diagnostic.enable(false, bufnr)
-  end
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()

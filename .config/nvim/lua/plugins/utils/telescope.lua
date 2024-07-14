@@ -60,6 +60,7 @@ return {
     require("telescope").load_extension("aerial")
     require("telescope").load_extension("fzf")
     require("telescope").load_extension("notify")
+    require("telescope").load_extension("refactoring")
   end,
   keys = {
     {

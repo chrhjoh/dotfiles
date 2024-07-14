@@ -33,7 +33,7 @@ return {
         end,
       },
       completion = {
-        completeopt = 'menu,menuone,noinsert',
+        completeopt = 'menuone,noinsert',
       },
       mapping = cmp.mapping.preset.insert {
         ['<C-n>'] = cmp.mapping.select_next_item(),
@@ -66,8 +66,8 @@ return {
       },
       sources = {
         { name = 'nvim_lsp', group_index = 1 },
-        { name = 'path',     group_index = 2 },
-        { name = 'luasnip',  group_index = 3 },
+        { name = 'path',     group_index = 1 },
+        { name = 'luasnip',  group_index = 1 },
         { name = "spell", group_index = 3,
           option = {
             keep_all_entries = false,
