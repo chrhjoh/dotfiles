@@ -8,8 +8,8 @@ local config = {}
 config.use_ime = true
 
 -- Fonts
-config.font_size = 10
-config.font = wezterm.font 'MesloLGM Nerd Font'
+config.font_size = 11
+config.font = wezterm.font 'JetBrainsMono Nerd Font'
 
 color_theme.add_color_theme_configurations(config)
 tab_bar.add_tab_bar_configurations(config)
