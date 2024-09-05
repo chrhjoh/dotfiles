@@ -46,3 +46,9 @@ vim.o.sessionoptions = "buffers,curdir,folds,tabpages,winpos,winsize"
 vim.o.laststatus = 0
 
 vim.opt.spelllang = { "en_us" }
+
+-- Forces cursor into middle of page when scrolling
+vim.o.so = 15
+
+-- disable terminal sync to avoid cursor flicker
+vim.o.termsync = false
