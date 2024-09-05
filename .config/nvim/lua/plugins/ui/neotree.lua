@@ -49,7 +49,7 @@ return {
           ["<tab>"] = {
             function(state)
               require("neo-tree.sources.common.commands").open(state)
-              require("neo-tree.command").execute({ action = "focus" })
+              require("neo-tree.command").execute({ action = "focus", source = 'last' })
             end
 
           },
