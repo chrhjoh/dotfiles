@@ -79,7 +79,7 @@
           "trailing_diamond": "\ue0b4",
           "foreground": "p:text",
           "background": "#cba6f7",
-          "template": " {{ if .Error }}{{ .Error }}{{ else }}{{ if .Venv }}  {{.Venv}}{{ end }}{{ end }}",
+          "template": " {{ if .Error }}{{ .Error }}{{ else }}{{ if .Venv }} {{.Venv}}{{ end }}{{ end }}",
           "properties": {
             "fetch_virtual_env": true,
             "home_enabled": true
