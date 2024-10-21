@@ -25,7 +25,47 @@ alias vi=nvim
 alias vim=nvim
 alias e=nvim
 
-function pyactivate () { source "$HOME/.pyenvs/$1/bin/activate" }
+function activate_pyenv () { 
+  VENV_DIR="$HOME/.pyenvs/"
+  venvs=($(ls "$VENV_DIR"))
+
+  if [ -z "$1" ]; then
+    echo "Please provide the name of the virtual environment to activate."
+    echo "Available virtual environments in $VENV_DIR:"
+    echo ""
+
+  
+    for i in {1..${#venvs[@]}}; do
+      echo "$i) ${venvs[$((i))]}"
+    done
+    echo ""
+
+    echo -n "Please enter the name or number of the virtual environment: "
+    read VENV
+  else
+    VENV=$1
+  fi
+  if [[ "$VENV" =~ ^[0-9]+$ ]]; then
+    VENV="${venvs[$((VENV))]}"
+  fi
+
+  VENV_PATH="${VENV_DIR}/$VENV/bin/activate"
+
+  # Check if the provided virtual environment exists
+  if [ -f "$VENV_PATH" ]; then
+    source "$VENV_PATH"
+    echo ""
+    echo "Activated virtual environment: $VENV"
+  else
+    echo ""
+    echo "Virtual environment '$VENV' not found in $VENV_DIR"
+    echo "Please choose from the created environments:"
+    echo ""
+
+    ls "$VENV_DIR"
+
+    return 1
+  fi }
 
 # Setup paths
 path=($path  "/Users/hcq343/.local/bin")

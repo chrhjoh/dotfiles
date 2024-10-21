@@ -40,8 +40,8 @@ return {
   end,
   keys = {
     [[<c-\>]],
-    { "<leader>tl", ":ToggleTermSendCurrentLine<CR>",       desc = "Send current line to terminal" },
-    { "<leader>tv", ":ToggleTermSendVisualLines<CR>",       desc = "Send selected lines to terminal" },
+    { "<leader>tl", ":ToggleTermSendCurrentLine<CR>",       desc = "Send current line to terminal",            mode = { "n", "v" } },
+    { "<leader>tv", ":ToggleTermSendVisualLines<CR>",       desc = "Send selected lines to terminal",          mode = { "n", "v" } },
     { "<leader>tV", ":ToggleTermSendVisualSelection<CR>",   desc = "Send selection to terminal" },
     { "<leader>t|", ":ToggleTerm direction=vertical<CR>",   desc = "Open vertical terminal" },
     { "<leader>t-", ":ToggleTerm direction=horizontal<CR>", desc = "Open horizontal terminal" },
