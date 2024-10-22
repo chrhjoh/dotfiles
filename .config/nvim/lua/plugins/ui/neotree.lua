@@ -9,22 +9,22 @@ return {
         function()
           require("neo-tree.command").execute({ source = 'filesystem', toggle = true, dir = vim.uv.cwd(), })
         end,
-        desc = "Explorer NeoTree (cwd)",
+        desc = "Open File Explorer In Current Directory (NeoTree)",
       },
-      { "<leader>e", "<leader>fe", desc = "Explorer NeoTree (Root Dir)", remap = true },
+      { "<leader>e", "<leader>fe", desc = "Open File Explorer In Root Directory (NeoTree)", remap = true },
       {
         "<leader>ge",
         function()
           require("neo-tree.command").execute({ source = "git_status", toggle = true })
         end,
-        desc = "Git Explorer",
+        desc = "Open Git Explorer In Parent Directory (NeoTree)",
       },
       {
         "<leader>be",
         function()
           require("neo-tree.command").execute({ source = "buffers", toggle = true })
         end,
-        desc = "Buffer Explorer",
+        desc = "Open Buffer Explorer In Parent Directory (NeoTree)",
       },
     },
     deactivate = function()
