@@ -8,6 +8,10 @@ return {
         suggestion = {
           enabled = true,
           auto_trigger = true,
+          keymap = {
+            accept = "<M-y>",
+            accept_word = "<M-Y>",
+          }
         }
       })
     end,

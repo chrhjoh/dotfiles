@@ -47,7 +47,7 @@ return {
         mappings = {
           i = {
             ["<CR>"] = select_one_or_multi,
-
+            ["<C-D>"] = require("telescope.actions").delete_buffer,
           },
           n = {
             ["<C-D>"] = require("telescope.actions").delete_buffer,

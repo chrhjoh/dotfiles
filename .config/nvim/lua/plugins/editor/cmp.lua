@@ -36,18 +36,30 @@ return {
         completeopt = 'menuone,noinsert',
       },
       mapping = cmp.mapping.preset.insert {
-        ['<C-n>'] = cmp.mapping.select_next_item(),
-        ['<C-p>'] = cmp.mapping.select_prev_item(),
-        ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-        ['<C-f>'] = cmp.mapping.scroll_docs(4),
-        ['<C-c>'] = cmp.mapping.complete({ reason = cmp.ContextReason.Auto }),
-        ['<C-y>'] = cmp.mapping.confirm {
+        ['<Down>']  = cmp.mapping(
+          function(fallback)
+            cmp.close()
+            fallback()
+          end,
+          { "i" }),
+        ['<Up>']    = cmp.mapping(
+          function(fallback)
+            cmp.close()
+            fallback()
+          end,
+          { "i" }),
+        ['<C-n>']   = cmp.mapping.select_next_item(),
+        ['<C-p>']   = cmp.mapping.select_prev_item(),
+        ['<C-b>']   = cmp.mapping.scroll_docs(-4),
+        ['<C-f>']   = cmp.mapping.scroll_docs(4),
+        ['<C-c>']   = cmp.mapping.complete({ reason = cmp.ContextReason.Auto }),
+        ['<C-y>']   = cmp.mapping.confirm {
           behavior = cmp.ConfirmBehavior.Replace,
           select = true,
         },
-        ['<Tab>'] = cmp.mapping(function(fallback)
+        ['<Tab>']   = cmp.mapping(function(fallback)
           if cmp.visible() then
-            cmp.select_next_item()
+            cmp.select_next_item({ behavior = require('cmp.types').cmp.SelectBehavior.Select })
           elseif luasnip.expand_or_locally_jumpable() then
             luasnip.expand_or_jump()
           else
@@ -56,7 +68,7 @@ return {
         end, { 'i', 's' }),
         ['<S-Tab>'] = cmp.mapping(function(fallback)
           if cmp.visible() then
-            cmp.select_prev_item()
+            cmp.select_prev_item({ behavior = require('cmp.types').cmp.SelectBehavior.Select })
           elseif luasnip.locally_jumpable(-1) then
             luasnip.jump(-1)
           else

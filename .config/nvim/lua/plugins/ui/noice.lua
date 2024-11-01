@@ -21,6 +21,15 @@ return {
     },
     config = function()
         require("noice").setup({
+            routes = {
+                {
+                    filter = {
+                        event = "lsp",
+                        kind = "progress",
+                    },
+                    opts = { skip = true },
+                },
+            },
             lsp = {
                 -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
                 override = {

@@ -15,7 +15,6 @@ return {
                 { "<leader>f",      group = "Files" },
                 { "<leader>g",      group = "Git" },
                 { "<leader>gh",     group = "Git [H]unk" },
-                { "<leader>l",      group = "Latex" },
                 { "<leader>o",      group = "Obsidian" },
                 { "<leader>r",      group = "Refactor" },
                 { "<leader>s",      group = "Search" },
@@ -24,6 +23,7 @@ return {
                 { "<leader>w",      group = "Window" },
                 { "<leader>x",      group = "Diagnostics/quickfiX" },
                 { "<localleader>o", group = "Oil" },
+                { "<localleader>l", group = "Latex" },
 
                 { "",               group = "prev" },
                 { "",               group = "next" },
