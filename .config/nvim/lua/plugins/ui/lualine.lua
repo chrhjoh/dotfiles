@@ -20,10 +20,7 @@ return {
         lualine_b = { 'branch', 'diff', { 'diagnostics', sections = { 'error', 'warn' } } },
         lualine_c = {
           {
-            'buffers',
-            symbols = {
-              alternate_file = ''
-            },
+            'filename'
           }
         },
         lualine_x = {
