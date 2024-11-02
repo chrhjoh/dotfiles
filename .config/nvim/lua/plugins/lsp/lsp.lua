@@ -51,6 +51,7 @@ return {
     { "folke/neodev.nvim", opts = {} },
     "neovim/nvim-lspconfig",
     "williamboman/mason.nvim",
+    "barreiroleo/ltex-extra.nvim"
   },
   config = function()
     require("mason-lspconfig").setup({
@@ -131,6 +132,14 @@ return {
         -- serverPath = "" -- Normally, there is no need to uncomment it.
       }
     }
-    lspconfig.ltex.setup {}
+    lspconfig.ltex.setup {
+      capabilities = capabilities,
+      on_attach = function(client, bufnr)
+        on_attach(client, bufnr)
+        require("ltex_extra").setup {
+          path = "~/.local/share/ltex"
+        }
+      end
+    }
   end
 }
