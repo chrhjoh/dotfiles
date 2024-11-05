@@ -12,6 +12,7 @@ return {
   'akinsho/bufferline.nvim',
   version = "*",
   dependencies = { 'nvim-tree/nvim-web-devicons', },
+  event = { "BufReadPost", "BufNewFile", "BufWritePre" },
   config = function()
     local bufferline = require("bufferline")
     local harpoon = require("harpoon")
