@@ -19,19 +19,6 @@ return {
   lazy = true,
   dependencies = {
     "nvim-lua/plenary.nvim",
-    -- Fuzzy Finder Algorithm which requires local dependencies to be built.
-    -- Only load if `make` is available. Make sure you have the system
-    -- requirements installed.
-    {
-      "nvim-telescope/telescope-fzf-native.nvim",
-      -- NOTE: If you are having trouble with this installation,
-      --       refer to the README for telescope-fzf-native for more instructions.
-      build = "make",
-      cond = function()
-        return vim.fn.executable("make") == 1
-      end,
-    },
-    { "fbuchlak/telescope-directory.nvim" },
   },
   config = function()
     require("telescope").setup({
@@ -56,9 +43,7 @@ return {
       },
     })
     require("telescope").load_extension("persisted")
-    require("telescope").load_extension("directory")
     require("telescope").load_extension("aerial")
-    require("telescope").load_extension("fzf")
     require("telescope").load_extension("notify")
     require("telescope").load_extension("refactoring")
   end,
@@ -99,9 +84,17 @@ return {
       desc = "[G]it [F]ind",
     },
     {
+      "<leader>fF",
+      function()
+        require("telescope.builtin").find_files({ no_ignore = true, hidden = true })
+      end,
+      desc = "[F]iles [F]ind",
+    },
+
+    {
       "<leader>ff",
       function()
-        require("telescope.builtin").find_files({ no_ignore = true })
+        require("telescope.builtin").find_files()
       end,
       desc = "[F]iles [F]ind",
     },
