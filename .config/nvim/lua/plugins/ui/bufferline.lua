@@ -12,13 +12,14 @@ return {
   'akinsho/bufferline.nvim',
   version = "*",
   dependencies = { 'nvim-tree/nvim-web-devicons', },
-  event = "VeryLazy",
+  event = { "BufReadPost", "BufNewFile" },
   config = function()
     local bufferline = require("bufferline")
     local harpoon = require("harpoon")
     bufferline.setup {
       options = {
         style_preset = bufferline.style_preset.minimal,
+        always_show_bufferline = false,
         color_icons = false,
         name_formatter = function(buf)
           local harpoon_list = harpoon:list().items
