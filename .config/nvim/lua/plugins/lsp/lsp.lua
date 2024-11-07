@@ -23,13 +23,14 @@ local on_attach = function(client, bufnr)
   nmap("<leader>cr", vim.lsp.buf.rename, "[C]ode [R]ename")
   nmap("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
 
-  nmap("gd", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
-  nmap("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
-  nmap("gI", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
-  nmap("<leader>cD", require("telescope.builtin").lsp_type_definitions, "[C]ode Type [D]efinition")
-  nmap("<leader>cs", require("telescope.builtin").lsp_document_symbols, "[C]ode Document [S]ymbols")
-  nmap("<leader>cS", require("telescope.builtin").lsp_dynamic_workspace_symbols, "[Code] Workspace [S]ymbols")
-
+  vim.keymap.set("n", "gd", "<cmd>FzfLua lsp_definitions     jump_to_single_result=true ignore_current_line=true<cr>",
+    { desc = "Goto Definition" })
+  vim.keymap.set("n", "gr", "<cmd>FzfLua lsp_references      jump_to_single_result=true ignore_current_line=true<cr>",
+    { desc = "References", nowait = true })
+  vim.keymap.set("n", "gI", "<cmd>FzfLua lsp_implementations jump_to_single_result=true ignore_current_line=true<cr>",
+    { desc = "Goto Implementation" })
+  vim.keymap.set("n", "gy", "<cmd>FzfLua lsp_typedefs        jump_to_single_result=true ignore_current_line=true<cr>",
+    { desc = "Goto T[y]pe Definition" })
   vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
     signs = {
       severity = { min = vim.diagnostic.severity.INFO },

@@ -89,16 +89,6 @@ return {
         end,
         { desc = "CopilotChat - Quick chat" }
       )
-      -- Show prompts actions with telescope
-      vim.keymap.set(
-        { 'n', 'v' },
-        "<leader>cp",
-        function()
-          local actions = require("CopilotChat.actions")
-          require("CopilotChat.integrations.telescope").pick(actions.prompt_actions())
-        end,
-        { desc = "CopilotChat - Prompt actions" }
-      )
       vim.keymap.set({ 'n', 'v' }, "<leader>ce", "<cmd>CopilotChatExplain<cr>", { desc = "CopilotChat - Explain code" })
       vim.keymap.set({ 'n', 'v' }, "<leader>cs", "<cmd>CopilotChatSuggest<cr>", { desc = "CopilotChat - Suggest code" })
       vim.keymap.set({ 'n', 'v' }, "<leader>ct", "<cmd>CopilotChatTests<cr>", { desc = "CopilotChat - Generate tests" })

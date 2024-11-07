@@ -8,12 +8,6 @@ return {
   keys = {
     { "<leader>r", "", desc = "+refactor", mode = { "n", "v" } },
     {
-      "<leader>rs",
-      function() require('telescope').extensions.refactoring.refactors() end,
-      mode = { "n", "x" },
-      desc = "Refactor Search",
-    },
-    {
       "<leader>ri",
       function()
         require("refactoring").refactor("Inline Variable")

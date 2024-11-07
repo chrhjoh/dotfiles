@@ -54,10 +54,10 @@ return {
     }
     -- Set menu
     dashboard.section.buttons.val = {
-      button("s", "  > Restore session", ':lua require("telescope").extensions.persisted.persisted()<CR>'),
-      button("f", "  > Find file", ':lua require("telescope.builtin").find_files()<CR>'),
+      button("s", "  > Restore session", '<cmd>SessionSelect<cr>'),
+      button("f", "  > Find file", ':lua require("fzf-lua").files()<CR>'),
       button("e", "  > New file", ":ene <BAR> startinsert <CR>"),
-      button("o", "  > Open Recent Files", ':lua require("telescope.builtin").oldfiles()<CR>'),
+      button("o", "  > Open Recent Files", ':lua require("fzf-lua").oldfiles()<CR>'),
       button("t", "  > Open File Tree", ':lua require("neo-tree.command").execute{}<CR>'),
       button("u", "󰂖  > Update Plugins", ":Lazy update<CR>"),
       button("c", "  > Open Configurations", ":e $MYVIMRC | :cd %:p:h | pwd<CR>"),
