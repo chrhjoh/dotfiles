@@ -2,6 +2,7 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = ","
 vim.loader.enable()
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+local lazylockdir = vim.env.DOTFILES or vim.fn.stdpath("config")
 if not vim.loop.fs_stat(lazypath) then
     vim.fn.system({
         "git",
@@ -31,6 +32,6 @@ require("lazy").setup({
     dev = {
         path = "~/projects/nvim_plugins",
     },
-    lockfile = vim.env.DOTFILES .. "/lazy-lock.json" or vim.fn.stdpath("config") .. "/lazy-lock.json"
+    lockfile = lazylockdir .. "/lazy-lock.json"
 
 })
