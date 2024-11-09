@@ -52,7 +52,6 @@ return {
     { "folke/neodev.nvim", opts = {} },
     "neovim/nvim-lspconfig",
     "williamboman/mason.nvim",
-    "barreiroleo/ltex-extra.nvim"
   },
   config = function()
     require("mason-lspconfig").setup({
@@ -89,23 +88,10 @@ return {
       },
       filetypes = { "python", "snakemake" },
     })
-    lspconfig.bashls.setup({
-      capabilities = capabilities,
-      on_attach = on_attach,
-    })
     lspconfig.jsonls.setup({
       capabilities = capabilities,
       on_attach = on_attach,
     })
-    lspconfig.marksman.setup({
-      capabilities = capabilities,
-      on_attach = on_attach,
-    })
-    lspconfig.yamlls.setup({
-      capabilities = capabilities,
-      on_attach = on_attach,
-    })
-
     lspconfig.lua_ls.setup({
       capabilities = capabilities,
       on_attach = on_attach,
@@ -132,15 +118,6 @@ return {
         exportPdf = "onSave" -- Choose onType, onSave or never.
         -- serverPath = "" -- Normally, there is no need to uncomment it.
       }
-    }
-    lspconfig.ltex.setup {
-      capabilities = capabilities,
-      on_attach = function(client, bufnr)
-        on_attach(client, bufnr)
-        require("ltex_extra").setup {
-          path = "~/.local/share/ltex"
-        }
-      end
     }
     lspconfig.nil_ls.setup({})
   end

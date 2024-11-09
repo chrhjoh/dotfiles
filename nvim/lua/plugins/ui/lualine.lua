@@ -27,7 +27,7 @@ return {
           'filetype'
         },
         lualine_y = {
-          { "aerial", colored = true, dense = true },
+          { "aerial", colored = true, depth = -1 },
           'progress',
 
         },

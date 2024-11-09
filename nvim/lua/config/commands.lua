@@ -63,14 +63,3 @@ vim.api.nvim_create_user_command("BdeleteLower", function()
     vim.cmd(range .. "bd")
   end
 end, {})
-
-vim.api.nvim_create_user_command("SelectOption", function()
-  local options = { "Option 1", "Option 2", "Option 3" }
-  vim.ui.select(options, { prompt = "Choose an option:" }, function(choice)
-    if choice then
-      print("You selected: " .. choice)
-    else
-      print("No option selected")
-    end
-  end)
-end, {})
