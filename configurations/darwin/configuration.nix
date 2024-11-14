@@ -17,6 +17,9 @@
   # Necessary for using flakes on this system.
   nix.settings.experimental-features = "nix-command flakes";
 
+  # Use xdg directories
+  nix.settings.use-xdg-base-directories = true;
+
   # Used for backwards compatibility, please read the changelog before changing.
   # $ darwin-rebuild changelog
   system = {

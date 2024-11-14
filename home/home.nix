@@ -26,29 +26,15 @@
     fzf
 
     # Python stuff
-    pipx
-    snakemake
-    poetry
     micromamba
-
-    # R
-    R
-
-    # markup
-    typst
-    texlive.combined.scheme-small
-
-    #rust
-    cargo
 
     #nix
     nixfmt-rfc-style
 
-    spotify
-
     rectangle
-    obsidian
 
+    spotify
+    obsidian
     zotero
     slack
 
@@ -58,21 +44,10 @@
   #create dotfile symlinks to store
   xdg.configFile."wezterm".source = ./../wezterm;
   xdg.configFile."nvim".source = ./../nvim;
-  xdg.configFile."oh-my-posh".source = ./../oh-my-posh;
-
-  xdg.enable = true;
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
-  programs.oh-my-posh = {
-    enable = false;
-    useTheme = "catppuccin_mocha";
-    settings = builtins.fromJSON (
-      builtins.unsafeDiscardStringContext (builtins.readFile ./../oh-my-posh/config.json)
-    );
-
-  };
   programs.starship = {
     enable = true;
     settings = {
@@ -83,13 +58,28 @@
         error_symbol = "[[󰄛](red) ❯](peach)";
 
       };
+      cmd_duration.disabled = true;
+      git_status.disabled = true;
       git_branch = {
         style = "bold mauve";
       };
       directory = {
         style = "bold flamingo";
-        format = "[$path]($style)[$read_only]($read_only_style) ";
       };
+      python = {
+        symbol = " ";
+        format = "[($symbol($virtualenv))]($style)";
+        style = "bold yellow";
+      };
+      conda = {
+        format = "[$symbol$environment]($style)";
+      };
+      rust = {
+        symbol = "";
+        format = "[$symbol ($version )]($style)";
+        style = "bold red";
+      };
+      package.disabled = true;
       palettes.catppuccin_mocha = {
         rosewater = "#f5e0dc";
         flamingo = "#f2cdcd";
@@ -140,7 +130,7 @@
   programs.zsh = {
     enable = true;
     enableCompletion = true;
-    dotDir = ".local/share/zsh/";
+    dotDir = ".config/zsh";
     oh-my-zsh = {
       enable = true;
       plugins = [
@@ -154,18 +144,39 @@
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
     shellAliases = {
-      update = "darwin-rebuild switch --flake ~/.config/dotfiles/";
+      update = "darwin-rebuild switch --flake $DOTFILES";
       mm = "micromamba";
       dots = "cd $DOTFILES";
     };
-    sessionVariables = {
-      CARGO_HOME = "$HOME/.local/share/cargo";
-      MAMBA_ROOT_PREFIX = "$HOME/.local/share/micromamba";
-      DOTFILES = "$HOME/.config/dotfiles";
-    };
+    sessionVariables =
+      let
+        xdg = config.xdg;
+        runtime_dir = "/run/user/$UID";
+      in
+      {
+        XDG_DATA_HOME = xdg.dataHome;
+        XDG_CONFIG_HOME = xdg.configHome;
+        XDG_STATE_HOME = xdg.stateHome;
+        XDG_CACHE_HOME = xdg.cacheHome;
+        XDG_RUNTIME_DIR = runtime_dir;
+        CARGO_HOME = "${xdg.dataHome}/cargo";
+        MAMBA_ROOT_PREFIX = "${xdg.dataHome}/micromamba";
+        DOTFILES = "${xdg.configHome}/dotfiles";
+        R_HISTFILE = "${xdg.stateHome}/R/history";
+        HISTFILE = "${xdg.stateHome}/bash/history";
+        BUNDLE_USER_CACHE = "${xdg.cacheHome}/bundle";
+        BUNDLE_USER_CONFIG = "${xdg.configHome}/bundle";
+        BUNDLE_USER_PLUGIN = "${xdg.dataHome}/bundle";
+        JULIA_DEPOT_PATH = "${xdg.dataHome}/julia:$JULIA_DEPOT_PATH";
+        DOCKER_CONFIG = "${xdg.configHome}/docker";
+        NPM_CONFIG_INIT_MODULE = "${xdg.configHome}/npm/config/npm-init.js";
+        NPM_CONFIG_CACHE = "${xdg.cacheHome}/npm";
+        NPM_CONFIG_TMP = "${runtime_dir}/npm";
+        PYTHON_HISTORY = "${xdg.stateHome}/python_history";
+      };
     history = {
       size = 10000;
-      path = "$ZDOTDIR/zsh_history";
+      path = "${config.xdg.stateHome}/zsh_history";
     };
     initExtra = ''
       HYPHEN_INSENSITIVE="true"
@@ -328,7 +339,14 @@
   };
   programs.nushell = {
     enable = true;
-
+  };
+  programs.direnv = {
+    enable = true;
+    enableZshIntegration = true;
+    nix-direnv.enable = true;
+    config = {
+      hide_env_diff = true;
+    };
   };
 
 }
