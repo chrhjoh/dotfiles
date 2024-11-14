@@ -55,16 +55,71 @@
     wezterm.packages.${pkgs.system}.default
   ];
 
-  #create dotfile symlinks
+  #create dotfile symlinks to store
   xdg.configFile."wezterm".source = ./../wezterm;
   xdg.configFile."nvim".source = ./../nvim;
+  xdg.configFile."oh-my-posh".source = ./../oh-my-posh;
+
+  xdg.enable = true;
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
   programs.oh-my-posh = {
-    enable = true;
+    enable = false;
     useTheme = "catppuccin_mocha";
+    settings = builtins.fromJSON (
+      builtins.unsafeDiscardStringContext (builtins.readFile ./../oh-my-posh/config.json)
+    );
+
+  };
+  programs.starship = {
+    enable = true;
+    settings = {
+      add_newline = false;
+      palette = "catppuccin_mocha";
+      character = {
+        success_symbol = "[[󰄛](green) ❯](peach)";
+        error_symbol = "[[󰄛](red) ❯](peach)";
+
+      };
+      git_branch = {
+        style = "bold mauve";
+      };
+      directory = {
+        style = "bold flamingo";
+        format = "[$path]($style)[$read_only]($read_only_style) ";
+      };
+      palettes.catppuccin_mocha = {
+        rosewater = "#f5e0dc";
+        flamingo = "#f2cdcd";
+        pink = "#f5c2e7";
+        mauve = "#cba6f7";
+        red = "#f38ba8";
+        maroon = "#eba0ac";
+        peach = "#fab387";
+        yellow = "#f9e2af";
+        green = "#a6e3a1";
+        teal = "#94e2d5";
+        sky = "#89dceb";
+        sapphire = "#74c7ec";
+        blue = "#89b4fa";
+        lavender = "#b4befe";
+        text = "#cdd6f4";
+        subtext1 = "#bac2de";
+        subtext0 = "#a6adc8";
+        overlay2 = "#9399b2";
+        overlay1 = "#7f849c";
+        overlay0 = "#6c7086";
+        surface2 = "#585b70";
+        surface1 = "#45475a";
+        surface0 = "#313244";
+        base = "#1e1e2e";
+        mantle = "#181825";
+        crust = "#11111b";
+
+      };
+    };
   };
 
   programs.git = {
@@ -269,6 +324,10 @@
       }
 
     ];
+
+  };
+  programs.nushell = {
+    enable = true;
 
   };
 
