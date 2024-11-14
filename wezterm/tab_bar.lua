@@ -94,6 +94,26 @@ wezterm.on('update-status', function(window, pane)
 
 	window:set_right_status(wezterm.format(elements))
 end)
+local function tab_title(tab_info)
+	local title = tab_info.tab_title
+	-- if the tab title is explicitly set, take that
+	if title and #title > 0 then
+		return title
+	end
+	-- Otherwise, use the title from the active pane
+	-- in that tab
+	return basename(tab_info.active_pane.title)
+end
+
+wezterm.on(
+	'format-tab-title',
+	function(tab, tabs, panes, config, hover, max_width)
+		local title = tab_title(tab)
+		return {
+			{ Text = ' ' .. tab.tab_index + 1 .. ": " .. title .. ' ' },
+		}
+	end
+)
 
 function M.add_tab_bar_configurations(config)
 	config.use_fancy_tab_bar = false
