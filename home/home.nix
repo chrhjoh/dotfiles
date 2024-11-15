@@ -59,9 +59,16 @@
 
       };
       cmd_duration.disabled = true;
-      git_status.disabled = true;
+      git_status = {
+        style = "bold mauve";
+      };
       git_branch = {
         style = "bold mauve";
+        format = "on [$symbol$branch(:$remote_branch)]($style)";
+      };
+      nix_shell = {
+        format = "[$symbol $state( \($name\))]($style) ";
+        symbol = "❄️";
       };
       directory = {
         style = "bold flamingo";
