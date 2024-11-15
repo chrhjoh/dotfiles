@@ -8,7 +8,7 @@ local config = {}
 config.use_ime = true
 -- Fonts
 config.font_size = 11
-config.font = wezterm.font 'JetBrainsMono Nerd Font'
+config.font = wezterm.font_with_fallback { 'JetBrainsMono Nerd Font', 'Monaco' }
 
 color_theme.add_color_theme_configurations(config)
 tab_bar.add_tab_bar_configurations(config)
