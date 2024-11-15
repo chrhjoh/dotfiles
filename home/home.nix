@@ -64,7 +64,7 @@
       };
       git_branch = {
         style = "bold mauve";
-        format = "on [$symbol$branch(:$remote_branch)]($style)";
+        format = "on [$symbol$branch(:$remote_branch)]($style) ";
       };
       nix_shell = {
         format = "[$symbol $state( \($name\))]($style) ";
@@ -75,15 +75,15 @@
       };
       python = {
         symbol = " ";
-        format = "[($symbol($virtualenv))]($style)";
+        format = "[($symbol($virtualenv))]($style) ";
         style = "bold yellow";
       };
       conda = {
-        format = "[$symbol$environment]($style)";
+        format = "[$symbol$environment]($style) ";
       };
       rust = {
         symbol = "";
-        format = "[$symbol ($version )]($style)";
+        format = "[$symbol ($version)]($style) ";
         style = "bold red";
       };
       package.disabled = true;
@@ -158,7 +158,7 @@
     sessionVariables =
       let
         xdg = config.xdg;
-        runtime_dir = "/run/user/$UID";
+        runtime_dir = "${config.home.homeDirectory}/.xdg-runtime";
       in
       {
         XDG_DATA_HOME = xdg.dataHome;
