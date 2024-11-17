@@ -92,16 +92,10 @@ function M.add_key_configurations(config)
 		{ key = 'k', mods = 'LEADER',       action = act.CloseCurrentPane { confirm = true } },
 		{ key = 'c', mods = 'LEADER',       action = act.SpawnTab 'CurrentPaneDomain' },
 		{
-			key = 'u',
+			key = 'a',
 			mods = 'LEADER',
 			action = act.AttachDomain 'unix',
 		},
-		{
-			key = 'U',
-			mods = 'LEADER',
-			action = act.SpawnTab { DomainName = 'unix' }
-		},
-
 		{
 			key = 'd',
 			mods = 'LEADER',

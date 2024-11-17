@@ -168,6 +168,7 @@
         XDG_RUNTIME_DIR = runtime_dir;
         CARGO_HOME = "${xdg.dataHome}/cargo";
         MAMBA_ROOT_PREFIX = "${xdg.dataHome}/micromamba";
+        CONDARC = "${xdg.configHome}/conda/condarc";
         DOTFILES = "${xdg.configHome}/dotfiles";
         R_HISTFILE = "${xdg.stateHome}/R/history";
         HISTFILE = "${xdg.stateHome}/bash/history";
@@ -180,6 +181,7 @@
         NPM_CONFIG_CACHE = "${xdg.cacheHome}/npm";
         NPM_CONFIG_TMP = "${runtime_dir}/npm";
         PYTHON_HISTORY = "${xdg.stateHome}/python_history";
+        LESSHISTFILE = "${xdg.stateHome}/less/history";
       };
     history = {
       size = 10000;
