@@ -5,7 +5,7 @@ return {
   config = function()
     require('persisted').setup({
       use_git_branch = true,
-      should_autosave = false,
+      autostart = false,
       autoload = false
     })
   end,

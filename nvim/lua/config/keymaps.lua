@@ -7,8 +7,6 @@ vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = tr
 vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
 -- Diagnostic keymaps
-vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic message" })
-vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next diagnostic message" })
 vim.keymap.set("n", "<leader>xe", vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
 vim.keymap.set("n", "<leader>xd", function()
   vim.diagnostic.setloclist({ severity = { min = vim.diagnostic.severity.WARN } })
@@ -30,9 +28,6 @@ vim.keymap.set("n", "]b", "<cmd>bnext<cr>", { desc = "Next Buffer" })
 vim.keymap.set("n", "<leader>bb", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
 vim.keymap.set("n", "<leader>`", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
 vim.keymap.set("n", "<leader>bo", ':%bdelete|edit #|bd #"<cr>', { desc = "Delete all other buffers" })
-vim.keymap.set("n", "<leader>bh", ":BdeleteHigher<cr>", { desc = "Delete buffers higher than current" })
-vim.keymap.set("n", "<leader>bl", ":BdeleteLower<cr>", { desc = "Delete buffers lower than current" })
-vim.keymap.set("n", "<leader>bd", "<cmd>silent! bp<bar>sp<bar>silent!bn<bar>bd<cr>", { desc = "Delete Current buffer" })
 vim.keymap.set("n", "<leader>bD", "<cmd>bd!<cr>", { desc = "Delete current buffer (discard changes)" })
 vim.keymap.set("n", "<leader>bc", "<cmd>let @+ = expand('%:p')<cr>",
   { desc = "Copy current buffer relative path to clipboard" })
@@ -106,5 +101,11 @@ vim.cmd("autocmd! TermOpen term://* lua set_terminal_keymaps()")
 -- Toggles
 vim.keymap.set("n", "<leader>uF", "<cmd>ToggleFormat<cr>", { desc = "Toggle auto-format globally" })
 vim.keymap.set("n", "<leader>uf", "<cmd>ToggleFormat!<cr>", { desc = "Toggle auto-format for buffer" })
-vim.keymap.set("n", "<leader>uc", "<cmd>ToggleGitConfigurations<cr>", { desc = "Toggle git for dotfiles" })
 vim.keymap.set("n", "<leader>ud", "<cmd>ToggleDiagnostics<cr>", { desc = "Toggle diagnostics for buffer" })
+
+
+-- Move around
+vim.keymap.set("i", "<c-l>", "<right>", { desc = "Right" })
+vim.keymap.set("i", "<c-k>", "<up>", { desc = "Up" })
+vim.keymap.set("i", "<c-j>", "<down>", { desc = "Down" })
+vim.keymap.set("i", "<c-h>", "<left>", { desc = "Left" })

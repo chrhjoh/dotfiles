@@ -3,19 +3,6 @@ vim.api.nvim_create_user_command("Configurations", function()
   vim.api.nvim_set_current_dir(CONFIG_HOME)
 end, {})
 
-vim.api.nvim_create_user_command("ToggleGitConfigurations", function()
-  -- Set these to make vim fugitive and gitsigns work with bare dotfile directory
-  if not vim.env.GIT_DIR then
-    vim.env.GIT_DIR = vim.env.DOTBARE_DIR
-    vim.env.GIT_WORK_TREE = vim.env.DOTBARE_TREE
-    print("Set Git to track Dotfiles")
-  else
-    vim.env.GIT_DIR = nil
-    vim.env.GIT_WORK_TREE = nil
-    print("Removed Git Dotfile tracking")
-  end
-end, {})
-
 vim.api.nvim_create_user_command("ToggleFormat", function(args)
   if args.bang then
     -- ToggleFormat! will disable formatting just for this buffer
@@ -49,17 +36,3 @@ vim.api.nvim_create_user_command("ToggleDiagnostics", function()
 end, {
   desc = "Toggle Diagnostics",
 })
-
-vim.api.nvim_create_user_command("BdeleteHigher", function()
-  vim.cmd('execute (bufnr("%") + 1) .. "," .. bufnr("$") .. "bd"')
-end, {})
-
-vim.api.nvim_create_user_command("BdeleteLower", function()
-  local curbuf = vim.fn.bufnr("%")
-  if curbuf > 1 then
-    -- Build the range string for buffers less than the current one
-    local range = "1," .. (curbuf - 1)
-    -- Execute the buffer delete command on the specified range
-    vim.cmd(range .. "bd")
-  end
-end, {})

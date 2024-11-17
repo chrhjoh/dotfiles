@@ -97,7 +97,7 @@ return {
       { "<leader>sW",      function() require("fzf-lua").grep_cword({ root = false }) end,     desc = "Word (cwd)" },
       { "<leader>sw",      function() require("fzf-lua").grep_visual() end,                    mode = "v",                       desc = "Selection (Root Dir)" },
       { "<leader>sW",      function() require("fzf-lua").grep_visual({ root = false }) end,    mode = "v",                       desc = "Selection (cwd)" },
-      { "<leader>uC",      function() require("fzf-lua").colorschemes() end,                   desc = "Colorscheme with Preview" },
+      { "<leader>sT",      function() require("fzf-lua").colorschemes() end,                   desc = "Colorscheme with Preview" },
       {
         "<leader>ss",
         function()
