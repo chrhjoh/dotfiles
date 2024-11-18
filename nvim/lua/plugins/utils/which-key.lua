@@ -22,14 +22,19 @@ return {
                 { "<leader>u",      group = "Toggle" },
                 { "<leader>w",      group = "Window" },
                 { "<leader>x",      group = "Diagnostics/quickfiX" },
+                { "<leader>y",      group = "Yank" },
                 { "<localleader>o", group = "Oil" },
                 { "<localleader>l", group = "Latex" },
+                { "<localleader>t", group = "Typst" },
+                { "<localleader>m", group = "Markdown" },
 
-                { "",               group = "prev" },
-                { "",               group = "next" },
+
+                { "]",              group = "prev" },
+                { "[",              group = "next" },
                 { "g",              group = "goto" },
                 { "gs",             group = "surround" },
                 { "z",              group = "fold" },
+
             },
         }
 

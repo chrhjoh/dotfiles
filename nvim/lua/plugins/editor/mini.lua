@@ -76,8 +76,6 @@ return {
       local ret = { mode = { "o", "x" } }
       ---@type table<string, string>
       local mappings = vim.tbl_extend("force", {}, {
-        around = "a",
-        inside = "i",
         around_next = "an",
         inside_next = "in",
         around_last = "al",

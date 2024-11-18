@@ -1,4 +1,4 @@
-#DotFiles
+# DotFiles
 This repository contains my dotfiles for configuration of:
 
 Terminal: Wezterm

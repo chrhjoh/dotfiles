@@ -16,9 +16,9 @@ end, { desc = "Open diagnostics list" })
 vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
 
-vim.keymap.set("n", "yP", ':let @* = expand("%:p")<CR>', { desc = "[P] Copy Absolute [P]athy" })
-vim.keymap.set("n", "yp", ':let @* = expand("%")<CR>', { desc = "[p] Copy Relative [P]ath" })
-vim.keymap.set("n", "y.", ':let @* = expand("%:t")<CR>', { desc = "[.] Copy Filename" })
+vim.keymap.set("n", "<leader>yP", ':let @* = expand("%:p")<CR>', { desc = "Yank Absolute [P]athy" })
+vim.keymap.set("n", "<leader>yp", ':let @* = expand("%")<CR>', { desc = "Yank Relative [P]ath" })
+vim.keymap.set("n", "<leader>y.", ':let @* = expand("%:t")<CR>', { desc = "Yank Filename" })
 
 -- Moving between buffers
 vim.keymap.set("n", "<TAB>", ":bn<CR>", { desc = "Next Buffer", silent = true })
@@ -28,7 +28,6 @@ vim.keymap.set("n", "]b", "<cmd>bnext<cr>", { desc = "Next Buffer" })
 vim.keymap.set("n", "<leader>bb", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
 vim.keymap.set("n", "<leader>`", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
 vim.keymap.set("n", "<leader>bo", ':%bdelete|edit #|bd #"<cr>', { desc = "Delete all other buffers" })
-vim.keymap.set("n", "<leader>bD", "<cmd>bd!<cr>", { desc = "Delete current buffer (discard changes)" })
 vim.keymap.set("n", "<leader>bc", "<cmd>let @+ = expand('%:p')<cr>",
   { desc = "Copy current buffer relative path to clipboard" })
 
