@@ -40,7 +40,6 @@ vim.o.termguicolors = true
 
 vim.opt.conceallevel = 1
 
-vim.opt.shell = vim.env.SHELL .. " -l"
 
 vim.o.sessionoptions = "buffers,curdir,folds,tabpages,winpos,winsize"
 vim.o.laststatus = 0

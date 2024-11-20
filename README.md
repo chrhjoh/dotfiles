@@ -2,12 +2,11 @@
 This repository contains my dotfiles for configuration of:
 
 Terminal: Wezterm
-Command Prompt: oh-my-posh
-Window Manager: Tmux
+Command Prompt: starship
+Multiplexer: Tmux/Wezterm
 Editor: Neovim
-Shell: zsh (oh-my-zsh)
+Shell: zsh 
 
-Current list of priorities for setting up dotfiles with nix.
+The configuration is done largely through nix.
 
-1. Mamba show env (requires rework of ohmyposh i think)
 

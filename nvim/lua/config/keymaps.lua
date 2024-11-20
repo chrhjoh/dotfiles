@@ -19,6 +19,8 @@ vim.keymap.set("v", ">", ">gv")
 vim.keymap.set("n", "<leader>yP", ':let @* = expand("%:p")<CR>', { desc = "Yank Absolute [P]athy" })
 vim.keymap.set("n", "<leader>yp", ':let @* = expand("%")<CR>', { desc = "Yank Relative [P]ath" })
 vim.keymap.set("n", "<leader>y.", ':let @* = expand("%:t")<CR>', { desc = "Yank Filename" })
+vim.keymap.set("n", "<leader>p", '"0p<cr>', { desc = "Put latest yank" })
+vim.keymap.set("n", "<leader>P", "<CMD>YankyRingHistory<CR>", { desc = "Put from yank history" })
 
 -- Moving between buffers
 vim.keymap.set("n", "<TAB>", ":bn<CR>", { desc = "Next Buffer", silent = true })
