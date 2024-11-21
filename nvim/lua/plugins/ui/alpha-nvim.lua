@@ -61,8 +61,6 @@ return {
       button("t", "  > Open File Tree", ':lua require("neo-tree.command").execute{}<CR>'),
       button("u", "󰂖  > Update Plugins", ":Lazy update<CR>"),
       button("c", "  > Open Configurations", ":e $MYVIMRC | :cd %:p:h | pwd<CR>"),
-      button("n", "󱓧  > Search Notes", "<cmd>ObsidianSearch<CR>"),
-      button("N", "󱓧  > Choose Note Workspace", "<cmd>ObsidianWorkspace<CR>"),
       button("q", "󰗼  > Quit NVIM", ":qa<CR>"),
     }
     -- Send config to alpha
