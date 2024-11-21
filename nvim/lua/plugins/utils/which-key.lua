@@ -23,6 +23,8 @@ return {
                 { "<leader>w",      group = "Window" },
                 { "<leader>x",      group = "Diagnostics/quickfiX" },
                 { "<leader>y",      group = "Yank" },
+                { "<leader>q",      group = "Session" },
+
                 { "<localleader>o", group = "Oil" },
                 { "<localleader>l", group = "Latex" },
                 { "<localleader>t", group = "Typst" },

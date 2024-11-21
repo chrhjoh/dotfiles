@@ -10,5 +10,6 @@ return {
          ["<Left>"] = { "n", "x" },
       },
    },
-   lazy = false
+   lazy = true,
+   cmd = "Hardtime"
 }
