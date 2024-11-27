@@ -5,6 +5,17 @@ return {
   opts = {
     quickfile = { enabled = true },
     statuscolumn = { enabled = true },
+    dashboard = {
+      enabled = true,
+      sections = {
+        { pane = 1, section = "header" },
+        { pane = 1, section = "keys", gap = 1, padding = 1 },
+        { pane = 2, padding = 8 },
+        { pane = 2, icon = " ", title = "Recent Files", section = "recent_files", indent = 2, padding = 1 },
+        { pane = 2, icon = " ", title = "Projects", section = "projects", indent = 2, padding = 1 },
+        { section = "startup" },
+      },
+    }
   },
   keys = {
     { "<leader>bd", function() Snacks.bufdelete() end,          desc = "Delete Buffer" },

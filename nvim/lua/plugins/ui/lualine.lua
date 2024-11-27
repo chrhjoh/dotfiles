@@ -13,7 +13,7 @@ return {
         theme = 'catppuccin',
         section_separators = '',
         component_separators = '|',
-        disabled_filetypes = { 'alpha', 'neo-tree' },
+        disabled_filetypes = { 'snacks_dashboard', 'neo-tree' },
       },
       sections = {
         lualine_a = { 'mode' },

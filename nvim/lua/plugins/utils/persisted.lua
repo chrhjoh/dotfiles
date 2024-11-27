@@ -4,8 +4,15 @@ return {
   config = function()
     require('persisted').setup({
       use_git_branch = true,
-      autostart = false,
-      autoload = true,
+      autostart = true,
+      autoload = false,
+      should_save = function()
+        if vim.bo.filetype == "snacks_dashboard" then return false end
+
+        local buffers = vim.api.nvim_list_bufs()
+        if #buffers < 1 then return false end
+        return true
+      end
     })
   end,
   keys = {
