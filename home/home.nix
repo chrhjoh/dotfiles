@@ -210,48 +210,37 @@
       # <<< mamba initialize <<<'';
 
     profileExtra = ''
-      function activate_pyvenv () { 
-      VENV_DIR="$HOME/.pyvenvs/"
-      venvs=($(ls "$VENV_DIR"))
+      function devshell() {
+          local repo="git+ssh://git@github.com/chrhjoh/dev-shells" 
+          local available_shells
+          local selected_shell
 
-      if [ -z "$1" ]; then
-        echo "Please provide the name of the virtual environment to activate."
-        echo "Available virtual environments in $VENV_DIR:"
-        echo ""
+          # Fetch the available shells using nix flake metadata
+          available_shells=$(nix flake show --quiet --quiet --json "$repo" | jq -r '.devShells | values[] | keys[]'| sort | uniq)  
 
+          # Check if any shells are available
+          if [[ -z "$available_shells" ]]; then
+            echo "No available shells found in the flake."
+            return 1
+          fi
 
-        for i in {1..''${#venvs[@]}}; do
-          echo "$i) ''${venvs[$((i))]}"
-        done
-        echo ""
+          echo "Available shells from $repo:"
+          echo "$available_shells"  | nl  # Numbered list of shells
 
-        echo -n "Please enter the name or number of the virtual environment: "
-        read VENV
-      else
-        VENV=$1
-      fi
-      if [[ "$VENV" =~ ^[0-9]+$ ]]; then
-        VENV="''${venvs[$((VENV))]}"
-      fi
+          # Prompt the user to select a shell
+          echo -n "Enter the number of the shell you want to activate: "
+          read shell_index
 
-      VENV_PATH="''${VENV_DIR}/$VENV/bin/activate"
+          # Get the shell name corresponding to the index
+          selected_shell=$(echo "$available_shells" | sed -n "''${shell_index}p")
 
-      # Check if the provided virtual environment exists
-      if [ -f "$VENV_PATH" ]; then
-        source "$VENV_PATH"
-        echo ""
-        echo "Activated virtual environment: $VENV"
-      else
-        echo ""
-        echo "Virtual environment '$VENV' not found in $VENV_DIR"
-        echo "Please choose from the created environments:"
-        echo ""
-
-        ls "$VENV_DIR"
-
-        return 1
-      fi }
-    '';
+          if [[ -n "$selected_shell" ]]; then
+            echo "Activating shell: $selected_shell"
+            nix develop "$repo#$selected_shell" -c "$SHELL"
+          else
+            echo "Invalid selection. Please try again."
+          fi
+        }'';
   };
 
   programs.neovim = {
