@@ -2,26 +2,9 @@ return {
   {
     "ibhagwan/fzf-lua",
     cmd = "FzfLua",
-    opts = function(_, opts)
-      local config = require("fzf-lua.config")
+    config = function(_)
       local actions = require("fzf-lua.actions")
-
-      config.defaults.keymap.builtin["<Esc>"] = "hide"
-      config.defaults.keymap.fzf["ctrl-q"] = "select-all+accept"
-      config.defaults.keymap.fzf["ctrl-u"] = "half-page-up"
-      config.defaults.keymap.fzf["ctrl-d"] = "half-page-down"
-      config.defaults.keymap.fzf["ctrl-x"] = "jump"
-      config.defaults.keymap.fzf["ctrl-f"] = "preview-page-down"
-      config.defaults.keymap.fzf["ctrl-b"] = "preview-page-up"
-      config.defaults.keymap.builtin["<c-f>"] = "preview-page-down"
-      config.defaults.keymap.builtin["<c-b>"] = "preview-page-up"
-
-      config.defaults.actions.files["ctrl-t"] = require("trouble.sources.fzf").actions.open
-
-
-
-
-      return {
+      require("fzf-lua").setup({
         fzf_colors = true,
         files = {
           actions = {
@@ -47,10 +30,28 @@ return {
             child_prefix = false,
           },
         },
+        keymap = {
+          builtin = {
+            true,
+            ["ctrl-f"] = "preview-page-down",
+            ["ctrl-b"] = "preview-page-up",
+            ["<Esc>"] = "abort",
+          },
+          fzf = {
+            true,
+            ["ctrl-q"] = "select-all+accept",
+            ["ctrl-u"] = "half-page-up",
+            ["ctrl-d"] = "half-page-down",
+            ["ctrl-x"] = "jump",
+          },
+          files = {
+            true,
+            ["ctrl-t"] = require("trouble.sources.fzf").actions.open
+
+          }
+        },
       }
-    end,
-    config = function(_, opts)
-      require("fzf-lua").setup(opts)
+      )
     end,
     keys = {
       { "<c-j>", "<c-j>", ft = "fzf", mode = "t", nowait = true },
