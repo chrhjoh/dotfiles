@@ -84,14 +84,6 @@ vim.keymap.set("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increa
 -- new file
 vim.keymap.set("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New File" })
 
-
-
--- Toggles
-vim.keymap.set("n", "<leader>uF", "<cmd>ToggleFormat<cr>", { desc = "Toggle auto-format globally" })
-vim.keymap.set("n", "<leader>uf", "<cmd>ToggleFormat!<cr>", { desc = "Toggle auto-format for buffer" })
-vim.keymap.set("n", "<leader>ud", "<cmd>ToggleDiagnostics<cr>", { desc = "Toggle diagnostics for buffer" })
-
-
 -- Move around
 vim.keymap.set("i", "<c-l>", "<right>", { desc = "Right" })
 vim.keymap.set("i", "<c-k>", "<up>", { desc = "Up" })

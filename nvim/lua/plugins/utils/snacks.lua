@@ -63,6 +63,41 @@ return {
           "<leader>uc")
         Snacks.toggle.treesitter():map("<leader>uT")
         Snacks.toggle.inlay_hints():map("<leader>uh")
+        Snacks.toggle.diagnostics({ bufnr = 0 }):map("<leader>ud")
+        Snacks.toggle({
+          name = "Format (Buffer)",
+          get = function() return vim.b[0].autoformat == nil or vim.b[0].autoformat end,
+          set = function(state) vim.b[0].autoformat = not state end
+        }
+        ):map("<leader>uf")
+        Snacks.toggle({
+          name = "Format (Global)",
+          get = function() return vim.g.autoformat == nil or vim.g.autoformat end,
+          set = function(state) vim.g.autoformat = not state end
+        }
+        ):map("<leader>uf")
+        Snacks.toggle({
+          name = "Zen Mode",
+          get = function() return require("zen-mode.view").is_open() end,
+          set = function(_)
+            require("zen-mode").toggle({})
+          end
+        }):map("<leader>uz")
+        Snacks.toggle({
+          name = "Git Blame Line",
+          get = function() return require("gitsigns.config").config.current_line_blame end,
+          set = function(_) require("gitsigns").toggle_current_line_blame() end
+        }):map("<leader>ub")
+        Snacks.toggle({
+          name = "Git Deleted",
+          get = function() return require("gitsigns.config").config.show_deleted end,
+          set = function(_) require("gitsigns").toggle_deleted() end
+        }):map("<leader>uD")
+        Snacks.toggle({
+          name = "CSV View",
+          get = function() return require('csvview').is_enabled(vim.api.nvim_get_current_buf()) end,
+          set = function(_) require('csvview').toggle() end
+        }):map("<leader>uC")
       end,
     })
   end,

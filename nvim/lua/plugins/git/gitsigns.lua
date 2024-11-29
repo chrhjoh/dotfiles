@@ -71,7 +71,7 @@ return {
 
     -- normal mode
     {
-      '<leader>gs',
+      '<leader>gh',
       function()
         require("gitsigns").stage_hunk()
       end,
@@ -156,27 +156,6 @@ return {
         require("gitsigns").diffthis()
       end,
       desc = 'Git diff against last index',
-      mode = 'n',
-
-    },
-
-    -- Toggles
-    {
-      '<leader>ub',
-      function()
-        require("gitsigns").toggle_current_line_blame()
-      end,
-      desc = 'Toggle git blame line',
-      mode = 'n',
-
-    },
-
-    {
-      '<leader>uD',
-      function()
-        require("gitsigns").toggle_deleted()
-      end,
-      desc = 'Toggle git deleted',
       mode = 'n',
 
     },

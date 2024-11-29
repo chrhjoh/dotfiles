@@ -5,5 +5,4 @@ return {
   config = function()
     require('csvview').setup()
   end,
-  keys = { "<leader>uC", "<CMD>CsvViewToggle<cr>", desc = "Toggle CSV" }
 }

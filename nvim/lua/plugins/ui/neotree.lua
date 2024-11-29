@@ -74,7 +74,6 @@ return {
         window = {
           mappings = {
             ["A"] = "git_add_all",
-            ["gy"] = "git_unstage_file",
           },
         },
       },

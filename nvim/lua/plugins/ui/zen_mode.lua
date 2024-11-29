@@ -2,7 +2,6 @@ return {
   "folke/zen-mode.nvim",
   lazy = true,
   cmd = "ZenMode",
-  keys = { { "<leader>uz", "<CMD>ZenMode<CR>", desc = "Toggle Zen Mode" } },
   opts = {
     window = {
       backdrop = 1,
