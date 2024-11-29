@@ -93,6 +93,16 @@ return {
         })
         table.insert(python_configs, {
             type = "python",
+            request = "launch",
+            name = "Python: Launch with python as `which python`",
+            program = "${file}",
+            pythonPath = function()
+                return vim.fn.exepath("python")
+            end
+        })
+
+        table.insert(python_configs, {
+            type = "python",
             request = "attach",
             name = "Python: Attach remote",
             connect = function()
