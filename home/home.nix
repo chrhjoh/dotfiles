@@ -211,7 +211,7 @@
 
     profileExtra = ''
       function devshell() {
-          local repo="git+ssh://git@github.com/chrhjoh/dev-shells" 
+          local repo="git+ssh://git@github.com/chrhjoh/dev-shells/" 
           local available_shells
           local selected_shell
 
