@@ -66,16 +66,16 @@ return {
         Snacks.toggle.diagnostics({ bufnr = 0 }):map("<leader>ud")
         Snacks.toggle({
           name = "Format (Buffer)",
-          get = function() return vim.b[0].autoformat == nil or vim.b[0].autoformat end,
-          set = function(state) vim.b[0].autoformat = not state end
+          get = function() return not vim.b[0].disable_autoformat end,
+          set = function(_) vim.b[0].disable_autoformat = not vim.b[0].disable_autoformat end
         }
         ):map("<leader>uf")
         Snacks.toggle({
           name = "Format (Global)",
-          get = function() return vim.g.autoformat == nil or vim.g.autoformat end,
-          set = function(state) vim.g.autoformat = not state end
+          get = function() return not vim.g.disable_autoformat end,
+          set = function(_) vim.g.disable_autoformat = not vim.g.disable_autoformat end
         }
-        ):map("<leader>uf")
+        ):map("<leader>uF")
         Snacks.toggle({
           name = "Zen Mode",
           get = function() return require("zen-mode.view").is_open() end,
