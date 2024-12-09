@@ -1,4 +1,5 @@
 local wezterm = require('wezterm') --[[@as Wezterm]]
+local copy_paste = require('utils.copy')
 local actions = wezterm.action
 
 local M = {}
@@ -143,6 +144,30 @@ local function key_configurations(config)
     { key = 'j', mods = 'CTRL', action = actions.EmitEvent('ActivatePaneDirection-down') },
     { key = 'k', mods = 'CTRL', action = actions.EmitEvent('ActivatePaneDirection-up') },
     { key = 'l', mods = 'CTRL', action = actions.EmitEvent('ActivatePaneDirection-right') },
+    {
+      key = 'I',
+      mods = 'LEADER',
+      action = actions.PaneSelect {
+        show_pane_ids = true,
+      },
+    },
+    {
+      key = 'm',
+      mods = 'LEADER',
+      action = actions.PaneSelect {
+        mode = 'SwapWithActive',
+      },
+    },
+    {
+      key = 'P',
+      mods = 'LEADER',
+      action = actions.EmitEvent(copy_paste.set_paste_terminal_event),
+    },
+    {
+      key = 'p',
+      mods = 'LEADER',
+      action = actions.EmitEvent(copy_paste.paste_selection_event),
+    },
   }
   config.key_tables = {
     -- Defines the keys that are active in our resize-pane mode.
