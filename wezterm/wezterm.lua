@@ -1,20 +1,10 @@
-local wezterm = require('wezterm')
-local color_theme = require('color_scheme')
-local tab_bar = require('tab_bar')
-local keys = require('keys')
-local window = require('windows')
-local config = {}
+local config = require('init').setup()
 
-config.use_ime = true
--- Fonts
-config.font_size = 11
-config.font = wezterm.font_with_fallback { 'JetBrainsMono Nerd Font', 'Monaco' }
+require('ui.color_scheme').setup(config)
+require('ui.tab_bar').setup(config)
+require('config.keys').setup(config)
+require('ui.windows').setup(config)
+require('ui.zen-mode').setup()
+require('ui.startup').setup()
 
-color_theme.add_color_theme_configurations(config)
-tab_bar.add_tab_bar_configurations(config)
-keys.add_key_configurations(config)
-window.add_window_configurations(config)
-
--- Setup startups
-require('startup')
 return config

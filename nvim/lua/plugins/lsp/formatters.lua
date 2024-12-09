@@ -22,7 +22,8 @@ return {
         formatters_by_ft = {
           python = { "isort", "ruff_format" },
           snakemake = { "snakefmt" },
-          nix = { "nixfmt" }
+          nix = { "nixfmt" },
+          lua = { "stylua" }
         },
         -- Set up format-on-save
         format_on_save = function(bufnr)
