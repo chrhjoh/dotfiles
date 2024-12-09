@@ -1,1 +1,1 @@
-return {  {'tpope/vim-fugitive', event = 'VeryLazy'}}
+return { { 'tpope/vim-fugitive', event = 'VeryLazy' } }

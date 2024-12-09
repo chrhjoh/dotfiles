@@ -1,20 +1,20 @@
 return {
-  "stevearc/aerial.nvim",
-  event = { "BufReadPost", "BufNewFile", "BufWritePre" },
+  'stevearc/aerial.nvim',
+  event = { 'BufReadPost', 'BufNewFile', 'BufWritePre' },
   opts = function()
     -- HACK: fix lua's weird choice for `Package` for control
     -- structures like if/else/for/etc.
 
     local opts = {
-      attach_mode = "global",
-      backends = { "lsp", "treesitter", "markdown", "man" },
+      attach_mode = 'global',
+      backends = { 'lsp', 'treesitter', 'markdown', 'man' },
       show_guides = true,
       layout = {
         resize_to_content = false,
         win_opts = {
-          winhl = "Normal:NormalFloat,FloatBorder:NormalFloat,SignColumn:SignColumnSB",
-          signcolumn = "yes",
-          statuscolumn = " ",
+          winhl = 'Normal:NormalFloat,FloatBorder:NormalFloat,SignColumn:SignColumnSB',
+          signcolumn = 'yes',
+          statuscolumn = ' ',
         },
       },
       -- stylua: ignore
@@ -28,6 +28,6 @@ return {
     return opts
   end,
   keys = {
-    { "<leader>cA", "<cmd>AerialToggle<cr>", desc = "Code Aerial (Symbols)" },
+    { '<leader>cA', '<cmd>AerialToggle<cr>', desc = 'Code Aerial (Symbols)' },
   },
 }

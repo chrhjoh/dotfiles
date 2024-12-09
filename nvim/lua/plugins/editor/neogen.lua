@@ -1,18 +1,18 @@
 return {
-  "danymat/neogen",
-  cmd = "Neogen",
+  'danymat/neogen',
+  cmd = 'Neogen',
   keys = {
     {
-      "<leader>cn",
+      '<leader>cn',
       function()
-        require("neogen").generate()
+        require('neogen').generate()
       end,
-      desc = "Generate Annotations (Neogen)",
+      desc = 'Generate Annotations (Neogen)',
     },
   },
   config = function()
-    require("neogen").setup({
-      snippet_engine = "luasnip"
-    })
+    require('neogen').setup {
+      snippet_engine = 'luasnip',
+    }
   end,
 }

@@ -20,20 +20,19 @@ return {
         lualine_b = { 'branch', 'diff', { 'diagnostics', sections = { 'error', 'warn' } } },
         lualine_c = {
           {
-            'filename'
-          }
+            'filename',
+          },
         },
         lualine_x = {
           { 'copilot', show_colors = true },
-          'filetype'
+          'filetype',
         },
         lualine_y = {
-          { "aerial", colored = true, depth = -1 },
+          { 'aerial', colored = true, depth = -1 },
           'progress',
-
         },
         lualine_z = { 'location' },
-      }
+      },
     }
-  end
+  end,
 }

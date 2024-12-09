@@ -1,7 +1,7 @@
 return {
-  "folke/todo-comments.nvim",
-  cmd = { "TodoTrouble", },
-  event = { "BufReadPost", "BufNewFile", "BufWritePre" },
+  'folke/todo-comments.nvim',
+  cmd = { 'TodoTrouble' },
+  event = { 'BufReadPost', 'BufNewFile', 'BufWritePre' },
   config = true,
   -- stylua: ignore
   keys = {

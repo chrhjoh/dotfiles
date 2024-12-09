@@ -1,30 +1,30 @@
 return {
   {
-    "nvim-neo-tree/neo-tree.nvim",
-    branch = "v3.x",
-    cmd = "Neotree",
+    'nvim-neo-tree/neo-tree.nvim',
+    branch = 'v3.x',
+    cmd = 'Neotree',
     keys = {
       {
-        "<leader>fe",
+        '<leader>fe',
         function()
-          require("neo-tree.command").execute({ source = 'filesystem', toggle = true, dir = vim.uv.cwd(), })
+          require('neo-tree.command').execute { source = 'filesystem', toggle = true, dir = vim.uv.cwd() }
         end,
-        desc = "Open File Explorer In Current Directory (NeoTree)",
+        desc = 'Open File Explorer In Current Directory (NeoTree)',
       },
-      { "<leader>e", "<leader>fe", desc = "Open File Explorer In Root Directory (NeoTree)", remap = true },
+      { '<leader>e', '<leader>fe', desc = 'Open File Explorer In Root Directory (NeoTree)', remap = true },
       {
-        "<leader>ge",
+        '<leader>ge',
         function()
-          require("neo-tree.command").execute({ source = "git_status", toggle = true })
+          require('neo-tree.command').execute { source = 'git_status', toggle = true }
         end,
-        desc = "Open Git Explorer In Parent Directory (NeoTree)",
+        desc = 'Open Git Explorer In Parent Directory (NeoTree)',
       },
       {
-        "<leader>be",
+        '<leader>be',
         function()
-          require("neo-tree.command").execute({ source = "buffers", toggle = true })
+          require('neo-tree.command').execute { source = 'buffers', toggle = true }
         end,
-        desc = "Open Buffer Explorer In Parent Directory (NeoTree)",
+        desc = 'Open Buffer Explorer In Parent Directory (NeoTree)',
       },
     },
     deactivate = function()
@@ -33,35 +33,34 @@ return {
     init = function()
       if vim.fn.argc(-1) == 1 then
         local stat = vim.uv.fs_stat(vim.fn.argv(0))
-        if stat and stat.type == "directory" then
-          require("neo-tree")
+        if stat and stat.type == 'directory' then
+          require('neo-tree')
         end
       end
     end,
     opts = {
-      sources = { "filesystem", "buffers", "git_status", "document_symbols" },
-      open_files_do_not_replace_types = { "terminal", "Trouble", "trouble", "qf", "Outline" },
+      sources = { 'filesystem', 'buffers', 'git_status', 'document_symbols' },
+      open_files_do_not_replace_types = { 'terminal', 'Trouble', 'trouble', 'qf', 'Outline' },
       window = {
         width = 60,
         mappings = {
-          ["<space>"] = "none",
-          ["<cr>"] = "open",
-          ["<tab>"] = {
+          ['<space>'] = 'none',
+          ['<cr>'] = 'open',
+          ['<tab>'] = {
             function(state)
-              require("neo-tree.sources.common.commands").open(state)
-              require("neo-tree.command").execute({ action = "focus", source = 'last' })
-            end
-
+              require('neo-tree.sources.common.commands').open(state)
+              require('neo-tree.command').execute { action = 'focus', source = 'last' }
+            end,
           },
-          ["Y"] = {
+          ['Y'] = {
             function(state)
               local node = state.tree:get_node()
               local path = node:get_id()
-              vim.fn.setreg("+", path, "c")
+              vim.fn.setreg('+', path, 'c')
             end,
-            desc = "Copy Path to Clipboard",
+            desc = 'Copy Path to Clipboard',
           },
-          ["o"] = "system_open"
+          ['o'] = 'system_open',
         },
       },
 
@@ -73,7 +72,7 @@ return {
       git_status = {
         window = {
           mappings = {
-            ["A"] = "git_add_all",
+            ['A'] = 'git_add_all',
           },
         },
       },
@@ -87,24 +86,23 @@ return {
       default_component_configs = {
         indent = {
           with_expanders = true, -- if nil and file nesting is enabled, will enable expanders
-          expander_collapsed = "",
-          expander_expanded = "",
-          expander_highlight = "NeoTreeExpander",
+          expander_collapsed = '',
+          expander_expanded = '',
+          expander_highlight = 'NeoTreeExpander',
         },
       },
       event_handlers = {
 
         {
-          event = "file_open_requested",
+          event = 'file_open_requested',
           handler = function()
             -- auto close
             -- vim.cmd("Neotree close")
             -- OR
-            require("neo-tree.command").execute({ action = "close" })
-          end
+            require('neo-tree.command').execute { action = 'close' }
+          end,
         },
-
-      }
-    }
+      },
+    },
   },
 }

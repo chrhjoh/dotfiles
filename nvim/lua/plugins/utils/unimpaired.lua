@@ -35,5 +35,5 @@ return {
         dot_repeat = true,
       },
     },
-  }
+  },
 }

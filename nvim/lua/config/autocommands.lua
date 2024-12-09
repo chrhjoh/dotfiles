@@ -1,25 +1,24 @@
-local highlight_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
-vim.api.nvim_create_autocmd("TextYankPost", {
+local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
+vim.api.nvim_create_autocmd('TextYankPost', {
   callback = function()
     vim.highlight.on_yank()
   end,
   group = highlight_group,
-  pattern = "*",
+  pattern = '*',
 })
 
-local toggleterm_group = vim.api.nvim_create_augroup("ToggleTerm", { clear = true })
-vim.api.nvim_create_autocmd("TermOpen" , {
-  pattern ="term://*toggleterm#*",
+local toggleterm_group = vim.api.nvim_create_augroup('ToggleTerm', { clear = true })
+vim.api.nvim_create_autocmd('TermOpen', {
+  pattern = 'term://*toggleterm#*',
   group = toggleterm_group,
-  callback =
-      function()
-        local opts = { buffer = 0 }
-        vim.keymap.set("t", "<esc>", [[<C-\><C-n>]], opts)
-        vim.keymap.set("t", "jk", [[<C-\><C-n>]], opts)
-        vim.keymap.set("t", "<C-h>", [[<Cmd>wincmd h<CR>]], opts)
-        vim.keymap.set("t", "<C-j>", [[<Cmd>wincmd j<CR>]], opts)
-        vim.keymap.set("t", "<C-k>", [[<Cmd>wincmd k<CR>]], opts)
-        vim.keymap.set("t", "<C-l>", [[<Cmd>wincmd l<CR>]], opts)
-        vim.keymap.set("t", "<C-w>", [[<C-\><C-n><C-w>]], opts)
-      end
+  callback = function()
+    local opts = { buffer = 0 }
+    vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], opts)
+    vim.keymap.set('t', 'jk', [[<C-\><C-n>]], opts)
+    vim.keymap.set('t', '<C-h>', [[<Cmd>wincmd h<CR>]], opts)
+    vim.keymap.set('t', '<C-j>', [[<Cmd>wincmd j<CR>]], opts)
+    vim.keymap.set('t', '<C-k>', [[<Cmd>wincmd k<CR>]], opts)
+    vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]], opts)
+    vim.keymap.set('t', '<C-w>', [[<C-\><C-n><C-w>]], opts)
+  end,
 })

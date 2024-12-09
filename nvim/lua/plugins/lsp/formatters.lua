@@ -1,29 +1,29 @@
 return {
   {
-    "stevearc/conform.nvim",
+    'stevearc/conform.nvim',
     lazy = true,
-    event = { "BufWritePre" },
-    cmd = { "ConformInfo" },
+    event = { 'BufWritePre' },
+    cmd = { 'ConformInfo' },
     keys = {
       {
         -- Customize or remove this keymap to your liking
-        "<leader>cf",
+        '<leader>cf',
         function()
-          require("conform").format({ async = true, lsp_fallback = true })
+          require('conform').format { async = true, lsp_fallback = true }
         end,
-        mode = "",
-        desc = "Format buffer",
+        mode = '',
+        desc = 'Format buffer',
       },
     },
     -- Everything in opts will be passed to setup()
     config = function()
-      require("conform").setup({
+      require('conform').setup {
         -- Define your formatters
         formatters_by_ft = {
-          python = { "isort", "ruff_format" },
-          snakemake = { "snakefmt" },
-          nix = { "nixfmt" },
-          lua = { "stylua" }
+          python = { 'isort', 'ruff_format' },
+          snakemake = { 'snakefmt' },
+          nix = { 'nixfmt' },
+          lua = { 'stylua' },
         },
         -- Set up format-on-save
         format_on_save = function(bufnr)
@@ -33,8 +33,8 @@ return {
           end
           return { async = false, lsp_fallback = true }
         end,
-      })
-      require("mason-conform").setup()
+      }
+      require('mason-conform').setup()
     end,
     init = function()
       -- If you want the formatexpr, here is the place to set it
@@ -42,11 +42,11 @@ return {
     end,
   },
   {
-    "zapling/mason-conform.nvim",
+    'zapling/mason-conform.nvim',
     lazy = true,
     dependencies = {
-      "stevearc/conform.nvim",
-      "williamboman/mason.nvim",
+      'stevearc/conform.nvim',
+      'williamboman/mason.nvim',
     },
     opts = {},
   },

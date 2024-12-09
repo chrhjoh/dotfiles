@@ -4,12 +4,28 @@ return {
   dependencies = {
     { 'nvim-treesitter/nvim-treesitter-textobjects', lazy = true },
   },
-  event = { "BufReadPost", "BufNewFile", "BufWritePre" },
+  event = { 'BufReadPost', 'BufNewFile', 'BufWritePre' },
   build = ':TSUpdate',
   config = function()
     require('nvim-treesitter.configs').setup {
       -- Add languages to be installed here that you want installed for treesitter
-      ensure_installed = { 'lua', 'python', 'rust', 'vimdoc', 'vim', 'bash', 'markdown', 'markdown_inline', 'julia', 'snakemake', 'json', 'toml', 'gitcommit', 'yaml', 'nix' },
+      ensure_installed = {
+        'lua',
+        'python',
+        'rust',
+        'vimdoc',
+        'vim',
+        'bash',
+        'markdown',
+        'markdown_inline',
+        'julia',
+        'snakemake',
+        'json',
+        'toml',
+        'gitcommit',
+        'yaml',
+        'nix',
+      },
 
       -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
       auto_install = false,
@@ -19,7 +35,7 @@ return {
       ignore_install = {},
       -- You can specify additional Treesitter modules here: -- For example: -- playground = {--enable = true,-- },
       modules = {},
-      highlight = { enable = true, disable = { "latex" } },
+      highlight = { enable = true, disable = { 'latex' } },
       indent = { enable = true },
       incremental_selection = {
         enable = true,
@@ -75,5 +91,5 @@ return {
         },
       },
     }
-  end
+  end,
 }

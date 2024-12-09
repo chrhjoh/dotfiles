@@ -2,9 +2,9 @@ return {
   {
     'brenoprata10/nvim-highlight-colors',
     lazy = true,
-    event = "BufReadPost",
+    event = 'BufReadPost',
     config = function()
-      require('nvim-highlight-colors').setup({
+      require('nvim-highlight-colors').setup {
         ---Highlight hex colors, e.g. '#FFFFFF'
         enable_hex = true,
 
@@ -25,16 +25,15 @@ return {
 
         ---Highlight tailwind colors, e.g. 'bg-blue-500'
         enable_tailwind = false,
-
-      })
-    end
+      }
+    end,
   },
   {
-    "max397574/colortils.nvim",
+    'max397574/colortils.nvim',
     lazy = true,
-    cmd = "Colortils",
+    cmd = 'Colortils',
     config = function()
-      require("colortils").setup()
+      require('colortils').setup()
     end,
-  }
+  },
 }

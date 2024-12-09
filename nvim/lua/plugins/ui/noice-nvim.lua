@@ -1,37 +1,37 @@
 return {
-  "folke/noice.nvim",
-  event = "VeryLazy",
+  'folke/noice.nvim',
+  event = 'VeryLazy',
   dependencies = {
-    "MunifTanjim/nui.nvim",
+    'MunifTanjim/nui.nvim',
     {
       'stevearc/dressing.nvim',
       opts = {},
-      { "rcarriga/nvim-notify", opts = { render = "compact" } },
+      { 'rcarriga/nvim-notify', opts = { render = 'compact' } },
     },
   },
   opts = {
     cmdline = {
-      view = "cmdline"
+      view = 'cmdline',
     },
     lsp = {
       override = {
-        ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-        ["vim.lsp.util.stylize_markdown"] = true,
-        ["cmp.entry.get_documentation"] = true,
+        ['vim.lsp.util.convert_input_to_markdown_lines'] = true,
+        ['vim.lsp.util.stylize_markdown'] = true,
+        ['cmp.entry.get_documentation'] = true,
       },
-      progress = { enabled = false }
+      progress = { enabled = false },
     },
     routes = {
       {
         filter = {
-          event = "msg_show",
+          event = 'msg_show',
           any = {
-            { find = "%d+L, %d+B" },
-            { find = "; after #%d+" },
-            { find = "; before #%d+" },
+            { find = '%d+L, %d+B' },
+            { find = '; after #%d+' },
+            { find = '; before #%d+' },
           },
         },
-        view = "mini",
+        view = 'mini',
       },
     },
     presets = {
@@ -52,6 +52,6 @@ return {
     { "<c-b>",       function() if not require("noice.lsp").scroll(-4) then return "<c-b>" end end, silent = true,                           expr = true,              desc = "Scroll Backward", mode = { "i", "n", "s" } },
   },
   config = function(_, opts)
-    require("noice").setup(opts)
+    require('noice').setup(opts)
   end,
 }
