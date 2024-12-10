@@ -12,7 +12,7 @@ local function is_inside_vim(pane)
     return false
   end
 
-  local process = wezterm.run_child_process {
+  local success, stdout, stderr = wezterm.run_child_process {
     'sh',
     '-c',
     'ps -o state= -o comm= -t'
@@ -21,7 +21,7 @@ local function is_inside_vim(pane)
       .. "grep -iqE '^[^TXZ ]+ +(\\S+\\/)?g?(view|l?n?vim?x?)(diff)?$'",
   }
 
-  return process.success
+  return success
 end
 
 ---@param window Window
