@@ -4,6 +4,7 @@ if [[ -z "$__HM_ZSH_SESS_VARS_SOURCED" ]]; then
   export BUNDLE_USER_CACHE="/Users/hcq343/.cache/bundle"
 export BUNDLE_USER_CONFIG="/Users/hcq343/.config/bundle"
 export BUNDLE_USER_PLUGIN="/Users/hcq343/.local/share/bundle"
+export HOMEBREW_BUNDLE_FILE="$DOTFILES/hosts/mac/$HOST/Brewfile"
 export CARGO_HOME="/Users/hcq343/.local/share/cargo"
 export RUSTUP_HOME="/Users/hcq343/.local/share/rustup"
 export CONDARC="/Users/hcq343/.config/conda/condarc"
