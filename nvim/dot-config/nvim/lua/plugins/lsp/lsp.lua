@@ -132,5 +132,8 @@ return {
     lspconfig.texlab.setup {}
     lspconfig.tinymist.setup {}
     lspconfig.nil_ls.setup {}
+    lspconfig.ltex.setup = {
+      autostart = false, -- LTeX is too heavy for regular use.
+    }
   end,
 }

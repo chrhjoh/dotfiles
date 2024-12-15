@@ -9,14 +9,14 @@ return {
         files = {
           actions = {
             ['alt-i'] = { actions.toggle_ignore },
-            ['alt-h'] = { actions.toggle_hidden },
+            ['alt-.'] = { actions.toggle_hidden },
           },
         },
         grep = {
           rg_glob = true,
           actions = {
             ['alt-i'] = { actions.toggle_ignore },
-            ['alt-h'] = { actions.toggle_hidden },
+            ['alt-.'] = { actions.toggle_hidden },
           },
         },
         lsp = {

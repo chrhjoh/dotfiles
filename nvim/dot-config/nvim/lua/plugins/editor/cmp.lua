@@ -89,6 +89,10 @@ return {
         { name = 'buffer', group_index = 5 },
       },
 
+      enabled = function()
+        return not vim.g.cmp_disable
+      end,
+
       formatting = {
         format = function(entry, item)
           local color_item = require('nvim-highlight-colors').format(entry, { kind = item.kind })

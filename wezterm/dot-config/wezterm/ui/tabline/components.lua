@@ -41,7 +41,7 @@ function M.HostComponent(window, pane)
 
   table.insert(component, { Foreground = { Color = colors.base } })
   table.insert(component, { Background = { Color = bg_color } })
-  table.insert(component, { Text = ' ' .. symbols.cod_terminal_tmux .. ' ' .. workspace .. ' ' })
+  table.insert(component, { Text = ' ' .. symbols.md_network_pos .. ' ' .. workspace .. ' ' })
   return wezterm.format(component)
 end
 

@@ -1,0 +1,36 @@
+# Only source this once
+if [[ -z "$__HM_ZSH_SESS_VARS_SOURCED" ]]; then
+  export __HM_ZSH_SESS_VARS_SOURCED=1
+  export BUNDLE_USER_CACHE="/Users/hcq343/.cache/bundle"
+export BUNDLE_USER_CONFIG="/Users/hcq343/.config/bundle"
+export BUNDLE_USER_PLUGIN="/Users/hcq343/.local/share/bundle"
+export CARGO_HOME="/Users/hcq343/.local/share/cargo"
+export RUSTUP_HOME="/Users/hcq343/.local/share/rustup"
+export CONDARC="/Users/hcq343/.config/conda/condarc"
+export DOCKER_CONFIG="/Users/hcq343/.config/docker"
+export DOTFILES="/Users/hcq343/.dotfiles"
+export HISTFILE="/Users/hcq343/.local/state/bash/history"
+export JULIA_DEPOT_PATH="/Users/hcq343/.local/share/julia:$JULIA_DEPOT_PATH"
+export LESSHISTFILE="/Users/hcq343/.local/state/less/history"
+export NPM_CONFIG_CACHE="/Users/hcq343/.cache/npm"
+export NPM_CONFIG_INIT_MODULE="/Users/hcq343/.config/npm/config/npm-init.js"
+export NPM_CONFIG_TMP="/Users/hcq343/.xdg-runtime/npm"
+export PYTHON_HISTORY="/Users/hcq343/.local/state/python_history"
+export R_HISTFILE="/Users/hcq343/.local/state/R/history"
+export XDG_CACHE_HOME="/Users/hcq343/.cache"
+export XDG_CONFIG_HOME="/Users/hcq343/.config"
+export XDG_DATA_HOME="/Users/hcq343/.local/share"
+export XDG_RUNTIME_DIR="/Users/hcq343/.xdg-runtime"
+export XDG_STATE_HOME="/Users/hcq343/.local/state"
+export EDITOR="nvim"
+export STOW_DIR="$DOTFILES"
+fi
+
+export ZDOTDIR=$HOME/.config/zsh
+
+# Oh-My-Zsh
+ZSH="$XDG_DATA_HOME/oh-my-zsh";
+ZSH_CACHE_DIR="/Users/hcq343/.cache/oh-my-zsh";
+
+# Cargo
+. "/Users/hcq343/.local/share/cargo/env"

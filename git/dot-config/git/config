@@ -1,0 +1,11 @@
+[alias]
+	ca = "commit --amend"
+	cm = "commit -m"
+	co = "checkout"
+	lol = "log --graph --decorate --pretty=oneline --abbrev-commit"
+	lola = "log --graph --decorate --pretty=oneline --abbrev-commit --all"
+	s = "status"
+
+[user]
+	email = "christian.johansen@cpr.ku.dk"
+	name = "Christian Johansen"

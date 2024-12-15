@@ -108,6 +108,15 @@ return {
           end,
         }):map('<leader>uF')
         Snacks.toggle({
+          name = 'Completion Menu',
+          get = function()
+            return not vim.g.cmp_disable
+          end,
+          set = function(_)
+            vim.g.cmp_disable = not vim.g.cmp_disable
+          end,
+        }):map('<leader>um')
+        Snacks.toggle({
           name = 'Zen Mode',
           get = function()
             return require('zen-mode.view').is_open()

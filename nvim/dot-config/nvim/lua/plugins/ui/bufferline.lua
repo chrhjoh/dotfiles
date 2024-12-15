@@ -18,6 +18,7 @@ return {
     local harpoon = require('harpoon')
     bufferline.setup {
       options = {
+        buffer_close_icon = ' ',
         highlights = require('catppuccin.groups.integrations.bufferline').get(),
         style_preset = bufferline.style_preset.minimal,
         always_show_bufferline = false,

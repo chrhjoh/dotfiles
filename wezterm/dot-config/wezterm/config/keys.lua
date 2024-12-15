@@ -168,6 +168,11 @@ local function key_configurations(config)
       mods = 'LEADER',
       action = actions.EmitEvent(copy_paste.paste_selection_event),
     },
+    {
+      key = '?',
+      mods = 'LEADER',
+      action = actions.SpawnCommandInNewTab { args = { 'bash', '-ic', 'wezterm show-keys | fzf' } },
+    },
   }
   config.key_tables = {
     -- Defines the keys that are active in our resize-pane mode.
