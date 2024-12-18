@@ -18,7 +18,6 @@ return {
   },
   {
     'CopilotC-Nvim/CopilotChat.nvim',
-    branch = 'canary',
     lazy = true,
     cmd = 'CopilotChat',
     dependencies = {

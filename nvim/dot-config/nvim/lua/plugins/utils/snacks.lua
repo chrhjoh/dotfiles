@@ -2,22 +2,44 @@ return {
   'folke/snacks.nvim',
   priority = 1000,
   lazy = false,
-  opts = {
-    quickfile = { enabled = true },
-    statuscolumn = { enabled = true },
-    dashboard = {
-      enabled = true,
-      sections = {
-        { pane = 1, section = 'header' },
-        { pane = 1, section = 'keys', gap = 1, padding = 1 },
-        { pane = 2, padding = 8 },
-        { pane = 2, icon = ' ', title = 'Recent Files', section = 'recent_files', indent = 2, padding = 1 },
-        { pane = 2, icon = ' ', title = 'Projects', section = 'projects', indent = 2, padding = 1 },
-        { section = 'startup' },
+  config = function()
+    require('snacks').setup {
+      quickfile = { enabled = true },
+      statuscolumn = { enabled = true },
+      dashboard = {
+        enabled = true,
+        sections = {
+          { pane = 1, section = 'header' },
+          { pane = 1, section = 'keys', gap = 1, padding = 1 },
+          { pane = 2, padding = 8 },
+          { pane = 2, icon = ' ', title = 'Recent Files', section = 'recent_files', indent = 2, padding = 1 },
+          { pane = 2, icon = ' ', title = 'Projects', section = 'projects', indent = 2, padding = 1 },
+          { section = 'startup' },
+        },
       },
-    },
-  },
+
+      indent = { enabled = true },
+      notifier = { enabled = true },
+      words = { enabled = true },
+    }
+  end,
   keys = {
+    {
+      ']]',
+      function()
+        Snacks.words.jump(vim.v.count1)
+      end,
+      desc = 'Next Reference',
+      mode = { 'n', 't' },
+    },
+    {
+      '[[',
+      function()
+        Snacks.words.jump(-vim.v.count1)
+      end,
+      desc = 'Prev Reference',
+      mode = { 'n', 't' },
+    },
     {
       '<leader>bd',
       function()
@@ -54,6 +76,7 @@ return {
           file = vim.api.nvim_get_runtime_file('doc/news.txt', false)[1],
           width = 0.6,
           height = 0.6,
+          relative = 'editor',
           wo = {
             spell = false,
             wrap = false,
@@ -63,6 +86,27 @@ return {
           },
         }
       end,
+    },
+    {
+      '<leader>gf',
+      function()
+        Snacks.lazygit.log_file()
+      end,
+      desc = 'Lazygit Current File History',
+    },
+    {
+      '<leader>gg',
+      function()
+        Snacks.lazygit()
+      end,
+      desc = 'Lazygit',
+    },
+    {
+      '<leader>gl',
+      function()
+        Snacks.lazygit.log()
+      end,
+      desc = 'Lazygit Log (cwd)',
     },
   },
   init = function()
@@ -89,6 +133,9 @@ return {
         Snacks.toggle.treesitter():map('<leader>uT')
         Snacks.toggle.inlay_hints():map('<leader>uh')
         Snacks.toggle.diagnostics({ bufnr = 0 }):map('<leader>ud')
+        Snacks.toggle.zen():map('<leader>uZ')
+        Snacks.toggle.dim():map('<leader>uz')
+        Snacks.toggle.indent():map('<leader>ui')
         Snacks.toggle({
           name = 'Format (Buffer)',
           get = function()
@@ -117,15 +164,6 @@ return {
           end,
         }):map('<leader>um')
         Snacks.toggle({
-          name = 'Zen Mode',
-          get = function()
-            return require('zen-mode.view').is_open()
-          end,
-          set = function(_)
-            require('zen-mode').toggle {}
-          end,
-        }):map('<leader>uz')
-        Snacks.toggle({
           name = 'Git Blame Line',
           get = function()
             return require('gitsigns.config').config.current_line_blame
@@ -152,6 +190,7 @@ return {
             require('csvview').toggle()
           end,
         }):map('<leader>uC')
+        Snacks.toggle.dim():map('<leader>uD')
       end,
     })
   end,

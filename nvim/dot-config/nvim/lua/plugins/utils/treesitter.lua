@@ -8,7 +8,7 @@ return {
   build = ':TSUpdate',
   config = function()
     require('nvim-treesitter.configs').setup {
-      -- Add languages to be installed here that you want installed for treesitter
+      -- add languages to be installed here that you want installed for treesitter
       ensure_installed = {
         'lua',
         'python',
@@ -27,31 +27,31 @@ return {
         'nix',
       },
 
-      -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
+      -- autoinstall languages that are not installed. defaults to false (but you can change for yourself!)
       auto_install = false,
-      -- Install languages synchronously (only applied to `ensure_installed`)
+      -- install languages synchronously (only applied to `ensure_installed`)
       sync_install = false,
-      -- List of parsers to ignore installing
+      -- list of parsers to ignore installing
       ignore_install = {},
-      -- You can specify additional Treesitter modules here: -- For example: -- playground = {--enable = true,-- },
+      -- you can specify additional treesitter modules here: -- for example: -- playground = {--enable = true,-- },
       modules = {},
       highlight = { enable = true, disable = { 'latex' } },
       indent = { enable = true },
       incremental_selection = {
         enable = true,
         keymaps = {
-          init_selection = '<c-space>',
-          node_incremental = '<c-space>',
-          scope_incremental = '<c-s>',
-          node_decremental = '<M-space>',
+          init_selection = '<m-space>',
+          node_incremental = '<m-space>',
+          scope_incremental = '<m-s>',
+          node_decremental = '<m-b>',
         },
       },
       textobjects = {
         select = {
           enable = true,
-          lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
+          lookahead = true, -- automatically jump forward to textobj, similar to targets.vim
           keymaps = {
-            -- You can use the capture groups defined in textobjects.scm
+            -- you can use the capture groups defined in textobjects.scm
             ['aa'] = '@parameter.outer',
             ['ia'] = '@parameter.inner',
             ['af'] = '@function.outer',
@@ -68,7 +68,7 @@ return {
             [']}'] = '@class.outer',
           },
           goto_next_end = {
-            [']M'] = '@function.outer',
+            [']m'] = '@function.outer',
             [']{'] = '@class.outer',
           },
           goto_previous_start = {
@@ -76,7 +76,7 @@ return {
             ['[{'] = '@class.outer',
           },
           goto_previous_end = {
-            ['[M'] = '@function.outer',
+            ['[m'] = '@function.outer',
             ['[}'] = '@class.outer',
           },
         },
@@ -86,7 +86,7 @@ return {
             ['<leader>a'] = '@parameter.inner',
           },
           swap_previous = {
-            ['<leader>A'] = '@parameter.inner',
+            ['<leader>a'] = '@parameter.inner',
           },
         },
       },

@@ -72,7 +72,10 @@ return {
         { 'gonstoll/wezterm-types', lazy = true },
       },
       opts = {
-        library = { path = 'wezterm-types', mods = { 'wezterm' } },
+        library = {
+          { path = 'wezterm-types', mods = { 'wezterm' } },
+          { path = 'snacks.nvim', words = { 'Snacks' } },
+        },
       },
     },
     'neovim/nvim-lspconfig',
@@ -92,22 +95,20 @@ return {
       on_attach = on_attach,
     }
 
-    lspconfig.pyright.setup {
+    lspconfig.basedpyright.setup {
       capabilities = capabilities,
       on_attach = on_attach,
       settings = {
-        python = {
+        basedpyright = {
           analysis = {
+            typeCheckingMode = 'standard',
             diagnosticSeverityOverrides = {
-              reportInvalidTypeArguments = 'warning',
-              reportArgumentType = 'information',
-              reportGeneralTypeIssues = 'information',
-              reportReturnType = 'information',
-              reportIncompatibleMethodOverride = 'information',
-              reportIncompatibleVariableOverride = 'warning',
-              reportPossiblyUnboundVariable = 'warning',
+              reportMissingParameterType = 'warning',
+              reportMissingTypeArgument = 'warning',
+              reportUnnecessaryComparison = 'warning',
+              reportUnnecessaryContains = 'warning',
+              reportUnnecessaryIsInstance = 'warning',
             },
-            typeCheckingMode = 'basic',
           },
         },
       },
@@ -125,7 +126,7 @@ return {
           format = { enable = false },
           workspace = { checkThirdParty = false },
           telemetry = { enable = false },
-          diagnostics = { globals = { 'Snacks' } },
+          diagnostics = {},
         },
       },
     }
