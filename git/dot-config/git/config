@@ -9,3 +9,5 @@
 [user]
 	email = "christian.johansen@cpr.ku.dk"
 	name = "Christian Johansen"
+[pull]
+	rebase = true
