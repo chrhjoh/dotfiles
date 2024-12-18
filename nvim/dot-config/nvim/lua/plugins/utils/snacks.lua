@@ -21,6 +21,7 @@ return {
       indent = { enabled = true },
       notifier = { enabled = true },
       words = { enabled = true },
+      bigfile = { enabled = true },
     }
   end,
   keys = {
