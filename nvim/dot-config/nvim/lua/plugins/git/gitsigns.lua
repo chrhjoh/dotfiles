@@ -21,7 +21,7 @@ return {
           return ']h'
         end
         vim.schedule(function()
-          require('gitsigns').next_hunk()
+          require('gitsigns').nav_hunk('next')
         end)
         return '<Ignore>'
       end,
@@ -37,7 +37,7 @@ return {
           return '[h'
         end
         vim.schedule(function()
-          require('gitsigns').prev_hunk()
+          require('gitsigns').nav_hunk('prev')
         end)
         return '<Ignore>'
       end,
@@ -133,18 +133,18 @@ return {
     {
       '<leader>gd',
       function()
-        require('gitsigns').diffthis('~')
+        require('gitsigns').preview_hunk_inline()
       end,
-      desc = 'Git diff against last commit',
+      desc = 'Git diff inline',
       mode = 'n',
     },
 
     {
       '<leader>gD',
       function()
-        require('gitsigns').diffthis()
+        require('gitsigns').diffthis('~')
       end,
-      desc = 'Git diff against last index',
+      desc = 'Git diff against last commit',
       mode = 'n',
     },
 

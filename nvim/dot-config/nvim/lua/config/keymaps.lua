@@ -29,7 +29,9 @@ vim.keymap.set('n', '[b', '<cmd>bprevious<cr>', { desc = 'Prev Buffer' })
 vim.keymap.set('n', ']b', '<cmd>bnext<cr>', { desc = 'Next Buffer' })
 vim.keymap.set('n', '<leader>bb', '<cmd>e #<cr>', { desc = 'Switch to Other Buffer' })
 vim.keymap.set('n', '<leader>`', '<cmd>e #<cr>', { desc = 'Switch to Other Buffer' })
-vim.keymap.set('n', '<leader>bo', ':%bdelete|edit #|bd #"<cr>', { desc = 'Delete all other buffers' })
+vim.keymap.set('n', '<leader>bo', function()
+  Snacks.bufdelete { other = true }
+end, { desc = 'Delete all other buffers' })
 vim.keymap.set(
   'n',
   '<leader>bc',
@@ -71,8 +73,6 @@ vim.keymap.set('n', '[w', diagnostic_goto(false, 'WARN'), { desc = 'Prev Warning
 
 vim.keymap.set('n', '<leader>ww', '<C-W>p', { desc = 'Other Window', remap = true })
 vim.keymap.set('n', '<leader>wd', '<C-W>c', { desc = 'Delete Window', remap = true })
-vim.keymap.set('n', '<leader>w-', '<C-W>s', { desc = 'Split Window Below', remap = true })
-vim.keymap.set('n', '<leader>w|', '<C-W>v', { desc = 'Split Window Right', remap = true })
 vim.keymap.set('n', '<leader>-', '<C-W>s', { desc = 'Split Window Below', remap = true })
 vim.keymap.set('n', '<leader>|', '<C-W>v', { desc = 'Split Window Right', remap = true })
 vim.keymap.set('n', '<leader>q', '<cmd>close<cr>', { desc = 'Close current window' })

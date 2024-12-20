@@ -1,6 +1,5 @@
 local move_mux = function(direction)
   if vim.env.TMUX then
-    -- TODO: Does not work, check if this executes or if tmux swallows command
     if direction == 'h' then
       vim.cmd('TmuxNavigateLeft')
     end
@@ -31,7 +30,7 @@ vim.keymap.set('n', '<C-l>', function()
 end, { desc = 'Move Pane Right' })
 
 return {
-  'letieu/wezterm-move.nvim',
+  { 'letieu/wezterm-move.nvim', lazy = true },
   {
     'christoomey/vim-tmux-navigator',
     cmd = {

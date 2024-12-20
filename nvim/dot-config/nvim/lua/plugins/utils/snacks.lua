@@ -22,6 +22,7 @@ return {
       notifier = { enabled = true },
       words = { enabled = true },
       bigfile = { enabled = true },
+      scroll = { enabled = true },
     }
   end,
   keys = {
@@ -133,12 +134,21 @@ return {
           :map('<leader>uc')
         Snacks.toggle.treesitter():map('<leader>uT')
         Snacks.toggle.inlay_hints():map('<leader>uh')
-        Snacks.toggle.diagnostics({ bufnr = 0 }):map('<leader>ud')
+        Snacks.toggle.diagnostics({ bufnr = 0 }):map('<leader>uD')
         Snacks.toggle.zen():map('<leader>uZ')
         Snacks.toggle.dim():map('<leader>uz')
         Snacks.toggle.indent():map('<leader>ui')
         Snacks.toggle({
-          name = 'Format (Buffer)',
+          name = 'Buffer Diagnostics',
+          get = function()
+            return vim.diagnostic.is_enabled { bufnr = 0 }
+          end,
+          set = function(_)
+            vim.diagnostic.enable(not vim.diagnostic.is_enabled { bufnr = 0 }, { bufnr = 0 })
+          end,
+        }):map('<leader>ud')
+        Snacks.toggle({
+          name = 'Buffer Format',
           get = function()
             return not vim.b[0].disable_autoformat
           end,
@@ -147,7 +157,7 @@ return {
           end,
         }):map('<leader>uf')
         Snacks.toggle({
-          name = 'Format (Global)',
+          name = 'Global Format',
           get = function()
             return not vim.g.disable_autoformat
           end,
@@ -181,7 +191,7 @@ return {
           set = function(_)
             require('gitsigns').toggle_deleted()
           end,
-        }):map('<leader>uD')
+        }):map('<leader>ug')
         Snacks.toggle({
           name = 'CSV View',
           get = function()
@@ -191,7 +201,6 @@ return {
             require('csvview').toggle()
           end,
         }):map('<leader>uC')
-        Snacks.toggle.dim():map('<leader>uD')
       end,
     })
   end,
