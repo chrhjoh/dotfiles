@@ -20,6 +20,7 @@ return {
       },
       progress = { enabled = false },
     },
+    messages = { view_search = false },
     routes = {
       {
         filter = {
