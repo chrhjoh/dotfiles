@@ -7,10 +7,7 @@ vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = tr
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
 -- Diagnostic keymaps
-vim.keymap.set('n', '<leader>xe', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
-vim.keymap.set('n', '<leader>xd', function()
-  vim.diagnostic.setloclist { severity = { min = vim.diagnostic.severity.WARN } }
-end, { desc = 'Open diagnostics list' })
+vim.keymap.set('n', '<leader>d', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
 
 -- Automatic reselect after indent
 vim.keymap.set('v', '<', '<gv')
@@ -46,13 +43,31 @@ vim.keymap.set('n', '<C-p>', ':cp<CR>', { desc = 'Previous item in list', silent
 -- Save file
 vim.keymap.set({ 'i', 'x', 'n', 's' }, '<C-s>', '<cmd>w<cr><esc>', { desc = 'Save File' })
 
-vim.keymap.set('n', '<leader>xl', '<cmd>lopen<cr>', { desc = 'Location List' })
-vim.keymap.set('n', '<leader>xq', '<cmd>copen<cr>', { desc = 'Quickfix List' })
-vim.keymap.set('n', '<leader>xc', '<cmd>cclose<cr>', { desc = 'Close quickfix List' })
-vim.keymap.set('n', '<leader>xC', '<cmd>lclose<cr>', { desc = 'Close location List' })
+-- Lists
+local window_is_open = function(variable)
+  for _, win in ipairs(vim.api.nvim_list_wins()) do
+    local buf = vim.api.nvim_win_get_buf(win)
+    if vim.api.nvim_get_option_value('buftype', { buf = buf }) == variable then
+      return true
+    end
+  end
+  return false
+end
+vim.keymap.set('n', '<leader>ll', function()
+  if window_is_open('location') then
+    vim.cmd('lclose')
+  else
+    vim.cmd('lopen')
+  end
+end, { desc = 'Toggle Quickfix List' })
 
-vim.keymap.set('n', '[q', vim.cmd.cprev, { desc = 'Previous Quickfix' })
-vim.keymap.set('n', ']q', vim.cmd.cnext, { desc = 'Next Quickfix' })
+vim.keymap.set('n', '<leader>lq', function()
+  if window_is_open('quickfix') then
+    vim.cmd('cclose')
+  else
+    vim.cmd('copen')
+  end
+end, { desc = 'Toggle Location List' })
 
 -- diagnostic
 local diagnostic_goto = function(next, severity)
@@ -100,3 +115,7 @@ vim.keymap.set(
   { desc = 'Paste Selection to selected WezTerm pane' }
 )
 vim.keymap.set('n', '<leader>tP', '<cmd>SelectWezPane<cr>', { desc = 'Select WezTerm pane for pasting' })
+
+vim.keymap.set('n', '<leader>X', '<cmd>source % <CR>', { desc = 'Source current Lua file' })
+vim.keymap.set('n', '<leader>x', ':.lua<CR>', { desc = 'Source current Lua line' })
+vim.keymap.set('v', '<leader>x', ':lua<CR>', { desc = 'Source current Lua selection' })

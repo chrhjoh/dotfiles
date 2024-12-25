@@ -16,7 +16,8 @@ return {
           end,
         },
         { '<leader>c', group = 'code' },
-        { '<leader>d', group = 'debug' },
+        { '<leader>D', group = 'debug' },
+        { '<leader>l', group = 'lists' },
         { '<leader>f', group = 'files' },
         { '<leader>g', group = 'git' },
         { '<leader>r', group = 'refactors' },
@@ -24,7 +25,6 @@ return {
         { '<leader>t', group = 'terminals' },
         { '<leader>u', group = 'toggles' },
         { '<leader>w', group = 'windows', proxy = '<c-w>' },
-        { '<leader>x', group = 'Diagnostics/quickfixs' },
         { '<leader>y', group = 'yanks' },
         { '<leader>q', group = 'sessions' },
 

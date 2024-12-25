@@ -115,11 +115,11 @@ return {
   end,
   keys = {
     -- Basic debugging keymaps, feel free to change to your liking!
-    { '<leader>dc', ':DapContinue<CR>', desc = '[D]ebug: Start/[C]ontinue' },
-    { '<leader>di', ':DapStepInto<CR>', desc = '[D]ebug: Step [I]nto' },
-    { '<leader>dn', ':DapStepOver<CR>', desc = '[D]ebug: Step Over/[N]ext' },
-    { '<leader>do', ':DapStepOut<CR>', desc = '[D]ebug: Step [O]ut' },
-    { '<leader>db', ':DapToggleBreakpoint<CR>', desc = '[D]ebug: Toggle [B]reakpoint' },
-    { '<leader>dt', ':DapTerminate<CR>', desc = '[D]ebug: [T]erminate' },
+    { '<leader>Dc', ':DapContinue<CR>', desc = '[D]ebug: Start/[C]ontinue' },
+    { '<leader>Di', ':DapStepInto<CR>', desc = '[D]ebug: Step [I]nto' },
+    { '<leader>Dn', ':DapStepOver<CR>', desc = '[D]ebug: Step Over/[N]ext' },
+    { '<leader>Do', ':DapStepOut<CR>', desc = '[D]ebug: Step [O]ut' },
+    { '<leader>Db', ':DapToggleBreakpoint<CR>', desc = '[D]ebug: Toggle [B]reakpoint' },
+    { '<leader>Dt', ':DapTerminate<CR>', desc = '[D]ebug: [T]erminate' },
   },
 }
