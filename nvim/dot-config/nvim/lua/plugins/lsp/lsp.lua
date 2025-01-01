@@ -1,10 +1,4 @@
 local on_attach = function(client, bufnr)
-  -- NOTE: Remember that lua is a real programming language, and as such it is possible
-  -- to define small helper and utility functions so you don't have to repeat yourself
-  -- many times.
-  --
-  -- In this case, we create a function that lets us more easily define mappings specific
-  -- for LSP related items. It sets the mode, buffer and description for us each time.
   local nmap = function(keys, func, desc)
     if desc then
       desc = 'LSP: ' .. desc
@@ -18,34 +12,34 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('i', '<C-?>', vim.lsp.buf.signature_help, { desc = 'LSP: Signature', noremap = true })
   nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
   -- Lesser used LSP functionality
-  nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
+  nmap('gD', vim.lsp.buf.declaration, 'Goto Declaration')
 
-  nmap('<leader>cr', vim.lsp.buf.rename, '[C]ode [R]ename')
-  nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
+  nmap('<leader>cr', vim.lsp.buf.rename, 'Code Rename')
+  nmap('<leader>ca', vim.lsp.buf.code_action, 'Code Action')
 
   vim.keymap.set(
     'n',
     'gd',
     '<cmd>FzfLua lsp_definitions     jump_to_single_result=true ignore_current_line=true<cr>',
-    { desc = 'Goto Definition' }
+    { desc = 'LSP: Goto Definition' }
   )
   vim.keymap.set(
     'n',
     'gr',
     '<cmd>FzfLua lsp_references      jump_to_single_result=true ignore_current_line=true<cr>',
-    { desc = 'References', nowait = true }
+    { desc = 'LSP: References', nowait = true }
   )
   vim.keymap.set(
     'n',
     'gI',
     '<cmd>FzfLua lsp_implementations jump_to_single_result=true ignore_current_line=true<cr>',
-    { desc = 'Goto Implementation' }
+    { desc = 'LSP: Goto Implementation' }
   )
   vim.keymap.set(
     'n',
     'gy',
     '<cmd>FzfLua lsp_typedefs        jump_to_single_result=true ignore_current_line=true<cr>',
-    { desc = 'Goto T[y]pe Definition' }
+    { desc = 'LSP: Goto Type Definition' }
   )
   vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
     signs = {
@@ -56,9 +50,6 @@ local on_attach = function(client, bufnr)
     },
   })
 end
-
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
 return {
   'williamboman/mason-lspconfig.nvim',
@@ -80,11 +71,14 @@ return {
     },
     'neovim/nvim-lspconfig',
     'williamboman/mason.nvim',
+    'saghen/blink.cmp',
   },
   config = function()
     require('mason-lspconfig').setup {
       automatic_installation = true,
     }
+    local capabilities = vim.lsp.protocol.make_client_capabilities()
+    local capabilities = require('blink.cmp').get_lsp_capabilities(capabilities)
     local lspconfig = require('lspconfig')
     lspconfig.julials.setup {
       capabilities = capabilities,

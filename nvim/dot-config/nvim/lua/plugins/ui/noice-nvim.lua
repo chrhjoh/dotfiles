@@ -3,10 +3,6 @@ return {
   event = 'VeryLazy',
   dependencies = {
     'MunifTanjim/nui.nvim',
-    {
-      'stevearc/dressing.nvim',
-      opts = {},
-    },
   },
   opts = {
     cmdline = {
@@ -20,7 +16,6 @@ return {
       },
       progress = { enabled = false },
     },
-    messages = { view_search = false },
     routes = {
       {
         filter = {
