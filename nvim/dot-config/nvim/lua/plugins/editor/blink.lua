@@ -21,7 +21,7 @@ return {
       },
       documentation = {
         auto_show = true,
-        auto_show_delay_ms = 200,
+        auto_show_delay_ms = 500,
       },
       ghost_text = { enabled = false },
     },
@@ -29,7 +29,6 @@ return {
       use_nvim_cmp_as_default = false,
       nerd_font_variant = 'mono',
     },
-    signature = { enabled = true },
     keymap = {
       preset = 'default',
       ['<C-space>'] = {},
