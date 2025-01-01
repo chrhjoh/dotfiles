@@ -10,6 +10,7 @@ return {
           actions = {
             ['alt-i'] = { actions.toggle_ignore },
             ['alt-.'] = { actions.toggle_hidden },
+            ['ctrl-t'] = require('trouble.sources.fzf').actions.open,
           },
         },
         grep = {
@@ -17,6 +18,7 @@ return {
           actions = {
             ['alt-i'] = { actions.toggle_ignore },
             ['alt-.'] = { actions.toggle_hidden },
+            ['ctrl-t'] = require('trouble.sources.fzf').actions.open,
           },
         },
         lsp = {
@@ -44,10 +46,6 @@ return {
             ['ctrl-d'] = 'half-page-down',
             ['ctrl-x'] = 'jump',
           },
-          files = {
-            true,
-            ['ctrl-t'] = require('trouble.sources.fzf').actions.open,
-          },
         },
       }
     end,
@@ -64,12 +62,12 @@ return {
         function()
           require('fzf-lua').live_grep()
         end,
-        desc = 'Grep (Root Dir)',
+        desc = 'Search Grep (Root Dir)',
       },
       {
         '<leader>:',
         '<cmd>FzfLua command_history<cr>',
-        desc = 'Command History',
+        desc = 'Search Command History',
       },
       {
         '<leader><space>',
