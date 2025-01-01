@@ -1,9 +1,17 @@
 return {
   'folke/which-key.nvim',
+  ---@class wk.Opts
   opts = {
-    preset = 'classic',
+    preset = 'helix',
     icons = {
       separator = '→',
+      rules = {
+        { plugin = 'refactoring.nvim', pattern = 'refactor', icon = '󱖈 ', color = 'green' },
+        { pattern = 'put', icon = '󰅇 ', color = 'yellow' },
+        { pattern = 'yank', icon = '󰅇 ', color = 'yellow' },
+        { pattern = 'lists', icon = ' ', color = 'green' },
+        { pattern = 'lua', icon = '󰢱 ', color = 'blue' },
+      },
     },
     spec = {
       {
@@ -20,12 +28,12 @@ return {
         { '<leader>l', group = 'lists' },
         { '<leader>f', group = 'files' },
         { '<leader>g', group = 'git' },
-        { '<leader>r', group = 'refactors' },
+        { '<leader>r', group = 'refactor' },
         { '<leader>s', group = 'searches' },
         { '<leader>t', group = 'terminals' },
         { '<leader>u', group = 'toggles' },
         { '<leader>w', group = 'windows', proxy = '<c-w>' },
-        { '<leader>y', group = 'yanks' },
+        { '<leader>y', group = 'yank' },
         { '<leader>q', group = 'sessions' },
 
         { '<localleader>o', group = 'oil' },
