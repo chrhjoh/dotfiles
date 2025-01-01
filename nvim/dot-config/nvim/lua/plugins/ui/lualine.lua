@@ -18,6 +18,9 @@ local recording_component = {
     return text:find('recording') ~= nil
   end,
 }
+local command_component = {
+  '%S',
+}
 return {
   -- Set lualine as statusline
   'nvim-lualine/lualine.nvim',
@@ -25,7 +28,6 @@ return {
   -- See `:help lualine.txt`
   dependencies = {
     'nvim-tree/nvim-web-devicons',
-    'AndreM222/copilot-lualine',
   },
   config = function()
     require('lualine').setup {
@@ -34,14 +36,14 @@ return {
         section_separators = '',
         component_separators = '|',
         disabled_filetypes = { 'snacks_dashboard', 'neo-tree' },
+        globalstatus = true,
       },
       sections = {
-        lualine_a = { 'mode' },
+        lualine_a = { 'mode', recording_component },
         lualine_b = {
           'branch',
           'diff',
           { 'diagnostics', sections = { 'error', 'warn' } },
-          recording_component,
         },
         lualine_c = {
           {
@@ -49,11 +51,10 @@ return {
           },
         },
         lualine_x = {
-          { 'copilot', show_colors = true },
+          command_component,
           'filetype',
         },
         lualine_y = {
-          { 'aerial', colored = true, depth = -1 },
           'progress',
         },
         lualine_z = { 'location' },

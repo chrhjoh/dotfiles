@@ -35,13 +35,12 @@ vim.o.timeoutlen = 300
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noinsert'
 
--- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
 
 vim.opt.conceallevel = 1
 
 vim.o.sessionoptions = 'buffers,curdir,folds,tabpages,winpos,winsize'
-vim.o.laststatus = 0
+vim.o.laststatus = 3
 
 vim.opt.spelllang = { 'en_us' }
 
@@ -52,3 +51,5 @@ vim.opt.spelllang = { 'en_us' }
 vim.o.termsync = false
 
 vim.o.pumheight = 10
+
+vim.opt.showcmdloc = 'statusline'
