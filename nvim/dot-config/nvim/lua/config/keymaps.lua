@@ -1,73 +1,116 @@
--- Keymaps for better default experience
--- See `:help vim.keymap.set()`
-vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
+local nmap = Utils.keymap.get_mapper { mode = "n" }
+local vmap = Utils.keymap.get_mapper { mode = "v" }
+local imap = Utils.keymap.get_mapper { mode = "i" }
+local yank_map = Utils.keymap.get_mapper { mode = "n", desc_prefix = "Yank" }
+local list_map = Utils.keymap.get_mapper { mode = "n", desc_prefix = "List" }
+local buffer_map = Utils.keymap.get_mapper { mode = "n", desc_prefix = "Buffer" }
+local diagnostic_map = Utils.keymap.get_mapper { mode = "n", desc_prefix = "Diagnostics" }
+local window_map = Utils.keymap.get_mapper { mode = "n", desc_prefix = "Window" }
+local file_map = Utils.keymap.get_mapper { mode = "n", desc_prefix = "File" }
+local source_map = Utils.keymap.get_mapper { mode = "n", desc_prefix = "Source" }
+
+nmap { "<Space>", "<Nop>", mode = { "n", "v" }, silent = true }
+nmap { "<leader>Q", "<cmd>quit<cr>", desc = "Quit Neovim" }
 
 -- Remap for dealing with word wrap
-vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
-vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
-
--- Diagnostic keymaps
-vim.keymap.set('n', '<leader>d', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
+nmap { "k", "v:count == 0 ? 'gk' : 'k'", silent = true, expr = true }
+nmap { "j", "v:count == 0 ? 'gj' : 'j'", silent = true, expr = true }
 
 -- Automatic reselect after indent
-vim.keymap.set('v', '<', '<gv')
-vim.keymap.set('v', '>', '>gv')
+vmap { "<", "<gv" }
+vmap { ">", ">gv" }
 
-vim.keymap.set('n', '<leader>yP', ':let @* = expand("%:p")<CR>', { desc = 'Yank Absolute [P]athy' })
-vim.keymap.set('n', '<leader>yp', ':let @* = expand("%")<CR>', { desc = 'Yank Relative [P]ath' })
-vim.keymap.set('n', '<leader>y.', ':let @* = expand("%:t")<CR>', { desc = 'Yank Filename' })
-vim.keymap.set('n', '<leader>p', '"0p<cr>', { desc = 'Put from last yank registry' })
-vim.keymap.set('n', '<leader>P', '<CMD>YankyRingHistory<CR>', { desc = 'Put from yank history' })
+yank_map { "<leader>yP", ':let @* = expand("%:p")<CR>', desc = "Yank Absolute Path" }
+yank_map { "<leader>yp", ':let @* = expand("%")<CR>', desc = "Yank Relative Path" }
+yank_map { "<leader>y.", ':let @* = expand("%:t")<CR>', desc = "Yank Filename" }
+yank_map { "<leader>p", '"0p<cr>', desc = "Put from last yank registry" }
+yank_map { "<leader>P", "<CMD>YankyRingHistory<CR>", desc = "Put from yank history" }
 
 -- Moving between buffers
-vim.keymap.set('n', '<TAB>', ':bn<CR>', { desc = 'Next Buffer', silent = true })
-vim.keymap.set('n', '<S-TAB>', ':bp<CR>', { desc = 'Previous Buffer', silent = true })
-vim.keymap.set('n', '[b', '<cmd>bprevious<cr>', { desc = 'Prev Buffer' })
-vim.keymap.set('n', ']b', '<cmd>bnext<cr>', { desc = 'Next Buffer' })
-vim.keymap.set('n', '<leader>bb', '<cmd>e #<cr>', { desc = 'Switch to Other Buffer' })
-vim.keymap.set('n', '<leader>`', '<cmd>e #<cr>', { desc = 'Switch to Other Buffer' })
-vim.keymap.set('n', '<leader>bo', function()
-  Snacks.bufdelete { other = true }
-end, { desc = 'Delete all other buffers' })
-vim.keymap.set(
-  'n',
-  '<leader>bc',
+buffer_map { "<TAB>", ":bn<CR>", desc = "Next", silent = true }
+buffer_map { "<S-TAB>", ":bp<CR>", desc = "Previous", silent = true }
+buffer_map { "[b", "<cmd>bprevious<cr>", desc = "Previous" }
+buffer_map { "]b", "<cmd>bnext<cr>", desc = "Next" }
+buffer_map { "<leader>bb", "<cmd>e #<cr>", desc = "Switch to Other" }
+buffer_map { "<leader>`", "<cmd>e #<cr>", desc = "Switch to Other" }
+buffer_map { "<leader>bd", Snacks.bufdelete.delete, desc = "Delete" }
+buffer_map { "<leader>bo", Snacks.bufdelete.other, desc = "Delete All Other" }
+buffer_map { "<leader>bA", Snacks.bufdelete.all, desc = "Delete all" }
+buffer_map {
+  "<leader>bc",
   "<cmd>let @+ = expand('%:p')<cr>",
-  { desc = 'Copy current buffer relative path to clipboard' }
-)
+  desc = "Copy relative path to clipboard",
+}
 
 -- Moving over quickfix items quickly
-vim.keymap.set('n', '<C-n>', ':cn<CR>', { desc = 'Next item in list', silent = true })
-vim.keymap.set('n', '<C-p>', ':cp<CR>', { desc = 'Previous item in list', silent = true })
+nmap { "<C-n>", ":cn<CR>", desc = "Next item in list", silent = true }
+nmap { "<C-p>", ":cp<CR>", desc = "Previous item in list", silent = true }
+nmap {
+  "[q",
+  function()
+    if require("trouble").is_open() then
+      require("trouble").prev { skip_groups = true, jump = true }
+    else
+      local ok, err = pcall(vim.cmd.cprev)
+      if not ok then
+        vim.notify(err, vim.log.levels.ERROR)
+      end
+    end
+  end,
+  desc = "Previous Trouble/Quickfix Item",
+}
+nmap {
+  "]q",
+  function()
+    if require("trouble").is_open() then
+      require("trouble").next { skip_groups = true, jump = true }
+    else
+      local ok, err = pcall(vim.cmd.cnext)
+      if not ok then
+        vim.notify(err, vim.log.levels.ERROR)
+      end
+    end
+  end,
+  desc = "Next Trouble/Quickfix Item",
+}
 
 -- Save file
-vim.keymap.set({ 'i', 'x', 'n', 's' }, '<C-s>', '<cmd>w<cr><esc>', { desc = 'Save File' })
+nmap { "<C-s>", "<cmd>w<cr><esc>", mode = { "i", "x", "n", "s" }, desc = "Save File", silent = true }
 
 -- Lists
 local window_is_open = function(variable)
   for _, win in ipairs(vim.api.nvim_list_wins()) do
     local buf = vim.api.nvim_win_get_buf(win)
-    if vim.api.nvim_get_option_value('buftype', { buf = buf }) == variable then
+    if vim.api.nvim_get_option_value("buftype", { buf = buf }) == variable then
       return true
     end
   end
   return false
 end
-vim.keymap.set('n', '<leader>ll', function()
-  if window_is_open('location') then
-    vim.cmd('lclose')
-  else
-    vim.cmd('lopen')
-  end
-end, { desc = 'Toggle Quickfix List' })
 
-vim.keymap.set('n', '<leader>lq', function()
-  if window_is_open('quickfix') then
-    vim.cmd('cclose')
-  else
-    vim.cmd('copen')
-  end
-end, { desc = 'Toggle Location List' })
+list_map {
+  "<leader>ll",
+  function()
+    if window_is_open("location") then
+      vim.cmd("lclose")
+    else
+      vim.cmd("lopen")
+    end
+  end,
+  desc = "Toggle Quickfix List",
+}
+
+list_map {
+  "<leader>lq",
+  function()
+    if window_is_open("quickfix") then
+      vim.cmd("cclose")
+    else
+      vim.cmd("copen")
+    end
+  end,
+  desc = "Toggle Location List",
+}
 
 -- diagnostic
 local diagnostic_goto = function(next, severity)
@@ -77,45 +120,161 @@ local diagnostic_goto = function(next, severity)
     go { severity = severity }
   end
 end
-vim.keymap.set('n', '<leader>cd', vim.diagnostic.open_float, { desc = 'Line Diagnostics' })
-vim.keymap.set('n', '<C-k>', vim.diagnostic.open_float, { desc = 'Line Diagnostics' })
-vim.keymap.set('n', ']d', diagnostic_goto(true), { desc = 'Next Diagnostic' })
-vim.keymap.set('n', '[d', diagnostic_goto(false), { desc = 'Prev Diagnostic' })
-vim.keymap.set('n', ']e', diagnostic_goto(true, 'ERROR'), { desc = 'Next Error' })
-vim.keymap.set('n', '[e', diagnostic_goto(false, 'ERROR'), { desc = 'Prev Error' })
-vim.keymap.set('n', ']w', diagnostic_goto(true, 'WARN'), { desc = 'Next Warning' })
-vim.keymap.set('n', '[w', diagnostic_goto(false, 'WARN'), { desc = 'Prev Warning' })
 
-vim.keymap.set('n', '<leader>ww', '<C-W>p', { desc = 'Other Window', remap = true })
-vim.keymap.set('n', '<leader>wd', '<C-W>c', { desc = 'Delete Window', remap = true })
-vim.keymap.set('n', '<leader>-', '<C-W>s', { desc = 'Split Window Below', remap = true })
-vim.keymap.set('n', '<leader>|', '<C-W>v', { desc = 'Split Window Right', remap = true })
-vim.keymap.set('n', '<leader>q', '<cmd>close<cr>', { desc = 'Close current window' })
-vim.keymap.set('n', '<leader>Q', '<cmd>quit<cr>', { desc = 'Quit Neovim' })
+diagnostic_map { "<leader>cd", vim.diagnostic.open_float, desc = "Line" }
+diagnostic_map { "<C-k>", vim.diagnostic.open_float, desc = "Line" }
+diagnostic_map { "]d", diagnostic_goto(true), desc = "Next" }
+diagnostic_map { "[d", diagnostic_goto(false), desc = "Previous" }
+diagnostic_map { "]e", diagnostic_goto(true, "ERROR"), desc = "Next Error" }
+diagnostic_map { "[e", diagnostic_goto(false, "ERROR"), desc = "Previous Error" }
+diagnostic_map { "]w", diagnostic_goto(true, "WARN"), desc = "Next Warning" }
+diagnostic_map { "[w", diagnostic_goto(false, "WARN"), desc = "Previous Warning" }
 
--- Resize window using <ctrl> arrow keys
-vim.keymap.set('n', '<C-Up>', '<cmd>resize +2<cr>', { desc = 'Increase Window Height' })
-vim.keymap.set('n', '<C-Down>', '<cmd>resize -2<cr>', { desc = 'Decrease Window Height' })
-vim.keymap.set('n', '<C-Left>', '<cmd>vertical resize -2<cr>', { desc = 'Decrease Window Width' })
-vim.keymap.set('n', '<C-Right>', '<cmd>vertical resize +2<cr>', { desc = 'Increase Window Width' })
+window_map { "<leader>ww", "<C-W>p", desc = "Other", remap = true }
+window_map { "<leader>wd", "<C-W>c", desc = "Delete", remap = true }
+window_map { "<leader>-", "<C-W>s", desc = "Split Below", remap = true }
+window_map { "<leader>|", "<C-W>v", desc = "Split Right", remap = true }
+
+window_map { "<C-Up>", "<cmd>resize +2<cr>", desc = "Increase Height" }
+window_map { "<C-Down>", "<cmd>resize -2<cr>", desc = "Decrease Height" }
+window_map { "<C-Left>", "<cmd>vertical resize -2<cr>", desc = "Decrease Width" }
+window_map { "<C-Right>", "<cmd>vertical resize +2<cr>", desc = "Increase Width" }
 
 -- new file
-vim.keymap.set('n', '<leader>fn', '<cmd>enew<cr>', { desc = 'New File' })
+file_map { "<leader>fn", "<cmd>enew<cr>", desc = "New File" }
 
 -- Move around
-vim.keymap.set('i', '<c-l>', '<right>', { desc = 'Right' })
-vim.keymap.set('i', '<c-k>', '<up>', { desc = 'Up' })
-vim.keymap.set('i', '<c-j>', '<down>', { desc = 'Down' })
-vim.keymap.set('i', '<c-h>', '<left>', { desc = 'Left' })
+imap { "<c-l>", "<right>" }
+imap { "<c-h>", "<up>" }
+imap { "<c-j>", "<down>" }
+imap { "<c-k>", "<left>" }
 
-vim.keymap.set(
-  { 'v', 'n' },
-  '<leader>tp',
-  '<cmd>PasteSelectionWezPane<cr>',
-  { desc = 'Paste Selection to selected WezTerm pane' }
-)
-vim.keymap.set('n', '<leader>tP', '<cmd>SelectWezPane<cr>', { desc = 'Select WezTerm pane for pasting' })
+source_map { "<leader>X", "<cmd>source % <CR>", desc = "Source current Lua file", silent = true }
+source_map { "<leader>x", ":.lua<CR>", desc = "Source current Lua line", silent = true }
+source_map { "<leader>x", ":lua<CR>", mode = "v", desc = "Source current Lua selection", silent = true }
 
-vim.keymap.set('n', '<leader>X', '<cmd>source % <CR>', { desc = 'Source current Lua file' })
-vim.keymap.set('n', '<leader>x', ':.lua<CR>', { desc = 'Source current Lua line' })
-vim.keymap.set('v', '<leader>x', ':lua<CR>', { desc = 'Source current Lua selection' })
+-- Toggle options
+Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>us")
+Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>uw")
+Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>uL")
+Snacks.toggle.line_number():map("<leader>ul")
+Snacks.toggle
+  .option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 })
+  :map("<leader>uc")
+
+-- Toogle various ui elements
+Snacks.toggle.treesitter():map("<leader>uT")
+Snacks.toggle.inlay_hints():map("<leader>uh")
+Snacks.toggle.diagnostics({ bufnr = 0 }):map("<leader>uD")
+Snacks.toggle.zen():map("<leader>uZ")
+Snacks.toggle.dim():map("<leader>uz")
+Snacks.toggle.indent():map("<leader>ui")
+
+-- M.blank_above = function()
+--   local repeated = vim.fn["repeat"]({ "" }, vim.v.count1)
+--   local line = vim.api.nvim_win_get_cursor(0)[1]
+--   vim.api.nvim_buf_set_lines(0, line - 1, line - 1, true, repeated)
+-- end
+--
+-- M.blank_below = function()
+--   local repeated = vim.fn["repeat"]({ "" }, vim.v.count1)
+--   local line = vim.api.nvim_win_get_cursor(0)[1]
+--   vim.api.nvim_buf_set_lines(0, line, line, true, repeated)
+-- end
+-- M.exchange_above = function()
+--   local count = vim.v.count1
+--   vim.cmd("silent! move --" .. count)
+--   vim.cmd.normal("==")
+--   Utils.restore_dot_repetition(count)
+-- end
+--
+-- M.exchange_below = function()
+--   local count = vim.v.count1
+--   vim.cmd("silent! move +" .. count)
+--   vim.cmd.normal("==")
+--   Utils.restore_dot_repetition(count)
+-- end
+--
+-- M.exchange_section_above = function()
+--   local count = vim.v.count1
+--   vim.cmd("silent! '<,'>move '<--" .. count)
+--   vim.cmd.normal("gv=")
+--   Utils.restore_dot_repetition(count)
+-- end
+--
+-- M.exchange_section_below = function()
+--   local count = vim.v.count1
+--   vim.cmd("silent! '<,'>move '>+" .. count)
+--   vim.cmd.normal("gv=")
+--   Utils.restore_dot_repetition(count)
+-- end
+
+Snacks.toggle({
+  name = "Buffer Diagnostics",
+  get = function()
+    return vim.diagnostic.is_enabled { bufnr = 0 }
+  end,
+  set = function(_)
+    vim.diagnostic.enable(not vim.diagnostic.is_enabled { bufnr = 0 }, { bufnr = 0 })
+  end,
+}):map("<leader>ud")
+
+Snacks.toggle({
+  name = "Buffer Format",
+  get = function()
+    return not vim.b[0].disable_autoformat
+  end,
+  set = function(_)
+    vim.b[0].disable_autoformat = not vim.b[0].disable_autoformat
+  end,
+}):map("<leader>uf")
+
+Snacks.toggle({
+  name = "Global Format",
+  get = function()
+    return not vim.g.disable_autoformat
+  end,
+  set = function(_)
+    vim.g.disable_autoformat = not vim.g.disable_autoformat
+  end,
+}):map("<leader>uF")
+
+Snacks.toggle({
+  name = "Completion Menu",
+  get = function()
+    return not vim.g.cmp_disable
+  end,
+  set = function(_)
+    vim.g.cmp_disable = not vim.g.cmp_disable
+  end,
+}):map("<leader>um")
+
+Snacks.toggle({
+  name = "Git Blame Line",
+  get = function()
+    return require("gitsigns.config").config.current_line_blame
+  end,
+  set = function(_)
+    require("gitsigns").toggle_current_line_blame()
+  end,
+}):map("<leader>ub")
+
+Snacks.toggle({
+  name = "Git Deleted",
+  get = function()
+    return require("gitsigns.config").config.show_deleted
+  end,
+  set = function(_)
+    require("gitsigns").toggle_deleted()
+  end,
+}):map("<leader>ug")
+
+Snacks.toggle({
+  name = "CSV View",
+  get = function()
+    return require("csvview").is_enabled(vim.api.nvim_get_current_buf())
+  end,
+  set = function(_)
+    require("csvview").toggle()
+  end,
+}):map("<leader>uC")

@@ -1,55 +1,64 @@
-vim.o.hlsearch = true
+-- Leader
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ','
 
--- Make line numbers default
-vim.wo.number = true
-vim.wo.relativenumber = true
-
--- add cursorline
-vim.wo.cursorline = true
-vim.wo.cursorlineopt = 'number'
 -- Enable mouse mode
 vim.o.mouse = 'a'
 
--- Sync clipboard between OS and Neovim.
---  Remove this option if you want your OS clipboard to remain independent.
---  See `:help 'clipboard'`
+-- Clipboard
 vim.o.clipboard = 'unnamedplus'
 
--- Enable break indent
+-- Indent
 vim.o.breakindent = true
 
--- Save undo history
+-- Undo
 vim.o.undofile = true
 
--- Case-insensitive searching UNLESS \C or capital in search
+-- Searching
 vim.o.ignorecase = true
 vim.o.smartcase = true
 
--- Keep signcolumn on by default
-vim.wo.signcolumn = 'yes'
-
--- Decrease update time
+-- UpdateTime
 vim.o.updatetime = 250
-vim.o.timeoutlen = 300
 
--- Set completeopt to have a better completion experience
-vim.o.completeopt = 'menuone,noinsert'
-
-vim.o.termguicolors = true
-
-vim.opt.conceallevel = 1
-
+-- Sessions
 vim.o.sessionoptions = 'buffers,curdir,folds,tabpages,winpos,winsize'
-vim.o.laststatus = 3
-
-vim.opt.spelllang = { 'en_us' }
 
 -- Forces cursor into middle of page when scrolling
--- vim.o.so = 15
+vim.o.so = 0
 
--- disable terminal sync to avoid cursor flicker
-vim.o.termsync = false
+-- Statusline
+vim.o.showcmdloc = 'statusline'
+vim.o.laststatus = 3
 
+-- Completion
+vim.o.completeopt = 'menu,menuone,noselect'
 vim.o.pumheight = 10
 
-vim.opt.showcmdloc = 'statusline'
+-- Window
+vim.wo.number = true
+vim.wo.relativenumber = true
+
+vim.wo.cursorline = true
+vim.wo.cursorlineopt = 'number'
+
+vim.wo.signcolumn = 'yes'
+
+-- Terminal
+vim.o.termsync = false
+vim.o.termguicolors = true
+
+-- Conceal
+vim.o.conceallevel = 2
+
+local opt = vim.opt
+
+opt.confirm = true -- Confirm to save changes before exiting modified buffer
+opt.cursorline = true -- Enable highlighting of the current line
+opt.expandtab = true -- Use spaces instead of tabs
+opt.timeoutlen = 300
+opt.wildmode = 'longest:full,full'
+opt.splitright = true
+opt.virtualedit = 'block'
+-- Spelling
+opt.spelllang = 'en_us'

@@ -11,3 +11,5 @@
 	name = "Christian Johansen"
 [pull]
 	rebase = true
+[init]
+	defaultBranch = master

@@ -47,8 +47,9 @@ function M.build_active_title(tab, tabs, panes, config, hover, max_width)
   local right_symbol = utils.format_text(symbols.ple_right_half_circle_thick, colors.mauve, colors.base)
   local left_symbol = utils.format_text(symbols.ple_left_half_circle_thick, colors.mauve, colors.base)
 
-  if name:len() > max_width then
-    name = wezterm.truncate_right(name, max_width) .. '..'
+  if name:len() > max_width - 1 then
+    wezterm.log_error(name .. ' ' .. name:len())
+    name = wezterm.truncate_right(name, 20) .. '..'
   end
 
   return left_symbol .. index .. name .. zoom .. right_symbol

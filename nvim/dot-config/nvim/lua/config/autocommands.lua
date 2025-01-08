@@ -1,24 +1,100 @@
-local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
+-- Highlight on yank
 vim.api.nvim_create_autocmd('TextYankPost', {
   callback = function()
     vim.highlight.on_yank()
   end,
-  group = highlight_group,
+  group = vim.api.nvim_create_augroup('YankHighlight', { clear = true }),
   pattern = '*',
 })
 
-local toggleterm_group = vim.api.nvim_create_augroup('ToggleTerm', { clear = true })
-vim.api.nvim_create_autocmd('TermOpen', {
-  pattern = 'term://*toggleterm#*',
-  group = toggleterm_group,
+-- Check if we need to reload the file when it changed
+vim.api.nvim_create_autocmd({ 'FocusGained', 'TermClose', 'TermLeave' }, {
+  group = vim.api.nvim_create_augroup('checktime', { clear = true }),
   callback = function()
-    local opts = { buffer = 0 }
-    vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], opts)
-    vim.keymap.set('t', 'jk', [[<C-\><C-n>]], opts)
-    vim.keymap.set('t', '<C-h>', [[<Cmd>wincmd h<CR>]], opts)
-    vim.keymap.set('t', '<C-j>', [[<Cmd>wincmd j<CR>]], opts)
-    vim.keymap.set('t', '<C-k>', [[<Cmd>wincmd k<CR>]], opts)
-    vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]], opts)
-    vim.keymap.set('t', '<C-w>', [[<C-\><C-n><C-w>]], opts)
+    if vim.o.buftype ~= 'nofile' then
+      vim.cmd('checktime')
+    end
+  end,
+})
+
+-- resize splits if window got resized
+vim.api.nvim_create_autocmd({ 'VimResized' }, {
+  group = vim.api.nvim_create_augroup('resize_splits', { clear = true }),
+  callback = function()
+    local current_tab = vim.fn.tabpagenr()
+    vim.cmd('tabdo wincmd =')
+    vim.cmd('tabnext ' .. current_tab)
+  end,
+})
+
+-- close some filetypes with <q>
+vim.api.nvim_create_autocmd('FileType', {
+  group = vim.api.nvim_create_augroup('close_with_q', { clear = true }),
+  pattern = {
+    'PlenaryTestPopup',
+    'checkhealth',
+    'dbout',
+    'gitsigns-blame',
+    'grug-far',
+    'help',
+    'lspinfo',
+    'man',
+    'neotest-output',
+    'neotest-output-panel',
+    'neotest-summary',
+    'notify',
+    'qf',
+    'spectre_panel',
+    'startuptime',
+    'tsplayground',
+  },
+  callback = function(event)
+    vim.bo[event.buf].buflisted = false
+    vim.schedule(function()
+      vim.keymap.set('n', 'q', function()
+        vim.cmd('close')
+        pcall(vim.api.nvim_buf_delete, event.buf, { force = true })
+      end, {
+        buffer = event.buf,
+        silent = true,
+        desc = 'Quit buffer',
+      })
+    end)
+  end,
+})
+
+-- Autocreate intermediate directories
+vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
+  group = vim.api.nvim_create_augroup('auto_create_dirs', { clear = true }),
+  callback = function(event)
+    if event.match:match('^%w%w+:[\\/][\\/]') then
+      return
+    end
+    local file = vim.uv.fs_realpath(event.match) or event.match
+    vim.fn.mkdir(vim.fn.fnamemodify(file, ':p:h'), 'p')
+  end,
+})
+
+-- Fix conceallevel for json files
+vim.api.nvim_create_autocmd({ 'FileType' }, {
+  group = vim.api.nvim_create_augroup('json_conceal', { clear = true }),
+  pattern = { 'json', 'jsonc', 'json5' },
+  callback = function()
+    vim.opt_local.conceallevel = 0
+  end,
+})
+
+local snacks_terminal_group = vim.api.nvim_create_augroup('SnacksTerminal', { clear = true })
+vim.api.nvim_create_autocmd('TermOpen', {
+  group = snacks_terminal_group,
+  callback = function()
+    if vim.bo.filetype == 'snacks_terminal' then
+      local opts = { buffer = 0 }
+      vim.keymap.set('t', '<C-h>', [[<Cmd>wincmd h<CR>]], opts)
+      vim.keymap.set('t', '<C-j>', [[<Cmd>wincmd j<CR>]], opts)
+      vim.keymap.set('t', '<C-k>', [[<Cmd>wincmd k<CR>]], opts)
+      vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]], opts)
+      vim.keymap.set('t', '<C-w>', [[<C-\><C-n><C-w>]], opts)
+    end
   end,
 })
