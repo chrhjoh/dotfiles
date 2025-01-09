@@ -4,6 +4,7 @@ return {
   {
     "saghen/blink.cmp",
     version = "*",
+    build = "cargo build --release", -- Build from source for now since downloading is not blocking
     dependencies = "rafamadriz/friendly-snippets",
     event = "InsertEnter",
     opts = {

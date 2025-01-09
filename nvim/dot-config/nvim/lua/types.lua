@@ -19,6 +19,7 @@
 ---@class InstallOpts
 ---@field exclude? string[]
 ---@field update? boolean
+---@field force? boolean
 
 ---@alias ToolType "formatters"|"debuggers"|"lsps"
 

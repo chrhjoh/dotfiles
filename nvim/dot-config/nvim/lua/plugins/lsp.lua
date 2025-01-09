@@ -3,7 +3,7 @@ return {
   {
     "williamboman/mason.nvim",
     opts = {},
-    cmd = "Mason",
+    cmd = { "Mason", "MasonInstall" },
   },
   {
     "neovim/nvim-lspconfig",
