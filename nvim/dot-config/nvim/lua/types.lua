@@ -16,6 +16,10 @@
 ---@field adapter dap.Adapter
 ---@field configurations dap.Configuration[]
 
+---@class InstallOpts
+---@field exclude? string[]
+---@field update? boolean
+
 ---@alias ToolType "formatters"|"debuggers"|"lsps"
 
 -- Modfied from https://github.com/folke/lazy.nvim/blob/main/lua/lazy/core/handler/keys.lua

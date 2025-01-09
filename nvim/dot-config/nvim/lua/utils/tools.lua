@@ -1,9 +1,12 @@
 local M = {}
 
 ---@param tools ToolConfig[]
-local install = function(tools)
+---@param opts? InstallOpts
+local install = function(tools, opts)
   local registry = require("mason-registry")
-  registry.update()
+  if opts and opts.update then
+    registry.update()
+  end
   local needs_install = {}
   for _, tool in pairs(tools) do
     if tool.mason == false then
@@ -11,7 +14,10 @@ local install = function(tools)
     end
     local install_name = tool.mason_alias or tool.name
     if registry.has_package(install_name) then
-      table.insert(needs_install, install_name)
+      local p = registry.get_package(install_name)
+      if not p:is_installed() then
+        table.insert(needs_install, install_name)
+      end
     end
     ::continue::
   end
@@ -31,11 +37,11 @@ local function get_all()
   return all_tools
 end
 
----@param exclude? string[]
-M.install_all = function(exclude)
+---@param opts? InstallOpts
+M.install_all = function(opts)
   local all_tools = get_all()
   all_tools = vim.tbl_filter(function(tbl)
-    return not vim.list_contains(exclude or {}, tbl.name)
+    return not vim.list_contains(opts and (opts.exclude or {}) or {}, tbl.name)
   end, all_tools)
   install(all_tools)
 end

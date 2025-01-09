@@ -25,7 +25,7 @@ return {
       },
 
       auto_install = false,
-      sync_install = false,
+      sync_install = true,
       ignore_install = {},
       modules = {},
       incremental_selection = {
