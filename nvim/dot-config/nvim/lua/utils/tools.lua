@@ -2,15 +2,15 @@ local M = {}
 
 ---@param tools ToolConfig[]
 local install = function(tools)
+  local registry = require("mason-registry")
+  registry.update()
   local needs_install = {}
   for _, tool in pairs(tools) do
     if tool.mason == false then
       goto continue
     end
     local install_name = tool.mason_alias or tool.name
-    local registry = require("mason-registry")
-    local p = registry.get_package(install_name)
-    if not p:is_installed() then
+    if registry.has_package(install_name) then
       table.insert(needs_install, install_name)
     end
     ::continue::
