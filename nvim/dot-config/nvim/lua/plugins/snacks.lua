@@ -80,28 +80,6 @@ return {
         end,
         desc = "Rename File",
       },
-      {
-        "<leader>gf",
-        function()
-          local file = vim.trim(vim.api.nvim_buf_get_name(0))
-          Snacks.terminal { "lazygit", "-f", file }
-        end,
-        desc = "Lazygit Current File History",
-      },
-      {
-        "<leader>gg",
-        function()
-          Snacks.terminal("lazygit")
-        end,
-        desc = "Lazygit",
-      },
-      {
-        "<leader>gl",
-        function()
-          Snacks.terminal { "lazygit", "log" }
-        end,
-        desc = "Lazygit Log",
-      },
     }
   end,
 }

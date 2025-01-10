@@ -1,55 +1,6 @@
-local move_map = Utils.keymap.get_mapper { mode = "n", desc_prefix = "Move" }
+local move_map = Utils.keymap.get_lazy_list_mapper { mode = "n", desc_prefix = "Move" }
 local wez_paste_map = Utils.keymap.get_lazy_list_mapper { mode = "n", desc_prefix = "WezTerm" }
-local snoggle_map = Utils.keymap.get_lazy_list_mapper { mode = "n", desc_prefix = "Snoggle" }
----@alias Direction "h"|"j"|"k"|"l"
----@param direction Direction
-local move = function(direction)
-  if vim.env.TMUX then
-    if direction == "h" then
-      vim.cmd("TmuxNavigateLeft")
-    end
-    if direction == "j" then
-      vim.cmd("TmuxNavigateDown")
-    end
-    if direction == "k" then
-      vim.cmd("TmuxNavigateUp")
-    end
-    if direction == "l" then
-      vim.cmd("TmuxNavigateRight")
-    end
-  end
-  require("wezterm-move").move(direction)
-end
--- Navigation between windows
-
-move_map {
-  "<C-h>",
-  function()
-    move("h")
-  end,
-  desc = "Pane Left",
-}
-move_map {
-  "<C-j>",
-  function()
-    move("j")
-  end,
-  desc = "Pane Down",
-}
-move_map {
-  "<C-k>",
-  function()
-    move("k")
-  end,
-  desc = "Pane Up",
-}
-move_map {
-  "<C-l>",
-  function()
-    move("l")
-  end,
-  desc = "Pane Right",
-}
+local terminal_map = Utils.keymap.get_lazy_list_mapper { mode = "n", desc_prefix = "Terminal" }
 
 return {
   { "letieu/wezterm-move.nvim", lazy = true },
@@ -62,6 +13,30 @@ return {
       "TmuxNavigateRight",
       "TmuxNavigatePrevious",
     },
+    keys = function()
+      return move_map {
+        {
+          "<C-h>",
+          "<cmd>TmuxNavigateLeft<cr>",
+          desc = "Pane Left",
+        },
+        {
+          "<C-j>",
+          "<cmd>TmuxNavigateDown<cr>",
+          desc = "Pane Down",
+        },
+        {
+          "<C-k>",
+          "<cmd>TmuxNavigateUp<cr>",
+          desc = "Pane Up",
+        },
+        {
+          "<C-l>",
+          "<cmd>TmuxNavigateRight<cr>",
+          desc = "Pane Right",
+        },
+      }
+    end,
   },
   {
     "chrhjoh/wezterm-paster.nvim",
@@ -80,54 +55,111 @@ return {
     end,
   },
   {
-    "chrhjoh/snoggleterm.nvim",
+    "akinsho/toggleterm.nvim",
+    version = "*",
     lazy = true,
-    dependencies = { "folke/snacks.nvim" },
+    cmd = "ToggleTerm",
+    --  ---@type ToggleTermConfig
+    opts = {
+      open_mapping = [[<c-\>]],
+      close_on_exit = true,
+      shading_ratio = 0.5,
+      winbar = { enabled = true },
+    },
+    config = function(_, opts)
+      require("toggleterm").setup(opts)
+      local toggleterm_mappings = vim.api.nvim_create_augroup("ToggleTermMappings", { clear = true })
+      vim.api.nvim_create_autocmd("TermOpen", {
+        group = toggleterm_mappings,
+        pattern = "term://*toggleterm#*",
+        callback = function()
+          local keymap_opts = { buffer = 0 }
+          vim.keymap.set("t", "jk", [[<C-\><C-n>]], keymap_opts)
+          vim.keymap.set("t", "<C-h>", [[<Cmd>wincmd h<CR>]], keymap_opts)
+          vim.keymap.set("t", "<C-j>", [[<Cmd>wincmd j<CR>]], keymap_opts)
+          vim.keymap.set("t", "<C-k>", [[<Cmd>wincmd k<CR>]], keymap_opts)
+          vim.keymap.set("t", "<C-l>", [[<Cmd>wincmd l<CR>]], keymap_opts)
+          vim.keymap.set("t", "<C-w>", [[<C-\><C-n><C-w>]], keymap_opts)
+        end,
+      })
+    end,
     keys = function()
-      return snoggle_map {
+      return terminal_map {
+        { "<c-\\>" },
         {
-          "<leader>tt",
+          "<leader>tx",
           function()
-            require("snoggleterm").toggle_terminal()
+            require("toggleterm").send_lines_to_terminal("single_line", true, { args = vim.v.count })
           end,
-          desc = "Toggle",
-          { expr = true },
+          desc = "Send Current Line",
+          mode = "n",
         },
         {
-          "<leader>tf",
+          "<leader>tx",
           function()
-            require("snoggleterm").toggle_floating_terminal()
+            require("toggleterm").send_lines_to_terminal("visual_lines", true, { args = vim.v.count })
           end,
-          desc = "Toggle - Float",
+          desc = "Send Selected Lines",
+          mode = "v",
+        },
+        {
+          "<leader>tX",
+          function()
+            require("toggleterm").send_lines_to_terminal("visual_selection", true, { args = vim.v.count })
+          end,
+          desc = "Send Selection",
+          mode = "v",
         },
         {
           "<leader>t|",
           function()
-            require("snoggleterm").spawn_terminal("right")
+            require("toggleterm").toggle(vim.v.count, 60, nil, "vertical")
           end,
-          desc = "Spawn - Right",
+          desc = "Open Vertical",
         },
         {
           "<leader>t-",
           function()
-            require("snoggleterm").spawn_terminal("bottom")
+            require("toggleterm").toggle(vim.v.count, 18, nil, "horizontal")
           end,
-          desc = "Spawn - Bottom",
+          desc = "Open Horizontal",
         },
         {
-          "<leader>tr",
+          "<leader>tf",
           function()
-            require("snoggleterm").spawn_terminal("bottom", "python3")
+            require("toggleterm").toggle(vim.v.count, nil, nil, "float")
           end,
-          desc = "Spawn REPL",
+          desc = "Open Float",
         },
-
         {
-          "<C-\\>",
+          "<leader>gg",
           function()
-            require("snoggleterm").toggle_terminal()
+            local terminal = require("toggleterm.terminal").Terminal
+            local lazygit = terminal:new { cmd = "lazygit", hidden = true, direction = "float", close_on_exit = true }
+            lazygit:open()
           end,
-          desc = "Toggle",
+          desc = "Lazygit",
+        },
+        {
+          "<leader>gl",
+          function()
+            local terminal = require("toggleterm.terminal").Terminal
+            local lazygit =
+              terminal:new { cmd = "lazygit log", hidden = true, direction = "float", close_on_exit = true }
+            lazygit:open()
+          end,
+          desc = "Lazygit Log",
+        },
+        {
+          "<leader>gf",
+          function()
+            local file = vim.trim(vim.api.nvim_buf_get_name(0))
+            local terminal = require("toggleterm.terminal").Terminal
+            local lazygit =
+              terminal:new { cmd = "lazygit -f " .. file, hidden = true, direction = "float", close_on_exit = true }
+            lazygit:open()
+          end,
+          desc = "Lazygit Current File History",
         },
       }
     end,

@@ -4,42 +4,6 @@ local actions = wezterm.action
 
 local M = {}
 
----@param pane Pane
----@return boolean
-local function is_inside_vim(pane)
-  local tty = pane:get_tty_name()
-  if tty == nil then
-    return false
-  end
-
-  local success, stdout, stderr = wezterm.run_child_process {
-    'sh',
-    '-c',
-    'ps -o state= -o comm= -t'
-      .. wezterm.shell_quote_arg(tty)
-      .. ' | '
-      .. "grep -iqE '^[^TXZ ]+ +(\\S+\\/)?g?(view|l?n?vim?x?)(diff)?$'",
-  }
-
-  return success
-end
-
----@param window Window
----@param pane Pane
----@param pane_direction Direction
----@param vim_direction string
-local function conditionalActivatePane(window, pane, pane_direction, vim_direction)
-  if is_inside_vim(pane) or os.getenv('TMUX') then
-    window:perform_action(
-      -- This should match the keybinds you set in Neovim.
-      actions.SendKey { key = vim_direction, mods = 'CTRL' },
-      pane
-    )
-  else
-    window:perform_action(actions.ActivatePaneDirection(pane_direction), pane)
-  end
-end
-
 ---@param config Config
 local function key_configurations(config)
   config.disable_default_key_bindings = true
@@ -164,10 +128,10 @@ local function key_configurations(config)
       mods = 'LEADER',
       action = actions.DetachDomain { DomainName = 'unix' },
     },
-    { key = 'h', mods = 'CTRL', action = actions.EmitEvent('ActivatePaneDirection-left') },
-    { key = 'j', mods = 'CTRL', action = actions.EmitEvent('ActivatePaneDirection-down') },
-    { key = 'k', mods = 'CTRL', action = actions.EmitEvent('ActivatePaneDirection-up') },
-    { key = 'l', mods = 'CTRL', action = actions.EmitEvent('ActivatePaneDirection-right') },
+    { key = 'h', mods = 'CTRL|SHIFT', action = actions.ActivatePaneDirection('Left') },
+    { key = 'j', mods = 'CTRL|SHIFT', action = actions.ActivatePaneDirection('Down') },
+    { key = 'k', mods = 'CTRL|SHIFT', action = actions.ActivatePaneDirection('Up') },
+    { key = 'l', mods = 'CTRL|SHIFT', action = actions.ActivatePaneDirection('Right') },
     {
       key = 'I',
       mods = 'LEADER',
