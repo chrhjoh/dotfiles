@@ -7,7 +7,6 @@ function M.setup(config)
   config.use_ime = true
   config.font_size = 12
   config.font = wezterm.font_with_fallback { 'JetBrainsMono Nerd Font', 'Monaco' }
-  config.default_domain = 'unix'
   config.window_decorations = 'RESIZE'
   config.window_padding = {
     left = 0,

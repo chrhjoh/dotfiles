@@ -4,6 +4,10 @@ local mux = wezterm.mux
 
 local M = {}
 
-function M.setup() end
+function M.setup()
+  wezterm.on('gui-startup', function()
+    mux.get_domain('unix'):attach()
+  end)
+end
 
 return M
