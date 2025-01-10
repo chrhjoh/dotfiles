@@ -1,4 +1,4 @@
-local utils = require('ui.tabline.utils')
+local utils = require('plugins.tabline.utils')
 local colors = require('utils.colors').colors
 local wezterm = require('wezterm') --[[@ as Wezterm]]
 local symbols = wezterm.nerdfonts

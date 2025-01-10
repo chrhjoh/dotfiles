@@ -1,4 +1,4 @@
-local components = require('ui.tabline.components')
+local components = require('plugins.tabline.components')
 local M = {}
 
 ---@param window Window

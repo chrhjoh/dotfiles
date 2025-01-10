@@ -1,5 +1,5 @@
 local wezterm = require('wezterm') --[[@as Wezterm]]
-local copy_paste = require('utils.copy')
+local copy_paste = require('plugins.copy')
 local actions = wezterm.action
 
 local M = {}
@@ -48,10 +48,7 @@ local function key_configurations(config)
   config.keys = {
     { key = '|', mods = 'LEADER|SHIFT', action = wezterm.action.SplitHorizontal { domain = 'CurrentPaneDomain' } },
     { key = '-', mods = 'LEADER', action = wezterm.action.SplitVertical { domain = 'CurrentPaneDomain' } },
-    -- Send "CTRL-Space" to the terminal when pressing CTRL-Space, CTRL-Space
     { key = 'Space', mods = 'LEADER|CTRL', action = wezterm.action.SendKey { key = 'Space', mods = 'CTRL' } },
-    -- CTRL+SHIFT+Space, followed by 'r' will put us in resize-pane
-    -- mode until we cancel that mode.
     {
       key = 'r',
       mods = 'LEADER',
@@ -60,7 +57,35 @@ local function key_configurations(config)
     {
       key = 's',
       mods = 'LEADER',
-      action = actions.ShowLauncherArgs { flags = 'WORKSPACES', title = 'Select workspace' },
+      action = actions.ShowLauncherArgs { flags = 'FUZZY|WORKSPACES', title = 'Select workspace' },
+    },
+    {
+      key = 's',
+      mods = 'LEADER|SHIFT',
+      action = actions.PromptInputLine {
+        description = wezterm.format {
+          { Attribute = { Intensity = 'Bold' } },
+          { Foreground = { AnsiColor = 'Fuchsia' } },
+          { Text = 'Enter name for new workspace - Enter for Current Working Directory' },
+        },
+        action = wezterm.action_callback(function(window, pane, line)
+          if line == '' then
+            window:perform_action(
+              actions.SwitchToWorkspace {
+                name = window:active_pane():get_current_working_dir(),
+              },
+              pane
+            )
+          elseif line ~= nil then
+            window:perform_action(
+              actions.SwitchToWorkspace {
+                name = line,
+              },
+              pane
+            )
+          end
+        end),
+      },
     },
     -- Rename workspace
     {
@@ -71,7 +96,6 @@ local function key_configurations(config)
         action = wezterm.action_callback(function(win, pane, line)
           if line then
             wezterm.mux.rename_workspace(wezterm.mux.get_active_workspace(), line)
-            wezterm.emit('update-status')
           end
         end),
       },
@@ -89,7 +113,6 @@ local function key_configurations(config)
           if line then
             window:active_tab():set_title(line)
           end
-          wezterm.emit('update-status')
         end),
       },
     },
@@ -130,15 +153,16 @@ local function key_configurations(config)
     { key = 'k', mods = 'LEADER|SHIFT', action = actions.CloseCurrentTab { confirm = true } },
     { key = 'k', mods = 'LEADER', action = actions.CloseCurrentPane { confirm = true } },
     { key = 't', mods = 'LEADER', action = actions.SpawnTab('CurrentPaneDomain') },
+    { key = '/', mods = 'SHIFT|CTRL', action = wezterm.action.QuickSelect },
     {
-      key = 'a',
+      key = 'u',
       mods = 'LEADER',
       action = actions.AttachDomain('unix'),
     },
     {
-      key = 'd',
+      key = 'U',
       mods = 'LEADER',
-      action = actions.DetachDomain('CurrentPaneDomain'),
+      action = actions.DetachDomain { DomainName = 'unix' },
     },
     { key = 'h', mods = 'CTRL', action = actions.EmitEvent('ActivatePaneDirection-left') },
     { key = 'j', mods = 'CTRL', action = actions.EmitEvent('ActivatePaneDirection-down') },
@@ -173,6 +197,7 @@ local function key_configurations(config)
       mods = 'LEADER',
       action = actions.SpawnCommandInNewTab { args = { 'bash', '-ic', 'wezterm show-keys | fzf' } },
     },
+    { key = 'D', mods = 'LEADER', action = wezterm.action.ShowDebugOverlay },
   }
   config.key_tables = {
     -- Defines the keys that are active in our resize-pane mode.
@@ -189,6 +214,14 @@ local function key_configurations(config)
 
       -- Cancel the mode by pressing escape
       { key = 'Escape', action = 'PopKeyTable' },
+    },
+  }
+  config.mouse_bindings = {
+    -- Ctrl-click will open the link under the mouse cursor
+    {
+      event = { Up = { streak = 1, button = 'Left' } },
+      mods = 'CTRL',
+      action = wezterm.action.OpenLinkAtMouseCursor,
     },
   }
 end

@@ -1,7 +1,7 @@
 local wezterm = require('wezterm') --[[@as Wezterm]]
 local symbols = wezterm.nerdfonts
 local colors = require('utils.colors').colors
-local scheme = require('ui.color_scheme').scheme
+local scheme = require('config.colorscheme').scheme
 local M = {}
 
 ---@param window Window

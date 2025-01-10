@@ -1,7 +1,7 @@
 local wezterm = require('wezterm') --[[@as Wezterm]]
 local colors = require('utils.colors').colors
 local symbols = wezterm.nerdfonts
-local tabutils = require('ui.tabline.utils')
+local tabutils = require('plugins.tabline.utils')
 local M = {}
 
 ---@param window Window

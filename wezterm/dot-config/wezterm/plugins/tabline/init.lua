@@ -1,8 +1,8 @@
 local wezterm = require('wezterm') --[[@ as Wezterm]]
 local colors = require('utils.colors').colors
-local status = require('ui.tabline.status_builder')
-local tab_title = require('ui.tabline.tab_title_builder')
-local utils = require('ui.tabline.utils')
+local status = require('plugins.tabline.status_builder')
+local tab_title = require('plugins.tabline.tab_title_builder')
+local utils = require('plugins.tabline.utils')
 local M = {}
 
 ---@param config Config
