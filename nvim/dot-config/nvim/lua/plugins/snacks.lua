@@ -17,7 +17,8 @@ return {
         { section = "startup" },
       },
     },
-    input = { enabled = false },
+    input = { enabled = true },
+    scope = { enabled = true },
 
     indent = { enabled = true },
     notifier = { enabled = true },

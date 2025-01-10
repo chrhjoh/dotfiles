@@ -18,10 +18,10 @@ return {
         -- Enable or disable LSP file operations
         enabled = true,
         -- Time to wait for LSP file operations to complete before skipping
-        timeout_ms = 1000,
+        timeout_ms = 3000,
         -- Set to true to autosave buffers that are updated with LSP willRenameFiles
         -- Set to "unmodified" to only save unmodified buffers
-        autosave_changes = false,
+        autosave_changes = "unmodified",
       },
       preview_win = {
         preview_method = "load",
@@ -40,6 +40,19 @@ return {
         end,
         ["<C-v>"] = { "actions.select", opts = { vertical = true } },
         ["<C-p>"] = { "actions.preview" },
+        ["gd"] = function()
+          require("oil").set_columns { "icon", "permissions", "size", "mtime" }
+        end,
+        ["<leader>ff"] = {
+          function()
+            require("fzf-lua").files {
+              cwd = require("oil").get_current_dir(),
+            }
+          end,
+          mode = "n",
+          nowait = true,
+          desc = "Find files in the current directory",
+        },
       },
     },
     keys = function()

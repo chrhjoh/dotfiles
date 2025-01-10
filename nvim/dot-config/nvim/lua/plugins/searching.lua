@@ -95,7 +95,7 @@ return {
         {
           "<leader>fc",
           function()
-            require("fzf-lua").files { cwd = "~/.config/" }
+            require("fzf-lua").files { cwd = vim.env.XDG_CONFIG_HOME or vim.env.HOME .. "/.config/" }
           end,
           desc = "Config File",
         },
