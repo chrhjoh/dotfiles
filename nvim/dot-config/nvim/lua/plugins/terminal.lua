@@ -99,7 +99,7 @@ return {
         group = toggleterm_custom,
         pattern = "term://*toggleterm#*",
         callback = function(args)
-          local id = tonumber(args.file:match("#(%d+)$")) or vim.v.count1 -- Resolve id from the buffer name (Dont think fallback can happen)
+          local id = vim.b[args.buf].toggle_number
           local keymap_opts = { buffer = args.buf }
           vim.keymap.set("t", "<esc>", function()
             double_press_escape()
