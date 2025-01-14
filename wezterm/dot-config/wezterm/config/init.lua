@@ -7,7 +7,7 @@ function M.setup()
   require('config.options').setup(config)
   require('config.keys').setup(config)
   require('config.colorscheme').setup(config)
-  require('config.startup').setup()
+  require('config.workspaces').setup()
   return config
 end
 

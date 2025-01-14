@@ -6,12 +6,13 @@ local M = {}
 
 ---@param tab TabInformation
 ---@return string
+---@return boolean
 local function get_active_tab_name(tab)
   local title = tab.tab_title
 
   -- If title is set
   if title and #title > 0 then
-    return title
+    return title, true
   end
 
   -- Try and get it from the active panes directory
@@ -20,10 +21,10 @@ local function get_active_tab_name(tab)
     local parent = cwd_uri.file_path:match('([^/]*)/[^/]*$')
     local cwd = cwd_uri.file_path:match('([^/]+)/?$')
     title = parent .. '/' .. cwd
-    return title
+    return title, false
   end
 
-  return tab.active_pane.title
+  return tab.active_pane.title, false
 end
 
 ---@param tab TabInformation
@@ -34,7 +35,7 @@ end
 ---@param max_width number
 ---@return string
 function M.build_active_title(tab, tabs, panes, config, hover, max_width)
-  local name = get_active_tab_name(tab)
+  local name, trunc_right = get_active_tab_name(tab)
   local index = tab.tab_index + 1 .. '. '
   local zoom
 
@@ -43,16 +44,26 @@ function M.build_active_title(tab, tabs, panes, config, hover, max_width)
   else
     zoom = ''
   end
+  local left_symbol = symbols.ple_left_half_circle_thick
+  local right_symbol = symbols.ple_right_half_circle_thick
+  local not_name_chars = index:len() + left_symbol:len() + right_symbol:len() + zoom:len()
 
-  local right_symbol = utils.format_text(symbols.ple_right_half_circle_thick, colors.mauve, colors.base)
-  local left_symbol = utils.format_text(symbols.ple_left_half_circle_thick, colors.mauve, colors.base)
+  local total_length = name:len() + not_name_chars
 
-  if name:len() > max_width - 1 then
-    wezterm.log_error(name .. ' ' .. name:len())
-    name = wezterm.truncate_right(name, 20) .. '..'
+  if total_length > config.tab_max_width then
+    local truncate = config.tab_max_width - not_name_chars -- How much do i need to truncate plus how long is the name currently
+    if trunc_right then
+      name = wezterm.truncate_right(name, truncate - 2) .. '..' --Account for extra chars added
+    else
+      name = '..' .. wezterm.truncate_left(name, truncate - 2)
+    end
   end
 
-  return left_symbol .. index .. name .. zoom .. right_symbol
+  return utils.format_text(left_symbol, colors.mauve, colors.base) -- These chars are reverse formatted fg and bg
+    .. index
+    .. name
+    .. zoom
+    .. utils.format_text(right_symbol, colors.mauve, colors.base)
 end
 
 ---@param tab TabInformation

@@ -9,7 +9,7 @@ local M = {}
 ---@return string
 function M.DomainComponent(window, pane)
   local component = {}
-  local domain = window:active_pane():get_domain_name()
+  local domain = pane:get_domain_name()
   local bg_color = tabutils.color_by_mode(tabutils.get_current_mode(window))
 
   table.insert(component, { Foreground = { Color = colors.base } })

@@ -15,6 +15,8 @@ function M.setup(config)
     ['MYppuccin'] = custom,
   }
   config.color_scheme = 'MYppuccin'
+  config.command_palette_fg_color = colors.text
+  config.command_palette_bg_color = colors.surface0
 end
 
 M.scheme = custom

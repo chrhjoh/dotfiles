@@ -24,6 +24,24 @@ local double_press_escape = function()
   end
 end
 
+local move = function(direction)
+  if vim.env.TMUX then
+    if direction == "h" then
+      vim.cmd("TmuxNavigateLeft")
+    end
+    if direction == "j" then
+      vim.cmd("TmuxNavigateDown")
+    end
+    if direction == "k" then
+      vim.cmd("TmuxNavigateUp")
+    end
+    if direction == "l" then
+      vim.cmd("TmuxNavigateRight")
+    end
+  end
+  require("wezterm-move").move(direction)
+end
+
 return {
   { "letieu/wezterm-move.nvim", lazy = true },
   {
@@ -42,22 +60,30 @@ return {
       return move_map {
         {
           "<C-h>",
-          "<cmd>TmuxNavigateLeft<cr>",
+          function()
+            move("h")
+          end,
           desc = "Pane Left",
         },
         {
           "<C-j>",
-          "<cmd>TmuxNavigateDown<cr>",
+          function()
+            move("j")
+          end,
           desc = "Pane Down",
         },
         {
           "<C-k>",
-          "<cmd>TmuxNavigateUp<cr>",
+          function()
+            move("k")
+          end,
           desc = "Pane Up",
         },
         {
           "<C-l>",
-          "<cmd>TmuxNavigateRight<cr>",
+          function()
+            move("l")
+          end,
           desc = "Pane Right",
         },
       }
@@ -149,7 +175,7 @@ return {
         {
           "<c-\\>",
           function()
-            require("toggleterm").toggle(vim.v.count1)
+            require("toggleterm").toggle(vim.v.count)
           end,
           desc = "Toggle",
           mode = "n",

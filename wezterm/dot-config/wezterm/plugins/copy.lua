@@ -3,9 +3,7 @@ local wezterm = require('wezterm') --[[@as Wezterm]]
 
 local terminal = nil
 
-M.set_paste_terminal_event = 'copy-paste-terminal-set'
-
-wezterm.on(M.set_paste_terminal_event, function(window, pane)
+M.set_paste_terminal = wezterm.action_callback(function(window, pane)
   local panes = window:active_tab():panes()
   local pane_list = {}
 
@@ -31,9 +29,7 @@ wezterm.on(M.set_paste_terminal_event, function(window, pane)
   )
 end)
 
-M.paste_selection_event = 'copy-paste-selection'
-
-wezterm.on(M.paste_selection_event, function(window, pane)
+M.paste_selection = wezterm.action_callback(function(window, pane)
   local selection = window:get_selection_text_for_pane(pane)
   if terminal then
     local target_pane = wezterm.mux.get_pane(terminal)

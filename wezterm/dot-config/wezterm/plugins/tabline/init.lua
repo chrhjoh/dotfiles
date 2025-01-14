@@ -7,10 +7,6 @@ local M = {}
 
 ---@param config Config
 function M.setup(config)
-  config.use_fancy_tab_bar = false
-  config.tab_max_width = 32
-  config.status_update_interval = 250
-
   wezterm.on('update-status', function(window, pane)
     window:set_left_status(status.build_left_status(window, pane))
     window:set_right_status(status.build_right_status(window, pane))
@@ -23,8 +19,7 @@ function M.setup(config)
     else
       title = tab_title.build_inactive_title(tab, tabs, panes, event_config, hover, max_width)
     end
-    local spacing = utils.format_text(' ', nil, colors.base)
-    return spacing .. title
+    return title
   end)
 end
 
