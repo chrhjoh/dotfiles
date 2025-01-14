@@ -156,6 +156,7 @@ return {
       }
       local command_component = {
         "%S",
+        separator = "",
       }
       -- Theme
       local mocha = require("catppuccin.palettes").get_palette("mocha")
@@ -173,23 +174,43 @@ return {
           lualine_a = { "mode", recording_component },
           lualine_b = {
             "branch",
-            "diff",
-            { "diagnostics", sections = { "error", "warn" } },
+            {
+              "diff",
+              symbols = {
+                added = " ",
+                modified = " ",
+                removed = " ",
+              },
+            },
           },
           lualine_c = {
+            { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
             {
               "filename",
+              path = 1,
+              symbols = { modified = " ", readonly = " 󰌾 ", newfile = " " },
+              color = function(section)
+                return vim.bo.modified and { fg = mocha.yellow, gui = "italic,bold" } or nil
+              end,
             },
+            { "diagnostics", sections = { "error", "warn" } },
           },
           lualine_x = {
             command_component,
-            "filetype",
+            {
+              require("lazy.status").updates,
+              cond = require("lazy.status").has_updates,
+              color = function()
+                return { fg = Snacks.util.color("Special") }
+              end,
+            },
           },
           lualine_y = {
             "progress",
           },
           lualine_z = { "location" },
         },
+        extensions = { "lazy", "fzf", "toggleterm", "oil" },
       }
     end,
   },
