@@ -56,7 +56,7 @@ return {
     keys = function()
       return noice_map {
         {
-          "<S-Enter>",
+          "<c-Enter>",
           function()
             require("noice").redirect(vim.fn.getcmdline())
           end,
@@ -210,7 +210,7 @@ return {
           },
           lualine_z = { "location" },
         },
-        extensions = { "lazy", "fzf", "toggleterm", "oil" },
+        extensions = { "lazy", "fzf", "toggleterm", "oil", "quickfix" },
       }
     end,
   },

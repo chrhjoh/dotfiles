@@ -101,5 +101,5 @@ return {
   },
   --Tabwidth etc.
   { "tpope/vim-sleuth", event = "VeryLazy" },
-  { "echasnovski/mini.pairs", event = "InsertEnter", opts = {} },
+  { "windwp/nvim-autopairs", event = "InsertEnter", opts = {} },
 }
