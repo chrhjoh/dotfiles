@@ -1,9 +1,9 @@
 vim.filetype.add {
 
   extension = {
-    smk = 'snakemake',
+    smk = "snakemake",
   },
   filename = {
-    ['Snakefile'] = 'snakemake',
+    ["Snakefile"] = "snakemake",
   },
 }

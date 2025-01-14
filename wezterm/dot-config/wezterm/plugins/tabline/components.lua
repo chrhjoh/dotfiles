@@ -1,7 +1,7 @@
-local wezterm = require('wezterm') --[[@as Wezterm]]
-local colors = require('utils.colors').colors
+local wezterm = require("wezterm") --[[@as Wezterm]]
+local colors = require("utils.colors").colors
 local symbols = wezterm.nerdfonts
-local tabutils = require('plugins.tabline.utils')
+local tabutils = require("plugins.tabline.utils")
 local M = {}
 
 ---@param window Window
@@ -14,7 +14,7 @@ function M.DomainComponent(window, pane)
 
   table.insert(component, { Foreground = { Color = colors.base } })
   table.insert(component, { Background = { Color = bg_color } })
-  table.insert(component, { Text = ' ' .. symbols.md_domain .. ' ' .. domain .. ' ' })
+  table.insert(component, { Text = " " .. symbols.md_domain .. " " .. domain .. " " })
   return wezterm.format(component)
 end
 
@@ -23,11 +23,11 @@ end
 ---@return string
 function M.WorkspaceComponent(window, pane)
   local component = {}
-  local workspace = string.match(window:active_workspace(), '[^/\\]+$')
+  local workspace = string.match(window:active_workspace(), "[^/\\]+$")
 
   table.insert(component, { Foreground = { Color = colors.text } })
   table.insert(component, { Background = { Color = colors.surface0 } })
-  table.insert(component, { Text = ' ' .. symbols.cod_terminal_tmux .. ' ' .. workspace .. ' ' })
+  table.insert(component, { Text = " " .. symbols.cod_terminal_tmux .. " " .. workspace .. " " })
   return wezterm.format(component)
 end
 
@@ -41,7 +41,7 @@ function M.HostComponent(window, pane)
 
   table.insert(component, { Foreground = { Color = colors.base } })
   table.insert(component, { Background = { Color = bg_color } })
-  table.insert(component, { Text = ' ' .. symbols.md_network_pos .. ' ' .. workspace .. ' ' })
+  table.insert(component, { Text = " " .. symbols.md_network_pos .. " " .. workspace .. " " })
   return wezterm.format(component)
 end
 
@@ -54,7 +54,7 @@ function M.CpuComponent(window, pane, update_interval)
 
   table.insert(component, { Foreground = { Color = colors.text } })
   table.insert(component, { Background = { Color = colors.base } })
-  table.insert(component, { Text = ' ' .. symbols.oct_cpu .. '  ' .. cpu .. ' ' })
+  table.insert(component, { Text = " " .. symbols.oct_cpu .. "  " .. cpu .. " " })
   return wezterm.format(component)
 end
 
@@ -67,7 +67,7 @@ function M.RamComponent(window, pane, update_interval)
 
   table.insert(component, { Foreground = { Color = colors.text } })
   table.insert(component, { Background = { Color = colors.base } })
-  table.insert(component, { Text = ' ' .. symbols.cod_server .. '  ' .. ram .. ' ' })
+  table.insert(component, { Text = " " .. symbols.cod_server .. "  " .. ram .. " " })
   return wezterm.format(component)
 end
 return M

@@ -1,4 +1,4 @@
-local components = require('plugins.tabline.components')
+local components = require("plugins.tabline.components")
 local M = {}
 
 ---@param window Window
@@ -18,7 +18,7 @@ function M.build_right_status(window, pane)
   local cpu = components.CpuComponent(window, pane, 5)
   local ram = components.RamComponent(window, pane, 5)
 
-  return ram .. '|' .. cpu .. host
+  return ram .. "|" .. cpu .. host
 end
 
 return M

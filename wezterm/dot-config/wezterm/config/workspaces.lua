@@ -1,33 +1,40 @@
-local wezterm = require('wezterm') --[[@as Wezterm]]
+local wezterm = require("wezterm") --[[@as Wezterm]]
 local mux = wezterm.mux
 
 local default_project_layout = function(window, tab, pane)
-  pane:send_text('$EDITOR\n')
-  local shell_pane = pane:split { direction = 'Left' }
-  shell_pane:split { direction = 'Top' }
+  pane:send_text("$EDITOR\n")
+  local shell_pane = pane:split { direction = "Left" }
+  shell_pane:split { direction = "Top" }
 end
 
 local default_opts = { layout = function(window, tab, pane) end, width = 50, height = 50 }
 
 local workspaces = {
   {
-    name = 'dotfiles',
+    name = "dotfiles",
     layout = function(window, tab, pane)
-      pane:send_text('$EDITOR\n')
+      pane:send_text("$EDITOR\n")
     end,
-    directory = wezterm.home_dir .. '/.dotfiles',
+    directory = wezterm.home_dir .. "/.dotfiles",
   },
   {
-    name = 'thesis',
+    name = "thesis",
     layout = function(window, tab, pane)
-      pane:send_text('$EDITOR\n')
+      pane:send_text("$EDITOR\n")
     end,
-    directory = wezterm.home_dir .. '/Documents/thesis',
+    directory = wezterm.home_dir .. "/Documents/phd_thesis",
   },
   {
-    name = 'projects',
+    name = "projects",
     layout = default_project_layout,
-    directory = wezterm.home_dir .. '/projects',
+    directory = wezterm.home_dir .. "/projects",
+  },
+  {
+    name = "translation",
+    layout = function(window, tab, pane)
+      pane:send_text("$EDITOR\n")
+    end,
+    directory = wezterm.home_dir .. "/bitbucket/translation",
   },
 }
 local function setup_workspace(workspace)
@@ -44,12 +51,12 @@ end
 local M = {}
 
 function M.setup()
-  wezterm.on('mux-startup', function()
+  wezterm.on("mux-startup", function()
     for _, workspace in ipairs(workspaces) do
       setup_workspace(workspace)
     end
   end)
-  wezterm.on('gui-startup', function(cmd)
+  wezterm.on("gui-startup", function(cmd)
     local tab, pane, window = mux.spawn_window(cmd or {})
     window:gui_window():maximize()
   end)
