@@ -1,6 +1,6 @@
 ---@class ToolConfig
 ---@field name string
----@field mason boolean?
+---@field ensure_install? boolean
 ---@field mason_alias string?
 ---@field filetypes string[]?
 

@@ -23,6 +23,7 @@ return {
         "gitcommit",
         "yaml",
       },
+      highlight = { enable = true },
 
       auto_install = false,
       sync_install = true,

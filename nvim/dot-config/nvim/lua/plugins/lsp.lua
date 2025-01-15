@@ -2,8 +2,14 @@ local lsp_map = Utils.keymap.get_mapper { mode = "n", desc_prefix = "LSP" }
 return {
   {
     "williamboman/mason.nvim",
+    build = {
+      ":MasonUpdate",
+      function(plugin)
+        Utils.tools.install_ensured()
+      end,
+    },
     opts = {},
-    cmd = { "Mason", "MasonInstall" },
+    cmd = { "Mason", "MasonInstall", "MasonUpdate" },
   },
   {
     "neovim/nvim-lspconfig",

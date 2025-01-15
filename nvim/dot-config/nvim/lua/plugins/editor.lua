@@ -5,8 +5,12 @@ return {
     "saghen/blink.cmp",
     version = "*",
     dependencies = "rafamadriz/friendly-snippets",
+    build = function(blink)
+      require("blink.cmp.fuzzy.download").from_github(blink.tag) -- forces a blocking install
+    end,
     event = "InsertEnter",
     opts = {
+      fuzzy = { prebuilt_binaries = { download = false } }, -- Already fetched in built
       sources = {
         default = { "lazydev", "lsp", "path", "snippets", "buffer" },
         providers = {

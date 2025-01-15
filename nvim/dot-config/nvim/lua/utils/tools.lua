@@ -9,9 +9,6 @@ local install = function(tools, opts)
   end
   local needs_install = {}
   for _, tool in pairs(tools) do
-    if tool.mason == false then
-      goto continue
-    end
     local install_name = tool.mason_alias or tool.name
     if opts and opts.force then
       table.insert(needs_install, install_name)
@@ -21,7 +18,6 @@ local install = function(tools, opts)
         table.insert(needs_install, install_name)
       end
     end
-    ::continue::
   end
   if not vim.tbl_isempty(needs_install) then
     vim.cmd("MasonInstall " .. table.concat(needs_install, " "))
@@ -30,27 +26,37 @@ local install = function(tools, opts)
   end
 end
 
-local function get_all()
+---@param tools ToolType[]
+local function get_tools(tools)
   local all_tools = {} ---@type ToolConfig[]
-  local tools = require("config.tools")
-  all_tools = vim.list_extend(all_tools, tools.debuggers)
-  all_tools = vim.list_extend(all_tools, tools.formatters)
-  all_tools = vim.list_extend(all_tools, tools.lsps)
+  local tool_configs = require("config.tools")
+  all_tools = vim.list_extend(all_tools, vim.list_contains(tools, "debuggers") and tool_configs.debuggers or {})
+  all_tools = vim.list_extend(all_tools, vim.list_contains(tools, "formatters") and tool_configs.formatters or {})
+  all_tools = vim.list_extend(all_tools, vim.list_contains(tools, "lsps") and tool_configs.lsps or {})
   return all_tools
 end
 
+---@param tools? ToolType[]
 ---@param opts? InstallOpts
-M.install_all = function(opts)
-  local all_tools = get_all()
+M.install_all = function(tools, opts)
+  local all_tools = get_tools(tools or { "formatters", "debuggers", "lsps" })
   all_tools = vim.tbl_filter(function(tbl)
     return not vim.list_contains(opts and (opts.exclude or {}) or {}, tbl.name)
   end, all_tools)
   install(all_tools, opts)
 end
 
+M.install_ensured = function(opts)
+  local all_tools = get_tools { "formatters", "debuggers", "lsps" }
+  all_tools = vim.tbl_filter(function(tbl)
+    return tbl.ensure_install ~= false
+  end, all_tools)
+  install(all_tools, opts)
+end
+
 ---@param tools string[]
 M.install = function(tools)
-  local all_tools = get_all()
+  local all_tools = get_tools { "formatters", "debuggers", "lsps" }
   all_tools = vim.tbl_filter(function(tbl)
     return vim.list_contains(tools, tbl.name)
   end, all_tools)

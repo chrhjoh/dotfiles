@@ -16,7 +16,7 @@ return {
   {
     "mfussenegger/nvim-dap",
     dependencies = {
-      -- Creates debugger UI
+      "mfussenegger/mason.nvim",
       "rcarriga/nvim-dap-ui",
       "theHamsta/nvim-dap-virtual-text",
     },

@@ -33,6 +33,7 @@ M.debuggers = {
   },
   {
     name = "codelldb",
+    ensure_install = false,
     filetypes = { "rust" },
     opts = {
       adapter = {
@@ -106,8 +107,9 @@ M.lsps = {
       },
     },
   },
-  { name = "texlab" },
-  { name = "ltex", opts = { autostart = false }, mason_alias = "ltex-ls" },
+  { name = "texlab", ensure_install = false },
+  { name = "ltex", opts = { autostart = false }, mason_alias = "ltex-ls", ensure_install = false },
+  { name = "tinymist", ensure_install = false },
 }
 
 return M
