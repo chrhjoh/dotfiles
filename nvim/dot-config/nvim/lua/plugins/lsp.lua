@@ -15,8 +15,27 @@ return {
     "neovim/nvim-lspconfig",
     dependencies = { "williamboman/mason.nvim", "folke/lazydev.nvim" },
     event = { "BufReadPost", "BufNewFile", "BufWritePre" },
-    opts = {},
-    config = function()
+    opts = {
+      diagnostics = {
+        underline = true,
+        update_in_insert = false,
+        virtual_text = {
+          severity = { min = vim.diagnostic.severity.WARN },
+        },
+        severity_sort = true,
+        signs = {
+          text = {
+            [vim.diagnostic.severity.ERROR] = Utils.icons.diagnostics.Error,
+            [vim.diagnostic.severity.WARN] = Utils.icons.diagnostics.Warn,
+            [vim.diagnostic.severity.HINT] = Utils.icons.diagnostics.Hint,
+            [vim.diagnostic.severity.INFO] = Utils.icons.diagnostics.Info,
+          },
+          severity = { min = vim.diagnostic.severity.INFO },
+        },
+      },
+    },
+    config = function(_, opts)
+      vim.diagnostic.config(opts.diagnostics)
       local on_attach = function(client, bufnr)
         lsp_map { "<leader>k", vim.lsp.buf.signature_help, desc = "Signature Documentation", buffer = bufnr }
         lsp_map { "K", vim.lsp.buf.hover, desc = "Hover Documentation", buffer = bufnr }
@@ -24,15 +43,6 @@ return {
         lsp_map { "<leader>cr", vim.lsp.buf.rename, desc = "Code Rename", buffer = bufnr }
         lsp_map { "<leader>ca", vim.lsp.buf.code_action, desc = "Code Action", buffer = bufnr }
         lsp_map { "<C-?>", vim.lsp.buf.signature_help, desc = "LSP: Signature", buffer = bufnr, mode = "i" }
-
-        vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-          signs = {
-            severity = { min = vim.diagnostic.severity.INFO },
-          },
-          virtual_text = {
-            severity = { min = vim.diagnostic.severity.WARN },
-          },
-        })
       end
       local capabilities = vim.tbl_deep_extend(
         "force",

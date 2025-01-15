@@ -2,19 +2,9 @@ local git_mapper = Utils.keymap.get_lazy_list_mapper { mode = "n", desc_prefix =
 return {
   "lewis6991/gitsigns.nvim",
   event = "BufReadPost",
-  opts = {
-    -- See `:help gitsigns.txt`
-    signs = {
-      add = { text = "+" },
-      change = { text = "~" },
-      delete = { text = "_" },
-      topdelete = { text = "‾" },
-      changedelete = { text = "~" },
-    },
-  },
+  opts = {},
   keys = function()
     return git_mapper {
-      -- Navigation
       {
         "]h",
         function()
@@ -46,9 +36,6 @@ return {
         desc = "Jump to previous hunk",
         mode = { "n", "v" },
       },
-
-      -- Actions
-      -- visual mode
       {
         "<leader>gs",
         function()
@@ -131,8 +118,6 @@ return {
         end,
         desc = "diff against last commit",
       },
-
-      -- Text object
       { "gih", ":<C-U>Gitsigns select_hunk<CR>", desc = "Select git hunk", mode = { "o", "x" } },
     }
   end,

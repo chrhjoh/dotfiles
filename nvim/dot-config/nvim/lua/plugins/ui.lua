@@ -2,7 +2,6 @@ local noice_map = Utils.keymap.get_lazy_list_mapper { mode = "n", desc_prefix = 
 return {
   {
     "catppuccin/nvim",
-    name = "catppuccin",
     priority = 1000,
     opts = {
       integrations = { blink_cmp = true, cmp = false, grug_far = true, which_key = true },
@@ -128,7 +127,6 @@ return {
   {
     "nvim-lualine/lualine.nvim",
     event = "VeryLazy",
-    -- See `:help lualine.txt`
     dependencies = {
       "nvim-tree/nvim-web-devicons",
     },
@@ -193,7 +191,11 @@ return {
                 return vim.bo.modified and { fg = mocha.yellow, gui = "italic,bold" } or nil
               end,
             },
-            { "diagnostics", sections = { "error", "warn" } },
+            {
+              "diagnostics",
+              sections = { "error", "warn" },
+              symbols = Utils.icons.diagnostics,
+            },
           },
           lualine_x = {
             command_component,
