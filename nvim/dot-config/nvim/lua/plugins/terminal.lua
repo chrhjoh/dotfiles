@@ -235,6 +235,7 @@ return {
                 hidden = true,
                 direction = "float",
                 close_on_exit = true,
+                id = 100, -- set to 100 to avoid overlapping with other terminals
               }
             lazygit:toggle()
           end,
@@ -250,8 +251,9 @@ return {
                 hidden = true,
                 direction = "float",
                 close_on_exit = true,
+                id = 101, -- set to 101 to avoid overlapping with other terminals
               }
-            lazygit_log:open()
+            lazygit_log:toggle()
           end,
           desc = "Lazygit Log",
         },
@@ -266,8 +268,9 @@ return {
                 hidden = true,
                 direction = "float",
                 close_on_exit = true,
+                id = 102, -- set to 102 to avoid overlapping with other terminals
               }
-            lazygit_filelog:open()
+            lazygit_filelog:toggle()
           end,
           desc = "Lazygit Current File History",
         },
