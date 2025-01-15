@@ -20,7 +20,6 @@ M.setup = function()
         require("config.autocommands")
       end
       require("config.keymaps")
-      require("config.filetypes")
     end,
   })
 end
