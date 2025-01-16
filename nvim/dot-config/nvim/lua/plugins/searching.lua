@@ -1,355 +1,271 @@
-local fzf_map = Utils.keymap.get_lazy_list_mapper { mode = "n", desc_prefix = "Fzf" }
+local picker_map = Utils.keymap.get_lazy_list_mapper { mode = "n", desc_prefix = "Snacks Picker" }
 local flash_map = Utils.keymap.get_lazy_list_mapper { mode = "n", desc_prefix = "Flash" }
 return {
   {
-    "ibhagwan/fzf-lua",
-    opts = function()
-      local fzf_actions = require("fzf-lua.actions")
-      local trouble_fzf_actions = require("trouble.sources.fzf").actions
-      return {
-        fzf_colors = true,
-        files = {
-          actions = {
-            ["alt-i"] = fzf_actions.toggle_ignore,
-            ["alt-."] = fzf_actions.toggle_hidden,
-            ["ctrl-t"] = trouble_fzf_actions.open,
-          },
-        },
-        grep = {
-          rg_glob = true,
-          actions = {
-            ["alt-i"] = fzf_actions.toggle_ignore,
-            ["alt-."] = fzf_actions.toggle_hidden,
-            ["ctrl-t"] = trouble_fzf_actions.open,
-          },
-        },
-        helptags = { actions = { ["enter"] = fzf_actions.help_vert } },
-        lsp = {
-          symbols = {
-            symbol_hl = function(s)
-              return "TroubleIcon" .. s
+    "snacks.nvim",
+    opts = { picker = { enabled = true, sources = { files = { follow = true } } } },
+    keys = function(keys)
+      return vim.list_extend(
+        keys,
+        picker_map {
+          {
+            "<leader>,",
+            function()
+              Snacks.picker.buffers()
             end,
-            symbol_fmt = function(s)
-              return s:lower() .. "\t"
+            desc = "Buffer",
+          },
+          {
+            "<leader>/",
+            function()
+              Snacks.picker.grep()
             end,
-            child_prefix = false,
+            desc = "Grep (Root Dir)",
           },
-        },
-        keymap = {
-          builtin = {
-            true,
-            ["ctrl-f"] = "preview-page-down",
-            ["ctrl-b"] = "preview-page-up",
-            ["<Esc>"] = "abort",
+          {
+            "<leader>:",
+            function()
+              Snacks.picker.command_history()
+            end,
+            desc = "Command History",
           },
-          fzf = {
-            true,
-            ["ctrl-q"] = "select-all+accept",
-            ["ctrl-u"] = "half-page-up",
-            ["ctrl-d"] = "half-page-down",
-            ["ctrl-x"] = "jump",
+          {
+            "<leader><space>",
+            function()
+              Snacks.picker.files()
+            end,
+            desc = "Files (Root Dir)",
           },
-        },
-      }
-    end,
-    keys = function()
-      return fzf_map {
-        { "<c-j>", "<c-j>", ft = "fzf", mode = "t", nowait = true },
-        { "<c-k>", "<c-k>", ft = "fzf", mode = "t", nowait = true },
-        {
-          "<leader>,",
-          function()
-            require("fzf-lua").buffers { sort_mru = true, sort_lastused = true }
-          end,
-          desc = "Buffer",
-        },
-        {
-          "<leader>/",
-          function()
-            require("fzf-lua").live_grep {}
-          end,
-          desc = "Grep (Root Dir)",
-        },
-        {
-          "<leader>:",
-          function()
-            require("fzf-lua").command_history {}
-          end,
-          desc = "Command History",
-        },
-        {
-          "<leader><space>",
-          function()
-            require("fzf-lua").files {}
-          end,
-          desc = "Files (Root Dir)",
-        },
-        -- find
-        {
-          "<leader>fb",
-          function()
-            require("fzf-lua").buffers { sort_mru = true, sort_lastused = true }
-          end,
-          desc = "Buffers",
-        },
-        {
-          "<leader>fc",
-          function()
-            require("fzf-lua").files { cwd = vim.env.XDG_CONFIG_HOME or vim.env.HOME .. "/.config/" }
-          end,
-          desc = "Config File",
-        },
-        {
-          "<leader>ff",
-          function()
-            require("fzf-lua").files {}
-          end,
-          desc = "Files (Root Dir)",
-        },
-        {
-          "<leader>fF",
-          function()
-            require("fzf-lua").files { root = false }
-          end,
-          desc = "Files (cwd)",
-        },
-        {
-          "<leader>fg",
-          function()
-            require("fzf-lua").git_files {}
-          end,
-          desc = "Files (git-files)",
-        },
-        {
-          "<leader>fr",
-          function()
-            require("fzf-lua").oldfiles {}
-          end,
-          desc = "Recent",
-        },
-        {
-          "<leader>fR",
-          function()
-            require("fzf-lua").oldfiles { cwd = vim.uv.cwd() }
-          end,
-          desc = "Recent (cwd)",
-        },
-        -- git
-        {
-          "<leader>gc",
-          function()
-            require("fzf-lua").git_commits {}
-          end,
-          desc = "Commits",
-        },
-        {
-          "<leader>gs",
-          function()
-            require("fzf-lua").git_status {}
-          end,
-          desc = "Git Status",
-        },
-        -- search
-        {
-          '<leader>s"',
-          function()
-            require("fzf-lua").registers {}
-          end,
-          desc = "Registers",
-        },
-        {
-          "<leader>sa",
-          function()
-            require("fzf-lua").autocmds {}
-          end,
-          desc = "Auto Commands",
-        },
-        {
-          "<leader>sb",
-          function()
-            require("fzf-lua").grep_curbuf {}
-          end,
-          desc = "Buffer",
-        },
-        {
-          "<leader>sc",
-          function()
-            require("fzf-lua").command_history {}
-          end,
-          desc = "Command History",
-        },
-        {
-          "<leader>sC",
-          function()
-            require("fzf-lua").commands {}
-          end,
-          desc = "Commands",
-        },
-        {
-          "<leader>sd",
-          function()
-            require("fzf-lua").diagnostics_document {}
-          end,
-          desc = "Document Diagnostics",
-        },
-        {
-          "<leader>sD",
-          function()
-            require("fzf-lua").diagnostics_workspace {}
-          end,
-          desc = "Workspace Diagnostics",
-        },
-        {
-          "<leader>sg",
-          function()
-            require("fzf-lua").live_grep {}
-          end,
-          desc = "Grep (Root Dir)",
-        },
-        {
-          "<leader>sG",
-          function()
-            require("fzf-lua").live_grep { root = false }
-          end,
-          desc = "Grep (cwd)",
-        },
-        {
-          "<leader>sh",
-          function()
-            require("fzf-lua").helptags {}
-          end,
-          desc = "Help Pages",
-        },
-        {
-          "<leader>sH",
-          function()
-            require("fzf-lua").highlights {}
-          end,
-          desc = "Highlight Groups",
-        },
-        {
-          "<leader>sj",
-          function()
-            require("fzf-lua").jumps {}
-          end,
-          desc = "Jumplist",
-        },
-        {
-          "<leader>sk",
-          function()
-            require("fzf-lua").keymaps {}
-          end,
-          desc = "Key Maps",
-        },
-        {
-          "<leader>sl",
-          function()
-            require("fzf-lua").loclist {}
-          end,
-          desc = "Location List",
-        },
-        {
-          "<leader>sM",
-          function()
-            require("fzf-lua").man_pages {}
-          end,
-          desc = "Man Pages",
-        },
-        {
-          "<leader>sm",
-          function()
-            require("fzf-lua").marks {}
-          end,
-          desc = "Jump to Mark",
-        },
-        {
-          "<leader>sR",
-          function()
-            require("fzf-lua").resume {}
-          end,
-          desc = "Resume",
-        },
-        {
-          "<leader>sq",
-          function()
-            require("fzf-lua").quickfix {}
-          end,
-          desc = "Quickfix List",
-        },
-        {
-          "<leader>sw",
-          function()
-            require("fzf-lua").grep_cword {}
-          end,
-          desc = "Word (Root Dir)",
-        },
-        {
-          "<leader>sW",
-          function()
-            require("fzf-lua").grep_cword { root = false }
-          end,
-          desc = "Word (cwd)",
-        },
-        {
-          "<leader>sw",
-          function()
-            require("fzf-lua").grep_visual {}
-          end,
-          mode = "v",
-          desc = "Selection (Root Dir)",
-        },
-        {
-          "<leader>sW",
-          function()
-            require("fzf-lua").grep_visual { root = false }
-          end,
-          mode = "v",
-          desc = "Selection (Cwd)",
-        },
-        {
-          "<leader>ss",
-          function()
-            require("fzf-lua").lsp_document_symbols {}
-          end,
-          desc = "Symbol",
-        },
-        {
-          "<leader>sS",
-          function()
-            require("fzf-lua").lsp_live_workspace_symbols {}
-          end,
-          desc = "Symbol (Workspace)",
-        },
-        {
-          "gd",
-          function()
-            require("fzf-lua").lsp_definitions { jump_to_single_result = true, ignore_current_line = true }
-          end,
-          desc = "LSP Definition",
-        },
-
-        {
-          "gr",
-          function()
-            require("fzf-lua").lsp_references { jump_to_single_result = true, ignore_current_line = true }
-          end,
-          desc = "LSP References",
-        },
-        {
-          "gI",
-          function()
-            require("fzf-lua").lsp_implementations { jump_to_single_result = true, ignore_current_line = true }
-          end,
-          desc = "LSP Implementations",
-        },
-        {
-          "gD",
-          function()
-            require("fzf-lua").lsp_typesdefs { jump_to_single_result = true, ignore_current_line = true }
-          end,
-          desc = "LSP Type Definitions",
-        },
-      }
+          -- find
+          {
+            "<leader>fb",
+            function()
+              Snacks.picker.buffers()
+            end,
+            desc = "Buffers",
+          },
+          {
+            "<leader>fc",
+            function()
+              Snacks.picker.files { cwd = vim.env.XDG_CONFIG_HOME or vim.env.HOME .. "/.config/" }
+            end,
+            desc = "Config File",
+          },
+          {
+            "<leader>ff",
+            function()
+              Snacks.picker.files()
+            end,
+            desc = "Files (Root Dir)",
+          },
+          {
+            "<leader>fg",
+            function()
+              Snacks.picker.git_files()
+            end,
+            desc = "Files (git-files)",
+          },
+          {
+            "<leader>fr",
+            function()
+              Snacks.picker.recent()
+            end,
+            desc = "Recent",
+          },
+          -- git
+          {
+            "<leader>gc",
+            function()
+              Snacks.picker.git_log()
+            end,
+            desc = "Commits",
+          },
+          {
+            "<leader>gs",
+            function()
+              Snacks.picker.git_status()
+            end,
+            desc = "Git Status",
+          },
+          {
+            "<leader>gH",
+            function()
+              Snacks.picker.git_diff()
+            end,
+            desc = "Git Hunk",
+          },
+          -- search
+          {
+            '<leader>s"',
+            function()
+              Snacks.picker.registers()
+            end,
+            desc = "Registers",
+          },
+          {
+            "<leader>sa",
+            function()
+              Snacks.picker.autocmds()
+            end,
+            desc = "Auto Commands",
+          },
+          {
+            "<leader>sb",
+            function()
+              Snacks.picker.lines()
+            end,
+            desc = "Buffer",
+          },
+          {
+            "<leader>sB",
+            function()
+              Snacks.picker.grep_buffers()
+            end,
+            desc = "Buffers",
+          },
+          {
+            "<leader>sc",
+            function()
+              Snacks.picker.command_history()
+            end,
+            desc = "Command History",
+          },
+          {
+            "<leader>sC",
+            function()
+              Snacks.picker.commands()
+            end,
+            desc = "Commands",
+          },
+          {
+            "<leader>sd",
+            function()
+              Snacks.picker.diagnostics()
+            end,
+            desc = "Document Diagnostics",
+          },
+          {
+            "<leader>sg",
+            function()
+              Snacks.picker.grep()
+            end,
+            desc = "Grep (Root Dir)",
+          },
+          {
+            "<leader>sh",
+            function()
+              Snacks.picker.help()
+            end,
+            desc = "Help Pages",
+          },
+          {
+            "<leader>sH",
+            function()
+              Snacks.picker.highlights()
+            end,
+            desc = "Highlight Groups",
+          },
+          {
+            "<leader>sj",
+            function()
+              Snacks.picker.jumps()
+            end,
+            desc = "Jumplist",
+          },
+          {
+            "<leader>sk",
+            function()
+              Snacks.picker.keymaps()
+            end,
+            desc = "Key Maps",
+          },
+          {
+            "<leader>sl",
+            function()
+              Snacks.picker.loclist {}
+            end,
+            desc = "Location List",
+          },
+          {
+            "<leader>sM",
+            function()
+              Snacks.picker.man()
+            end,
+            desc = "Man Pages",
+          },
+          {
+            "<leader>sm",
+            function()
+              Snacks.picker.marks()
+            end,
+            desc = "Jump to Mark",
+          },
+          {
+            "<leader>sR",
+            function()
+              Snacks.picker.resume()
+            end,
+            desc = "Resume",
+          },
+          {
+            "<leader>sq",
+            function()
+              Snacks.picker.qflist()
+            end,
+            desc = "Quickfix List",
+          },
+          {
+            "<leader>sw",
+            function()
+              Snacks.picker.grep_word()
+            end,
+            desc = "Word (Root Dir)",
+            mode = { "n", "x" },
+          },
+          {
+            "<leader>ss",
+            function()
+              Snacks.picker.lsp_symbols()
+            end,
+            desc = "Symbol",
+          },
+          {
+            "gd",
+            function()
+              Snacks.picker.lsp_definitions()
+            end,
+            desc = "LSP Definition",
+          },
+          {
+            "gr",
+            function()
+              Snacks.picker.lsp_references()
+            end,
+            desc = "LSP References",
+          },
+          {
+            "gI",
+            function()
+              Snacks.picker.lsp_implementations()
+            end,
+            desc = "LSP Implementations",
+          },
+          {
+            "gD",
+            function()
+              Snacks.picker.lsp_type_definitions()
+            end,
+            desc = "LSP Type Definitions",
+          },
+          {
+            "<leader>qp",
+            function()
+              Snacks.picker.projects()
+            end,
+            desc = "Projects",
+          },
+        }
+      )
     end,
   },
   {

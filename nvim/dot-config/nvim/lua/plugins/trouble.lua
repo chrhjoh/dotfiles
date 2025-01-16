@@ -21,7 +21,6 @@ return {
       },
       { "<leader>lL", "<cmd>Trouble loclist toggle<cr>", desc = "Location List" },
       { "<leader>lQ", "<cmd>Trouble qflist toggle<cr>", desc = "Quickfix List " },
-      { "<leader>lf", "<cmd>Trouble fzf_files toggle<cr>", desc = "Fzf Files" },
       {
         "<leader>lt",
         function()
