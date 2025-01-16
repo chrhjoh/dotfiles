@@ -59,51 +59,27 @@ return {
         on_yank = false,
       },
     },
+    --stylua: ignore
     keys = function()
       return yank_map {
-        {
-          "y",
-          "<Plug>(YankyYank)",
-          mode = { "n", "x" },
-          desc = "Yank Text",
-        },
-        {
-          "p",
-          "<Plug>(YankyPutAfter)",
-          mode = { "n", "x" },
-          desc = "Put Yanked Text After Cursor",
-        },
-        {
-          "P",
-          "<Plug>(YankyPutBefore)",
-          mode = { "n", "x" },
-          desc = "Put Yanked Text Before Cursor",
-        },
-        {
-          "gp",
-          "<Plug>(YankyGPutAfter)",
-          mode = { "n", "x" },
-          desc = "Put Yanked Text After Selection",
-        },
-        {
-          "gP",
-          "<Plug>(YankyGPutBefore)",
-          mode = { "n", "x" },
-          desc = "Put Yanked Text Before Selection",
-        },
-        { "[y", "<Plug>(YankyCycleForward)", desc = "Cycle Forward Through Yank History" },
-        { "]y", "<Plug>(YankyCycleBackward)", desc = "Cycle Backward Through Yank History" },
-        { "]p", "<Plug>(YankyPutIndentAfterLinewise)", desc = "Put Indented After Cursor (Linewise)" },
-        { "[p", "<Plug>(YankyPutIndentBeforeLinewise)", desc = "Put Indented Before Cursor (Linewise)" },
-        { "]P", "<Plug>(YankyPutIndentAfterLinewise)", desc = "Put Indented After Cursor (Linewise)" },
-        { "[P", "<Plug>(YankyPutIndentBeforeLinewise)", desc = "Put Indented Before Cursor (Linewise)" },
-        { ">p", "<Plug>(YankyPutIndentAfterShiftRight)", desc = "Put and Indent Right" },
-        { "<p", "<Plug>(YankyPutIndentAfterShiftLeft)", desc = "Put and Indent Left" },
-        { ">P", "<Plug>(YankyPutIndentBeforeShiftRight)", desc = "Put Before and Indent Right" },
-        { "<P", "<Plug>(YankyPutIndentBeforeShiftLeft)", desc = "Put Before and Indent Left" },
-        { "=p", "<Plug>(YankyPutAfterFilter)", desc = "Put After Applying a Filter" },
-        { "<leader>P", "<CMD>YankyRingHistory<CR>", desc = "Put from yank history" },
-        { "=P", "<Plug>(YankyPutBeforeFilter)", desc = "Put Before Applying a Filter" },
+        { "y",          "<Plug>(YankyYank)",                      desc = "Yank Text",                         mode = {"n", "x"}},
+        { "p",          "<Plug>(YankyPutAfter)",                  desc = "Put Yanked Text After Cursor",      mode = {"n", "x"}},
+        { "P",          "<Plug>(YankyPutBefore)",                 desc = "Put Yanked Text Before Cursor",     mode = {"n", "x"}},
+        { "gp",         "<Plug>(YankyGPutAfter)",                 desc = "Put Yanked Text After Selection",   mode = {"n", "x"}},
+        { "gP",         "<Plug>(YankyGPutBefore)",                desc = "Put Yanked Text Before Selection",  mode = {"n", "x"}},
+        { "[y",         "<Plug>(YankyCycleForward)",              desc = "Cycle Forward Through Yank History" },
+        { "]y",         "<Plug>(YankyCycleBackward)",             desc = "Cycle Backward Through Yank History" },
+        { "]p",         "<Plug>(YankyPutIndentAfterLinewise)",    desc = "Put Indented After Cursor (Linewise)" },
+        { "[p",         "<Plug>(YankyPutIndentBeforeLinewise)",   desc = "Put Indented Before Cursor (Linewise)" },
+        { "]P",         "<Plug>(YankyPutIndentAfterLinewise)",    desc = "Put Indented After Cursor (Linewise)" },
+        { "[P",         "<Plug>(YankyPutIndentBeforeLinewise)",   desc = "Put Indented Before Cursor (Linewise)" },
+        { ">p",         "<Plug>(YankyPutIndentAfterShiftRight)",  desc = "Put and Indent Right" },
+        { "<p",         "<Plug>(YankyPutIndentAfterShiftLeft)",   desc = "Put and Indent Left" },
+        { ">P",         "<Plug>(YankyPutIndentBeforeShiftRight)", desc = "Put Before and Indent Right" },
+        { "<P",         "<Plug>(YankyPutIndentBeforeShiftLeft)",  desc = "Put Before and Indent Left" },
+        { "=p",         "<Plug>(YankyPutAfterFilter)",            desc = "Put After Applying a Filter" },
+        { "<leader>P",  "<CMD>YankyRingHistory<CR>",              desc = "Put from yank history" },
+        { "=P",         "<Plug>(YankyPutBeforeFilter)",           desc = "Put Before Applying a Filter" },
       }
     end,
   },
@@ -135,47 +111,16 @@ return {
         end,
       })
     end,
+    --stylua: ignore
     keys = function(keys)
       return vim.list_extend(
         keys,
         snacks_keymap {
-          {
-            "]]",
-            function()
-              Snacks.words.jump(vim.v.count1)
-            end,
-            desc = "Next Reference",
-            mode = { "n", "t" },
-          },
-          {
-            "[[",
-            function()
-              Snacks.words.jump(-vim.v.count1)
-            end,
-            desc = "Prev Reference",
-            mode = { "n", "t" },
-          },
-          {
-            "<leader>gb",
-            function()
-              Snacks.git.blame_line()
-            end,
-            desc = "Git Blame Line",
-          },
-          {
-            "<leader>gB",
-            function()
-              Snacks.gitbrowse()
-            end,
-            desc = "Git Browse",
-          },
-          {
-            "<leader>cR",
-            function()
-              Snacks.rename.rename_file()
-            end,
-            desc = "Rename File",
-          },
+          {  "]]",          function()    Snacks.words.jump(vim.v.count1)  end,   desc = "Next Reference",  mode = { "n", "t" },},
+          {  "[[",          function()    Snacks.words.jump(-vim.v.count1)  end,  desc = "Prev Reference",  mode = { "n", "t" },},
+          {  "<leader>gb",  function()    Snacks.git.blame_line()  end,           desc = "Git Blame Line",},
+          {  "<leader>gB",  function()    Snacks.gitbrowse()  end,                desc = "Git Browse",},
+          {  "<leader>cR",  function()    Snacks.rename.rename_file()  end,       desc = "Rename File",},
         }
       )
     end,

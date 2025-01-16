@@ -19,16 +19,10 @@ return {
     init = function()
       vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
     end,
+    --stylua: ignore
     keys = function()
       return conform_map {
-        {
-          "<leader>cf",
-          function()
-            require("conform").format { async = false, lsp_fallback = true }
-          end,
-          mode = "n",
-          desc = "Format Buffer",
-        },
+        {  "<leader>cf", function() require("conform").format { async = false, lsp_fallback = true }  end,  mode = "n",  desc = "Format Buffer",} ,
       }
     end,
   },

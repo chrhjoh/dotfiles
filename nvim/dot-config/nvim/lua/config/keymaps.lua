@@ -1,16 +1,17 @@
-local nmap = Utils.keymap.get_mapper { mode = "n" }
-local vmap = Utils.keymap.get_mapper { mode = "v" }
-local imap = Utils.keymap.get_mapper { mode = "i" }
-local yank_map = Utils.keymap.get_mapper { mode = "n", desc_prefix = "Yank" }
-local list_map = Utils.keymap.get_mapper { mode = "n", desc_prefix = "List" }
-local buffer_map = Utils.keymap.get_mapper { mode = "n", desc_prefix = "Buffer" }
-local diagnostic_map = Utils.keymap.get_mapper { mode = "n", desc_prefix = "Diagnostics" }
-local window_map = Utils.keymap.get_mapper { mode = "n", desc_prefix = "Window" }
-local file_map = Utils.keymap.get_mapper { mode = "n", desc_prefix = "File" }
-local source_map = Utils.keymap.get_mapper { mode = "n", desc_prefix = "Source" }
+-- stylua: ignore start
+local nmap =            Utils.keymap.get_mapper { mode = "n" }
+local vmap =            Utils.keymap.get_mapper { mode = "v" }
+local imap =            Utils.keymap.get_mapper { mode = "i" }
+local yank_map =        Utils.keymap.get_mapper { mode = "n", desc_prefix = "Yank" }
+local list_map =        Utils.keymap.get_mapper { mode = "n", desc_prefix = "List" }
+local buffer_map =      Utils.keymap.get_mapper { mode = "n", desc_prefix = "Buffer" }
+local diagnostic_map =  Utils.keymap.get_mapper { mode = "n", desc_prefix = "Diagnostics" }
+local window_map =      Utils.keymap.get_mapper { mode = "n", desc_prefix = "Window" }
+local file_map =        Utils.keymap.get_mapper { mode = "n", desc_prefix = "File" }
+local source_map =      Utils.keymap.get_mapper { mode = "n", desc_prefix = "Source" }
 
-nmap { "<Space>", "<Nop>", mode = { "n", "v" }, silent = true }
-nmap { "<leader>Q", "<cmd>quit<cr>", desc = "Quit Neovim" }
+nmap { "<Space>",   "<Nop>",          mode = { "n", "v" }, silent = true }
+nmap { "<leader>Q", "<cmd>quit<cr>",  desc = "Quit Neovim" }
 
 -- Remap for dealing with word wrap
 nmap { "k", "v:count == 0 ? 'gk' : 'k'", silent = true, expr = true }
@@ -20,22 +21,22 @@ nmap { "j", "v:count == 0 ? 'gj' : 'j'", silent = true, expr = true }
 vmap { "<", "<gv" }
 vmap { ">", ">gv" }
 
-yank_map { "<leader>yP", ':let @* = expand("%:p")<CR>', desc = "Yank Absolute Path" }
-yank_map { "<leader>yp", ':let @* = expand("%")<CR>', desc = "Yank Relative Path" }
-yank_map { "<leader>y.", ':let @* = expand("%:t")<CR>', desc = "Yank Filename" }
-yank_map { "<leader>p", '"0p<cr>', desc = "Put from last yank registry" }
-yank_map { "<leader>P", "<CMD>YankyRingHistory<CR>", desc = "Put from yank history" }
+yank_map { "<leader>yP",  ':let @* = expand("%:p")<CR>',  desc = "Yank Absolute Path" }
+yank_map { "<leader>yp",  ':let @* = expand("%")<CR>',    desc = "Yank Relative Path" }
+yank_map { "<leader>y.",  ':let @* = expand("%:t")<CR>',  desc = "Yank Filename" }
+yank_map { "<leader>p",   '"0p<cr>',                      desc = "Put from last yank registry" }
+yank_map { "<leader>P",   "<CMD>YankyRingHistory<CR>",    desc = "Put from yank history" }
 
 -- Moving between buffers
-buffer_map { "<TAB>", ":bn<CR>", desc = "Next", silent = true }
-buffer_map { "<S-TAB>", ":bp<CR>", desc = "Previous", silent = true }
-buffer_map { "[b", "<cmd>bprevious<cr>", desc = "Previous" }
-buffer_map { "]b", "<cmd>bnext<cr>", desc = "Next" }
-buffer_map { "<leader>bb", "<cmd>e #<cr>", desc = "Switch to Other" }
-buffer_map { "<leader>`", "<cmd>e #<cr>", desc = "Switch to Other" }
-buffer_map { "<leader>bd", Snacks.bufdelete.delete, desc = "Delete" }
-buffer_map { "<leader>bo", Snacks.bufdelete.other, desc = "Delete All Other" }
-buffer_map { "<leader>bA", Snacks.bufdelete.all, desc = "Delete all" }
+buffer_map { "<TAB>",       ":bn<CR>",                desc = "Next",      silent = true }
+buffer_map { "<S-TAB>",     ":bp<CR>",                desc = "Previous",  silent = true }
+buffer_map { "[b",          "<cmd>bprevious<cr>",     desc = "Previous" }
+buffer_map { "]b",          "<cmd>bnext<cr>",         desc = "Next" }
+buffer_map { "<leader>bb",  "<cmd>e #<cr>",           desc = "Switch to Other" }
+buffer_map { "<leader>`",   "<cmd>e #<cr>",           desc = "Switch to Other" }
+buffer_map { "<leader>bd",  Snacks.bufdelete.delete,  desc = "Delete" }
+buffer_map { "<leader>bo",  Snacks.bufdelete.other,   desc = "Delete All Other" }
+buffer_map { "<leader>bA",  Snacks.bufdelete.all,     desc = "Delete all" }
 buffer_map {
   "<leader>bc",
   "<cmd>let @+ = expand('%:p')<cr>",
@@ -43,8 +44,8 @@ buffer_map {
 }
 
 -- Moving over quickfix items quickly
-nmap { "<C-n>", ":cn<CR>", desc = "Next item in list", silent = true }
-nmap { "<C-p>", ":cp<CR>", desc = "Previous item in list", silent = true }
+nmap { "<C-n>", ":cn<CR>", desc = "Next item in list",      silent = true }
+nmap { "<C-p>", ":cp<CR>", desc = "Previous item in list",  silent = true }
 nmap {
   "[q",
   function()
@@ -121,24 +122,24 @@ local diagnostic_goto = function(next, severity)
   end
 end
 
-diagnostic_map { "<leader>cd", vim.diagnostic.open_float, desc = "Line" }
-diagnostic_map { "<C-k>", vim.diagnostic.open_float, desc = "Line" }
-diagnostic_map { "]d", diagnostic_goto(true), desc = "Next" }
-diagnostic_map { "[d", diagnostic_goto(false), desc = "Previous" }
-diagnostic_map { "]e", diagnostic_goto(true, "ERROR"), desc = "Next Error" }
-diagnostic_map { "[e", diagnostic_goto(false, "ERROR"), desc = "Previous Error" }
-diagnostic_map { "]w", diagnostic_goto(true, "WARN"), desc = "Next Warning" }
-diagnostic_map { "[w", diagnostic_goto(false, "WARN"), desc = "Previous Warning" }
+diagnostic_map { "<leader>cd",  vim.diagnostic.open_float,        desc = "Line" }
+diagnostic_map { "<C-k>",       vim.diagnostic.open_float,        desc = "Line" }
+diagnostic_map { "]d",          diagnostic_goto(true),            desc = "Next" }
+diagnostic_map { "[d",          diagnostic_goto(false),           desc = "Previous" }
+diagnostic_map { "]e",          diagnostic_goto(true, "ERROR"),   desc = "Next Error" }
+diagnostic_map { "[e",          diagnostic_goto(false, "ERROR"),  desc = "Previous Error" }
+diagnostic_map { "]w",          diagnostic_goto(true, "WARN"),    desc = "Next Warning" }
+diagnostic_map { "[w",          diagnostic_goto(false, "WARN"),   desc = "Previous Warning" }
 
-window_map { "<leader>ww", "<C-W>p", desc = "Other", remap = true }
-window_map { "<leader>wd", "<C-W>c", desc = "Delete", remap = true }
-window_map { "<leader>-", "<C-W>s", desc = "Split Below", remap = true }
-window_map { "<leader>|", "<C-W>v", desc = "Split Right", remap = true }
+window_map { "<leader>ww",  "<C-W>p", desc = "Other",       remap = true }
+window_map { "<leader>wd",  "<C-W>c", desc = "Delete",      remap = true }
+window_map { "<leader>-",   "<C-W>s", desc = "Split Below", remap = true }
+window_map { "<leader>|",   "<C-W>v", desc = "Split Right", remap = true }
 
-window_map { "<C-Up>", "<cmd>resize +2<cr>", desc = "Increase Height" }
-window_map { "<C-Down>", "<cmd>resize -2<cr>", desc = "Decrease Height" }
-window_map { "<C-Left>", "<cmd>vertical resize -2<cr>", desc = "Decrease Width" }
-window_map { "<C-Right>", "<cmd>vertical resize +2<cr>", desc = "Increase Width" }
+window_map { "<C-Up>",    "<cmd>resize +2<cr>",           desc = "Increase Height" }
+window_map { "<C-Down>",  "<cmd>resize -2<cr>",           desc = "Decrease Height" }
+window_map { "<C-Left>",  "<cmd>vertical resize -2<cr>",  desc = "Decrease Width" }
+window_map { "<C-Right>", "<cmd>vertical resize +2<cr>",  desc = "Increase Width" }
 
 -- new file
 file_map { "<leader>fn", "<cmd>enew<cr>", desc = "New File" }
@@ -149,9 +150,10 @@ imap { "<c-h>", "<up>" }
 imap { "<c-j>", "<down>" }
 imap { "<c-k>", "<left>" }
 
-source_map { "<leader>X", "<cmd>source % <CR>", desc = "Source current Lua file", silent = true }
-source_map { "<leader>x", ":.lua<CR>", desc = "Source current Lua line", silent = true }
-source_map { "<leader>x", ":lua<CR>", mode = "v", desc = "Source current Lua selection", silent = true }
+source_map { "<leader>X", "<cmd>source % <CR>",   desc = "Source current Lua file",       silent = true }
+source_map { "<leader>x", ":.lua<CR>",            desc = "Source current Lua line",       silent = true }
+source_map { "<leader>x", ":lua<CR>",             desc = "Source current Lua selection",  silent = true, mode = "v" }
+-- stylua: ignore end
 
 -- Toggle options
 Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>us")

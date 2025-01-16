@@ -1,19 +1,15 @@
+local nmap = Utils.keymap.get_lazy_list_mapper { mode = "n", desc_prefix = "Neogen" }
 return {
   {
     "danymat/neogen",
     opts = {
       snippet_engine = "luasnip",
     },
+    --stylua: ignore
     keys = function()
-      local nmap = Utils.keymap.get_lazy_mapper { mode = "n", desc_prefix = "Neogen" }
-
       return {
         nmap {
-          "<leader>cn",
-          function()
-            require("neogen").generate()
-          end,
-          desc = "Generate Annotations",
+          { "<leader>cn", function() require("neogen").generate() end, desc = "Generate Annotations" },
         },
       }
     end,

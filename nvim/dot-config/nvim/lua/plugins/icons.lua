@@ -18,5 +18,5 @@ return {
       }
     end,
   },
-  --{ "echasnovski/mini.icons", version = false, lazy = true },
+  { "echasnovski/mini.icons", version = false, lazy = true },
 }

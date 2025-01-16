@@ -65,75 +65,17 @@ return {
         long_message_to_split = true,
       },
     },
+    --stylua: ignore
     keys = function()
       return noice_map {
-        {
-          "<c-Enter>",
-          function()
-            require("noice").redirect(vim.fn.getcmdline())
-          end,
-          mode = "c",
-          desc = "Redirect Cmdline",
-        },
-        {
-          "<leader>nl",
-          function()
-            require("noice").cmd("last")
-          end,
-          desc = "Noice Last Message",
-        },
-        {
-          "<leader>nh",
-          function()
-            require("noice").cmd("history")
-          end,
-          desc = "Noice History",
-        },
-        {
-          "<leader>na",
-          function()
-            require("noice").cmd("all")
-          end,
-          desc = "Noice All",
-        },
-        {
-          "<leader>nd",
-          function()
-            require("noice").cmd("dismiss")
-          end,
-          desc = "Dismiss All",
-        },
-        {
-          "<leader>sn",
-          function()
-            require("noice").cmd("pick")
-          end,
-          desc = "Search",
-        },
-        {
-          "<c-f>",
-          function()
-            if not require("noice.lsp").scroll(4) then
-              return "<c-f>"
-            end
-          end,
-          silent = true,
-          expr = true,
-          desc = "Scroll Forward",
-          mode = { "i", "n", "s" },
-        },
-        {
-          "<c-b>",
-          function()
-            if not require("noice.lsp").scroll(-4) then
-              return "<c-b>"
-            end
-          end,
-          silent = true,
-          expr = true,
-          desc = "Scroll Backward",
-          mode = { "i", "n", "s" },
-        },
+        { "<c-Enter>",  function()   require("noice").redirect(vim.fn.getcmdline()) end,                        desc = "Redirect Cmdline",  mode = "c"},
+        { "<leader>nl", function()   require("noice").cmd("last") end,                                          desc = "Noice Last Message",},
+        { "<leader>nh", function()   require("noice").cmd("history") end,                                       desc = "Noice History",},
+        { "<leader>na", function()   require("noice").cmd("all") end,                                           desc = "Noice All",},
+        { "<leader>nd", function()   require("noice").cmd("dismiss") end,                                       desc = "Dismiss All",},
+        { "<leader>sn", function()   require("noice").cmd("pick") end,                                          desc = "Search",},
+        { "<c-f>",      function()   if not require("noice.lsp").scroll(4) then     return "<c-f>"   end end,   desc = "Scroll Forward",    mode = { "i", "n", "s" },  silent = true, expr = true, },
+        { "<c-b>",      function()   if not require("noice.lsp").scroll(-4) then     return "<c-b>"   end end,  desc = "Scroll Backward",   mode = { "i", "n", "s" }, silent = true, expr = true, },
       }
     end,
   },
@@ -259,25 +201,17 @@ return {
         })
       end,
     },
+    --stylua: ignore
     keys = function()
       return trouble_map {
-        { "<leader>ld", "<cmd>Trouble diagnostics toggle<cr>", desc = "Diagnostics" },
-        { "<leader>lD", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", desc = "Buffer Diagnostics (Trouble)" },
-        { "<leader>cy", "<cmd>Trouble symbols toggle<cr>", desc = "Symbols" },
-        {
-          "<leader>cY",
-          "<cmd>Trouble lsp toggle<cr>",
-          desc = "LSP references/definitions/... (Trouble)",
-        },
-        { "<leader>lL", "<cmd>Trouble loclist toggle<cr>", desc = "Location List" },
-        { "<leader>lQ", "<cmd>Trouble qflist toggle<cr>", desc = "Quickfix List " },
-        { "<leader>lf", "<cmd>Trouble snacks_files toggle<cr>", desc = "Snacks Files" },
-        {
-          "<leader>lt",
-          function()
-            require("trouble").toggle { mode = "todo" }
-          end,
-          desc = "Todo",
+        { "<leader>ld", "<cmd>Trouble diagnostics toggle<cr>",                      desc = "Diagnostics" },
+        { "<leader>lD", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",         desc = "Buffer Diagnostics (Trouble)" },
+        { "<leader>cy", "<cmd>Trouble symbols toggle<cr>",                          desc = "Symbols" },
+        { "<leader>cY", "<cmd>Trouble lsp toggle<cr>",                              desc = "LSP references/definitions/... (Trouble)",},
+        { "<leader>lL", "<cmd>Trouble loclist toggle<cr>",                          desc = "Location List" },
+        { "<leader>lQ", "<cmd>Trouble qflist toggle<cr>",                           desc = "Quickfix List " },
+        { "<leader>lf", "<cmd>Trouble snacks_files toggle<cr>",                     desc = "Snacks Files" },
+        {"<leader>lt",  function() require("trouble").toggle { mode = "todo" } end, desc = "Todo",
         },
         {
           "<leader>lT",
@@ -304,12 +238,8 @@ return {
       win_options = {},
       view_options = { show_hidden = true },
       lsp_file_methods = {
-        -- Enable or disable LSP file operations
         enabled = true,
-        -- Time to wait for LSP file operations to complete before skipping
         timeout_ms = 3000,
-        -- Set to true to autosave buffers that are updated with LSP willRenameFiles
-        -- Set to "unmodified" to only save unmodified buffers
         autosave_changes = "unmodified",
       },
       preview_win = {
@@ -334,7 +264,7 @@ return {
         end,
         ["<leader>ff"] = {
           function()
-            require("fzf-lua").files {
+            Snacks.picker.files {
               cwd = require("oil").get_current_dir(),
             }
           end,
@@ -344,22 +274,11 @@ return {
         },
       },
     },
+    --stylua: ignore
     keys = function()
       return oil_map {
-        {
-          "-",
-          function()
-            require("oil").open()
-          end,
-          desc = "Open Oil buffer In Parent Directory",
-        },
-        {
-          "<leader>f-",
-          function()
-            require("oil").open(vim.fn.getcwd())
-          end,
-          desc = "Open Oil buffer In Root Directory",
-        },
+        {  "-",           function()    require("oil").open()  end,                 desc = "Open Oil buffer In Parent Directory",},
+        {  "<leader>f-",  function()    require("oil").open(vim.fn.getcwd())  end,  desc = "Open Oil buffer In Root Directory",},
       }
     end,
   },

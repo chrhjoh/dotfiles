@@ -7,6 +7,17 @@ local lazygit = nil
 local lazygit_log = nil
 local lazygit_filelog = nil
 
+local function hidden_terminal(cmd, id)
+  local terminal = require("toggleterm.terminal").Terminal
+  return terminal:new {
+    cmd = cmd,
+    hidden = true,
+    direction = "float",
+    close_on_exit = true,
+    id = id,
+  }
+end
+
 local double_press_escape = function()
   local bufnr = vim.api.nvim_get_current_buf()
   if not vim.b[bufnr].esc_timer_id then
@@ -56,36 +67,13 @@ return {
     init = function()
       vim.g.tmux_navigator_no_mappings = 1
     end,
+    --stylua: ignore
     keys = function()
       return move_map {
-        {
-          "<C-h>",
-          function()
-            move("h")
-          end,
-          desc = "Pane Left",
-        },
-        {
-          "<C-j>",
-          function()
-            move("j")
-          end,
-          desc = "Pane Down",
-        },
-        {
-          "<C-k>",
-          function()
-            move("k")
-          end,
-          desc = "Pane Up",
-        },
-        {
-          "<C-l>",
-          function()
-            move("l")
-          end,
-          desc = "Pane Right",
-        },
+        {  "<C-h>",  function() move("h")  end,  desc = "Pane Left",} ,
+        {  "<C-j>",  function() move("j")  end,  desc = "Pane Down",} ,
+        {  "<C-k>",  function() move("k")  end,  desc = "Pane Up",} ,
+        {  "<C-l>",  function() move("l")  end,  desc = "Pane Right",} ,
       }
     end,
   },
@@ -93,14 +81,10 @@ return {
     "chrhjoh/wezterm-paster.nvim",
     cmd = { "WezTermPanePaste", "WezTermPaneSelect" },
     opts = {},
+    --stylua: ignore
     keys = function()
       return wez_paste_map {
-        {
-          "<leader>tp",
-          "<cmd>WezTermPanePaste<cr>",
-          desc = "Paste to Pane",
-          mode = { "n", "v" },
-        },
+        { "<leader>tp", "<cmd>WezTermPanePaste<cr>",  desc = "Paste to Pane",  mode = { "n", "v" },} ,
         { "<leader>tP", "<cmd>WezTermPaneSelect<cr>", desc = "Select Pane" },
       }
     end,
@@ -170,106 +154,22 @@ return {
         end,
       })
     end,
+    --stylua: ignore
     keys = function()
       return terminal_map {
-        {
-          "<c-\\>",
-          function()
-            require("toggleterm").toggle(vim.v.count)
-          end,
-          desc = "Toggle",
-          mode = "n",
-        },
-        {
-          "<leader>tx",
-          function()
-            require("toggleterm").send_lines_to_terminal("single_line", true, { args = vim.v.count1 })
-          end,
-          desc = "Send Current Line",
-          mode = "n",
-        },
-        {
-          "<leader>tx",
-          function()
-            require("toggleterm").send_lines_to_terminal("visual_lines", true, { args = vim.v.count1 })
-          end,
-          desc = "Send Selected Lines",
-          mode = "v",
-        },
-        {
-          "<leader>tX",
-          function()
-            require("toggleterm").send_lines_to_terminal("visual_selection", true, { args = vim.v.count1 })
-          end,
-          desc = "Send Selection",
-          mode = "v",
-        },
-        {
-          "<leader>t|",
-          function()
-            require("toggleterm").toggle(vim.v.count1, 60, nil, "vertical")
-          end,
-          desc = "Open Vertical",
-        },
-        {
-          "<leader>t-",
-          function()
-            require("toggleterm").toggle(vim.v.count1, 18, nil, "horizontal")
-          end,
-          desc = "Open Horizontal",
-        },
-        {
-          "<leader>tf",
-          function()
-            require("toggleterm").toggle(vim.v.count1, nil, nil, "float")
-          end,
-          desc = "Open Float",
-        },
-        {
-          "<leader>gg",
-          function()
-            local terminal = require("toggleterm.terminal").Terminal
-            lazygit = lazygit
-              or terminal:new {
-                cmd = "lazygit",
-                hidden = true,
-                direction = "float",
-                close_on_exit = true,
-                id = 100, -- set to 100 to avoid overlapping with other terminals
-              }
-            lazygit:toggle()
-          end,
-          desc = "Lazygit",
-        },
-        {
-          "<leader>gl",
-          function()
-            local terminal = require("toggleterm.terminal").Terminal
-            lazygit_log = lazygit_log
-              or terminal:new {
-                cmd = "lazygit log",
-                hidden = true,
-                direction = "float",
-                close_on_exit = true,
-                id = 101, -- set to 101 to avoid overlapping with other terminals
-              }
-            lazygit_log:toggle()
-          end,
-          desc = "Lazygit Log",
-        },
-        {
-          "<leader>gf",
+        { "<c-\\>",     function()   require("toggleterm").toggle(vim.v.count) end,                                                       desc = "Toggle",              mode = "n",},
+        { "<leader>tx", function()   require("toggleterm").send_lines_to_terminal("single_line", true, { args = vim.v.count1 }) end,      desc = "Send Current Line",   mode = "n",},
+        { "<leader>tx", function()   require("toggleterm").send_lines_to_terminal("visual_lines", true, { args = vim.v.count1 }) end,     desc = "Send Selected Lines", mode = "v",},
+        { "<leader>tX", function()   require("toggleterm").send_lines_to_terminal("visual_selection", true, { args = vim.v.count1 }) end, desc = "Send Selection",      mode = "v",},
+        { "<leader>t|", function()   require("toggleterm").toggle(vim.v.count1, 60, nil, "vertical") end,                                 desc = "Open Vertical",},
+        { "<leader>t-", function()   require("toggleterm").toggle(vim.v.count1, 18, nil, "horizontal") end,                               desc = "Open Horizontal",},
+        { "<leader>tf", function()   require("toggleterm").toggle(vim.v.count1, nil, nil, "float") end,                                   desc = "Open Float",},
+        { "<leader>gg", function()   lazygit = lazygit or hidden_terminal("lazygit", 100)            lazygit:toggle() end,                desc = "Lazygit",},
+        { "<leader>gl", function()   lazygit_log = lazygit_log or hidden_terminal("lazygit log",101) lazygit_log:toggle()end,             desc = "Lazygit Log",},
+        { "<leader>gf",
           function()
             local file = vim.trim(vim.api.nvim_buf_get_name(0))
-            local terminal = require("toggleterm.terminal").Terminal
-            lazygit_filelog = lazygit_filelog
-              or terminal:new {
-                cmd = "lazygit -f " .. file,
-                hidden = true,
-                direction = "float",
-                close_on_exit = true,
-                id = 102, -- set to 102 to avoid overlapping with other terminals
-              }
+            lazygit_filelog = lazygit_filelog or hidden_terminal("lazygit log -f" .. file)
             lazygit_filelog:toggle()
           end,
           desc = "Lazygit Current File History",
