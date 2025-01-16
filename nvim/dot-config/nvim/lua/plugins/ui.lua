@@ -1,10 +1,12 @@
 local noice_map = Utils.keymap.get_lazy_list_mapper { mode = "n", desc_prefix = "Noice" }
+local trouble_map = Utils.keymap.get_lazy_list_mapper { mode = "n", desc_prefix = "Trouble" }
+local oil_map = Utils.keymap.get_lazy_list_mapper { mode = "n", desc_prefix = "Oil" }
 return {
   {
     "catppuccin/nvim",
     priority = 1000,
     opts = {
-      integrations = { blink_cmp = true, cmp = false, grug_far = true, which_key = true },
+      integrations = { blink_cmp = true, cmp = false, grug_far = true, which_key = true, snacks = true },
     },
     config = function(opts)
       require("catppuccin").setup(opts)
@@ -12,10 +14,21 @@ return {
     end,
   },
   {
-    "stevearc/dressing.nvim",
-    event = "VeryLazy",
+    "folke/snacks.nvim",
     opts = {
-      input = { enabled = false },
+      statuscolumn = { enabled = true },
+      dashboard = {
+        enabled = true,
+        sections = {
+          { pane = 1, section = "header" },
+          { pane = 1, section = "keys", gap = 1, padding = 1 },
+          { pane = 2, padding = 8 },
+          { pane = 2, icon = " ", title = "Recent Files", section = "recent_files", indent = 2, padding = 1 },
+          { pane = 2, icon = " ", title = "Projects", section = "projects", indent = 2, padding = 1 },
+          { section = "startup" },
+        },
+      },
+      indent = { enabled = true },
     },
   },
   {
@@ -213,6 +226,140 @@ return {
           lualine_z = { "location" },
         },
         extensions = { "lazy", "fzf", "toggleterm", "oil", "quickfix" },
+      }
+    end,
+  },
+  {
+    "folke/trouble.nvim",
+    cmd = "Trouble",
+    opts = {
+      modes = {
+        lsp = {
+          win = { position = "right" },
+        },
+      },
+    },
+    specs = {
+      "folke/snacks.nvim",
+      opts = function(_, opts)
+        return vim.tbl_deep_extend("force", opts or {}, {
+          picker = {
+            actions = require("trouble.sources.snacks").actions,
+            win = {
+              input = {
+                keys = {
+                  ["<c-t>"] = {
+                    "trouble_open",
+                    mode = { "n", "i" },
+                  },
+                },
+              },
+            },
+          },
+        })
+      end,
+    },
+    keys = function()
+      return trouble_map {
+        { "<leader>ld", "<cmd>Trouble diagnostics toggle<cr>", desc = "Diagnostics" },
+        { "<leader>lD", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", desc = "Buffer Diagnostics (Trouble)" },
+        { "<leader>cy", "<cmd>Trouble symbols toggle<cr>", desc = "Symbols" },
+        {
+          "<leader>cY",
+          "<cmd>Trouble lsp toggle<cr>",
+          desc = "LSP references/definitions/... (Trouble)",
+        },
+        { "<leader>lL", "<cmd>Trouble loclist toggle<cr>", desc = "Location List" },
+        { "<leader>lQ", "<cmd>Trouble qflist toggle<cr>", desc = "Quickfix List " },
+        { "<leader>lf", "<cmd>Trouble snacks_files toggle<cr>", desc = "Snacks Files" },
+        {
+          "<leader>lt",
+          function()
+            require("trouble").toggle { mode = "todo" }
+          end,
+          desc = "Todo",
+        },
+        {
+          "<leader>lT",
+          function()
+            require("trouble").toggle { mode = "todo", filter = { { tag = { "TODO", "FIX", "FIXME" } } } }
+          end,
+          desc = "Todo/Fix/Fixme",
+        },
+      }
+    end,
+  },
+  {
+    "stevearc/oil.nvim",
+    ---@module 'oil'
+    ---@type oil.SetupOpts
+    dependencies = { "nvim-tree/nvim-web-devicons", "echasnovski/mini.icons" },
+    opts = {
+      columns = {
+        "icon",
+        -- "permissions",
+        --'size',
+        --'mtime',
+      },
+      win_options = {},
+      view_options = { show_hidden = true },
+      lsp_file_methods = {
+        -- Enable or disable LSP file operations
+        enabled = true,
+        -- Time to wait for LSP file operations to complete before skipping
+        timeout_ms = 3000,
+        -- Set to true to autosave buffers that are updated with LSP willRenameFiles
+        -- Set to "unmodified" to only save unmodified buffers
+        autosave_changes = "unmodified",
+      },
+      preview_win = {
+        preview_method = "load",
+        disable_preview = function(filename)
+          return filename == "../"
+        end,
+      },
+      keymaps = {
+        ["<C-s>"] = false,
+        ["<C-l>"] = false,
+        ["<C-h>"] = false,
+        ["q"] = { "actions.close", mode = "n" },
+        ["<Tab>"] = function()
+          require("oil.actions").send_to_qflist.callback()
+          require("trouble").open { mode = "quickfix", refresh = true, new = false }
+        end,
+        ["<C-v>"] = { "actions.select", opts = { vertical = true } },
+        ["<C-p>"] = { "actions.preview" },
+        ["gd"] = function()
+          require("oil").set_columns { "icon", "permissions", "size", "mtime" }
+        end,
+        ["<leader>ff"] = {
+          function()
+            require("fzf-lua").files {
+              cwd = require("oil").get_current_dir(),
+            }
+          end,
+          mode = "n",
+          nowait = true,
+          desc = "Find files in the current directory",
+        },
+      },
+    },
+    keys = function()
+      return oil_map {
+        {
+          "-",
+          function()
+            require("oil").open()
+          end,
+          desc = "Open Oil buffer In Parent Directory",
+        },
+        {
+          "<leader>f-",
+          function()
+            require("oil").open(vim.fn.getcwd())
+          end,
+          desc = "Open Oil buffer In Root Directory",
+        },
       }
     end,
   },
