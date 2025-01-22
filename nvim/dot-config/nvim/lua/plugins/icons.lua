@@ -4,12 +4,13 @@ return {
     lazy = true,
     opts = {},
     config = function(_, opts)
+      local palette = require("catppuccin.palettes").get_palette("mocha")
       local devicons = require("nvim-web-devicons")
       devicons.setup(opts)
       devicons.set_icon {
         snakemake = {
           icon = "󱔎",
-          color = "#a6e3a1",
+          color = palette.green,
           name = "Snakemake",
         },
       }
@@ -18,5 +19,5 @@ return {
       }
     end,
   },
-  { "echasnovski/mini.icons", version = false, lazy = true },
+  { "echasnovski/mini.icons", version = false, lazy = true, opts = {} },
 }

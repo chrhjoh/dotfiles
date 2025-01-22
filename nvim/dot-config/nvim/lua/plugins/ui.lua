@@ -4,11 +4,12 @@ local oil_map = Utils.keymap.get_lazy_list_mapper { mode = "n", desc_prefix = "O
 return {
   {
     "catppuccin/nvim",
+    name = "catppuccin",
     priority = 1000,
     opts = {
-      integrations = { blink_cmp = true, cmp = false, grug_far = true, which_key = true, snacks = true },
+      integrations = { blink_cmp = true, cmp = false, grug_far = true, which_key = true, snacks = false },
     },
-    config = function(opts)
+    config = function(_, opts)
       require("catppuccin").setup(opts)
       vim.cmd.colorscheme("catppuccin-mocha")
     end,

@@ -3,7 +3,14 @@ local flash_map = Utils.keymap.get_lazy_list_mapper { mode = "n", desc_prefix = 
 return {
   {
     "folke/snacks.nvim",
-    opts = { picker = { enabled = true, sources = { files = { follow = true } } } },
+    ---@type snacks.Config
+    opts = {
+      picker = {
+        enabled = true,
+        sources = { files = { follow = true } },
+        formatters = { file = { filename_first = true } },
+      },
+    },
     -- stylua: ignore
     keys = function(keys)
       return vim.list_extend(

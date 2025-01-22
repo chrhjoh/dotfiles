@@ -13,6 +13,8 @@ local source_map =      Utils.keymap.get_mapper { mode = "n", desc_prefix = "Sou
 nmap { "<Space>",   "<Nop>",          mode = { "n", "v" }, silent = true }
 nmap { "<leader>Q", "<cmd>quit<cr>",  desc = "Quit Neovim" }
 
+nmap( {"<esc>", function() vim.cmd("noh") return "<esc>" end, mode={ "i", "n", "s" },  expr = true, desc = "Escape and Clear hlsearch" })
+
 -- Remap for dealing with word wrap
 nmap { "k", "v:count == 0 ? 'gk' : 'k'", silent = true, expr = true }
 nmap { "j", "v:count == 0 ? 'gj' : 'j'", silent = true, expr = true }
