@@ -7,6 +7,7 @@ M.formatters = {
   { name = "ruff_format", filetypes = { "python" }, mason_alias = "ruff" },
   { name = "snakefmt", filetypes = { "snakemake" } },
   { name = "stylua", filetypes = { "lua" } },
+  { name = "typstfmt", filetypes = { "typst" } },
 }
 
 ---@type DebuggerToolConfig[]

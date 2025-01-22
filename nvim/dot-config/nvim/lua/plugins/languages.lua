@@ -3,7 +3,7 @@ local markview_mapper = Utils.keymap.get_lazy_list_mapper { mode = "n", desc_pre
 return {
   {
     "lervag/vimtex",
-    ft = "tex",
+    lazy = false, -- Reuired for inverse searching
     init = function()
       -- VimTeX configuration goes here, e.g.
       vim.g.vimtex_view_method = "skim"
@@ -23,17 +23,14 @@ return {
     build = function()
       require("typst-preview").update()
     end,
+    --stylua: ignore
     keys = function()
       return typst_mapper {
-        { "<localleader>td", ":TypstPreview document<CR>", desc = "Preview Document" },
-        -- Start Typst preview in slide mode
-        { "<localleader>ts", ":TypstPreview slide<CR>", desc = "Preview Slide" },
-        -- Stop Typst preview
-        { "<localleader>tp", ":TypstPreviewStop<CR>", desc = "Preview Stop" },
-        -- Toggle follow cursor mode
+        { "<localleader>td", ":TypstPreview document<CR>",          desc = "Preview Document" },
+        { "<localleader>ts", ":TypstPreview slide<CR>",             desc = "Preview Slide" },
+        { "<localleader>tp", ":TypstPreviewStop<CR>",               desc = "Preview Stop" },
         { "<localleader>tf", ":TypstPreviewFollowCursorToggle<CR>", desc = "Preview Follow Cursor Toggle" },
-        -- Synchronize cursor position
-        { "<localleader>ty", ":TypstPreviewSyncCursor<CR>", desc = "Preview Sync Cursor" },
+        { "<localleader>ty", ":TypstPreviewSyncCursor<CR>",         desc = "Preview Sync Cursor" },
       }
     end,
   },
@@ -50,18 +47,18 @@ return {
   {
     "OXY2DEV/markview.nvim",
     ft = "markdown",
-
     dependencies = {
       "nvim-treesitter/nvim-treesitter",
       "nvim-tree/nvim-web-devicons",
     },
     opts = {},
+    --stylua: ignore
     keys = function()
       markview_mapper {
-        { "<localleader>mt", "<cmd>Markview toggle<cr>", desc = "Toggle" },
-        { "<localleader>ms", "<cmd>Markview splitToggle<cr>", desc = "Split Toggle" },
-        { "<localleader>mh", "<cmd>Markview hybridToggle<cr>", desc = "hybrid Toggle" },
-        { "<localleader>mo", "<cmd>Markopen<cr>", desc = "hybrid Toggle" },
+        { "<localleader>mt", "<cmd>Markview toggle<cr>",        desc = "Toggle" },
+        { "<localleader>ms", "<cmd>Markview splitToggle<cr>",   desc = "Split Toggle" },
+        { "<localleader>mh", "<cmd>Markview hybridToggle<cr>",  desc = "hybrid Toggle" },
+        { "<localleader>mo", "<cmd>Markopen<cr>",               desc = "hybrid Toggle" },
       }
     end,
   },
