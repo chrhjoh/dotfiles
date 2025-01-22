@@ -7,10 +7,8 @@ return {
     },
     --stylua: ignore
     keys = function()
-      return {
-        nmap {
+      return nmap{
           { "<leader>cn", function() require("neogen").generate() end, desc = "Generate Annotations" },
-        },
       }
     end,
   },
