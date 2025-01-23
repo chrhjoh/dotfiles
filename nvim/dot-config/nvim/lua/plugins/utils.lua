@@ -78,7 +78,7 @@ return {
         { ">P",         "<Plug>(YankyPutIndentBeforeShiftRight)", desc = "Put Before and Indent Right" },
         { "<P",         "<Plug>(YankyPutIndentBeforeShiftLeft)",  desc = "Put Before and Indent Left" },
         { "=p",         "<Plug>(YankyPutAfterFilter)",            desc = "Put After Applying a Filter" },
-        { "<leader>P",  "<CMD>YankyRingHistory<CR>",              desc = "Put from yank history" },
+        { "<leader>sy",  "<CMD>YankyRingHistory<CR>",              desc = "Search yank history" },
         { "=P",         "<Plug>(YankyPutBeforeFilter)",           desc = "Put Before Applying a Filter" },
       }
     end,
