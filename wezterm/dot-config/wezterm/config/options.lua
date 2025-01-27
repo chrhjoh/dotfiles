@@ -6,12 +6,10 @@ local M = {}
 function M.setup(config)
   config.use_ime = true
   config.font_size = 12
-  config.font = wezterm.font_with_fallback { "JetBrainsMono Nerd Font", "Monaco" }
+  config.font = wezterm.font_with_fallback { "JetBrainsMono" }
   config.use_fancy_tab_bar = false
   config.tab_max_width = 32
   config.status_update_interval = 250
-  config.integrated_title_button_alignment = "Right"
-  config.integrated_title_button_style = "Gnome"
   config.command_palette_font_size = 14
   config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"
   config.window_padding = {

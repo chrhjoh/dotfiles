@@ -33,6 +33,7 @@ return {
           -- search
           { '<leader>s"',       function()  Snacks.picker.registers() end,                                                            desc = "Registers" },
           { "<leader>sa",       function()  Snacks.picker.autocmds() end,                                                             desc = "Auto Commands" },
+          { "<leader>sA",       function()  Snacks.picker() end,                                                                      desc = "Pickers" },
           { "<leader>sb",       function()  Snacks.picker.lines() end,                                                                desc = "Buffer" },
           { "<leader>sB",       function()  Snacks.picker.grep_buffers() end,                                                         desc = "Buffers" },
           { "<leader>sc",       function()  Snacks.picker.command_history() end,                                                      desc = "Command History" },
@@ -44,6 +45,7 @@ return {
           { "<leader>sj",       function()  Snacks.picker.jumps() end,                                                                desc = "Jumplist" },
           { "<leader>sk",       function()  Snacks.picker.keymaps() end,                                                              desc = "Key Maps" },
           { "<leader>sl",       function()  Snacks.picker.loclist() end,                                                              desc = "Location List" },
+          { "<leader>sL",       function()  Snacks.picker.lazy() end,                                                                 desc = "Lazy Specs" },
           { "<leader>sM",       function()  Snacks.picker.man() end,                                                                  desc = "Man Pages" },
           { "<leader>sm",       function()  Snacks.picker.marks() end,                                                                desc = "Jump to Mark" },
           { "<leader>sR",       function()  Snacks.picker.resume() end,                                                               desc = "Resume" },

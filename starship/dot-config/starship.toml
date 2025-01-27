@@ -21,10 +21,6 @@ style = "bold mauve"
 [git_status]
 style = "bold mauve"
 
-[nix_shell]
-format = "[$symbol $state( ($name))]($style) "
-symbol = "❄️"
-
 [package]
 disabled = true
 
