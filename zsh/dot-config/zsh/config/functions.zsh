@@ -12,3 +12,15 @@ __wezterm_set_user_var() {
     fi
   fi
 }
+
+function _run_prog() {
+    # set PROG to the program being run
+    __wezterm_set_user_var "PROG" "$1"
+
+    # arrange to clear it when it is done
+    trap '__wezterm_set_user_var PROG ""' EXIT
+
+    # and now run the corresponding command, taking care to avoid looping
+    # with the alias definition
+    command "$@"
+}
