@@ -6,7 +6,7 @@ local M = {}
 function M.setup(config)
   config.use_ime = true
   config.font_size = 12
-  config.font = wezterm.font_with_fallback { "JetBrainsMono" }
+  config.font = wezterm.font_with_fallback { "JetBrains Mono", "Symbols Nerd Font Mono" }
   config.use_fancy_tab_bar = false
   config.tab_max_width = 32
   config.status_update_interval = 250

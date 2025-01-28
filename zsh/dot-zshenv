@@ -1,12 +1,1 @@
 export ZDOTDIR="$HOME/.config/zsh"
-
-export XDG_CACHE_HOME="/Users/hcq343/.cache"
-export XDG_CONFIG_HOME="/Users/hcq343/.config"
-export XDG_DATA_HOME="/Users/hcq343/.local/share"
-export XDG_RUNTIME_DIR="/Users/hcq343/.xdg-runtime"
-export XDG_STATE_HOME="/Users/hcq343/.local/state"
-
-export CARGO_HOME="$XDG_DATA_HOME/cargo"
-
-eval "$(/opt/homebrew/bin/brew shellenv)"
-. "$CARGO_HOME/env"

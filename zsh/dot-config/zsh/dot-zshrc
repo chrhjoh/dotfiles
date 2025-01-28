@@ -1,3 +1,5 @@
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
 source "$ZDOTDIR/config/options.zsh"
 source "$ZDOTDIR/config/variables.zsh"
 source "$ZDOTDIR/config/functions.zsh"
@@ -19,6 +21,7 @@ fi
 zstyle ':zim:completion' dumpfile $XDG_CACHE_HOME/zsh/zshcompdump
 zstyle ':completion::complete:*' cache-path ${XDG_CACHE_HOME}/zsh/zcompcache
 
+. "$CARGO_HOME/env"
 # ----- Source ZIM -----
 source ${ZIM_HOME}/init.zsh
 
