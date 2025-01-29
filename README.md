@@ -7,8 +7,6 @@ Multiplexer: Tmux/Wezterm
 Editor: Neovim
 Shell: zsh 
 
-Moving away from nix.
-Fix plugins with tmux
 
 
 
