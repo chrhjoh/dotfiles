@@ -35,4 +35,5 @@ M.keymap = require("utils.keymap")
 M.tools = require("utils.tools")
 M.lang = require("utils.lang")
 M.icons = require("utils.icons")
+M.root = require("utils.root")
 return M

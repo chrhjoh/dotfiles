@@ -1,5 +1,6 @@
 local yank_map = Utils.keymap.get_lazy_list_mapper { mode = "n", desc_prefix = "Yanky" }
-local snacks_keymap = Utils.keymap.get_lazy_list_mapper { mode = "n", desc_prefix = "Snacks" }
+local snacks_keymap = Utils.keymap.get_mapper { mode = "n", desc_prefix = "Snacks" }
+local snacks_lazy_keymap = Utils.keymap.get_lazy_list_mapper { mode = "n", desc_prefix = "Snacks" }
 return {
   {
     "folke/which-key.nvim",
@@ -110,12 +111,21 @@ return {
           vim.print = _G.dd -- Override print to use snacks for `:=` command
         end,
       })
+      vim.api.nvim_create_autocmd("FileType", {
+        callback = function()
+          local buffer = vim.api.nvim_get_current_buf()
+          --stylua: ignore start
+          snacks_keymap { "]]", function()  Snacks.words.jump(vim.v.count1) end,  desc = "Next Reference",  buffer = buffer,}
+          snacks_keymap { "[[", function()  Snacks.words.jump(-vim.v.count1) end, desc = "Prev Reference",  buffer = buffer,}
+          --stylua: ignore end
+        end,
+      })
     end,
     --stylua: ignore
     keys = function(keys)
       return vim.list_extend(
         keys,
-        snacks_keymap {
+        snacks_lazy_keymap {
           {  "]]",          function()    Snacks.words.jump(vim.v.count1)  end,   desc = "Next Reference",  mode = { "n", "t" },},
           {  "[[",          function()    Snacks.words.jump(-vim.v.count1)  end,  desc = "Prev Reference",  mode = { "n", "t" },},
           {  "<leader>gb",  function()    Snacks.git.blame_line()  end,           desc = "Git Blame Line",},
