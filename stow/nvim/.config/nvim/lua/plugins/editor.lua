@@ -10,7 +10,7 @@ return {
     end,
     event = "InsertEnter",
     opts = {
-      fuzzy = { prebuilt_binaries = { download = false } }, -- Already fetched in built
+      fuzzy = { prebuilt_binaries = { download = false } }, -- Already fetched in build
       sources = {
         default = { "lazydev", "lsp", "path", "snippets", "buffer" },
         providers = {

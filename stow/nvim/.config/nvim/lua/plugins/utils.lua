@@ -1,6 +1,7 @@
 local yank_map = Utils.keymap.get_lazy_list_mapper { mode = "n", desc_prefix = "Yanky" }
 local snacks_keymap = Utils.keymap.get_mapper { mode = "n", desc_prefix = "Snacks" }
 local snacks_lazy_keymap = Utils.keymap.get_lazy_list_mapper { mode = "n", desc_prefix = "Snacks" }
+local oil_map = Utils.keymap.get_lazy_list_mapper { mode = "n", desc_prefix = "Oil" }
 return {
   {
     "folke/which-key.nvim",
@@ -133,6 +134,65 @@ return {
           {  "<leader>cR",  function()    Snacks.rename.rename_file()  end,       desc = "Rename File",},
         }
       )
+    end,
+  },
+  {
+    "stevearc/oil.nvim",
+    ---@module 'oil'
+    ---@type oil.SetupOpts
+    dependencies = { "nvim-tree/nvim-web-devicons", "echasnovski/mini.icons" },
+    opts = {
+      columns = {
+        "icon",
+        -- "permissions",
+        --'size',
+        --'mtime',
+      },
+      win_options = {},
+      view_options = { show_hidden = true },
+      lsp_file_methods = {
+        enabled = true,
+        timeout_ms = 3000,
+        autosave_changes = "unmodified",
+      },
+      preview_win = {
+        preview_method = "load",
+        disable_preview = function(filename)
+          return filename == "../"
+        end,
+      },
+      keymaps = {
+        ["<C-s>"] = false,
+        ["<C-l>"] = false,
+        ["<C-h>"] = false,
+        ["q"] = { "actions.close", mode = "n" },
+        ["<Tab>"] = function()
+          require("oil.actions").send_to_qflist.callback()
+          require("trouble").open { mode = "quickfix", refresh = true, new = false }
+        end,
+        ["<C-v>"] = { "actions.select", opts = { vertical = true } },
+        ["<C-p>"] = { "actions.preview" },
+        ["gd"] = function()
+          require("oil").set_columns { "icon", "permissions", "size", "mtime" }
+        end,
+        ["<leader>ff"] = {
+          function()
+            Snacks.picker.files {
+              cwd = require("oil").get_current_dir(),
+            }
+          end,
+          mode = "n",
+          nowait = true,
+          desc = "Find files in the current directory",
+        },
+      },
+    },
+    --stylua: ignore
+    keys = function()
+      return oil_map {
+        {  "-",           function()    require("oil").open()  end,                 desc = "Open Oil buffer In Parent Directory",},
+        {  "_",  function()    require("oil").open(Utils.root())  end,  desc = "Open Oil buffer In Root Directory",},
+      }
     end,
   },
 }
