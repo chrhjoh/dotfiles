@@ -19,13 +19,7 @@ nmap( {"<esc>", function() vim.cmd("noh") return "<esc>" end, mode={ "i", "n", "
 nmap { "k", "v:count == 0 ? 'gk' : 'k'", silent = true, expr = true }
 nmap { "j", "v:count == 0 ? 'gj' : 'j'", silent = true, expr = true }
 
--- Pasting
-nmap{"d", '"dd', desc = "Delete to d register", noremap = true}
-nmap{"D", '"dD', desc = "Delete to d register",noremap = true}
-nmap{"dd", '"ddd', desc = "Delete to d register", noremap = true}
 nmap{"x", '"_x', desc = "Delete character", noremap = true}
-nmap{"<leader>p", '"dp', desc = "Paste last deleted", noremap = true}
-nmap{"<leader>P", '"dP', desc = "Paste last deleted", noremap = true}
 
 -- Automatic reselect after indent
 vmap { "<", "<gv" }

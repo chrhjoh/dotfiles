@@ -79,9 +79,7 @@ return {
         { "<p",         "<Plug>(YankyPutIndentAfterShiftLeft)",   desc = "Put and Indent Left" },
         { ">P",         "<Plug>(YankyPutIndentBeforeShiftRight)", desc = "Put Before and Indent Right" },
         { "<P",         "<Plug>(YankyPutIndentBeforeShiftLeft)",  desc = "Put Before and Indent Left" },
-        { "=p",         "<Plug>(YankyPutAfterFilter)",            desc = "Put After Applying a Filter" },
         { "<leader>sy",  "<CMD>YankyRingHistory<CR>",              desc = "Search yank history" },
-        { "=P",         "<Plug>(YankyPutBeforeFilter)",           desc = "Put Before Applying a Filter" },
       }
     end,
   },
@@ -191,7 +189,7 @@ return {
     keys = function()
       return oil_map {
         {  "-",           function()    require("oil").open()  end,                 desc = "Open Oil buffer In Parent Directory",},
-        {  "_",  function()    require("oil").open(Utils.root())  end,  desc = "Open Oil buffer In Root Directory",},
+        {  "=",  function()    require("oil").open(Utils.root())  end,  desc = "Open Oil buffer In Root Directory",},
       }
     end,
   },
