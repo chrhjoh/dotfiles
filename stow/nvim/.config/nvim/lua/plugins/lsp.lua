@@ -36,13 +36,18 @@ return {
     },
     config = function(_, opts)
       vim.diagnostic.config(opts.diagnostics)
-      local on_attach = function(client, bufnr)
-        lsp_map { "<leader>k", vim.lsp.buf.signature_help, desc = "Signature Documentation", buffer = bufnr }
-        lsp_map { "K", vim.lsp.buf.hover, desc = "Hover Documentation", buffer = bufnr }
-        lsp_map { "gD", vim.lsp.buf.declaration, desc = "Goto Declaration", buffer = bufnr }
-        lsp_map { "<leader>cr", vim.lsp.buf.rename, desc = "Code Rename", buffer = bufnr }
-        lsp_map { "<leader>ca", vim.lsp.buf.code_action, desc = "Code Action", buffer = bufnr }
-        lsp_map { "<C-?>", vim.lsp.buf.signature_help, desc = "LSP: Signature", buffer = bufnr, mode = "i" }
+      local wrap_on_attach = function(server)
+        return function(client, bufnr)
+          lsp_map { "<leader>k", vim.lsp.buf.signature_help, desc = "Signature Documentation", buffer = bufnr }
+          lsp_map { "K", vim.lsp.buf.hover, desc = "Hover Documentation", buffer = bufnr }
+          lsp_map { "gD", vim.lsp.buf.declaration, desc = "Goto Declaration", buffer = bufnr }
+          lsp_map { "<leader>cr", vim.lsp.buf.rename, desc = "Code Rename", buffer = bufnr }
+          lsp_map { "<leader>ca", vim.lsp.buf.code_action, desc = "Code Action", buffer = bufnr }
+          lsp_map { "<C-?>", vim.lsp.buf.signature_help, desc = "LSP: Signature", buffer = bufnr, mode = "i" }
+          if server and server.on_attach_callback then
+            server.on_attach_callback(client, bufnr)
+          end
+        end
       end
       local capabilities = vim.tbl_deep_extend(
         "force",
@@ -54,7 +59,7 @@ return {
       local function setup(server)
         local server_opts = vim.tbl_deep_extend("force", {
           capabilities = vim.deepcopy(capabilities),
-          on_attach = on_attach,
+          on_attach = wrap_on_attach(server),
         }, server.opts or {})
         require("lspconfig")[server.name].setup(server_opts)
       end
