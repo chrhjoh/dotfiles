@@ -5,7 +5,7 @@ source "$ZDOTDIR/config/options.zsh"
 source "$ZDOTDIR/config/functions.zsh"
 source "$ZDOTDIR/config/keys.zsh"
 source "$ZDOTDIR/config/aliases.zsh"
-
+[[ -f "$ZDOTDIR/zshrc.local" ]] && source "$ZDOTDIR/zshrc.local"
 # ----- zimfw plugin manager -----
 if [[ ! -e ${ZIM_HOME}/zimfw.zsh ]]; then
   curl -fsSL --create-dirs -o ${ZIM_HOME}/zimfw.zsh \

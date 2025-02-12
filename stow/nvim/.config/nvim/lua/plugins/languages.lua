@@ -52,13 +52,15 @@ return {
       "nvim-tree/nvim-web-devicons",
     },
     opts = {},
+    config = function(_, opts)
+      require("markview").setup(opts)
+      require("markview.extras.checkboxes").setup()
+    end,
     --stylua: ignore
     keys = function()
-      markview_mapper {
-        { "<localleader>mt", "<cmd>Markview toggle<cr>",        desc = "Toggle" },
-        { "<localleader>ms", "<cmd>Markview splitToggle<cr>",   desc = "Split Toggle" },
-        { "<localleader>mh", "<cmd>Markview hybridToggle<cr>",  desc = "hybrid Toggle" },
-        { "<localleader>mo", "<cmd>Markopen<cr>",               desc = "hybrid Toggle" },
+      return markview_mapper {
+        { "<localleader>mo", "<cmd>Markview open<cr>", desc = "Open Web Link" },
+        { "<localleader>mc", "<cmd>Checkbox interactive<cr>", desc = "Checkbox" },
       }
     end,
   },

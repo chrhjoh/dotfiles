@@ -16,6 +16,7 @@ return {
           { pattern = "yank", icon = "󰅇 ", color = "yellow" },
           { pattern = "lists", icon = " ", color = "green" },
           { pattern = "lua", icon = "󰢱 ", color = "blue" },
+          { pattern = "obsidian", icon = " ", color = "purple" },
         },
       },
       spec = {
@@ -39,7 +40,8 @@ return {
           { "<leader>y", group = "yank" },
           { "<leader>d", desc = "debug" },
           { "<leader>q", desc = "sessions" },
-          { "<leader>n", desc = "+noice" },
+          { "<leader>n", desc = "noice" },
+          { "<leader>o", desc = "obsidian" },
 
           { "<localleader>l", group = "latex" },
           { "<localleader>t", group = "typst" },

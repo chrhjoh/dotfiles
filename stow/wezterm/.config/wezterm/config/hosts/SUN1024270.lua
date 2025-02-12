@@ -27,6 +27,21 @@ M.workspaces = {
     end,
     directory = wezterm.home_dir .. "/bitbucket/translation",
   },
+  {
+    name = "obsidian_personal",
+    layout = function(window, tab, pane)
+      pane:send_text("$EDITOR\n")
+    end,
+    directory = wezterm.home_dir,
+  },
+  {
+
+    name = "obsidian_work",
+    layout = function(window, tab, pane)
+      pane:send_text("$EDITOR\n")
+    end,
+    directory = wezterm.home_dir,
+  },
 }
 
 return M

@@ -111,6 +111,22 @@ M.lsps = {
   { name = "texlab", ensure_install = false },
   { name = "ltex", opts = { autostart = false }, mason_alias = "ltex-ls", ensure_install = false },
   { name = "tinymist", ensure_install = false },
+  {
+    name = "markdown_oxide",
+    mason_alias = "markdown-oxide",
+    opts = {},
+    on_attach_callback = function(client, bufnr)
+      client.server_capabilities.renameProvider = false
+      client.server_capabilities.workspace.fileOperations = {
+        willRename = false,
+        didRename = false,
+        willCreate = false,
+        didCreate = false,
+        willDelete = false,
+        didDelete = false,
+      }
+    end,
+  },
 }
 
 return M
