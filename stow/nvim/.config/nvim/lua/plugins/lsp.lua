@@ -21,6 +21,14 @@ return {
         update_in_insert = false,
         virtual_text = {
           severity = { min = vim.diagnostic.severity.WARN },
+          prefix = function(diagnostic)
+            local icons = Utils.icons.diagnostics
+            for d, icon in pairs(icons) do
+              if diagnostic.severity == vim.diagnostic.severity[d:upper()] then
+                return icon
+              end
+            end
+          end,
         },
         severity_sort = true,
         signs = {

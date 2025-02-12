@@ -62,3 +62,4 @@ opt.splitright = true
 opt.virtualedit = "block"
 -- Spelling
 opt.spelllang = "en_us"
+opt.diffopt = "internal,filler,closeoff,indent-heuristic,linematch:60,algorithm:histogram"
