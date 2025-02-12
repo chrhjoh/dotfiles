@@ -2,57 +2,110 @@ local todo_keymap = Utils.keymap.get_lazy_list_mapper { mode = "n", desc_prefix 
 
 return {
   {
-    "saghen/blink.cmp",
-    version = "*",
-    dependencies = "rafamadriz/friendly-snippets",
-    build = function(blink)
-      require("blink.cmp.fuzzy.download").from_github(blink.tag) -- forces a blocking install
-    end,
+    "hrsh7th/nvim-cmp",
     event = "InsertEnter",
-    opts = {
-      fuzzy = { prebuilt_binaries = { download = false } }, -- Already fetched in build
-      sources = {
-        default = { "lazydev", "lsp", "path", "snippets", "buffer" },
-        providers = {
-          lazydev = {
-            name = "LazyDev",
-            module = "lazydev.integrations.blink",
-            score_offset = 100, -- show at a higher priority than lsp
-          },
-        },
-      },
-      completion = {
-        menu = {
-          draw = { treesitter = { "lsp" } },
-        },
-        list = { selection = { preselect = false } },
-        documentation = {
-          auto_show = true,
-          auto_show_delay_ms = 500,
-        },
-        ghost_text = { enabled = false },
-      },
-      appearance = {
-        use_nvim_cmp_as_default = false,
-        nerd_font_variant = "mono",
-      },
-      keymap = {
-        preset = "default",
-        ["<C-space>"] = {},
-        ["<S-CR>"] = { "select_and_accept", "show", "fallback" },
-        ["<Tab>"] = { "select_next", "snippet_forward", "fallback" },
-        ["<S-Tab>"] = { "select_prev", "snippet_backward", "fallback" },
-        ["<Up>"] = { "fallback" },
-        ["<Down>"] = { "fallback" },
-        cmdline = {
-          preset = "default",
-          ["<S-CR>"] = { "select_and_accept", "fallback" },
-          ["<C-y>"] = { "select_and_accept", "show" },
-          ["<Tab>"] = { "select_next", "fallback" },
-          ["<S-Tab>"] = { "select_prev", "fallback" },
-        },
-      },
+    dependencies = {
+      -- Snippet Engine & its associated nvim-cmp source
+      "L3MON4D3/LuaSnip",
+      "saadparwaiz1/cmp_luasnip",
+
+      -- Adds LSP completion capabilities
+      "hrsh7th/cmp-nvim-lsp",
+      "hrsh7th/cmp-buffer",
+      "hrsh7th/cmp-path",
+      "f3fora/cmp-spell",
+
+      -- Adds a number of user-friendly snippets
+      "rafamadriz/friendly-snippets",
+
+      "onsails/lspkind.nvim",
     },
+    config = function()
+      local cmp = require("cmp")
+      local luasnip = require("luasnip")
+      require("luasnip.loaders.from_vscode").lazy_load()
+      luasnip.config.setup {}
+
+      cmp.setup {
+        window = { completion = { scrolloff = 1 }, documentation = { max_height = 20 * 20 / vim.o.lines } },
+        snippet = {
+          expand = function(args)
+            luasnip.lsp_expand(args.body)
+          end,
+        },
+        mapping = cmp.mapping.preset.insert {
+          ["<Down>"] = cmp.mapping(function(fallback)
+            cmp.close()
+            fallback()
+          end, { "i" }),
+          ["<Up>"] = cmp.mapping(function(fallback)
+            cmp.close()
+            fallback()
+          end, { "i" }),
+          ["<C-n>"] = cmp.mapping.select_next_item(),
+          ["<C-p>"] = cmp.mapping.select_prev_item(),
+          ["<C-b>"] = cmp.mapping.scroll_docs(-4),
+          ["<C-f>"] = cmp.mapping.scroll_docs(4),
+          ["<C-c>"] = cmp.mapping.complete { reason = cmp.ContextReason.Auto },
+          ["<C-y>"] = cmp.mapping.confirm {
+            behavior = cmp.ConfirmBehavior.Replace,
+            select = true,
+          },
+          ["<S-cr>"] = cmp.mapping.confirm {
+            behavior = cmp.ConfirmBehavior.Replace,
+            select = true,
+          },
+          ["<Tab>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+              cmp.select_next_item { behavior = require("cmp.types").cmp.SelectBehavior.Select }
+            elseif luasnip.expand_or_locally_jumpable() then
+              luasnip.expand_or_jump()
+            else
+              fallback()
+            end
+          end, { "i", "s" }),
+          ["<S-Tab>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+              cmp.select_prev_item { behavior = require("cmp.types").cmp.SelectBehavior.Select }
+            elseif luasnip.locally_jumpable(-1) then
+              luasnip.jump(-1)
+            else
+              fallback()
+            end
+          end, { "i", "s" }),
+        },
+        sources = {
+          { name = "lazydev", group_index = 0 },
+          { name = "nvim_lsp", group_index = 1 },
+          { name = "path", group_index = 1 },
+          { name = "luasnip", group_index = 1 },
+          {
+            name = "spell",
+            group_index = 3,
+            option = {
+              keep_all_entries = false,
+              enable_in_context = function()
+                return true
+              end,
+            },
+          },
+          { name = "buffer", group_index = 5 },
+        },
+        formatting = {
+          format = function(entry, item)
+            local color_item = require("nvim-highlight-colors").format(entry, { kind = item.kind })
+            item = require("lspkind").cmp_format {
+              mode = "symbol_text",
+            }(entry, item)
+            if color_item.abbr_hl_group then
+              item.kind_hl_group = color_item.abbr_hl_group
+              item.kind = color_item.abbr
+            end
+            return item
+          end,
+        },
+      }
+    end,
   },
   {
     "numToStr/Comment.nvim",
