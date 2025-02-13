@@ -14,6 +14,7 @@ return {
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-path",
       "f3fora/cmp-spell",
+      "hrsh7th/cmp-cmdline",
 
       -- Adds a number of user-friendly snippets
       "rafamadriz/friendly-snippets",
@@ -105,6 +106,25 @@ return {
           end,
         },
       }
+      cmp.setup.cmdline({ "/", "?" }, {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = {
+          { name = "buffer" },
+        },
+      })
+      cmp.setup.cmdline(":", {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = cmp.config.sources({
+          { name = "path" },
+        }, {
+          {
+            name = "cmdline",
+            option = {
+              ignore_cmds = { "Man", "!" },
+            },
+          },
+        }),
+      })
     end,
   },
   {
