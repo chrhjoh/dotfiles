@@ -248,10 +248,10 @@ Snacks.toggle({
 Snacks.toggle({
   name = "Completion Menu",
   get = function()
-    return not vim.g.cmp_disable
+    return vim.g.cmp_enabled
   end,
   set = function(_)
-    vim.g.cmp_disable = not vim.g.cmp_disable
+    vim.g.cmp_enabled = not vim.g.cmp_enabled
   end,
 }):map("<leader>um")
 
@@ -271,7 +271,7 @@ Snacks.toggle({
     return require("gitsigns.config").config.show_deleted
   end,
   set = function(_)
-    require("gitsigns").toggle_deleted()
+    require("gitsigns").preview_hunk_inline()
   end,
 }):map("<leader>ug")
 

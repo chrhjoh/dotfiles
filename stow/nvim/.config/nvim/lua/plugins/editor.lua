@@ -21,6 +21,9 @@ return {
 
       "onsails/lspkind.nvim",
     },
+    init = function()
+      vim.g.cmp_enabled = true
+    end,
     config = function()
       local cmp = require("cmp")
       local luasnip = require("luasnip")
@@ -28,6 +31,9 @@ return {
       luasnip.config.setup {}
 
       cmp.setup {
+        enabled = function()
+          return vim.g.cmp_enabled
+        end,
         window = { completion = { scrolloff = 1 }, documentation = { max_height = 20 * 20 / vim.o.lines } },
         snippet = {
           expand = function(args)
@@ -82,7 +88,7 @@ return {
           { name = "luasnip", group_index = 1 },
           {
             name = "spell",
-            group_index = 3,
+            group_index = 1,
             option = {
               keep_all_entries = false,
               enable_in_context = function()
@@ -90,7 +96,21 @@ return {
               end,
             },
           },
-          { name = "buffer", group_index = 5 },
+          {
+            name = "buffer",
+            group_index = 2,
+            option = {
+              get_bufnrs = function()
+                local buf = vim.api.nvim_get_current_buf()
+                local byte_size = vim.api.nvim_buf_get_offset(buf, vim.api.nvim_buf_line_count(buf))
+                if byte_size > 1024 * 1024 then
+                  return {}
+                end
+                return { buf }
+              end,
+              indexing_interval = 1000,
+            },
+          },
         },
         formatting = {
           format = function(entry, item)
