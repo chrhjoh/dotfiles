@@ -6,7 +6,7 @@ return {
     name = "catppuccin",
     priority = 1000,
     opts = {
-      integrations = { blink_cmp = true, cmp = false, grug_far = true, which_key = true, snacks = false },
+      integrations = { cmp = true, grug_far = true, which_key = true, snacks = false },
     },
     config = function(_, opts)
       require("catppuccin").setup(opts)

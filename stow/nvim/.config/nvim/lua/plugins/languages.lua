@@ -51,7 +51,13 @@ return {
       "nvim-treesitter/nvim-treesitter",
       "nvim-tree/nvim-web-devicons",
     },
-    opts = {},
+    opts = function()
+      return {
+        markdown = {
+          horizontal_rules = require("markview.presets").horizontal_rules.thick,
+        },
+      }
+    end,
     config = function(_, opts)
       require("markview").setup(opts)
       require("markview.extras.checkboxes").setup()
