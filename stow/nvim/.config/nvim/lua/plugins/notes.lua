@@ -4,17 +4,19 @@ return {
     "chrhjoh/obsidian-tools.nvim",
     enabled = os.getenv("OBSIDIAN_HOME") ~= nil,
     lazy = true,
+    ---@type ObsidianTools.Config
     opts = {
       workspaces = {
         {
           name = "Work",
-          directory = os.getenv("OBSIDIAN_HOME") and os.getenv("OBSIDIAN_HOME") .. "/Work/" or "",
+          directory = os.getenv("OBSIDIAN_HOME") and os.getenv("OBSIDIAN_HOME") .. "/Work" or "",
         },
         {
           name = "Personal",
-          directory = os.getenv("OBSIDIAN_HOME") and os.getenv("OBSIDIAN_HOME") .. "/Personal/" or "",
+          directory = os.getenv("OBSIDIAN_HOME") and os.getenv("OBSIDIAN_HOME") .. "/Personal" or "",
         },
       },
+      template = { template_dir = "_templates/neovim" },
     },
     --stylua: ignore
     keys = function()

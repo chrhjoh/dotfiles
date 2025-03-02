@@ -89,6 +89,7 @@ return {
     "folke/snacks.nvim",
     priority = 1000,
     lazy = false,
+    ---@type snacks.Config
     opts = {
       quickfile = { enabled = true },
       input = { enabled = true },
@@ -97,6 +98,9 @@ return {
       words = { enabled = true },
       bigfile = { enabled = true },
       scroll = { enabled = true },
+      image = {
+        enabled = true,
+      },
     },
     init = function()
       vim.api.nvim_create_autocmd("User", {
