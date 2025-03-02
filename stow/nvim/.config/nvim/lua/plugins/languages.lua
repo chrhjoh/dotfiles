@@ -70,11 +70,4 @@ return {
       }
     end,
   },
-  {
-    "hat0uma/csvview.nvim",
-    event = "BufReadPost *.csv",
-    config = function()
-      require("csvview").setup()
-    end,
-  },
 }

@@ -274,13 +274,3 @@ Snacks.toggle({
     require("gitsigns").preview_hunk_inline()
   end,
 }):map("<leader>ug")
-
-Snacks.toggle({
-  name = "CSV View",
-  get = function()
-    return require("csvview").is_enabled(vim.api.nvim_get_current_buf())
-  end,
-  set = function(_)
-    require("csvview").toggle()
-  end,
-}):map("<leader>uC")
