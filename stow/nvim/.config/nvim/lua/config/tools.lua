@@ -51,7 +51,7 @@ M.debuggers = {
           type = "codelldb",
           request = "launch",
           program = function()
-            vim.fn.input { --BUG: Completion not working with blink.cmp (2025-01-08)
+            vim.fn.input {
               prompt = "Path to executable: ",
               default = vim.fn.getcwd() .. "/",
               completion = "file",
@@ -77,13 +77,6 @@ M.lsps = {
         basedpyright = {
           analysis = {
             typeCheckingMode = "standard",
-            diagnosticSeverityOverrides = {
-              reportMissingParameterType = "warning",
-              reportMissingTypeArgument = "warning",
-              reportUnnecessaryComparison = "warning",
-              reportUnnecessaryContains = "warning",
-              reportUnnecessaryIsInstance = "warning",
-            },
           },
         },
       },
