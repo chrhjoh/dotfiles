@@ -24,13 +24,11 @@ return {
     init = function()
       vim.g.cmp_enabled = true
     end,
-    config = function()
+    opts = function()
       local cmp = require("cmp")
       local luasnip = require("luasnip")
-      require("luasnip.loaders.from_vscode").lazy_load()
-      luasnip.config.setup {}
 
-      cmp.setup {
+      return {
         enabled = function()
           return vim.g.cmp_enabled
         end,
@@ -126,6 +124,15 @@ return {
           end,
         },
       }
+    end,
+
+    config = function(_, opts)
+      local cmp = require("cmp")
+      local luasnip = require("luasnip")
+      require("luasnip.loaders.from_vscode").lazy_load()
+      luasnip.config.setup {}
+
+      cmp.setup(opts)
       cmp.setup.cmdline({ "/", "?" }, {
         mapping = cmp.mapping.preset.cmdline(),
         sources = {
@@ -223,6 +230,9 @@ return {
           "julia",
           "snakemake",
           "json",
+          "toml",
+          "sql",
+          "latex",
           "toml",
           "gitcommit",
           "yaml",

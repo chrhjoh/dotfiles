@@ -19,7 +19,6 @@ function M.setup()
     dev = {
       path = "~/projects/nvim_plugins",
     },
-    checker = { enabled = true, notify = true },
   })
 end
 

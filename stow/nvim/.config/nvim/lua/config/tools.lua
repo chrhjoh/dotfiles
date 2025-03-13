@@ -77,6 +77,11 @@ M.lsps = {
         basedpyright = {
           analysis = {
             typeCheckingMode = "standard",
+            packageIndexDepths = {
+              {
+                { name = "", depth = 1, includeAllSymbols = false },
+              },
+            },
           },
         },
       },
