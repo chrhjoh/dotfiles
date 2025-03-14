@@ -27,6 +27,7 @@ return {
     opts = function()
       local cmp = require("cmp")
       local luasnip = require("luasnip")
+      local compare = require("cmp.config.compare")
 
       return {
         enabled = function()
@@ -78,6 +79,19 @@ return {
               fallback()
             end
           end, { "i", "s" }),
+        },
+        sorting = {
+          priority_weight = 2,
+          comparators = {
+            compare.exact,
+            -- compare.scopes,
+            compare.score,
+            compare.recently_used,
+            compare.locality,
+            compare.sort_text,
+            compare.length,
+            compare.order,
+          },
         },
         sources = {
           { name = "lazydev", group_index = 0 },
