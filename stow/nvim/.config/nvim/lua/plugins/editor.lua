@@ -28,7 +28,17 @@ return {
       local cmp = require("cmp")
       local luasnip = require("luasnip")
       local compare = require("cmp.config.compare")
-
+      local confirm = cmp.mapping(function(fallback)
+        if cmp.visible() then
+          if cmp.get_selected_entry() then
+            cmp.confirm { select = false }
+          else
+            cmp.close()
+          end
+        else
+          cmp.complete()
+        end
+      end, { "i", "s" })
       return {
         enabled = function()
           return vim.g.cmp_enabled
@@ -52,15 +62,8 @@ return {
           ["<C-p>"] = cmp.mapping.select_prev_item(),
           ["<C-b>"] = cmp.mapping.scroll_docs(-4),
           ["<C-f>"] = cmp.mapping.scroll_docs(4),
-          ["<C-c>"] = cmp.mapping.complete { reason = cmp.ContextReason.Auto },
-          ["<C-y>"] = cmp.mapping.confirm {
-            behavior = cmp.ConfirmBehavior.Replace,
-            select = true,
-          },
-          ["<S-cr>"] = cmp.mapping.confirm {
-            behavior = cmp.ConfirmBehavior.Replace,
-            select = true,
-          },
+          ["<C-y>"] = confirm,
+          ["<S-cr>"] = confirm,
           ["<Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
               cmp.select_next_item { behavior = require("cmp.types").cmp.SelectBehavior.Select }
@@ -84,7 +87,6 @@ return {
           priority_weight = 2,
           comparators = {
             compare.exact,
-            -- compare.scopes,
             compare.score,
             compare.recently_used,
             compare.locality,
