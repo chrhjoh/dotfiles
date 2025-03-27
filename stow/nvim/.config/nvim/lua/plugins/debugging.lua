@@ -12,6 +12,52 @@ local function get_args(config)
   return config
 end
 
+local debugpy = {
+  adapter = {
+    type = "executable",
+    command = vim.fn.exepath("debugpy-adapter"),
+  },
+  configurations = {
+    {
+      type = "python",
+      request = "launch",
+      name = "Python: Current Working Directory",
+      cwd = vim.fn.getcwd(),
+      program = "${file}",
+      pythonPath = Utils.lang.get_python_path(),
+    },
+  },
+}
+
+local codelldb = {
+  adapter = {
+    type = "server",
+    port = "${port}",
+    executable = {
+      command = vim.fn.exepath("codelldb"),
+      args = { "--port", "${port}" },
+    },
+  },
+  configurations = {
+    {
+      name = "LLDB: Launch",
+      type = "codelldb",
+      request = "launch",
+      program = function()
+        vim.fn.input {
+          prompt = "Path to executable: ",
+          default = vim.fn.getcwd() .. "/",
+          completion = "file",
+        }
+      end,
+      cwd = "${workspaceFolder}",
+      stopOnEntry = false,
+      args = {},
+      console = "integratedTerminal",
+    },
+  },
+}
+
 return {
   {
     "mfussenegger/nvim-dap",
@@ -21,7 +67,11 @@ return {
       "theHamsta/nvim-dap-virtual-text",
     },
     config = function()
-      Utils.tools.setup_debuggers()
+      local dap = require("dap")
+      dap.adapters["python"] = debugpy.adapter
+      dap.configurations["python"] = debugpy.configurations
+      dap.adapters["rust"] = codelldb.adapter
+      dap.configurations["rust"] = codelldb.configurations
       -- Make Dap points more visible
       vim.fn.sign_define("DapBreakpoint", { text = " ", texthl = "DapBreakpoint", linehl = "", numhl = "" })
       vim.fn.sign_define(

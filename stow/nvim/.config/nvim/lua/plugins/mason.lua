@@ -1,25 +1,17 @@
 return {
   {
     "williamboman/mason.nvim",
-    build = {
-      ":MasonUpdate",
-      function(plugin)
-        Utils.tools.install_ensured()
-      end,
-    },
-    event = { "BufReadPost", "BufNewFile", "BufWritePre" },
+    build = ":MasonInstall basedpyright rust-analyzer json-lsp lua-language-server markdown-oxide texlab ruff stylua snakefmt isort debugpy",
+    event = { "VeryLazy" },
     opts = {},
     cmd = { "Mason", "MasonInstall", "MasonUpdate" },
   },
-  {
-    "neovim/nvim-lspconfig",
-    dependencies = { "williamboman/mason.nvim", "folke/lazydev.nvim" },
-  },
-  {
+  { --BUG: Currently lazydev does nothing??
     "folke/lazydev.nvim",
     ft = "lua",
     dependencies = { "gonstoll/wezterm-types" },
     opts = {
+      debug = true,
       library = {
         { path = "wezterm-types", mods = { "wezterm" } },
         { path = "snacks.nvim", words = { "Snacks" } },

@@ -26,33 +26,30 @@ vim.diagnostic.config {
     severity = { min = vim.diagnostic.severity.INFO },
   },
 }
-local wrap_on_attach = function(server)
-  return function(client, bufnr)
-    lsp_map { "<leader>k", vim.lsp.buf.signature_help, desc = "Signature Documentation", buffer = bufnr }
-    lsp_map { "K", vim.lsp.buf.hover, desc = "Hover Documentation", buffer = bufnr }
-    lsp_map { "gD", vim.lsp.buf.declaration, desc = "Goto Declaration", buffer = bufnr }
-    lsp_map { "<leader>cr", vim.lsp.buf.rename, desc = "Code Rename", buffer = bufnr }
-    lsp_map { "<leader>ca", vim.lsp.buf.code_action, desc = "Code Action", buffer = bufnr }
-    lsp_map { "<C-?>", vim.lsp.buf.signature_help, desc = "LSP: Signature", buffer = bufnr, mode = "i" }
-    if server and server.on_attach_callback then
-      server.on_attach_callback(client, bufnr)
+vim.api.nvim_create_autocmd("LspAttach", {
+  group = vim.api.nvim_create_augroup("DefaultLspAttach", {}),
+  callback = function(args)
+    lsp_map { "<leader>k", vim.lsp.buf.signature_help, desc = "Signature Documentation", buffer = args.buf }
+    lsp_map { "K", vim.lsp.buf.hover, desc = "Hover Documentation", buffer = args.buf }
+    lsp_map { "gD", vim.lsp.buf.declaration, desc = "Goto Declaration", buffer = args.buf }
+    lsp_map { "<leader>cr", vim.lsp.buf.rename, desc = "Code Rename", buffer = args.buf }
+    lsp_map { "<leader>ca", vim.lsp.buf.code_action, desc = "Code Action", buffer = args.buf }
+    lsp_map { "<C-?>", vim.lsp.buf.signature_help, desc = "LSP: Signature", buffer = args.buf, mode = "i" }
+
+    local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
+    if client.name == "markdown-oxide" then
+      client.server_capabilities.renameProvider = false
+      client.server_capabilities.workspace.fileOperations = {
+        willRename = false,
+        didRename = false,
+        willCreate = false,
+        didCreate = false,
+        willDelete = false,
+        didDelete = false,
+      }
     end
-  end
-end
-local capabilities = vim.tbl_deep_extend(
-  "force",
-  {},
-  vim.lsp.protocol.make_client_capabilities(),
-  require("cmp_nvim_lsp").default_capabilities()
-)
-local function setup(name, config)
-  local opts = vim.tbl_deep_extend("force", {
-    capabilities = vim.deepcopy(capabilities),
-    on_attach = wrap_on_attach(config),
-  }, config.opts or {})
-  require("lspconfig")[name].setup(opts)
-end
-local servers = require("config.tools").lsps
-for name, config in pairs(servers) do
-  setup(name, config)
-end
+  end,
+})
+
+vim.lsp.config("*", { root_markers = { ".git" } })
+vim.lsp.enable { "lua-language-server", "rust-analyzer", "basedpyright", "json-lsp", "markdown-oxide", "texlab" }
