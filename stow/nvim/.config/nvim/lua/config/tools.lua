@@ -3,17 +3,16 @@ M = {}
 
 ---@type FormatterToolConfig[]
 M.formatters = {
-  { name = "isort", filetypes = { "python" } },
-  { name = "ruff_format", filetypes = { "python" }, mason_alias = "ruff" },
-  { name = "snakefmt", filetypes = { "snakemake" } },
-  { name = "stylua", filetypes = { "lua" } },
-  { name = "typstfmt", filetypes = { "typst" } },
+  isort = { filetypes = { "python" } },
+  ruff_format = { filetypes = { "python" }, mason_alias = "ruff" },
+  snakefmt = { filetypes = { "snakemake" } },
+  stylua = { filetypes = { "lua" } },
+  typstfmt = { filetypes = { "typst" } },
 }
 
 ---@type DebuggerToolConfig[]
 M.debuggers = {
-  {
-    name = "debugpy",
+  debugpy = {
     filetypes = { "python" },
     opts = {
       adapter = {
@@ -32,8 +31,7 @@ M.debuggers = {
       },
     },
   },
-  {
-    name = "codelldb",
+  codelldb = {
     ensure_install = false,
     filetypes = { "rust" },
     opts = {
@@ -69,8 +67,7 @@ M.debuggers = {
 
 ---@type LspToolConfig[]
 M.lsps = {
-  {
-    name = "basedpyright",
+  basedpyright = {
     filetypes = { "python", "snakemake" },
     opts = {
       settings = {
@@ -83,11 +80,10 @@ M.lsps = {
       },
     },
   },
-  { name = "jsonls", mason_alias = "json-lsp" },
-  { name = "julials", mason_alias = "julia-lsp" },
-  { name = "rust_analyzer", mason_alias = "rust-analyzer" },
-  {
-    name = "lua_ls",
+  jsonls = { mason_alias = "json-lsp" },
+  julials = { mason_alias = "julia-lsp" },
+  rust_analyzer = { mason_alias = "rust-analyzer" },
+  lua_ls = {
     mason_alias = "lua-language-server",
     opts = {
       settings = {
@@ -102,11 +98,10 @@ M.lsps = {
       },
     },
   },
-  { name = "texlab", ensure_install = false },
-  { name = "ltex", opts = { autostart = false }, mason_alias = "ltex-ls", ensure_install = false },
-  { name = "tinymist", ensure_install = false },
-  {
-    name = "markdown_oxide",
+  texlab = { ensure_install = false },
+  ltex = { opts = { autostart = false }, mason_alias = "ltex-ls", ensure_install = false },
+  tinymist = { ensure_install = false },
+  markdown_oxide = {
     mason_alias = "markdown-oxide",
     opts = {},
     on_attach_callback = function(client, bufnr)

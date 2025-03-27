@@ -1,5 +1,6 @@
+---@alias Tools table<string, ToolConfig>
+
 ---@class ToolConfig
----@field name string
 ---@field ensure_install? boolean
 ---@field mason_alias string?
 ---@field filetypes string[]?

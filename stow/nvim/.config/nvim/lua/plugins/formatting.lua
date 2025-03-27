@@ -7,7 +7,7 @@ return {
     dependencies = { "williamboman/mason.nvim" }, -- To setup mason on path
     opts = function()
       return {
-        formatters_by_ft = require("utils.tools").by_filetype("formatters"),
+        formatters_by_ft = require("utils.tools").conform_by_ft(),
         format_on_save = function(bufnr)
           if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
             return

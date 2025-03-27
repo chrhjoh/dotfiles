@@ -176,17 +176,6 @@ Snacks.toggle.zen():map("<leader>uZ")
 Snacks.toggle.dim():map("<leader>uz")
 Snacks.toggle.indent():map("<leader>ui")
 
--- M.blank_above = function()
---   local repeated = vim.fn["repeat"]({ "" }, vim.v.count1)
---   local line = vim.api.nvim_win_get_cursor(0)[1]
---   vim.api.nvim_buf_set_lines(0, line - 1, line - 1, true, repeated)
--- end
---
--- M.blank_below = function()
---   local repeated = vim.fn["repeat"]({ "" }, vim.v.count1)
---   local line = vim.api.nvim_win_get_cursor(0)[1]
---   vim.api.nvim_buf_set_lines(0, line, line, true, repeated)
--- end
 -- M.exchange_above = function()
 --   local count = vim.v.count1
 --   vim.cmd("silent! move --" .. count)
