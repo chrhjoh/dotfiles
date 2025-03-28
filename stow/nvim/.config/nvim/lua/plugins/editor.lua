@@ -43,6 +43,9 @@ return {
         enabled = function()
           return vim.g.cmp_enabled
         end,
+        completion = {
+          completeopt = vim.o.completeopt,
+        },
         window = { completion = { scrolloff = 1 }, documentation = { max_height = 20 * 20 / vim.o.lines } },
         snippet = {
           expand = function(args)
@@ -150,13 +153,21 @@ return {
 
       cmp.setup(opts)
       cmp.setup.cmdline({ "/", "?" }, {
-        mapping = cmp.mapping.preset.cmdline(),
+        mapping = cmp.mapping.preset.cmdline {
+          ["<S-cr>"] = {
+            c = cmp.mapping.confirm { select = false },
+          },
+        },
         sources = {
           { name = "buffer" },
         },
       })
       cmp.setup.cmdline(":", {
-        mapping = cmp.mapping.preset.cmdline(),
+        mapping = cmp.mapping.preset.cmdline {
+          ["<S-cr>"] = {
+            c = cmp.mapping.confirm { select = false },
+          },
+        },
         sources = cmp.config.sources({
           { name = "path" },
         }, {
