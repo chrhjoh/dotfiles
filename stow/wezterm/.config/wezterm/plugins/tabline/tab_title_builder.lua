@@ -107,15 +107,24 @@ function M.build_inactive_title(tab, tabs, panes, config, hover, max_width)
     icon = utils.process_to_icon["default"]
   end
 
+  left_symbol = symbols.ple_left_half_circle_thick
+  right_symbol = symbols.ple_right_half_circle_thick
+  local not_name_chars = left_symbol:len() + right_symbol:len() + icon.symbol:len() - 5
+  --
+  if not_name_chars + name:len() > config.tab_max_width then
+    local truncate = config.tab_max_width - not_name_chars -- How much do i need to truncate plus how long is the name currently
+    name = wezterm.truncate_right(name, truncate - 2) .. ".." --Account for extra chars added
+  end
+
   if hover then
     name = utils.format_text(name, nil, colors.surface1)
     icon_str = utils.format_text(icon.symbol .. "  ", icon.foreground, colors.surface1)
-    right_symbol = utils.format_text(symbols.ple_right_half_circle_thick, colors.surface1)
-    left_symbol = utils.format_text(symbols.ple_left_half_circle_thick, colors.surface1)
+    right_symbol = utils.format_text(right_symbol, colors.surface1)
+    left_symbol = utils.format_text(left_symbol, colors.surface1)
   else
     icon_str = utils.format_text(icon.symbol .. "  ", icon.foreground, colors.base)
-    right_symbol = utils.format_text(symbols.ple_right_half_circle_thick, colors.base, colors.base)
-    left_symbol = utils.format_text(symbols.ple_left_half_circle_thick, colors.base, colors.base)
+    right_symbol = utils.format_text(right_symbol, colors.base, colors.base)
+    left_symbol = utils.format_text(left_symbol, colors.base, colors.base)
   end
 
   return left_symbol .. icon_str .. name .. right_symbol
