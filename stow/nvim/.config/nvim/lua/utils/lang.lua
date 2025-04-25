@@ -1,3 +1,4 @@
+---@class Utils.Lang
 local M = {}
 
 M.get_roots = function()

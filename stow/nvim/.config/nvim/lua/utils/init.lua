@@ -1,4 +1,13 @@
-local M = {}
+---@class Utils
+---@field icons Utils.Icons
+---@field keymap Utils.Keymap
+---@field lang Utils.Lang
+---@field root Utils.Root
+local M = setmetatable({}, {
+  __index = function(_, key)
+    return require("utils." .. key)
+  end,
+})
 
 M.get_visual_range = function()
   if not M.is_visual_mode() then
@@ -31,8 +40,4 @@ M.restore_dot_repetition = function(count)
   vim.go.operatorfunc = callback
 end
 
-M.keymap = require("utils.keymap")
-M.lang = require("utils.lang")
-M.icons = require("utils.icons")
-M.root = require("utils.root")
 return M

@@ -1,3 +1,4 @@
+---@class Utils.Keymap
 local M = {}
 
 ---@alias KeyMapper fun(opts: KeysSpec)

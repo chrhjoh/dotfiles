@@ -54,6 +54,7 @@
   "vimtex": { "branch": "master", "commit": "4fbf861dbe91f0ea6cb0adedcdf3e6551fe395da" },
   "volt": { "branch": "main", "commit": "c45d5f48da8e802e608b5c6da471ca4d84276dfb" },
   "wezterm-move.nvim": { "branch": "master", "commit": "e2954ee4ddc9fee427ffa4d17f781875b9461103" },
+  "wezterm-paster.nvim": { "branch": "master", "commit": "12b2204e3a0a2986299fa50e864e9bc5f6647a96" },
   "wezterm-types": { "branch": "main", "commit": "3d59d9ed537ec4b935be3d48e06689ed02adace7" },
   "which-key.nvim": { "branch": "main", "commit": "370ec46f710e058c9c1646273e6b225acf47cbed" },
   "yanky.nvim": { "branch": "main", "commit": "04775cc6e10ef038c397c407bc17f00a2f52b378" }
