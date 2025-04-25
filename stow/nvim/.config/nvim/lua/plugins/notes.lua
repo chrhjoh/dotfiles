@@ -1,33 +1,116 @@
 local obsidian_key_mapper = Utils.keymap.get_lazy_list_mapper { mode = "n", desc_prefix = "Obsidian" }
+local function desc_w_prefix(desc)
+  return "Obsidian: " .. desc
+end
+local function prompted_command(prompt_title, cmd)
+  vim.ui.input({ prompt = prompt_title }, function(input)
+    if input == nil then
+      return
+    end
+    vim.cmd(cmd .. input)
+  end)
+end
+
 return {
   {
-    "chrhjoh/obsidian-tools.nvim",
-    enabled = os.getenv("OBSIDIAN_HOME") ~= nil,
-    lazy = true,
-    ---@type ObsidianTools.Config
+    "obsidian-nvim/obsidian.nvim",
+    ft = "markdown",
+    cmd = {
+      "ObsidianOpen",
+      "ObsidianNew",
+      "ObsidianQuickSwitch",
+      "ObsidianToday",
+      "ObsidianTags",
+      "ObsidianSearch",
+      "ObsidianWorkspace",
+      "ObsidianNewFromTemplate",
+    },
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
     opts = {
       workspaces = {
         {
           name = "Work",
-          directory = os.getenv("OBSIDIAN_HOME") and os.getenv("OBSIDIAN_HOME") .. "/Work" or "",
+          path = os.getenv("OBSIDIAN_HOME") and os.getenv("OBSIDIAN_HOME") .. "/Work" or "",
         },
         {
           name = "Personal",
-          directory = os.getenv("OBSIDIAN_HOME") and os.getenv("OBSIDIAN_HOME") .. "/Personal" or "",
+          path = os.getenv("OBSIDIAN_HOME") and os.getenv("OBSIDIAN_HOME") .. "/Personal" or "",
         },
       },
-      template = { template_dir = "_templates/neovim" },
+      notes_subdir = nil,
+      daily_notes = {
+        folder = "_timestamps/",
+        date_format = "%Y/%Y-%m-%d-%A",
+        alias_format = "%B %-d, %Y",
+        default_tags = { "daily-notes" },
+        template = nil, --TODO: Make a daily.md
+      },
+      completion = { min_chars = 2 },
+      mappings = {
+        ["gf"] = {
+          action = function()
+            return require("obsidian").util.gf_passthrough()
+          end,
+          opts = { noremap = false, expr = true, buffer = true, desc = desc_w_prefix("Follow Link") },
+        },
+      },
+      new_notes_location = "current_dir",
+      open_app_foreground = true,
+
+      ---@param title string|?
+      ---@return string
+      note_id_func = function(title)
+        local suffix = ""
+        if title ~= nil then
+          suffix = title:gsub(" ", "-"):gsub("[^A-Za-z0-9-]", ""):lower()
+        else
+          for _ = 1, 4 do
+            suffix = suffix .. string.char(math.random(65, 90))
+          end
+        end
+        return suffix .. "-" .. tostring(os.date("%Y%m%d"))
+      end,
+      wiki_linc_func = "prepend_note_id",
+      follow_url_func = function(url)
+        vim.ui.open(url)
+      end,
+      follow_img_func = function(img)
+        vim.ui.open(img)
+      end,
+      templates = {
+        folder = "_templates/neovim",
+        date_format = "%Y-%m-%d",
+        time_format = "%H:%M",
+        -- A map for custom variables, the key should be the variable and the value a function
+        substitutions = {},
+      },
+      ui = { enable = false },
+      attachments = { img_folder = "assets" },
     },
-    --stylua: ignore
-    keys = function()
-      return obsidian_key_mapper { 
-        {"<leader>oo", function() require("obsidian-tools").open_in_obsidian() end, desc = "Open in Obsidian"},
-        {"<leader>on", function() require("obsidian-tools").new_from_prompt() end, desc = "New Note"},
-        {"<leader>on", function() require("obsidian-tools").new_from_visual() end, desc = "New Note", mode = "v"},
-        {"<leader>of", function() require("obsidian-tools").quickswitch() end, desc = "Find Note"},
-        {"<leader>ot", function() require("obsidian-tools").apply_template() end, desc = "Apply Template"},
-        {"<leader>ow", function() require("obsidian-tools").select_workspace() end, desc = "Select Workspace"},
-      }
-    end,
+    -- stylua: ignore
+     keys = function()
+       return obsidian_key_mapper {
+         {"<leader>oo", "<cmd>ObsidianOpen<cr>",                        desc="Open File in App"},
+         {"<leader>on", "<cmd>ObsidianNew<cr>",                         desc="Create new note"},
+         {"<leader>ot", "<cmd>ObsidianNewFromTemplate<cr>",             desc="Create new note from template"},
+         {"<leader>of", "<cmd>ObsidianQuickSwitch<cr>",                 desc="Find Note"},
+         {"<leader>og", "<cmd>ObsidianFollowLink<cr>",                  desc="Open Reference"},
+         {"<leader>o|", "<cmd>ObsidianFollowLink vsplit<cr>",           desc="Open Reference in vsplit"},
+         {"<leader>o-", "<cmd>ObsidianFollowLink hsplit<cr>",           desc="Open Reference in hsplit"},
+         {"<leader>ob", "<cmd>ObsidianBackLinks<cr>",                   desc="Find Backlinks"},
+         {"<leader>oF", "<cmd>ObsidianTags<cr>",                        desc="Find Note by tag"},
+         {"<leader>ot", "<cmd>ObsidianToday " .. vim.v.count .. "<cr>", desc="Open Daily Note Relative To Today"},
+         {"<leader>os", "<cmd>ObsidianSearch<cr>",                      desc="Seach Notes"},
+         {"<leader>ol", "<cmd>ObsidianLinks<cr>",                       desc="Find Link in buffer"},
+         {"<leader>ow", "<cmd>ObsidianWorkspace<cr>",                   desc="Change Workspace"},
+         {"<leader>oc", "<cmd>ObsidianToggleCheckbox<cr>",              desc="Toggle Checkbox"},
+         {"<leader>op", function() prompted_command("Image Name","ObsidianPasteImg") end,                    desc="Paste Image"},
+         {"<leader>oL", function() prompted_command("ID/path/alias","ObsidianLink") end,         desc="Link to current note",         mode="v"},
+         {"<leader>ol", function() prompted_command("Optional Title","ObsidianLink") end,        desc="Create link to new note",      mode="v"},
+         {"<leadero>e", function() prompted_command("Optional Title","ObsidianExtractNote") end, desc="Extract to new note and link", mode="v"},
+       }
+     end,
   },
 }

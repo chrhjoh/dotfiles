@@ -13,3 +13,5 @@ confounders
 BMI
 covariates
 estimand
+confounder
+unconfounded
