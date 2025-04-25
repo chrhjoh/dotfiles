@@ -45,7 +45,7 @@ return {
         date_format = "%Y/%Y-%m-%d-%A",
         alias_format = "%B %-d, %Y",
         default_tags = { "daily-notes" },
-        template = nil, --TODO: Make a daily.md
+        template = "daily.md",
       },
       completion = { min_chars = 2 },
       mappings = {
@@ -72,6 +72,25 @@ return {
         end
         return suffix .. "-" .. tostring(os.date("%Y%m%d"))
       end,
+      note_frontmatter_func = function(note)
+        if note.title then
+          note:add_alias(note.title)
+        end
+
+        local out = { id = note.id, aliases = note.aliases, tags = note.tags }
+
+        if note.metadata ~= nil and not vim.tbl_isempty(note.metadata) then
+          for k, v in pairs(note.metadata) do
+            out[k] = v
+          end
+        end
+
+        if out.created == nil then
+          out.created = tostring(os.date("%Y-%m-%d"))
+        end
+
+        return out
+      end,
       wiki_linc_func = "prepend_note_id",
       follow_url_func = function(url)
         vim.ui.open(url)
@@ -83,8 +102,6 @@ return {
         folder = "_templates/neovim",
         date_format = "%Y-%m-%d",
         time_format = "%H:%M",
-        -- A map for custom variables, the key should be the variable and the value a function
-        substitutions = {},
       },
       ui = { enable = false },
       attachments = { img_folder = "assets" },
@@ -94,7 +111,7 @@ return {
        return obsidian_key_mapper {
          {"<leader>oo", "<cmd>ObsidianOpen<cr>",                        desc="Open File in App"},
          {"<leader>on", "<cmd>ObsidianNew<cr>",                         desc="Create new note"},
-         {"<leader>ot", "<cmd>ObsidianNewFromTemplate<cr>",             desc="Create new note from template"},
+         {"<leader>oT", "<cmd>ObsidianNewFromTemplate<cr>",             desc="Create new note from template"},
          {"<leader>of", "<cmd>ObsidianQuickSwitch<cr>",                 desc="Find Note"},
          {"<leader>og", "<cmd>ObsidianFollowLink<cr>",                  desc="Open Reference"},
          {"<leader>o|", "<cmd>ObsidianFollowLink vsplit<cr>",           desc="Open Reference in vsplit"},
@@ -109,7 +126,7 @@ return {
          {"<leader>op", function() prompted_command("Image Name","ObsidianPasteImg") end,                    desc="Paste Image"},
          {"<leader>oL", function() prompted_command("ID/path/alias","ObsidianLink") end,         desc="Link to current note",         mode="v"},
          {"<leader>ol", function() prompted_command("Optional Title","ObsidianLink") end,        desc="Create link to new note",      mode="v"},
-         {"<leadero>e", function() prompted_command("Optional Title","ObsidianExtractNote") end, desc="Extract to new note and link", mode="v"},
+         {"<leader>oe", function() prompted_command("Optional Title","ObsidianExtractNote") end, desc="Extract to new note and link", mode="v"},
        }
      end,
   },
