@@ -1,4 +1,4 @@
-local M = {}
+M = {}
 
 M.colors = {
   rosewater = "#f5e0dc",
@@ -28,5 +28,24 @@ M.colors = {
   mantle = "#181825",
   crust = "#11111b",
 }
+---@param window Window
+---@return string
+function M.get_current_mode(window)
+  local _, is_leader = pcall(function()
+    return window:leader_is_active()
+  end)
+  if is_leader then
+    return "LEADER"
+  end
+  local _, key_table = pcall(function()
+    return window:active_key_table()
+  end)
+  key_table = key_table or "normal_mode"
+
+  if not key_table:find("_mode$") then
+    key_table = "normal_mode"
+  end
+  return key_table:gsub("_mode", ""):upper()
+end
 
 return M

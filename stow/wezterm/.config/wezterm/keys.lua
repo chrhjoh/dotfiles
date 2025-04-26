@@ -1,12 +1,11 @@
 local wezterm = require("wezterm") --[[@as Wezterm]]
-local copy_paste = require("plugins.copy")
 local action = wezterm.action
-local user_action = require("config.actions")
+local user_action = require("actions")
 
 local M = {}
 
 ---@param config Config
-local function key_configurations(config)
+function M.apply_to_config(config)
   config.disable_default_key_bindings = true
   config.leader = { key = "Space", mods = "CTRL", timeout_milliseconds = 2000 }
   config.keys = {
@@ -118,12 +117,12 @@ local function key_configurations(config)
     {
       key = "P",
       mods = "LEADER",
-      action = copy_paste.set_paste_terminal,
+      action = user_action.set_paste_terminal,
     },
     {
       key = "p",
       mods = "LEADER",
-      action = copy_paste.paste_selection,
+      action = user_action.paste_selection,
     },
     { key = "D", mods = "LEADER", action = action.ShowDebugOverlay },
   }
@@ -135,11 +134,6 @@ local function key_configurations(config)
       action = wezterm.action.OpenLinkAtMouseCursor,
     },
   }
-end
-
----@param config Config
-function M.setup(config)
-  key_configurations(config)
 end
 
 return M
