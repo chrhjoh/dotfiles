@@ -16,6 +16,7 @@ export CONDARC="$XDG_CONFIG_HOME/conda/condarc"
 export DOCKER_CONFIG="$XDG_CONFIG_HOME/docker"
 export DOTFILES="$HOME/.dotfiles"
 export JULIA_DEPOT_PATH="$XDG_DATA_HOME/julia:$JULIA_DEPOT_PATH"
+export JUPYTER_CONFIG_DIR="$XDG_CONFIG_HOME"/jupyter
 export LESSHISTFILE="$XDG_STATE_HOME/less/history"
 export NPM_CONFIG_CACHE="$XDG_CACHE_HOME/npm"
 export NPM_CONFIG_INIT_MODULE="$XDG_CONFIG_HOME/npm/config/npm-init.js"
