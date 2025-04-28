@@ -30,6 +30,7 @@ M.workspaces = {
   {
     name = "obsidian_personal",
     layout = function(window, tab, pane)
+      pane:send_text("cd $OBSIDIAN_HOME/Personal\n")
       pane:send_text("$EDITOR\n")
     end,
     directory = wezterm.home_dir,
@@ -38,6 +39,7 @@ M.workspaces = {
 
     name = "obsidian_work",
     layout = function(window, tab, pane)
+      pane:send_text("cd $OBSIDIAN_HOME/Work\n")
       pane:send_text("$EDITOR\n")
     end,
     directory = wezterm.home_dir,
