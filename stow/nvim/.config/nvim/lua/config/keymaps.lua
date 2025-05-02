@@ -118,20 +118,19 @@ list_map {
 }
 
 -- diagnostic
-local diagnostic_goto = function(next, severity)
-  local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
+local diagnostic_goto = function(count, severity)
   severity = severity and vim.diagnostic.severity[severity] or nil
   return function()
-    go { severity = severity }
+    vim.diagnostic.jump { severity = severity, count=count }
   end
 end
 
 diagnostic_map { "<leader>cd",  vim.diagnostic.open_float,        desc = "Line" }
 diagnostic_map { "<C-k>",       vim.diagnostic.open_float,        desc = "Line" }
-diagnostic_map { "]d",          diagnostic_goto(true),            desc = "Next" }
-diagnostic_map { "[d",          diagnostic_goto(false),           desc = "Previous" }
-diagnostic_map { "]e",          diagnostic_goto(true, "ERROR"),   desc = "Next Error" }
-diagnostic_map { "[e",          diagnostic_goto(false, "ERROR"),  desc = "Previous Error" }
+diagnostic_map { "]d",          diagnostic_goto(1),            desc = "Next" }
+diagnostic_map { "[d",          diagnostic_goto(-1),           desc = "Previous" }
+diagnostic_map { "]e",          diagnostic_goto(1, "ERROR"),   desc = "Next Error" }
+diagnostic_map { "[e",          diagnostic_goto(-1, "ERROR"),  desc = "Previous Error" }
 diagnostic_map { "]w",          diagnostic_goto(true, "WARN"),    desc = "Next Warning" }
 diagnostic_map { "[w",          diagnostic_goto(false, "WARN"),   desc = "Previous Warning" }
 
@@ -150,11 +149,11 @@ file_map { "<leader>fn", "<cmd>enew<cr>", desc = "New File" }
 
 -- Move around
 imap { "<c-l>", "<right>" }
-imap { "<c-h>", "<up>" }
+imap { "<c-k>", "<up>" }
 imap { "<c-j>", "<down>" }
-imap { "<c-k>", "<left>" }
+imap { "<c-h>", "<left>" }
 
-source_map { "<leader>X", "<cmd>source % <CR>",   desc = "Source current Lua file",       silent = true }
+source_map {"<leader>X", "<cmd>source % <CR>",   desc = "Source current Lua file",       silent = true }
 source_map { "<leader>x", ":.lua<CR>",            desc = "Source current Lua line",       silent = true }
 source_map { "<leader>x", ":lua<CR>",             desc = "Source current Lua selection",  silent = true, mode = "v" }
 -- stylua: ignore end
