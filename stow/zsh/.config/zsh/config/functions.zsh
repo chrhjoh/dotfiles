@@ -24,3 +24,8 @@ function _run_prog() {
     # with the alias definition
     command "$@"
 }
+if [[ -n "$WEZTERM_EXECUTABLE" ]]; then
+    nvim() {
+        _run_prog nvim "$@"
+    }
+fi
