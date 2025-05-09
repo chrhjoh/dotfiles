@@ -21,7 +21,7 @@ function _run_prog() {
     trap '__wezterm_set_user_var PROG ""' EXIT
 
     # and now run the corresponding command, taking care to avoid looping
-    # with the alias definition
+    # with the definition
     command "$@"
 }
 if [[ -n "$WEZTERM_EXECUTABLE" ]]; then
