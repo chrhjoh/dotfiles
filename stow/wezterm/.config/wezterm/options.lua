@@ -11,7 +11,7 @@ function M.apply_to_config(config)
     name = "unix",
     connect_automatically = true,
   } }
-  config.color_scheme = "Catppuccin Mocha"
+  config.color_scheme = "Catppuccin Macchiato"
   config.command_palette_fg_color = utils.colors.text
   config.command_palette_bg_color = utils.colors.surface0
 end
