@@ -31,7 +31,7 @@ return {
       local confirm = cmp.mapping(function(fallback)
         if cmp.visible() then
           if cmp.get_selected_entry() then
-            cmp.confirm { select = false }
+            cmp.confirm { select = false, behavior = cmp.ConfirmBehavior.Replace }
           else
             cmp.close()
           end

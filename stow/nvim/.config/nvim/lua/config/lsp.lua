@@ -35,20 +35,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     lsp_map { "<leader>cr", vim.lsp.buf.rename, desc = "Code Rename", buffer = args.buf }
     lsp_map { "<leader>ca", vim.lsp.buf.code_action, desc = "Code Action", buffer = args.buf }
     lsp_map { "<C-?>", vim.lsp.buf.signature_help, desc = "LSP: Signature", buffer = args.buf, mode = "i" }
-
-    local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
-    if client.name == "markdown-oxide" then
-      client.server_capabilities.renameProvider = false
-      client.server_capabilities.workspace.fileOperations = {
-        willRename = false,
-        didRename = false,
-        willCreate = false,
-        didCreate = false,
-        willDelete = false,
-        didDelete = false,
-      }
-    end
   end,
 })
 vim.lsp.config("*", { root_markers = { ".git" } })
-vim.lsp.enable { "lua_ls", "rust-analyzer", "basedpyright", "json-lsp", "markdown-oxide", "texlab" }
+vim.lsp.enable { "lua_ls", "rust-analyzer", "basedpyright", "json-lsp", "texlab" }
