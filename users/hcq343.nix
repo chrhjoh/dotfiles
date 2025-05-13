@@ -37,6 +37,7 @@
         vim
         ripgrep
         imagemagick
+        ncdu
 
         # Fonts
         jetbrains-mono

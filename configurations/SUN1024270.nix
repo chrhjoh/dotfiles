@@ -5,11 +5,6 @@
     '';
 
   };
-
-  programs.zsh = {
-    enable = true;
-    enableCompletion = false;
-  };
   homebrew = {
     enable = true;
     onActivation = {
@@ -18,13 +13,13 @@
     casks = [
       "vivaldi"
       "1password"
-      "1password-cli"
       "slack"
       "spotify"
       "wezterm@nightly"
       "zotero"
       "obsidian"
       "rectangle"
+      "skim"
     ];
     brews = [
     ];
