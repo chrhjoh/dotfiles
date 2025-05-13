@@ -1,8 +1,0 @@
-zmodule direnv
-zmodule git
-zmodule utility
-zmodule environment
-zmodule zsh-users/zsh-syntax-highlighting
-zmodule zsh-users/zsh-autosuggestions
-zmodule zsh-users/zsh-history-substring-search
-zmodule completion
