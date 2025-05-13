@@ -15,6 +15,8 @@ return {
     ft = "typst",
     init = function()
       vim.g.typst_conceal = 2
+      vim.g.vimtex_syntax_enabled = 0
+      vim.g.vimtex_syntax_conceal_disable = 1
     end,
   },
   {
