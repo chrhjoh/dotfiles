@@ -13,8 +13,7 @@
     flake-utils.url = "github:numtide/flake-utils";
   };
   outputs =
-    inputs @ { self
-    , nixpkgs
+    { nixpkgs
     , darwin
     , home-manager
     , flake-utils
