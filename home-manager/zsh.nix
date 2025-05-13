@@ -16,7 +16,7 @@
       ll = "ls -alGhF";
       la = "ls -AhF";
       l = "ls -CFh";
-      ls = "ls -Gh";
+      ls = "ls -Gh --color";
       du = "du -h -d 2";
 
     };
