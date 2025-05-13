@@ -38,4 +38,11 @@ vim.api.nvim_create_autocmd("LspAttach", {
   end,
 })
 vim.lsp.config("*", { root_markers = { ".git" } })
-vim.lsp.enable { "lua_ls", "rust-analyzer", "basedpyright", "json-lsp", "texlab", "nixd" }
+vim.lsp.enable {
+  "lua_ls",
+  "rust-analyzer",
+  "basedpyright",
+  "texlab",
+  "nixd",
+  "tinymist",
+}

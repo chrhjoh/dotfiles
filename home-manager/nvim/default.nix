@@ -3,7 +3,29 @@
     enable = true;
     viAlias = true;
     vimAlias = true;
-    extraPackages = with pkgs;[ gcc tree-sitter imagemagick ];
+    extraPackages = with pkgs;[
+      tree-sitter
+      imagemagick
+
+      #formatters
+      nixpkgs-fmt
+      stylua
+      ruff
+      isort
+      typstfmt
+      snakefmt
+      jq
+
+      #lsp
+      ltex-ls-plus
+      texlab
+      basedpyright
+      lua-language-server
+      texlab
+      nixd
+      rust-analyzer
+      tinymist
+    ];
     withNodeJs = true;
   };
   home.file."./.config/nvim/" = {
