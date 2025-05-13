@@ -18,6 +18,7 @@
       l = "ls -CFh";
       ls = "ls -Gh --color";
       du = "du -h -d 2";
+      nvim_test = "NVIM_TESTDIR=$DOTFILES/home-manager/nvim/config/ nvim -u $DOTFILES/home-manager/nvim/config/init.lua";
 
     };
     sessionVariables = { LS_COLORS = "di=34:ln=35:so=36:pi=33:ex=32:bd=44;37:cd=44;37:su=37;41:sg=30;43:tw=30;42:ow=34;42"; };

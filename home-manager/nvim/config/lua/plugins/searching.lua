@@ -41,7 +41,7 @@ return {
           -- find
           { "<leader>fb",       function()  Snacks.picker.buffers() end,                                  desc = "Buffers" },
           { "<leader>fB",       function()  Snacks.picker.buffers({ hidden = true, nofile = true }) end,  desc = "Buffers (all)" },
-          { "<leader>fc",       function()  Snacks.picker.files { cwd = vim.env.XDG_CONFIG_HOME or vim.env.HOME .. "/.config/", hidden = true, nofile = true } end, desc = "Config File" },
+          { "<leader>fc",       function()  Snacks.picker.files { cwd = vim.env.DOTFILES or vim.env.XDG_CONFIG_HOME or vim.env.HOME .. "/.config/", hidden = true, nofile = true } end, desc = "Config File" },
           { "<leader>ff",       function()  Snacks.picker.files() end,                                    desc = "Files" },
           { "<leader>fF",       function()  Snacks.picker.files({ hidden = true, nofile = true }) end,    desc = "Files (all)" },
           { "<leader>fg",       function()  Snacks.picker.git_files() end,                                desc = "Files (git-files)" },
@@ -66,7 +66,6 @@ return {
           { "<leader>sk",       function()  Snacks.picker.keymaps() end,                                  desc = "Key Maps" },
           { "<leader>sl",       function()  Snacks.picker.loclist() end,                                  desc = "Location List" },
           { "<leader>si",       function()  Snacks.picker.icons() end,                                    desc = "Icons" },
-          { "<leader>sL",       function()  Snacks.picker.lazy() end,                                     desc = "Lazy Specs" },
           { "<leader>sM",       function()  Snacks.picker.man() end,                                      desc = "Man Pages" },
           { "<leader>sm",       function()  Snacks.picker.marks() end,                                    desc = "Jump to Mark" },
           { "<leader>sR",       function()  Snacks.picker.resume() end,                                   desc = "Resume" },

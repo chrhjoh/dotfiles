@@ -1,3 +1,6 @@
+if os.getenv("NVIM_TESTDIR") then
+  vim.opt.runtimepath:prepend(os.getenv("NVIM_TESTDIR"))
+end
 _G.Utils = require("utils")
 require("config.options")
 require("config.lazy").setup()
