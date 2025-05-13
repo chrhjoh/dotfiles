@@ -34,7 +34,6 @@
       zstyle ':completion:*:matches' group 'yes'
       zstyle ':completion:*:options' description 'yes'
       zstyle ':completion:*:options' auto-description '%d'
-      zstyle ':completion:*:corrections' format ' %F{green}-- %d (errors: %e) --%f'
       zstyle ':completion:*:descriptions' format ' %F{yellow}-- %d --%f'
       zstyle ':completion:*:messages' format ' %F{purple} -- %d --%f'
       zstyle ':completion:*:warnings' format ' %F{red}-- no matches found --%f'
@@ -44,11 +43,6 @@
       zstyle ':completion:*' list-rows-first true
       zstyle ':completion:*' list-packed yes
       zstyle ':completion:*' select-prompt '%SScrolling active: current selection →%s'
-
-      # Fuzzy match mistyped completions.
-      zstyle ':completion:*' completer _complete _match _approximate
-      zstyle ':completion:*:match:*' original only
-      zstyle ':completion:*:approximate:*' max-errors 1 numeric
 
       # This function emits an OSC 1337 sequence to set a user var
       # associated with the current terminal pane.
