@@ -84,6 +84,7 @@ return {
 
         return out
       end,
+      preferred_link_style = "wiki",
       wiki_linc_func = "prepend_note_id",
       follow_url_func = function(url)
         vim.ui.open(url)
@@ -116,9 +117,9 @@ return {
          {"<leader>ol", "<cmd>Obsidian links<cr>",                        desc="Find Link in buffer"},
          {"<leader>ow", "<cmd>Obsidian workspace<cr>",                    desc="Change Workspace"},
          {"<leader>oc", "<cmd>Obsidian toggle_checkbox<cr>",              desc="Toggle Checkbox"},
-         {"<leader>op", function() prompted_command("Image Name","Obsidian paste_img") end,        desc="Paste Image"},
-         {"<leader>oL", function() prompted_command("ID/path/alias","Obsidian link") end,          desc="Link to current note",         mode="v"},
-         {"<leader>ol", function() prompted_command("Optional Title","Obsidian link") end,         desc="Create link to new note",      mode="v"},
+         {"<leader>op", function() prompted_command("Image Name","Obsidian paste_img") end,     desc="Paste Image"},
+         {"<leader>oL", function() prompted_command("ID/path/alias","Obsidian link") end,       desc="Link to current note",  mode="v"},
+         {"<leader>ol", function() prompted_command("Optional Title","Obsidian link_new") end,  desc="Create new note from selection and link", mode="v"},
          {"<leader>oe", function() prompted_command("Optional Title","Obsidian extract_note") end, desc="Extract to new note and link", mode="v"},
        }
      end,

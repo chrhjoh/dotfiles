@@ -193,8 +193,8 @@ return {
     --stylua: ignore
     keys = function()
       return oil_map {
-        {  "-",           function()    require("oil").open()  end,                 desc = "Open Oil buffer In Parent Directory",},
-        {  "=",  function()    require("oil").open(Utils.root())  end,  desc = "Open Oil buffer In Root Directory",},
+        {  "=",  function()    require("oil").open()  end,              desc = "Open Oil buffer In Parent Directory",},
+        {  "<leader>=",  function()    require("oil").open(Utils.root())  end,  desc = "Open Oil buffer In Root Directory",},
       }
     end,
   },
@@ -210,5 +210,11 @@ return {
         -- "${3rd}/busted/library",
       },
     },
+  },
+  {
+    "m4xshen/hardtime.nvim",
+    lazy = false,
+    dependencies = { "MunifTanjim/nui.nvim" },
+    opts = {},
   },
 }
