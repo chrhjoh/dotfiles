@@ -10,13 +10,10 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    flake-utils.url = "github:numtide/flake-utils";
   };
   outputs =
-    { nixpkgs
-    , darwin
+    { darwin
     , home-manager
-    , flake-utils
     , ...
     }:
     let
@@ -45,20 +42,5 @@
           host = "SUN1024270";
         };
       };
-    }
-    // flake-utils.lib.eachDefaultSystem (system:
-    let
-      pkgs = nixpkgs.legacyPackages.${system};
-    in
-    {
-      devShells.default = pkgs.mkShell {
-        name = "dotfiles";
-        packages = with pkgs; [
-          nixd
-          nixpkgs-fmt
-          lua-language-server
-          stylua
-        ];
-      };
-    });
+    };
 }
