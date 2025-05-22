@@ -1,5 +1,5 @@
 {
-  description = "Christian Johansens's nix configuration";
+  description = "Christian Johansen's nix configuration";
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     darwin = {
