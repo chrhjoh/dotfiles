@@ -1,13 +1,19 @@
 { pkgs, ... }: {
   system = {
-    activationScripts.postUserActivation.text = ''
+    activationScripts.postActivation.text = ''
       /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
     '';
 
+    primaryUser = "hcq343";
+    keyboard = {
+      enableKeyMapping = true;
+      remapCapsLockToEscape = true;
+    };
   };
   homebrew = {
     enable = true;
     onActivation = {
+      autoUpdate = true;
       cleanup = "uninstall";
     };
     casks = [

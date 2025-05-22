@@ -10,6 +10,7 @@
       cm = "commit -m";
       ca = "commit --amend";
       co = "checkout";
+      others = "ls-files --others --ignored --exclude-from=.gitignore";
       lol = "log --graph --decorate --pretty=oneline --abbrev-commit";
       lola = "log --graph --decorate --pretty=oneline --abbrev-commit --all";
     };
