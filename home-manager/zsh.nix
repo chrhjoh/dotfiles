@@ -2,6 +2,7 @@
   programs.zsh = {
     enable = true;
     enableCompletion = true;
+    defaultKeymap = "viins";
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
     historySubstringSearch.enable = true;
