@@ -45,15 +45,6 @@ To update the system after making changes:
 ```shell
 darwin-rebuild switch --flake ".#$HOST"
 ```
-**Make Coment on an alias**
-This repository contains my dotfiles for configuration of:
-
-Terminal: Wezterm
-Command Prompt: starship
-Multiplexer: Tmux/Wezterm
-Editor: Neovim
-Shell: zsh 
-
 
 
 
