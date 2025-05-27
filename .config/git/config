@@ -1,0 +1,16 @@
+[include]
+	path = "~/.config/git/config.local"
+[alias]
+	ca = "commit --amend"
+	cm = "commit -m"
+	co = "checkout"
+	lol = "log --graph --decorate --pretty=oneline --abbrev-commit"
+	lola = "log --graph --decorate --pretty=oneline --abbrev-commit --all"
+	s = "status"
+[pull]
+	rebase = true
+[init]
+	defaultBranch = master
+[user]
+	name = Christian Johansen
+	email = christian.holm.johansen@gmail.com
