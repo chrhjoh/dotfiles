@@ -214,6 +214,21 @@ Snacks.toggle({
 }):map("<leader>ud")
 
 Snacks.toggle({
+  name = "Yadm",
+  get = function()
+    return vim.env.GIT_DIR == vim.fn.expand("$HOME/.local/share/yadm/repo.git")
+  end,
+  set = function(state)
+    if not state then
+      vim.env.GIT_DIR = nil
+      vim.env.GIT_WORK_TREE = nil
+    else
+      vim.env.GIT_DIR = vim.fn.expand("$HOME/.local/share/yadm/repo.git")
+      vim.env.GIT_WORK_TREE = vim.fn.expand("$HOME")
+    end
+  end,
+}):map("<leader>uy")
+Snacks.toggle({
   name = "Buffer Format",
   get = function()
     return not vim.b[0].disable_autoformat

@@ -3,13 +3,6 @@ local M = {}
 
 M.workspaces = {
   {
-    name = "dotfiles",
-    layout = function(window, tab, pane)
-      pane:send_text("$EDITOR\n")
-    end,
-    directory = wezterm.home_dir .. "/.dotfiles",
-  },
-  {
     name = "thesis",
     layout = function(window, tab, pane)
       pane:send_text("$EDITOR\n")

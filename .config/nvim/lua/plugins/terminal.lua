@@ -6,6 +6,7 @@ local esc_timers = {}
 local lazygit = nil
 local lazygit_log = nil
 local lazygit_filelog = nil
+local lazygit_yadm = nil
 
 local function hidden_terminal(cmd, id)
   local terminal = require("toggleterm.terminal").Terminal
@@ -165,11 +166,18 @@ return {
         { "<leader>t-", function()   require("toggleterm").toggle(vim.v.count1, 18, nil, "horizontal") end,                               desc = "Open Horizontal",},
         { "<leader>tf", function()   require("toggleterm").toggle(vim.v.count1, nil, nil, "float") end,                                   desc = "Open Float",},
         { "<leader>gg", function()   lazygit = lazygit or hidden_terminal("lazygit", 100)            lazygit:toggle() end,                desc = "Lazygit",},
-        { "<leader>gl", function()   lazygit_log = lazygit_log or hidden_terminal("lazygit log",101) lazygit_log:toggle()end,             desc = "Lazygit Log",},
+        { "<leader>gy", 
+          function()
+            lazygit_yadm = lazygit_yadm or hidden_terminal('lazygit --work-tree $HOME --git-dir $XDG_DATA_HOME/yadm/repo.git/' , 101)
+            lazygit_yadm:toggle() 
+          end,
+          desc = "Lazygit - Yadm dotfiles",
+        },
+        { "<leader>gl", function()   lazygit_log = lazygit_log or hidden_terminal("lazygit log",102) lazygit_log:toggle()end,             desc = "Lazygit Log",},
         { "<leader>gf",
           function()
             local file = vim.trim(vim.api.nvim_buf_get_name(0))
-            lazygit_filelog = lazygit_filelog or hidden_terminal("lazygit log -f " .. file)
+            lazygit_filelog = lazygit_filelog or hidden_terminal("lazygit log -f " .. file, 103)
             lazygit_filelog:toggle()
           end,
           desc = "Lazygit Current File History",
