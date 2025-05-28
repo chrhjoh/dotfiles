@@ -1,8 +1,8 @@
-#!/bin/sh
+#!/bin/zsh
 
 system_type=$(uname -s)
 
-if [ "$system_type" = "Darwin" ]; then
+if [[ "$system_type" = "Darwin" ]]; then
 
   # install homebrew if it's missing
   if ! command -v brew >/dev/null 2>&1; then
@@ -10,9 +10,9 @@ if [ "$system_type" = "Darwin" ]; then
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   fi
 
-  if [ -v "HOMEBREW_BUNDLE_FILE" ]; then
+  if [[ -v HOMEBREW_BUNDLE_FILE ]]; then
     echo "Updating homebrew from $HOMEBREW_BUNDLE_FILE"
-    brew bundle --global
+    brew bundle --file $HOMEBREW_BUNDLE_FILE
   fi
 
 fi

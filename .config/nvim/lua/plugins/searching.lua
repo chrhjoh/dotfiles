@@ -74,6 +74,7 @@ return {
           { "<leader>ss",       function()  Snacks.picker.lsp_symbols() end,                              desc = "Symbols" },
           { "<leader>sS",       function()  Snacks.picker.lsp_symbols{workspace = true} end,              desc = "Workspace Symbols" },
           { "<leader>su",       function()  Snacks.picker.undo() end,                                     desc = "Undotree" },
+          { "<leader>sL",       function()  Snacks.picker.lazy() end,                                     desc = "Search Lazy Specs" },
 
           { "gd",               function()  Snacks.picker.lsp_definitions() end,                          desc = "LSP Definition" },
           { "gr",               function()  Snacks.picker.lsp_references() end,                           desc = "LSP References",  nowait=true },
@@ -107,6 +108,7 @@ return {
   },
   {
     "folke/flash.nvim",
+    event = "VeryLazy",
     ---@type Flash.Config
     opts = {
       modes = {
