@@ -121,11 +121,8 @@ return {
       }
       -- Theme
       local macchiato = require("catppuccin.palettes").get_palette("macchiato")
-      local custom_theme = require("lualine.themes.catppuccin-macchiato")
-      custom_theme.normal.c.bg = macchiato.base
       return {
         options = {
-          theme = custom_theme,
           section_separators = "",
           component_separators = "|",
           disabled_filetypes = { "snacks_dashboard", "neo-tree" },

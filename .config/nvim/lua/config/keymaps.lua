@@ -277,3 +277,14 @@ Snacks.toggle({
     require("gitsigns").preview_hunk_inline()
   end,
 }):map("<leader>ug")
+
+Snacks.toggle({
+  name = "Hardtime",
+  get = function()
+    return not vim.g.hardtime_enabled
+  end,
+  set = function()
+    vim.g.hardtime_enabled = not vim.g.hardtime_enabled
+    vim.cmd("Hardtime toggle")
+  end,
+}):map("<leader>uH")
