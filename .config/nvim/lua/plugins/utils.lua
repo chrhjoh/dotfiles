@@ -113,6 +113,9 @@ return {
           _G.bt = function()
             Snacks.debug.backtrace()
           end
+          vim._print = function(_, ...)
+            _G.dd(...)
+          end
         end,
       })
       vim.api.nvim_create_autocmd("FileType", {

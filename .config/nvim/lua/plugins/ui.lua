@@ -120,9 +120,9 @@ return {
         separator = "",
       }
       -- Theme
-      local mocha = require("catppuccin.palettes").get_palette("mocha")
-      local custom_theme = require("lualine.themes.catppuccin-mocha")
-      custom_theme.normal.c.bg = mocha.base
+      local macchiato = require("catppuccin.palettes").get_palette("macchiato")
+      local custom_theme = require("lualine.themes.catppuccin-macchiato")
+      custom_theme.normal.c.bg = macchiato.base
       return {
         options = {
           theme = custom_theme,
@@ -151,7 +151,7 @@ return {
               path = 1,
               symbols = { modified = " ", readonly = " 󰌾 ", newfile = " " },
               color = function(section)
-                return vim.bo.modified and { fg = mocha.yellow, gui = "italic,bold" } or nil
+                return vim.bo.modified and { fg = macchiato.yellow, gui = "italic,bold" } or nil
               end,
             },
             {
