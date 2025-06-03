@@ -44,16 +44,6 @@ function M.apply_to_config(config)
     active_titlebar_bg = utils.colors.mantle,
     inactive_titlebar_bg = utils.colors.mantle,
   }
-  config.colors = {
-    tab_bar = {
-      inactive_tab_edge = utils.colors.mantle,
-      active_tab = { bg_color = utils.colors.mauve, fg_color = utils.colors.base },
-      inactive_tab = { bg_color = utils.colors.base, fg_color = utils.colors.text },
-      inactive_tab_hover = { bg_color = utils.colors.surface0, fg_color = utils.colors.text },
-      new_tab = { bg_color = utils.colors.base, fg_color = utils.colors.text },
-      new_tab_hover = { bg_color = utils.colors.surface0, fg_color = utils.colors.text },
-    },
-  }
   return config
 end
 
