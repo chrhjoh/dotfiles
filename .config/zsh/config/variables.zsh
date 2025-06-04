@@ -18,8 +18,7 @@ export ZIM_HOME="$XDG_DATA_HOME/zim"
 export HISTFILE="$XDG_STATE_HOME/zsh/history"
 export TEXMFHOME="$XDG_DATA_HOME/texmf"
 
+export OBSIDIAN_HOME="$HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/"
 
 export EDITOR="nvim"
 export HOMEBREW_BUNDLE_FILE="$XDG_CONFIG_HOME/homebrew/Brewfile.$HOST"
-export LSCOLORS="Gxfxcxdxbxegedabagacad"
-export LS_COLORS="di=1;36:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43"

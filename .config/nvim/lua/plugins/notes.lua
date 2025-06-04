@@ -14,7 +14,9 @@ end
 return {
   {
     "obsidian-nvim/obsidian.nvim",
+    enabled = os.getenv("OBSIDIAN_HOME") ~= nil,
     ft = "markdown",
+    version = "*",
     cmd = {
       "Obsidian",
     },
@@ -25,11 +27,11 @@ return {
       workspaces = {
         {
           name = "Work",
-          path = os.getenv("OBSIDIAN_HOME") and os.getenv("OBSIDIAN_HOME") .. "/Work" or "",
+          path = os.getenv("OBSIDIAN_HOME") and os.getenv("OBSIDIAN_HOME") .. "/Work" or nil,
         },
         {
           name = "Personal",
-          path = os.getenv("OBSIDIAN_HOME") and os.getenv("OBSIDIAN_HOME") .. "/Personal" or "",
+          path = os.getenv("OBSIDIAN_HOME") and os.getenv("OBSIDIAN_HOME") .. "/Personal" or nil,
         },
       },
       notes_subdir = nil,
@@ -50,7 +52,11 @@ return {
         },
       },
       new_notes_location = "current_dir",
-      open_app_foreground = true,
+      open = {
+        func = function(uri)
+          vim.ui.open(uri, { cmd = { "open", "-a", "/Applications/Obsidian.app" } })
+        end,
+      },
 
       ---@param title string|?
       ---@return string
