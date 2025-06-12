@@ -265,6 +265,7 @@ return {
           "gitcommit",
           "yaml",
           "regex",
+          "diff",
         },
         highlight = { enable = true },
 

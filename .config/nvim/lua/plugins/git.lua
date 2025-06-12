@@ -13,10 +13,9 @@ return {
       { "<leader>gr", function()  require("gitsigns").reset_hunk { vim.fn.line("."), vim.fn.line("v") } end, desc = "Reset hunk", mode = "v",} ,
 
       -- normal mode
-      { "<leader>gh", function()  require("gitsigns").stage_hunk() end,           desc = "stage hunk",} ,
+      { "<leader>gh", function()  require("gitsigns").stage_hunk() end,           desc = "stage/unstage hunk",} ,
       { "<leader>gr", function()  require("gitsigns").reset_hunk() end,           desc = "reset hunk",} ,
       { "<leader>gS", function()  require("gitsigns").stage_buffer() end,         desc = "stage buffer",} ,
-      { "<leader>gu", function()  require("gitsigns").undo_stage_hunk() end,      desc = "Undo stage hunk",} ,
       { "<leader>gR", function()  require("gitsigns").reset_buffer() end,         desc = "reset buffer",} ,
       { "<leader>gp", function()  require("gitsigns").preview_hunk() end,         desc = "Preview hunk",} ,
       { "<leader>gd", function()  require("gitsigns").preview_hunk_inline() end,  desc = "diff inline",} ,

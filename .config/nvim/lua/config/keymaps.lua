@@ -214,7 +214,7 @@ Snacks.toggle({
 }):map("<leader>ud")
 
 Snacks.toggle({
-  name = "Yadm",
+  name = "Yadm Git Tracking",
   get = function()
     return vim.env.GIT_DIR == vim.fn.expand("$HOME/.local/share/yadm/repo.git")
   end,
@@ -228,6 +228,25 @@ Snacks.toggle({
     end
   end,
 }):map("<leader>uy")
+
+nmap {
+  "<leader>gY",
+  function()
+    vim.system({ "yadm", "add", vim.fn.expand("%:p") }, { text = true }, function(res)
+      local notify = function(msg, level)
+        level = level or vim.log.levels.INFO
+        vim.notify(msg, level, { title = "Yadm" })
+      end
+      if res.stderr and res.stderr ~= "" then
+        notify(res.stderr, vim.log.levels.ERROR)
+      else
+        notify("Current buffer added to repository")
+      end
+    end)
+  end,
+  desc = "Add file to Yadm Repository",
+}
+
 Snacks.toggle({
   name = "Buffer Format",
   get = function()
