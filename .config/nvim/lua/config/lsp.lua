@@ -37,12 +37,11 @@ vim.api.nvim_create_autocmd("LspAttach", {
     lsp_map { "<C-?>", vim.lsp.buf.signature_help, desc = "LSP: Signature", buffer = args.buf, mode = "i" }
   end,
 })
-vim.lsp.config("*", { root_markers = { ".git" } })
+vim.lsp.config("*", { root_markers = { ".git", ".envrc" } })
 vim.lsp.enable {
   "lua_ls",
   "rust-analyzer",
   "basedpyright",
   "texlab",
-  "nixd",
   "tinymist",
 }

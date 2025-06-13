@@ -11,7 +11,6 @@ return {
           python = { "ruff_format", "isort" },
           snakemake = { "snakefmt" },
           typst = { "typstfmt" },
-          nix = { "nixpkgs_fmt" },
           json = { "fixjson" },
         },
         format_on_save = function(bufnr)
