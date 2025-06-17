@@ -8,7 +8,7 @@ return {
       return {
         formatters_by_ft = {
           lua = { "stylua" },
-          python = { "ruff_format", "isort" },
+          python = { "ruff_organize_imports", "ruff_format" },
           snakemake = { "snakefmt" },
           typst = { "typstfmt" },
           json = { "fixjson" },
