@@ -38,7 +38,6 @@ return {
           { "<leader>u", group = "toggles" },
           { "<leader>w", group = "windows", proxy = "<c-w>" },
           { "<leader>y", group = "yank" },
-          { "<leader>d", desc = "debug" },
           { "<leader>q", desc = "sessions" },
           { "<leader>n", desc = "noice" },
           { "<leader>o", desc = "obsidian" },
@@ -196,8 +195,8 @@ return {
     --stylua: ignore
     keys = function()
       return oil_map {
-        {  "=",  function()    require("oil").open()  end,              desc = "Open Oil buffer In Parent Directory",},
-        {  "<leader>=",  function()    require("oil").open(Utils.root())  end,  desc = "Open Oil buffer In Root Directory",},
+        {  "<leader>d",  function()    require("oil").open()  end,              desc = "Open Oil buffer In Parent Directory",},
+        {  "<leader>D",  function()    require("oil").open(Utils.root())  end,  desc = "Open Oil buffer In Root Directory",},
       }
     end,
   },

@@ -32,6 +32,7 @@ vim.o.showcmdloc = "statusline"
 vim.o.laststatus = 3
 
 -- Completion
+vim.g.completion = true
 vim.o.completeopt = "menu,menuone,noinsert"
 vim.o.pumheight = 10
 

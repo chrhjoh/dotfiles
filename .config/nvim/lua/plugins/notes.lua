@@ -42,7 +42,7 @@ return {
         default_tags = { "daily-notes" },
         template = "daily.md",
       },
-      completion = { min_chars = 2 },
+      completion = { min_chars = 2, blink = true },
       mappings = {
         ["gf"] = {
           action = function()

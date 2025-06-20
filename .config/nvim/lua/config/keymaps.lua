@@ -270,10 +270,10 @@ Snacks.toggle({
 Snacks.toggle({
   name = "Completion Menu",
   get = function()
-    return vim.g.cmp_enabled
+    return vim.b.completion ~= false
   end,
-  set = function(_)
-    vim.g.cmp_enabled = not vim.g.cmp_enabled
+  set = function(state)
+    vim.b.completion = state
   end,
 }):map("<leader>um")
 
