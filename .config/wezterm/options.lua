@@ -3,7 +3,7 @@ local utils = require("utils")
 local M = {}
 
 function M.apply_to_config(config)
-  config.font_size = 12
+  config.font_size = 11
   config.font = wezterm.font_with_fallback { "JetBrains Mono", "Symbols Nerd Font Mono" }
   config.window_decorations = "RESIZE"
   config.default_domain = "local"

@@ -11,7 +11,9 @@ return {
           python = { "ruff_organize_imports", "ruff_format" },
           snakemake = { "snakefmt" },
           typst = { "typstfmt" },
-          json = { "fixjson" },
+          json = { "prettier" },
+          yaml = { "prettier" },
+          markdown = { "prettier" },
         },
         format_on_save = function(bufnr)
           if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then

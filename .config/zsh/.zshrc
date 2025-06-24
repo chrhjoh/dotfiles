@@ -1,5 +1,8 @@
 source "$ZDOTDIR/config/variables.zsh"
 
+export PATH="$HOME/.local/bin:$PATH"
+fpath+="$XDG_DATA_HOME/zsh/completions/"
+
 # Load homebrew without $fpath extend (functions are already included) since it causes compinit reload currently
  if [[ -d /opt/homebrew && -z "$HOMEBREW_PREFIX" ]]; then
    export HOMEBREW_PREFIX="/opt/homebrew";
