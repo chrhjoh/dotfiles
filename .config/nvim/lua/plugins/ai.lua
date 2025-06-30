@@ -21,6 +21,7 @@ return {
     },
     build = "make tiktoken",
     opts = {
+      model = "claude-sonnet-4",
       mappings = {
         reset = {
           insert = "<C-c>",

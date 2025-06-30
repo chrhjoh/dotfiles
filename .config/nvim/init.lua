@@ -20,7 +20,7 @@ vim.api.nvim_create_autocmd("User", {
     if lazy_autocmds then
       require("config.autocommands")
     end
-    require("config.keymaps")
     require("config.lsp")
+    require("config.keymaps")
   end,
 })
