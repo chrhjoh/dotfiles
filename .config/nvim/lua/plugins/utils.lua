@@ -41,6 +41,7 @@ return {
           { "<leader>q", desc = "sessions" },
           { "<leader>n", desc = "noice" },
           { "<leader>o", desc = "obsidian" },
+          { "<leader>A", desc = "AI" },
 
           { "<localleader>l", group = "latex" },
           { "<localleader>t", group = "typst" },

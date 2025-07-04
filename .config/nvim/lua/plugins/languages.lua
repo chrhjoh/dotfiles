@@ -49,13 +49,17 @@ return {
   },
   {
     "OXY2DEV/markview.nvim",
-    ft = "markdown",
+    ft = { "markdown", "codecompanion" },
     dependencies = {
       "nvim-treesitter/nvim-treesitter",
       "nvim-tree/nvim-web-devicons",
     },
     opts = function()
       return {
+        preview = {
+          filetypes = { "markdown", "codecompanion" },
+          ignore_buftypes = {},
+        },
         markdown = {
           horizontal_rules = require("markview.presets").horizontal_rules.thick,
         },
