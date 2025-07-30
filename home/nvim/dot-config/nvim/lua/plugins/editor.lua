@@ -8,6 +8,7 @@ return {
     version = "*",
     opts = function()
       return {
+        signature = { enabled = true },
         appearance = { nerd_font_variant = "normal" },
         completion = {
           list = { selection = { auto_insert = false } },

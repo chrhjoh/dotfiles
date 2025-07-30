@@ -39,6 +39,18 @@ vim.api.nvim_create_autocmd("LspAttach", {
 })
 vim.lsp.config("*", { root_markers = { ".git", ".envrc" } })
 
+vim.lsp.config("basedpyright", {
+  settings = {
+    basedpyright = {
+      analysis = {
+        typeCheckingMode = "standard",
+        autoImportCompletions = false,
+        diagnosticMode = "workspace",
+      },
+    },
+  },
+})
+
 vim.lsp.enable {
   "lua_ls",
   "rust_analyzer",
