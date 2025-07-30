@@ -6,7 +6,6 @@ return {
     dependencies = { "rafamadriz/friendly-snippets" },
     event = "InsertEnter",
     version = "*",
-    ---@return blink.cmp.Config
     opts = function()
       return {
         appearance = { nerd_font_variant = "normal" },
@@ -39,19 +38,6 @@ return {
             },
             list = { selection = { auto_insert = false } },
             ghost_text = { enabled = false },
-          },
-        },
-        sources = {
-          providers = {
-            lazydev = {
-              name = "LazyDev",
-              module = "lazydev.integrations.blink",
-              -- make lazydev completions top priority (see `:h blink.cmp`)
-              score_offset = 100,
-            },
-          },
-          per_filetype = {
-            lua = { inherit_defaults = true, "lazydev" },
           },
         },
       }

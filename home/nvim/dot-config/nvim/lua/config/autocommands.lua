@@ -83,8 +83,3 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
     vim.opt_local.conceallevel = 0
   end,
 })
-vim.api.nvim_create_autocmd("QuickFixCmdPost", {
-  callback = function()
-    vim.cmd([[Trouble qflist open]])
-  end,
-})

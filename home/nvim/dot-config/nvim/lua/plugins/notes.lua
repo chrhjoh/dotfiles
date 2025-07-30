@@ -1,7 +1,4 @@
 local obsidian_key_mapper = Utils.keymap.get_lazy_list_mapper { mode = "n", desc_prefix = "Obsidian" }
-local function desc_w_prefix(desc)
-  return "Obsidian: " .. desc
-end
 local function prompted_command(prompt_title, cmd)
   vim.ui.input({ prompt = prompt_title }, function(input)
     if input == nil then
@@ -10,6 +7,16 @@ local function prompted_command(prompt_title, cmd)
     vim.cmd(cmd .. input)
   end)
 end
+
+vim.api.nvim_create_autocmd("User", {
+  pattern = "ObsidianNoteEnter",
+  callback = function(ev)
+    vim.keymap.set("n", "gf", "<CMD>Obsidian follow_link", {
+      buffer = ev.buf,
+      desc = "Obsidian: Follow Link",
+    })
+  end,
+})
 
 return {
   {
@@ -20,6 +27,7 @@ return {
       "Obsidian",
     },
     opts = {
+      legacy_commands = false, --TODO: Remove when unncessary
       workspaces = {
         {
           name = "Work",
@@ -39,14 +47,6 @@ return {
         template = "daily.md",
       },
       completion = { min_chars = 2, blink = true },
-      mappings = {
-        ["gf"] = {
-          action = function()
-            return require("obsidian").util.gf_passthrough()
-          end,
-          opts = { noremap = false, expr = true, buffer = true, desc = desc_w_prefix("Follow Link") },
-        },
-      },
       new_notes_location = "current_dir",
       open = {
         func = function(uri)

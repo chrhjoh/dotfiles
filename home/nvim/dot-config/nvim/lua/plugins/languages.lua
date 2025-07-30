@@ -57,6 +57,10 @@ return {
     opts = function()
       return {
         preview = {
+          modes = { "i", "n", "no", "c" },
+          hybrid_modes = { "i" },
+          linewise_hybrid_mode = true,
+
           filetypes = { "markdown", "codecompanion" },
           ignore_buftypes = {},
           icon_provider = "mini",

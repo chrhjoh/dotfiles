@@ -1,4 +1,16 @@
 local git_mapper = Utils.keymap.get_lazy_list_mapper { mode = "n", desc_prefix = "Git" }
+
+local function toggle_diffthis(cmd)
+  for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
+    local buf = vim.api.nvim_win_get_buf(win)
+    local bufname = vim.api.nvim_buf_get_name(buf)
+    if bufname:find("^gitsigns://") then
+      vim.api.nvim_win_close(win, true)
+      return
+    end
+  end
+  require("gitsigns").diffthis(cmd)
+end
 return {
   "lewis6991/gitsigns.nvim",
   event = "BufReadPost",
@@ -19,7 +31,7 @@ return {
       { "<leader>gR", function()  require("gitsigns").reset_buffer() end,         desc = "reset buffer",} ,
       { "<leader>gp", function()  require("gitsigns").preview_hunk() end,         desc = "Preview hunk",} ,
       { "<leader>gd", function()  require("gitsigns").preview_hunk_inline() end,  desc = "diff inline",} ,
-      { "<leader>gD", function()  require("gitsigns").diffthis("~") end,          desc = "diff against last commit",} ,
+      { "<leader>gD", function () toggle_diffthis("~") end,                       desc = "Toggle diff against last commit",} ,
       { "gih",        function()  require("gitsigns").select_hunk() end,          desc = "Select git hunk", mode = { "o", "x" } },
     }
   end,

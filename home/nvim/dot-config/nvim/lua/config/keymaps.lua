@@ -47,36 +47,30 @@ buffer_map {
   desc = "Copy relative path to clipboard",
 }
 
+-- Notifications
+nmap { "<leader>m", "<cmd>messages<CR>", desc = "Messages",      silent = true }
+
 -- Moving over quickfix items quickly
-nmap { "<C-n>", ":cn<CR>", desc = "Next item in list",      silent = true }
-nmap { "<C-p>", ":cp<CR>", desc = "Previous item in list",  silent = true }
+nmap { "<C-n>", "<cmd>cn<CR>", desc = "Next item in list",      silent = true }
+nmap { "<C-p>", "<cmd>cp<CR>", desc = "Previous item in list",  silent = true }
 nmap {
-  "[q",
-  function()
-    if require("trouble").is_open() then
-      require("trouble").prev { skip_groups = true, jump = true }
-    else
-      local ok, err = pcall(vim.cmd.cprev)
+  "[q",function() 
+    local ok, err = pcall(vim.cmd.cprev)
       if not ok then
         vim.notify(err, vim.log.levels.ERROR)
       end
-    end
-  end,
-  desc = "Previous Trouble/Quickfix Item",
+    end,
+  desc = "Previous Quickfix Item",
 }
 nmap {
   "]q",
   function()
-    if require("trouble").is_open() then
-      require("trouble").next { skip_groups = true, jump = true }
-    else
       local ok, err = pcall(vim.cmd.cnext)
       if not ok then
         vim.notify(err, vim.log.levels.ERROR)
       end
-    end
   end,
-  desc = "Next Trouble/Quickfix Item",
+  desc = "Next Quickfix Item",
 }
 
 -- Save file
@@ -94,19 +88,7 @@ local window_is_open = function(variable)
 end
 
 list_map {
-  "<leader>ll",
-  function()
-    if window_is_open("location") then
-      vim.cmd("lclose")
-    else
-      vim.cmd("lopen")
-    end
-  end,
-  desc = "Toggle Quickfix List",
-}
-
-list_map {
-  "<leader>lq",
+  "<leader>l",
   function()
     if window_is_open("quickfix") then
       vim.cmd("cclose")
@@ -114,7 +96,7 @@ list_map {
       vim.cmd("copen")
     end
   end,
-  desc = "Toggle Location List",
+  desc = "Toggle Quickfix List",
 }
 
 -- diagnostic

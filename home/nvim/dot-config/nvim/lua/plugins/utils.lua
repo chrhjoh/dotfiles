@@ -1,4 +1,3 @@
-local yank_map = Utils.keymap.get_lazy_list_mapper { mode = "n", desc_prefix = "Yanky" }
 local snacks_keymap = Utils.keymap.get_mapper { mode = "n", desc_prefix = "Snacks" }
 local snacks_lazy_keymap = Utils.keymap.get_lazy_list_mapper { mode = "n", desc_prefix = "Snacks" }
 local oil_map = Utils.keymap.get_lazy_list_mapper { mode = "n", desc_prefix = "Oil" }
@@ -31,7 +30,6 @@ return {
             end,
           },
           { "<leader>c", group = "code" },
-          { "<leader>l", group = "lists" },
           { "<leader>f", group = "files" },
           { "<leader>g", group = "git" },
           { "<leader>s", group = "searches" },
@@ -69,9 +67,24 @@ return {
       scroll = { enabled = true },
       image = {
         enabled = true,
+        math = {
+          latex = {
+            font_size = "small",
+          },
+        },
       },
       statuscolumn = { enabled = true },
       indent = { enabled = true },
+      dashboard = {
+        enabled = true,
+        sections = {
+          { section = "header" },
+          { section = "keys", gap = 1, padding = 2 },
+          { icon = " ", title = "Recent Files", section = "recent_files", indent = 2, padding = 2 },
+          { icon = " ", title = "Projects", section = "projects", indent = 2, padding = 2 },
+          { section = "startup" },
+        },
+      },
     },
     init = function()
       vim.api.nvim_create_autocmd("User", {
@@ -109,6 +122,7 @@ return {
           {  "<leader>gb",  function()    Snacks.git.blame_line()  end,           desc = "Git Blame Line",},
           {  "<leader>gB",  function()    Snacks.gitbrowse()  end,                desc = "Git Browse",},
           {  "<leader>cR",  function()    Snacks.rename.rename_file()  end,       desc = "Rename File",},
+          {  "<leader>n",  function()    Snacks.notifier.show_history()  end,       desc = "Notifications",},
         }
       )
     end,
@@ -145,13 +159,22 @@ return {
         ["q"] = { "actions.close", mode = "n" },
         ["<Tab>"] = function()
           require("oil.actions").send_to_qflist.callback()
-          require("trouble").open { mode = "quickfix", refresh = true, new = false }
         end,
         ["<C-v>"] = { "actions.select", opts = { vertical = true } },
         ["<C-p>"] = { "actions.preview" },
         ["gd"] = function()
           require("oil").set_columns { "icon", "permissions", "size", "mtime" }
         end,
+        ["<leader>sg"] = {
+          function()
+            Snacks.picker.grep {
+              cwd = require("oil").get_current_dir(),
+            }
+          end,
+          mode = "n",
+          nowait = true,
+          desc = "Grep files in Oil directory",
+        },
         ["<leader>ff"] = {
           function()
             Snacks.picker.files {
@@ -160,7 +183,7 @@ return {
           end,
           mode = "n",
           nowait = true,
-          desc = "Find files in the current directory",
+          desc = "Find files in the Oil directory",
         },
       },
     },
@@ -171,6 +194,16 @@ return {
         {  "<leader>D",  function()    require("oil").open(Utils.root())  end,  desc = "Open Oil buffer In Root Directory",},
       }
     end,
+  },
+  {
+    "folke/lazydev.nvim",
+    ft = "lua",
+    opts = {
+      library = {
+        { path = "snacks.nvim", words = { "Snacks" } },
+        { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+      },
+    },
   },
   {
     "m4xshen/hardtime.nvim",
