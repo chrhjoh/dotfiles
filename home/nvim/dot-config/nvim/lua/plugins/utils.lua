@@ -3,6 +3,7 @@ local snacks_keymap = Utils.keymap.get_mapper { mode = "n", desc_prefix = "Snack
 local snacks_lazy_keymap = Utils.keymap.get_lazy_list_mapper { mode = "n", desc_prefix = "Snacks" }
 local oil_map = Utils.keymap.get_lazy_list_mapper { mode = "n", desc_prefix = "Oil" }
 return {
+  { "tpope/vim-unimpaired", event = "VeryLazy" },
   {
     "folke/which-key.nvim",
     event = "VeryLazy",
@@ -37,9 +38,7 @@ return {
           { "<leader>t", group = "terminals" },
           { "<leader>u", group = "toggles" },
           { "<leader>w", group = "windows", proxy = "<c-w>" },
-          { "<leader>y", group = "yank" },
           { "<leader>q", desc = "sessions" },
-          { "<leader>n", desc = "noice" },
           { "<leader>o", desc = "obsidian" },
           { "<leader>A", desc = "AI" },
 
@@ -54,36 +53,6 @@ return {
         },
       },
     },
-  },
-  {
-    "gbprod/yanky.nvim",
-    opts = {
-      highlight = {
-        on_put = false,
-        on_yank = false,
-      },
-    },
-    --stylua: ignore
-    keys = function()
-      return yank_map {
-        { "y",          "<Plug>(YankyYank)",                      desc = "Yank Text",                         mode = {"n", "x"}},
-        { "p",          "<Plug>(YankyPutAfter)",                  desc = "Put Yanked Text After Cursor",      mode = {"n", "x"}},
-        { "P",          "<Plug>(YankyPutBefore)",                 desc = "Put Yanked Text Before Cursor",     mode = {"n", "x"}},
-        { "gp",         "<Plug>(YankyGPutAfter)",                 desc = "Put Yanked Text After Selection",   mode = {"n", "x"}},
-        { "gP",         "<Plug>(YankyGPutBefore)",                desc = "Put Yanked Text Before Selection",  mode = {"n", "x"}},
-        { "[y",         "<Plug>(YankyCycleForward)",              desc = "Cycle Forward Through Yank History" },
-        { "]y",         "<Plug>(YankyCycleBackward)",             desc = "Cycle Backward Through Yank History" },
-        { "]p",         "<Plug>(YankyPutIndentAfterLinewise)",    desc = "Put Indented After Cursor (Linewise)" },
-        { "[p",         "<Plug>(YankyPutIndentBeforeLinewise)",   desc = "Put Indented Before Cursor (Linewise)" },
-        { "]P",         "<Plug>(YankyPutIndentAfterLinewise)",    desc = "Put Indented After Cursor (Linewise)" },
-        { "[P",         "<Plug>(YankyPutIndentBeforeLinewise)",   desc = "Put Indented Before Cursor (Linewise)" },
-        { ">p",         "<Plug>(YankyPutIndentAfterShiftRight)",  desc = "Put and Indent Right" },
-        { "<p",         "<Plug>(YankyPutIndentAfterShiftLeft)",   desc = "Put and Indent Left" },
-        { ">P",         "<Plug>(YankyPutIndentBeforeShiftRight)", desc = "Put Before and Indent Right" },
-        { "<P",         "<Plug>(YankyPutIndentBeforeShiftLeft)",  desc = "Put Before and Indent Left" },
-        { "<leader>sy",  "<CMD>YankyRingHistory<CR>",              desc = "Search yank history" },
-      }
-    end,
   },
   {
     "folke/snacks.nvim",
@@ -101,6 +70,8 @@ return {
       image = {
         enabled = true,
       },
+      statuscolumn = { enabled = true },
+      indent = { enabled = true },
     },
     init = function()
       vim.api.nvim_create_autocmd("User", {
@@ -146,7 +117,7 @@ return {
     "stevearc/oil.nvim",
     ---@module 'oil'
     ---@type oil.SetupOpts
-    dependencies = { "nvim-tree/nvim-web-devicons", "echasnovski/mini.icons" },
+    dependencies = { "echasnovski/mini.icons" },
     opts = {
       columns = {
         "icon",
@@ -202,22 +173,8 @@ return {
     end,
   },
   {
-    "folke/lazydev.nvim",
-    ft = "lua",
-    dependencies = { "gonstoll/wezterm-types" },
-    opts = {
-      library = {
-        { path = "wezterm-types", mods = { "wezterm" } },
-        { path = "snacks.nvim", words = { "Snacks" } },
-        { path = "${3rd}/luv/library", words = { "vim%.uv" } },
-        -- "${3rd}/busted/library",
-      },
-    },
-  },
-  {
     "m4xshen/hardtime.nvim",
     event = "VeryLazy",
-    dependencies = { "MunifTanjim/nui.nvim" },
-    opts = {},
+    opts = { enabled = false },
   },
 }

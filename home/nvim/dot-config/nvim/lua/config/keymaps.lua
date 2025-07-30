@@ -13,7 +13,7 @@ local source_map =      Utils.keymap.get_mapper { mode = "n", desc_prefix = "Sou
 nmap { "<Space>",   "<Nop>",          mode = { "n", "v" }, silent = true }
 nmap { "<leader>Q", "<cmd>quit<cr>",  desc = "Quit Neovim" }
 
-nmap( {"<esc>", function() vim.cmd("noh") return "<esc>" end, mode={ "i", "n", "s" },  expr = true, desc = "Escape and Clear hlsearch" })
+nmap( {"<esc>", function() vim.cmd("noh") vim.cmd("stopinsert") return "<esc>" end, mode={ "i", "n", "s" },  expr = true, desc = "Escape and Clear hlsearch" })
 
 -- Remap for dealing with word wrap
 nmap { "k", "v:count == 0 ? 'gk' : 'k'", silent = true, expr = true }
@@ -174,34 +174,6 @@ Snacks.toggle.diagnostics({ bufnr = 0 }):map("<leader>uD")
 Snacks.toggle.zen():map("<leader>uZ")
 Snacks.toggle.dim():map("<leader>uz")
 Snacks.toggle.indent():map("<leader>ui")
-
--- M.exchange_above = function()
---   local count = vim.v.count1
---   vim.cmd("silent! move --" .. count)
---   vim.cmd.normal("==")
---   Utils.restore_dot_repetition(count)
--- end
---
--- M.exchange_below = function()
---   local count = vim.v.count1
---   vim.cmd("silent! move +" .. count)
---   vim.cmd.normal("==")
---   Utils.restore_dot_repetition(count)
--- end
---
--- M.exchange_section_above = function()
---   local count = vim.v.count1
---   vim.cmd("silent! '<,'>move '<--" .. count)
---   vim.cmd.normal("gv=")
---   Utils.restore_dot_repetition(count)
--- end
---
--- M.exchange_section_below = function()
---   local count = vim.v.count1
---   vim.cmd("silent! '<,'>move '>+" .. count)
---   vim.cmd.normal("gv=")
---   Utils.restore_dot_repetition(count)
--- end
 
 Snacks.toggle({
   name = "Buffer Diagnostics",

@@ -52,13 +52,14 @@ return {
     ft = { "markdown", "codecompanion" },
     dependencies = {
       "nvim-treesitter/nvim-treesitter",
-      "nvim-tree/nvim-web-devicons",
+      "echasnovski/mini.icons",
     },
     opts = function()
       return {
         preview = {
           filetypes = { "markdown", "codecompanion" },
           ignore_buftypes = {},
+          icon_provider = "mini",
         },
         markdown = {
           horizontal_rules = require("markview.presets").horizontal_rules.thick,

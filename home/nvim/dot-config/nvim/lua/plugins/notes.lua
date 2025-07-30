@@ -15,13 +15,9 @@ return {
   {
     "obsidian-nvim/obsidian.nvim",
     enabled = os.getenv("OBSIDIAN_HOME") ~= nil,
-    ft = "markdown",
     version = "*",
     cmd = {
       "Obsidian",
-    },
-    dependencies = {
-      "nvim-lua/plenary.nvim",
     },
     opts = {
       workspaces = {
