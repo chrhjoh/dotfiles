@@ -18,6 +18,10 @@ return {
       "echasnovski/mini.icons",
     },
     opts = function()
+      local keypress_component = {
+        "%S",
+        separator = "",
+      }
       -- Theme
       local macchiato = require("catppuccin.palettes").get_palette("macchiato")
       return {
@@ -57,6 +61,7 @@ return {
             },
           },
           lualine_x = {
+            keypress_component,
             {
               require("lazy.status").updates,
               cond = require("lazy.status").has_updates,

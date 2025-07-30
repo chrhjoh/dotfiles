@@ -13,7 +13,8 @@ local function toggle_diffthis(cmd)
 end
 return {
   "lewis6991/gitsigns.nvim",
-  event = "BufReadPost",
+  event = { "BufReadPost", "BufNewFile" },
+  cmd = "Gitsigns",
   opts = {},
   --stylua: ignore
   keys = function()
