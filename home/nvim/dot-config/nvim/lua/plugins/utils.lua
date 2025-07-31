@@ -190,8 +190,8 @@ return {
     --stylua: ignore
     keys = function()
       return oil_map {
-        {  "<leader>d",  function()    require("oil").open()  end,              desc = "Open Oil buffer In Parent Directory",},
-        {  "<leader>D",  function()    require("oil").open(Utils.root())  end,  desc = "Open Oil buffer In Root Directory",},
+        {  "§",  function()    require("oil").open()  end,              desc = "Open Oil buffer In Parent Directory",},
+        {  "±",  function()    require("oil").open(Utils.root())  end,  desc = "Open Oil buffer In Root Directory",},
       }
     end,
   },

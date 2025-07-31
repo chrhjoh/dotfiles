@@ -14,22 +14,29 @@ nmap { "<Space>",   "<Nop>",          mode = { "n", "v" }, silent = true }
 nmap { "<leader>Q", "<cmd>quit<cr>",  desc = "Quit Neovim" }
 
 nmap( {"<esc>", function() vim.cmd("noh") vim.cmd("stopinsert") return "<esc>" end, mode={ "i", "n", "s" },  expr = true, desc = "Escape and Clear hlsearch" })
+--TODO: remap oil to _. remap delete to delete and send to hole, remap dy to delete with sending to normal register.
 
 -- Remap for dealing with word wrap
 nmap { "k", "v:count == 0 ? 'gk' : 'k'", silent = true, expr = true }
 nmap { "j", "v:count == 0 ? 'gj' : 'j'", silent = true, expr = true }
 
+-- deleta and put mappings
 nmap{"x", '"_x', desc = "Delete character", noremap = true}
+nmap({ "d", [["_d]], silent = true,mode = {"n", "v"} })
+nmap({ "D", [["_D]], silent = true, mode = {"n", "v"}})
+nmap({ "<leader>d", "d", silent = true, desc = "Delete and yank", mode = {"n", "v"} })
+nmap({ "<leader>D", "D", silent = true, desc = "Delete and yank to end", mode = {"n", "v"} })
+vmap({ "p", [["_dP]], silent = true })
+vmap({ "<leader>p", "p", silent = true, desc = "Put and yank" })
 
 -- Automatic reselect after indent
 vmap { "<", "<gv" }
 vmap { ">", ">gv" }
 
+-- quick yank of files
 yank_map { "<leader>yP",  ':let @* = expand("%:p")<CR>',  desc = "Yank Absolute Path" }
 yank_map { "<leader>yp",  ':let @* = expand("%")<CR>',    desc = "Yank Relative Path" }
-yank_map { "<leader>y.",  ':let @* = expand("%:t")<CR>',  desc = "Yank Filename" }
-yank_map { "<leader>p",   '"0p<cr>',                      desc = "Put from last yank registry" }
-yank_map { "<leader>P",   "<CMD>YankyRingHistory<CR>",    desc = "Put from yank history" }
+yank_map { "<leader>yf",  ':let @* = expand("%:t")<CR>',  desc = "Yank Filename" }
 
 -- Moving between buffers
 buffer_map { "<TAB>",       ":bn<CR>",                desc = "Next",      silent = true }
