@@ -11,6 +11,7 @@ return {
         signature = { enabled = true },
         appearance = { nerd_font_variant = "normal" },
         completion = {
+          keyword = { range = "full" },
           list = { selection = { auto_insert = false } },
           menu = {
             draw = {

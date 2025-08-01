@@ -1,6 +1,7 @@
 local snacks_keymap = Utils.keymap.get_mapper { mode = "n", desc_prefix = "Snacks" }
 local snacks_lazy_keymap = Utils.keymap.get_lazy_list_mapper { mode = "n", desc_prefix = "Snacks" }
 local oil_map = Utils.keymap.get_lazy_list_mapper { mode = "n", desc_prefix = "Oil" }
+local detail = false
 return {
   { "tpope/vim-unimpaired", event = "VeryLazy" },
   {
@@ -14,7 +15,7 @@ return {
         rules = {
           { pattern = "put", icon = "󰅇 ", color = "yellow" },
           { pattern = "yank", icon = "󰅇 ", color = "yellow" },
-          { pattern = "lists", icon = " ", color = "green" },
+          { pattern = "message", icon = "󰆈 ", color = "gray" },
           { pattern = "lua", icon = "󰢱 ", color = "blue" },
           { pattern = "obsidian", icon = " ", color = "purple" },
         },
@@ -32,12 +33,13 @@ return {
           { "<leader>c", group = "code" },
           { "<leader>f", group = "files" },
           { "<leader>g", group = "git" },
+          { "<leader>o", desc = "obsidian" },
+          { "<leader>q", desc = "sessions" },
           { "<leader>s", group = "searches" },
           { "<leader>t", group = "terminals" },
           { "<leader>u", group = "toggles" },
+          { "<leader>y", group = "yank" },
           { "<leader>w", group = "windows", proxy = "<c-w>" },
-          { "<leader>q", desc = "sessions" },
-          { "<leader>o", desc = "obsidian" },
           { "<leader>A", desc = "AI" },
 
           { "<localleader>l", group = "latex" },
@@ -162,9 +164,18 @@ return {
         end,
         ["<C-v>"] = { "actions.select", opts = { vertical = true } },
         ["<C-p>"] = { "actions.preview" },
-        ["gd"] = function()
-          require("oil").set_columns { "icon", "permissions", "size", "mtime" }
-        end,
+
+        ["gd"] = {
+          desc = "Toggle file detail view",
+          callback = function()
+            detail = not detail
+            if detail then
+              require("oil").set_columns { "icon", "permissions", "size", "mtime" }
+            else
+              require("oil").set_columns { "icon" }
+            end
+          end,
+        },
         ["<leader>sg"] = {
           function()
             Snacks.picker.grep {
@@ -190,8 +201,8 @@ return {
     --stylua: ignore
     keys = function()
       return oil_map {
-        {  "§",  function()    require("oil").open()  end,              desc = "Open Oil buffer In Parent Directory",},
-        {  "±",  function()    require("oil").open(Utils.root())  end,  desc = "Open Oil buffer In Root Directory",},
+        {  "<leader>e",  function()    require("oil").open()  end,              desc = "Open Oil buffer In Parent Directory",},
+        {  "<leader>E",  function()    require("oil").open(Utils.root())  end,  desc = "Open Oil buffer In Root Directory",},
       }
     end,
   },

@@ -14,7 +14,6 @@ nmap { "<Space>",   "<Nop>",          mode = { "n", "v" }, silent = true }
 nmap { "<leader>Q", "<cmd>quit<cr>",  desc = "Quit Neovim" }
 
 nmap( {"<esc>", function() vim.cmd("noh") vim.cmd("stopinsert") return "<esc>" end, mode={ "i", "n", "s" },  expr = true, desc = "Escape and Clear hlsearch" })
---TODO: remap oil to _. remap delete to delete and send to hole, remap dy to delete with sending to normal register.
 
 -- Remap for dealing with word wrap
 nmap { "k", "v:count == 0 ? 'gk' : 'k'", silent = true, expr = true }
