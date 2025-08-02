@@ -1,0 +1,6 @@
+- name: Setup Macbook
+  hosts: local
+  roles:
+    - packages
+    - dots
+    - system

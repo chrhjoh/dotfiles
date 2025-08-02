@@ -1,5 +1,9 @@
 # Christian Johansen's Dotfiles
 
-TODO:
+Bootstrap by running
 
-Consider using ansible over shell scripts for bootstrapping stuff
+```{bash}
+./bootstrap
+```
+
+This install ansible and bootstraps my macbook.
