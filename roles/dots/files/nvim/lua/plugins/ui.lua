@@ -2,13 +2,15 @@ return {
   {
     "catppuccin/nvim",
     name = "catppuccin",
+    version = "*",
     priority = 1000,
     opts = {
+      transparent_background = true,
       auto_integrations = true,
     },
     config = function(_, opts)
       require("catppuccin").setup(opts)
-      vim.cmd.colorscheme("catppuccin-macchiato")
+      vim.cmd.colorscheme("catppuccin-mocha")
     end,
   },
   {
@@ -20,10 +22,8 @@ return {
     opts = function()
       local keypress_component = {
         "%S",
-        separator = "",
       }
       -- Theme
-      local macchiato = require("catppuccin.palettes").get_palette("macchiato")
       return {
         options = {
           section_separators = "",
@@ -32,9 +32,12 @@ return {
           globalstatus = true,
         },
         sections = {
-          lualine_a = { "mode" },
+          lualine_a = {},
           lualine_b = {
-            "branch",
+            { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
+            "filename",
+          },
+          lualine_c = {
             {
               "diff",
               symbols = {
@@ -43,37 +46,18 @@ return {
                 removed = " ",
               },
             },
-          },
-          lualine_c = {
-            { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
-            {
-              "filename",
-              path = 1,
-              symbols = { modified = " ", readonly = " 󰌾 ", newfile = " " },
-              color = function(section)
-                return vim.bo.modified and { fg = macchiato.yellow, gui = "italic,bold" } or nil
-              end,
-            },
             {
               "diagnostics",
               sections = { "error", "warn" },
               symbols = Utils.icons.diagnostics,
+              separator = "",
             },
           },
           lualine_x = {
             keypress_component,
-            {
-              require("lazy.status").updates,
-              cond = require("lazy.status").has_updates,
-              color = function()
-                return { fg = Snacks.util.color("Special") }
-              end,
-            },
           },
-          lualine_y = {
-            "progress",
-          },
-          lualine_z = { "location" },
+          lualine_y = {},
+          lualine_z = {},
         },
         extensions = { "lazy", "fzf", "toggleterm", "oil", "quickfix" },
       }
