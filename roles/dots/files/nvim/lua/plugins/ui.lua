@@ -5,7 +5,6 @@ return {
     version = "*",
     priority = 1000,
     opts = {
-      transparent_background = true,
       auto_integrations = true,
     },
     config = function(_, opts)
@@ -28,14 +27,22 @@ return {
         options = {
           section_separators = "",
           component_separators = "|",
-          disabled_filetypes = { "snacks_dashboard", "neo-tree" },
+          disabled_filetypes = { "snacks_dashboard" },
           globalstatus = true,
         },
         sections = {
           lualine_a = {},
           lualine_b = {
             { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
-            "filename",
+            {
+              "filename",
+              symbols = {
+                modified = " ", -- Text to show when the file is modified.
+                readonly = " ", -- Text to show when the file is non-modifiable or readonly.
+                unnamed = "[No Name]", -- Text to show for unnamed buffers.
+                newfile = " ", -- Text to show for newly created file before first write
+              },
+            },
           },
           lualine_c = {
             {

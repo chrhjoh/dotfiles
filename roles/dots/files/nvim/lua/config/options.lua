@@ -31,6 +31,7 @@ vim.o.so = 0
 vim.o.showcmdloc = "statusline"
 vim.o.laststatus = 3
 vim.o.showmode = false
+vim.o.ruler = false
 
 -- Completion
 vim.g.completion = true
