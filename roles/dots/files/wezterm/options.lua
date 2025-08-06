@@ -10,8 +10,7 @@ function M.apply_to_config(config)
     name = "unix",
     connect_automatically = true,
   } }
-  config.default_gui_startup_args =
-    { "start", "--always-new-process", "--domain", "unix", "--attach", "--workspace", "default" }
+  config.default_gui_startup_args = { "connect", "unix", "--workspace", "default" }
   config.color_scheme = "Catppuccin Mocha"
   config.window_background_opacity = 1
   config.command_palette_fg_color = utils.colors.text
@@ -29,9 +28,21 @@ function M.apply_to_config(config)
     tab_bar = {
       inactive_tab_edge = "none",
       active_tab = { bg_color = utils.colors.red, fg_color = utils.colors.base },
-      inactive_tab = { bg_color = utils.colors.crust, fg_color = utils.colors.text },
+      inactive_tab = { bg_color = utils.colors.mantle, fg_color = utils.colors.text },
       inactive_tab_hover = { bg_color = utils.colors.surface1, fg_color = utils.colors.text },
     },
+  }
+  config.use_fancy_tab_bar = true
+  config.tab_bar_at_bottom = false
+  config.show_tab_index_in_tab_bar = true
+  config.show_new_tab_button_in_tab_bar = false
+  config.hide_tab_bar_if_only_one_tab = true
+  config.show_close_tab_button_in_tabs = false
+  config.window_frame = {
+    font = wezterm.font { family = "JetBrains Mono", weight = "Bold" },
+    font_size = 11,
+    active_titlebar_bg = "none",
+    inactive_titlebar_bg = "none",
   }
 end
 

@@ -31,9 +31,5 @@ function M.setup()
       setup_workspace(workspace)
     end
   end)
-  wezterm.on("gui-startup", function(cmd)
-    local tab, pane, window = mux.spawn_window(cmd or {})
-    window:gui_window():set_inner_size(2200, 1400)
-  end)
 end
 return M
