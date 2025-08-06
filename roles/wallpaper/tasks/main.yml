@@ -1,0 +1,10 @@
+- name: Get current wallpaper
+  command: |
+    osascript -e 'tell application "System Events" to get picture of desktop 1'
+  register: current_wallpaper
+  changed_when: false
+
+- name: Set wallpaper
+  command: |
+    osascript -e 'tell application "System Events" to set picture of every desktop to "{{ wallpaper_path }}"'
+  when: wallpaper_path|string != current_wallpaper.stdout

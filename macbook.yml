@@ -1,6 +1,8 @@
 - name: Setup Macbook
   hosts: local
   roles:
-    - packages
+    - homebrew
     - dots
-    - system
+    - unix_system
+    - osx_system
+    - wallpaper

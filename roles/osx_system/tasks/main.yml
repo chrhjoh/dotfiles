@@ -1,0 +1,27 @@
+- name: Set Hot Corner Top Left - Mission Control
+  community.general.osx_defaults:
+    domain: com.apple.dock
+    key: wvous-tl-corner
+    type: int
+    value: 2
+
+- name: Set Hot Corner Top Right - Notification Center
+  community.general.osx_defaults:
+    domain: com.apple.dock
+    key: wvous-tr-corner
+    type: int
+    value: 12
+
+- name: Set Hot Corner Bottom Left - Application Windows
+  community.general.osx_defaults:
+    domain: com.apple.dock
+    key: wvous-bl-corner
+    type: int
+    value: 2
+
+- name: Set Hot Corner Bottom Right - Desktop
+  community.general.osx_defaults:
+    domain: com.apple.dock
+    key: wvous-br-corner
+    type: int
+    value: 4

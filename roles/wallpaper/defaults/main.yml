@@ -1,0 +1,2 @@
+wallpaper_name: yohoho.jpg
+wallpaper_path: "{{ role_path }}/files/{{ wallpaper_name }}"

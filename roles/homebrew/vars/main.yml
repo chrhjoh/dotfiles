@@ -1,0 +1,61 @@
+brew_packages:
+  # shell
+  - direnv
+  - fish
+  - starship
+  - zsh
+
+  # git
+  - lazygit
+  - git
+
+  # container
+  - podman-compose
+
+  # languages
+  - rustup
+  - basictex
+
+  # language servers
+  - basedpyright
+  - ltex-ls-plus
+  - lua-language-server
+  - texlab
+  - tinymist
+
+  # formatters and linters
+  - prettier
+  - ruff
+  - stylua
+
+  # miscellaneous CLI tools
+  - fd
+  - htop
+  - imagemagick
+  - ncdu
+  - neofetch
+  - ripgrep
+
+  # editors
+  - neovim
+
+  # terminal
+  - wezterm@nightly
+  - tmux
+
+  # gui
+  - spotify
+  - zen
+  - firefox
+  - zotero
+  - skim
+  - 1password
+  - obsidian
+  - rectangle
+  - slack
+
+  # fonts
+  - font-symbols-only-nerd-font
+  - font-jetbrains-mono
+
+  # - ansible  # should already be installed
