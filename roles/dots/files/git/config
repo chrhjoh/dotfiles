@@ -14,3 +14,5 @@
 [user]
 	name = Christian Johansen
 	email = christian.holm.johansen@gmail.com
+[core]
+	excludesfile = "~/.config/git/ignore"
