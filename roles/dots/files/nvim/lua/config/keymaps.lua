@@ -226,7 +226,7 @@ Snacks.toggle({
 Snacks.toggle({
   name = "Hardtime",
   get = function()
-    return not vim.g.hardtime_enabled
+    return vim.g.hardtime_enabled
   end,
   set = function()
     vim.g.hardtime_enabled = not vim.g.hardtime_enabled
