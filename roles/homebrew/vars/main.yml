@@ -35,6 +35,8 @@ brew_packages:
   - ncdu
   - neofetch
   - ripgrep
+  - zoxide
+  - fzf
 
   # editors
   - neovim

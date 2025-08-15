@@ -115,7 +115,6 @@ return {
           "rust",
           "vimdoc",
           "vim",
-          "latex",
           "bash",
           "markdown",
           "markdown_inline",
