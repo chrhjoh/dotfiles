@@ -19,7 +19,6 @@ set -x ZIM_HOME "$XDG_DATA_HOME/zim"
 set -x HISTFILE "$XDG_STATE_HOME/zsh/history"
 set -x TEXMFHOME "$XDG_DATA_HOME/texmf"
 
-set -x OBSIDIAN_HOME "$HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/"
 set -x EDITOR "nvim"
 set -x DOTS "$HOME/.dotfiles"
 

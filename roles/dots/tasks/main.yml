@@ -20,6 +20,8 @@
     - wezterm
     - .zshenv
     - zsh
+    - zellij
+    - ghostty
 
 - name: Link dotfiles to home directory
   file:

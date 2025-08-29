@@ -42,17 +42,16 @@ brew_packages:
   - neovim
 
   # terminal
-  - wezterm@nightly
-  - tmux
+  - zellij
+  - ghostty
 
   # gui
   - spotify
-  - zen
-  - firefox
+  - vivaldi
   - zotero
   - skim
   - 1password
-  - obsidian
+  - anytype
   - rectangle
   - slack
 

@@ -18,6 +18,9 @@ return {
               columns = { { "label", "label_description", gap = 1 }, { "kind_icon", "kind" } },
             },
           },
+          trigger = {
+            show_in_snippet = false,
+          },
         },
         keymap = {
           preset = "none",

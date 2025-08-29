@@ -1,5 +1,3 @@
-local move_map = Utils.keymap.get_lazy_list_mapper { mode = "n", desc_prefix = "Move" }
-local wez_paste_map = Utils.keymap.get_lazy_list_mapper { mode = "n", desc_prefix = "WezTerm" }
 local terminal_map = Utils.keymap.get_lazy_list_mapper { mode = "n", desc_prefix = "Terminal" }
 
 local esc_timers = {}
@@ -36,60 +34,7 @@ local double_press_escape = function()
   end
 end
 
-local move = function(direction)
-  if vim.env.TMUX then
-    if direction == "h" then
-      vim.cmd("TmuxNavigateLeft")
-    end
-    if direction == "j" then
-      vim.cmd("TmuxNavigateDown")
-    end
-    if direction == "k" then
-      vim.cmd("TmuxNavigateUp")
-    end
-    if direction == "l" then
-      vim.cmd("TmuxNavigateRight")
-    end
-  end
-  require("wezterm-move").move(direction)
-end
-
 return {
-  { "letieu/wezterm-move.nvim", lazy = true },
-  {
-    "christoomey/vim-tmux-navigator",
-    cmd = {
-      "TmuxNavigateLeft",
-      "TmuxNavigateDown",
-      "TmuxNavigateUp",
-      "TmuxNavigateRight",
-      "TmuxNavigatePrevious",
-    },
-    init = function()
-      vim.g.tmux_navigator_no_mappings = 1
-    end,
-    --stylua: ignore
-    keys = function()
-      return move_map {
-        {  "<C-h>",  function() move("h")  end,  desc = "Pane Left",} ,
-        {  "<C-j>",  function() move("j")  end,  desc = "Pane Down",} ,
-        {  "<C-k>",  function() move("k")  end,  desc = "Pane Up",} ,
-        {  "<C-l>",  function() move("l")  end,  desc = "Pane Right",} ,
-      }
-    end,
-  },
-  {
-    "chrhjoh/wezterm-paster.nvim",
-    cmd = { "WezTermPanePaste", "WezTermPaneSelect" },
-    opts = {},
-    --stylua: ignore
-    keys = function()
-      return wez_paste_map {
-        { "<leader>tp", "<cmd>WezTermPanePaste<cr>",  desc = "Paste to Pane",  mode = { "n", "v" },} ,
-        { "<leader>tP", "<cmd>WezTermPaneSelect<cr>", desc = "Select Pane" },
-      }
-    end,
-  },
   {
     "akinsho/toggleterm.nvim",
     version = "*",
