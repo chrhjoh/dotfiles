@@ -4,7 +4,7 @@ return {
   {
     "saghen/blink.cmp",
     dependencies = { "rafamadriz/friendly-snippets" },
-    event = "VeryLazy",
+    event = { "InsertEnter", "CmdlineEnter" },
     version = "*",
     opts = function()
       return {
@@ -36,6 +36,7 @@ return {
           ["<C-k>"] = { "show_signature", "hide_signature", "fallback" },
         },
         cmdline = {
+          enabled = true,
           keymap = { preset = "inherit" },
           completion = {
             menu = {
@@ -43,6 +44,18 @@ return {
             },
             list = { selection = { auto_insert = false } },
             ghost_text = { enabled = false },
+          },
+        },
+        sources = {
+          per_filetype = {
+            lua = { inherit_defaults = true, "lazydev" },
+          },
+          providers = {
+            lazydev = {
+              name = "LazyDev",
+              module = "lazydev.integrations.blink",
+              score_offset = 100, -- show at a higher priority than lsp
+            },
           },
         },
       }
@@ -100,75 +113,115 @@ return {
       }
     end,
   },
-  --Tabwidth etc.
+  -- --Tabwidth etc.
   { "tpope/vim-sleuth", event = "VeryLazy" },
   { "windwp/nvim-autopairs", event = "InsertEnter", opts = {} },
   {
     "nvim-treesitter/nvim-treesitter",
+    lazy = vim.fn.argc(-1) == 0, -- load treesitter early when opening a file from the cmdline
+    cmd = { "TSUpdate", "TSInstall", "TSLog", "TSUninstall" },
     dependencies = {
       "nvim-treesitter/nvim-treesitter-textobjects",
     },
     event = { "BufReadPost", "BufNewFile", "BufWritePre" },
-    build = ":TSUpdate",
+    branch = "main",
+    build = function(plugin)
+      local ensure_installed = {
+        "lua",
+        "python",
+        "rust",
+        "vimdoc",
+        "vim",
+        "bash",
+        "markdown",
+        "markdown_inline",
+        "julia",
+        "snakemake",
+        "json",
+        "toml",
+        "sql",
+        "latex",
+        "toml",
+        "gitcommit",
+        "yaml",
+        "regex",
+        "diff",
+      }
+      local TS = require("nvim-treesitter")
+      TS.update()
+      local installed = TS.get_installed()
+      local to_install = vim.tbl_filter(function(parser)
+        return not vim.list_contains(installed, parser)
+      end, ensure_installed)
+      TS.install(to_install):wait(300000)
+    end,
     config = function()
-      require("nvim-treesitter.configs").setup {
-        ensure_installed = {
-          "lua",
-          "python",
-          "rust",
-          "vimdoc",
-          "vim",
-          "bash",
-          "markdown",
-          "markdown_inline",
-          "julia",
-          "snakemake",
-          "json",
-          "toml",
-          "sql",
-          "latex",
-          "toml",
-          "gitcommit",
-          "yaml",
-          "regex",
-          "diff",
+      vim.api.nvim_create_autocmd("FileType", {
+        callback = function(ev)
+          local ft = vim.bo[ev.buf].filetype
+          if vim.list_contains(require("nvim-treesitter").get_installed(), ft) then
+            vim.treesitter.start()
+            vim.wo.foldmethod = "expr"
+            vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+            vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+          end
+        end,
+      })
+    end,
+  },
+  {
+    "nvim-treesitter/nvim-treesitter-textobjects",
+    branch = "main",
+    opts = {
+      set_jumps = true,
+    },
+    keys = function()
+      local result = {
+        {
+          "<leader>]",
+          function()
+            require("nvim-treesitter-textobjects.swap").swap_next("@parameter.inner")
+          end,
+          desc = "Swap Next Parameter",
+          mode = "n",
         },
-        highlight = { enable = true },
-
-        auto_install = false,
-        sync_install = true,
-        ignore_install = {},
-        modules = {},
-        incremental_selection = {
-          enable = true,
-          keymaps = {
-            init_selection = "<m-space>",
-            node_incremental = "<m-space>",
-            scope_incremental = false,
-            node_decremental = "<bs>",
-          },
-        },
-        textobjects = {
-          textobjects = {
-            move = {
-              enable = true,
-              goto_next_start = { ["]f"] = "@function.outer", ["]c"] = "@class.outer", ["]a"] = "@parameter.inner" },
-              goto_next_end = { ["]F"] = "@function.outer", ["]C"] = "@class.outer", ["]A"] = "@parameter.inner" },
-              goto_previous_start = { ["[f"] = "@function.outer", ["[c"] = "@class.outer", ["[a"] = "@parameter.inner" },
-              goto_previous_end = { ["[F"] = "@function.outer", ["[C"] = "@class.outer", ["[A"] = "@parameter.inner" },
-            },
-          },
-          swap = {
-            enable = true,
-            swap_next = {
-              ["<leader>]"] = "@parameter.inner",
-            },
-            swap_previous = {
-              ["<leader>["] = "@parameter.inner",
-            },
-          },
+        {
+          "<leader>[",
+          function()
+            require("nvim-treesitter-textobjects.swap").swap_previous("@parameter.outer")
+          end,
+          desc = "Swap Previous Parameter",
+          mode = "n",
         },
       }
+      local moves = {
+        goto_next_start = { ["]f"] = "@function.outer", ["]c"] = "@class.outer", ["]a"] = "@parameter.inner" },
+        goto_next_end = { ["]F"] = "@function.outer", ["]C"] = "@class.outer", ["]A"] = "@parameter.inner" },
+        goto_previous_start = { ["[f"] = "@function.outer", ["[c"] = "@class.outer", ["[a"] = "@parameter.inner" },
+        goto_previous_end = { ["[F"] = "@function.outer", ["[C"] = "@class.outer", ["[A"] = "@parameter.inner" },
+      }
+      for method, keymaps in pairs(moves) do
+        for key, query in pairs(keymaps) do
+          local desc = query:gsub("@", ""):gsub("%..*", "")
+          desc = desc:sub(1, 1):upper() .. desc:sub(2)
+          desc = (key:sub(1, 1) == "[" and "Prev " or "Next ") .. desc
+          desc = desc .. (key:sub(2, 2) == key:sub(2, 2):upper() and " End" or " Start")
+          result[#result + 1] = {
+            key,
+            function()
+              -- don't use treesitter if in diff mode and the key is one of the c/C keys
+              if vim.wo.diff and key:find("[cC]") then
+                return vim.cmd("normal! " .. key)
+              end
+              require("nvim-treesitter-textobjects.move")[method](query, "textobjects")
+            end,
+            desc = desc,
+            mode = { "n", "x", "o" },
+            silent = true,
+          }
+        end
+      end
+      return result
     end,
   },
 }
