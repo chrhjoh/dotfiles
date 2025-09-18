@@ -104,6 +104,24 @@ return {
         mode = { "n", "v" },
         desc = "Search and Replace",
       },
+      {
+        "<leader>sR",
+        function()
+          require("grug-far").open { prefills = { paths = vim.fn.expand("%") } }
+        end,
+        mode = "n",
+        desc = "Search and Replace within Current File",
+        silent = true,
+      },
+      {
+        "<leader>sR",
+        function()
+          require("grug-far").open { visualSelectionUsage = "operate-within-range" }
+        end,
+        mode = "x",
+        desc = "Search and Replace within Current Selection",
+        silent = true,
+      },
     },
   },
   {
@@ -117,12 +135,41 @@ return {
         },
       },
     },
-    -- stylua: ignore
-    keys = function() return flash_map {
-      { "s",     mode = { "n", "x", "o" }, function() require("flash").jump() end,              desc = "Jump" },
-      { "S",     mode = { "n", "o", "x" }, function() require("flash").treesitter() end,        desc = "Treesitter" },
-      { "r",     mode = "o",               function() require("flash").remote() end,            desc = "Remote" },
-      { "R",     mode = { "o", "x" },      function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
-    }end,
+    keys = function()
+      return flash_map {
+        {
+          "s",
+          mode = { "n", "x", "o" },
+          function()
+            require("flash").jump()
+          end,
+          desc = "Jump",
+        },
+        {
+          "S",
+          mode = { "n", "o", "x" },
+          function()
+            require("flash").treesitter()
+          end,
+          desc = "Treesitter",
+        },
+        {
+          "r",
+          mode = "o",
+          function()
+            require("flash").remote()
+          end,
+          desc = "Remote",
+        },
+        {
+          "R",
+          mode = { "o", "x" },
+          function()
+            require("flash").treesitter_search()
+          end,
+          desc = "Treesitter Search",
+        },
+      }
+    end,
   },
 }

@@ -13,11 +13,9 @@ return {
       icons = {
         separator = "→",
         rules = {
-          { pattern = "put", icon = "󰅇 ", color = "yellow" },
           { pattern = "yank", icon = "󰅇 ", color = "yellow" },
           { pattern = "message", icon = "󰆈 ", color = "gray" },
           { pattern = "lua", icon = "󰢱 ", color = "blue" },
-          { pattern = "obsidian", icon = " ", color = "purple" },
         },
       },
       spec = {
@@ -133,7 +131,7 @@ return {
     "stevearc/oil.nvim",
     ---@module 'oil'
     ---@type oil.SetupOpts
-    dependencies = { "echasnovski/mini.icons" },
+    dependencies = { "nvim-mini/mini.icons" },
     opts = {
       columns = {
         "icon",
@@ -225,7 +223,7 @@ return {
     opts = { enabled = false },
   },
   {
-    "echasnovski/mini.surround",
+    "nvim-mini/mini.surround",
     event = "VeryLazy",
     opts = {
       search_method = "nearest",

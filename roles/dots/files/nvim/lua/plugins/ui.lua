@@ -53,7 +53,7 @@ return {
     "nvim-lualine/lualine.nvim",
     event = "VeryLazy",
     dependencies = {
-      "echasnovski/mini.icons",
+      "nvim-mini/mini.icons",
       "bwpge/lualine-pretty-path",
     },
     opts = function()
