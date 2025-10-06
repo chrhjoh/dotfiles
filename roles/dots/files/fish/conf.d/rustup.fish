@@ -1,1 +1,3 @@
-source "/Users/hcq343/.local/share/cargo/env.fish"
+if test -f ~/.local/share/cargo/env.fish
+    source ~/.local/share/cargo/env.fish
+end
