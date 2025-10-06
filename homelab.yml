@@ -1,5 +1,5 @@
 - name: Setup Homelab
   hosts: homelab
   roles:
-    - homelab_packages
+    - homelab
     - dots
