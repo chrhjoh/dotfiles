@@ -69,6 +69,9 @@ return {
           vim.keymap.set("t", "<C-k>", [[<Cmd>wincmd k<CR>]], keymap_opts)
           vim.keymap.set("t", "<C-l>", [[<Cmd>wincmd l<CR>]], keymap_opts)
           vim.keymap.set("t", "<C-w>", [[<C-\><C-n><C-w>]], keymap_opts)
+          vim.keymap.set("n", "q", function()
+            require("toggleterm").toggle(id)
+          end, keymap_opts)
         end,
       })
       --- Cleanup if buffer is deleted (untested)
