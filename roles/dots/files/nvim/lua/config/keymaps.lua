@@ -8,7 +8,6 @@ local buffer_map =      Utils.keymap.get_mapper { mode = "n", desc_prefix = "Buf
 local diagnostic_map =  Utils.keymap.get_mapper { mode = "n", desc_prefix = "Diagnostics" }
 local window_map =      Utils.keymap.get_mapper { mode = "n", desc_prefix = "Window" }
 local file_map =        Utils.keymap.get_mapper { mode = "n", desc_prefix = "File" }
-local source_map =      Utils.keymap.get_mapper { mode = "n", desc_prefix = "Source" }
 
 nmap { "<Space>",   "<Nop>",          mode = { "n", "v" }, silent = true }
 nmap { "<leader>Q", "<cmd>quit<cr>",  desc = "Quit Neovim" }
@@ -141,9 +140,6 @@ imap { "<c-k>", "<up>" }
 imap { "<c-j>", "<down>" }
 imap { "<c-h>", "<left>" }
 
-source_map {"<leader>X", "<cmd>source % <CR>",   desc = "Source current Lua file",       silent = true }
-source_map { "<leader>x", ":.lua<CR>",            desc = "Source current Lua line",       silent = true }
-source_map { "<leader>x", ":lua<CR>",             desc = "Source current Lua selection",  silent = true, mode = "v" }
 -- stylua: ignore end
 
 -- Toggle options

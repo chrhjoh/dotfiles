@@ -4,7 +4,6 @@
 ---@field remap? boolean
 ---@field expr? boolean
 ---@field nowait? boolean
----@field ft? string|string[]
 ---@field buffer? integer|boolean
 
 ---@class KeysDefaults: KeysBase

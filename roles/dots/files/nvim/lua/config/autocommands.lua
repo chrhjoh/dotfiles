@@ -83,3 +83,28 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
     vim.opt_local.conceallevel = 0
   end,
 })
+
+vim.api.nvim_create_autocmd({ "FileType" }, {
+  group = vim.api.nvim_create_augroup("lua_keymaps", { clear = true }),
+  pattern = "lua",
+  callback = function(event)
+    vim.keymap.set(
+      "n",
+      "<leader>X",
+      "<cmd>source % <CR>",
+      { desc = "Source current Lua file", silent = true, buffer = event.buf }
+    )
+    vim.keymap.set(
+      "n",
+      "<leader>x",
+      "<CMD>.lua<CR>",
+      { desc = "Source current Lua line", silent = true, buffer = event.buf }
+    )
+    vim.keymap.set(
+      "v",
+      "<leader>x",
+      ":lua<CR>",
+      { desc = "Source current Lua selection", silent = true, buffer = event.buf }
+    )
+  end,
+})
