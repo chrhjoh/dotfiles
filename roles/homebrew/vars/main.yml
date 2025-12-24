@@ -9,12 +9,10 @@ brew_packages:
   - lazygit
   - git
 
-  # container
-  - podman-compose
-
   # languages
   - rustup
   - basictex
+  - python3
 
   # language servers
   - basedpyright

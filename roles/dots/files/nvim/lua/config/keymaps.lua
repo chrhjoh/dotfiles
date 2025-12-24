@@ -131,6 +131,11 @@ window_map { "<C-Down>",  "<cmd>resize -2<cr>",           desc = "Decrease Heigh
 window_map { "<C-Left>",  "<cmd>vertical resize -2<cr>",  desc = "Decrease Width" }
 window_map { "<C-Right>", "<cmd>vertical resize +2<cr>",  desc = "Increase Width" }
 
+window_map { "<C-h>",    "<C-W>h",                     desc = "Move Left Window" }
+window_map { "<C-j>",    "<C-W>j",                     desc = "Move Down Window" }
+window_map { "<C-k>",    "<C-W>k",                     desc = "Move Up Window" }
+window_map { "<C-l>",    "<C-W>l",                     desc = "Move Right Window" }
+
 -- new file
 file_map { "<leader>fn", "<cmd>enew<cr>", desc = "New File" }
 
