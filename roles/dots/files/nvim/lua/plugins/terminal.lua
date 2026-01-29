@@ -5,6 +5,7 @@ local lazygit = nil
 local lazygit_log = nil
 local lazygit_filelog = nil
 local lazygit_dots = nil
+local opencode = nil
 
 local function hidden_terminal(cmd, id)
   local terminal = require("toggleterm.terminal").Terminal
@@ -103,34 +104,112 @@ return {
         end,
       })
     end,
-    --stylua: ignore
     keys = function()
-      return terminal_map {
-        { "<c-\\>",     function()   require("toggleterm").toggle(vim.v.count) end,                                                       desc = "Toggle",              mode = "n",},
-        { "<leader>tx", function()   require("toggleterm").send_lines_to_terminal("single_line", true, { args = vim.v.count1 }) end,      desc = "Send Current Line",   mode = "n",},
-        { "<leader>tx", function()   require("toggleterm").send_lines_to_terminal("visual_lines", true, { args = vim.v.count1 }) end,     desc = "Send Selected Lines", mode = "v",},
-        { "<leader>tX", function()   require("toggleterm").send_lines_to_terminal("visual_selection", true, { args = vim.v.count1 }) end, desc = "Send Selection",      mode = "v",},
-        { "<leader>t|", function()   require("toggleterm").toggle(vim.v.count1, 60, nil, "vertical") end,                                 desc = "Open Vertical",},
-        { "<leader>t-", function()   require("toggleterm").toggle(vim.v.count1, 18, nil, "horizontal") end,                               desc = "Open Horizontal",},
-        { "<leader>tf", function()   require("toggleterm").toggle(vim.v.count1, nil, nil, "float") end,                                   desc = "Open Float",},
-        { "<leader>gg", function()   lazygit = lazygit or hidden_terminal("lazygit", 100)            lazygit:toggle() end,                desc = "Lazygit",},
-        { "<leader>gG", 
+      local keys = {
+        {
+          "<c-\\>",
           function()
-            lazygit_dots = lazygit_dots or hidden_terminal('lazygit -p $DOTS' , 101)
-            lazygit_dots:toggle() 
+            require("toggleterm").toggle(vim.v.count)
           end,
-          desc = "Lazygit - Dotfiles",
+          desc = "Toggle",
+          mode = "n",
         },
-        { "<leader>gl", function()   lazygit_log = lazygit_log or hidden_terminal("lazygit log",102) lazygit_log:toggle()end,             desc = "Lazygit Log",},
-        { "<leader>gf",
+        {
+          "<leader>tx",
           function()
-            local file = vim.trim(vim.api.nvim_buf_get_name(0))
-            lazygit_filelog = lazygit_filelog or hidden_terminal("lazygit log -f " .. file, 103)
-            lazygit_filelog:toggle()
+            require("toggleterm").send_lines_to_terminal("single_line", true, { args = vim.v.count1 })
           end,
-          desc = "Lazygit Current File History",
+          desc = "Send Current Line",
+          mode = "n",
+        },
+        {
+          "<leader>tx",
+          function()
+            require("toggleterm").send_lines_to_terminal("visual_lines", true, { args = vim.v.count1 })
+          end,
+          desc = "Send Selected Lines",
+          mode = "v",
+        },
+        {
+          "<leader>tX",
+          function()
+            require("toggleterm").send_lines_to_terminal("visual_selection", true, { args = vim.v.count1 })
+          end,
+          desc = "Send Selection",
+          mode = "v",
+        },
+        {
+          "<leader>t|",
+          function()
+            require("toggleterm").toggle(vim.v.count1, 60, nil, "vertical")
+          end,
+          desc = "Open Vertical",
+        },
+        {
+          "<leader>t-",
+          function()
+            require("toggleterm").toggle(vim.v.count1, 18, nil, "horizontal")
+          end,
+          desc = "Open Horizontal",
+        },
+        {
+          "<leader>tf",
+          function()
+            require("toggleterm").toggle(vim.v.count1, nil, nil, "float")
+          end,
+          desc = "Open Float",
         },
       }
+
+      if vim.fn.executable("lazygit") == 1 then
+        vim.list_extend(keys, {
+          {
+            "<leader>gg",
+            function()
+              lazygit = lazygit or hidden_terminal("lazygit", 100)
+              lazygit:toggle()
+            end,
+            desc = "Lazygit",
+          },
+          {
+            "<leader>gG",
+            function()
+              lazygit_dots = lazygit_dots or hidden_terminal("lazygit -p $DOTS", 101)
+              lazygit_dots:toggle()
+            end,
+            desc = "Lazygit - Dotfiles",
+          },
+          {
+            "<leader>gl",
+            function()
+              lazygit_log = lazygit_log or hidden_terminal("lazygit log", 102)
+              lazygit_log:toggle()
+            end,
+            desc = "Lazygit Log",
+          },
+          {
+            "<leader>gf",
+            function()
+              local file = vim.trim(vim.api.nvim_buf_get_name(0))
+              lazygit_filelog = lazygit_filelog or hidden_terminal("lazygit log -f " .. file, 103)
+              lazygit_filelog:toggle()
+            end,
+            desc = "Lazygit Current File History",
+          },
+        })
+      end
+      vim.list_extend(keys, {
+        {
+          "<leader>to",
+          function()
+            opencode = opencode or hidden_terminal("opencode", 104)
+            opencode:toggle()
+          end,
+          desc = "Opencode",
+        },
+      })
+
+      return terminal_map(keys)
     end,
   },
 }

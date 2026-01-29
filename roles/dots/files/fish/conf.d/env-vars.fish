@@ -18,8 +18,13 @@ set -x R_HISTFILE "$XDG_STATE_HOME/R/history"
 set -x ZIM_HOME "$XDG_DATA_HOME/zim"
 set -x HISTFILE "$XDG_STATE_HOME/zsh/history"
 set -x TEXMFHOME "$XDG_DATA_HOME/texmf"
+set -x ANSIBLE_HOME "$XDG_DATA_HOME/ansible"
 
 set -x EDITOR "nvim"
 set -x DOTS "$HOME/.dotfiles"
 
 set -x HOMEBREW_NO_AUTO_UPDATE 1
+set -x BUNDLE_USER_CONFIG "$XDG_CONFIG_HOME"/bundle
+set -x BUNDLE_USER_CACHE "$XDG_CACHE_HOME"/bundle
+set -x BUNDLE_USER_PLUGIN "$XDG_DATA_HOME"/bundle
+

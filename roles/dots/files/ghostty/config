@@ -30,3 +30,6 @@ keybind = super+alt+physical:six=goto_tab:6
 keybind = super+alt+physical:seven=goto_tab:7
 keybind = super+alt+physical:eight=goto_tab:8
 
+
+# SSH 
+shell-integration-features = ssh-terminfo,ssh-env,sudo
