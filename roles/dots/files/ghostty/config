@@ -32,4 +32,4 @@ keybind = super+alt+physical:eight=goto_tab:8
 
 
 # SSH 
-shell-integration-features = ssh-terminfo,ssh-env,sudo
+shell-integration-features = ssh-env,sudo
