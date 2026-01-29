@@ -7,6 +7,7 @@ vim.o.mouse = "a"
 
 -- Clipboard
 vim.o.clipboard = "unnamedplus"
+vim.g.clipboard = "osc52"
 
 -- Indent
 vim.o.breakindent = true
