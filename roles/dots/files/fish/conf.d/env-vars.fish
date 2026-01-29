@@ -2,7 +2,8 @@
 set -x XDG_CACHE_HOME "$HOME/.cache"
 set -x XDG_CONFIG_HOME "$HOME/.config"
 set -x XDG_DATA_HOME "$HOME/.local/share"
-set -x XDG_RUNTIME_DIR "$HOME/.xdg-runtime"
+
+set -x XDG_RUNTIME_DIR "/run/user/$(id -u)"
 set -x XDG_STATE_HOME "$HOME/.local/state"
 
 # Tool-specific directories
@@ -22,6 +23,8 @@ set -x ANSIBLE_HOME "$XDG_DATA_HOME/ansible"
 
 set -x EDITOR "nvim"
 set -x DOTS "$HOME/.dotfiles"
+
+set -x PAGER "less"
 
 set -x HOMEBREW_NO_AUTO_UPDATE 1
 set -x BUNDLE_USER_CONFIG "$XDG_CONFIG_HOME"/bundle
