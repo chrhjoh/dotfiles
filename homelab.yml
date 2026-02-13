@@ -1,5 +1,0 @@
-- name: Setup Homelab
-  hosts: homelab
-  roles:
-    - homelab
-    - dots
