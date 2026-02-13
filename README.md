@@ -1,9 +1,10 @@
 # Christian Johansen's Dotfiles
 
-Bootstrap by running
+Dotfiles managed by stow
+
+## Installation
 
 ```{bash}
-./bootstrap
+git clone git@github.com:chrhjoh/dotfiles.git ~/.config/dotfiles
+stow -d ~/.config/dotfiles -t $HOME --dotfiles <pkg>
 ```
-
-This install ansible and bootstraps my macbook.
