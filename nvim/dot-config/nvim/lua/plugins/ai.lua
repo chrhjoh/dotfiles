@@ -18,19 +18,20 @@ return {
     "olimorris/codecompanion.nvim",
     cmd = { "CodeCompanionChat", "CodeCompanion" },
     opts = {
-      strategies = {
-        chat = {
-          adapter = {
-            name = "copilot",
-            model = "claude-sonnet-4",
-          },
-          -- Add keymaps for chat such as
-        },
-      },
+      -- strategies = {
+      --   chat = {
+      --     adapter = {
+      --       name = "copilot",
+      --       -- model = "claude-sonnet-4",
+      --     },
+      --     -- Add keymaps for chat such as
+      --   },
+      -- },
     },
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-treesitter/nvim-treesitter",
+      "zbirenbaum/copilot.lua",
     },
     keys = function()
       return nmap {
