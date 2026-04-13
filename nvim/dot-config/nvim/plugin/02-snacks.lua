@@ -51,6 +51,7 @@ require("snacks").setup {
           desc = "Config",
           action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})",
         },
+        { icon = "󰏖 ", key = "p", desc = "Plugins", action = ":lua vim.pack.update(nil, { offline = true })" },
         { icon = " ", key = "s", desc = "Restore Session", action = ":Persisted load" },
         { icon = "󰆓 ", key = "S", desc = "Select Session", action = ":Persisted select" },
         { icon = " ", key = "q", desc = "Quit", action = ":qa" },
