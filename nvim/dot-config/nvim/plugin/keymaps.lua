@@ -1,6 +1,7 @@
 vim.pack.add { "https://github.com/folke/which-key.nvim" }
 
 local function setup()
+  vim.cmd.packadd("nvim.undotree")
   require("which-key").setup {
     preset = "helix",
     icons = { mappings = false },
@@ -53,6 +54,8 @@ local function setup()
   map { ">", ">gv", desc = "Deindent", mode = "v" }
   nmap { "<Leader>Q", "<Cmd>quit<Cr>", desc = "Quit" }
   nmap { "<Leader>m", "<Cmd>messages<Cr>", desc = "Messages", silent = true }
+  nmap { "<Leader>n", Snacks.notifier.show_history, desc = "Notifications" }
+  nmap { "<leader>U", require("undotree").open, desc = "Undotree" }
   nmap { "k", "v:count == 0 ? 'gk' : 'k'", desc = "Up", silent = true, expr = true }
   nmap { "j", "v:count == 0 ? 'gj' : 'j'", desc = "Down", silent = true, expr = true }
   nmap { "x", '"_x', desc = "Delete character", noremap = true }

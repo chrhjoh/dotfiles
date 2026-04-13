@@ -41,6 +41,7 @@ local function setup()
       "man",
       "notify",
       "qf",
+      "nvim-undotree",
       "startuptime",
     },
     callback = function(event)
