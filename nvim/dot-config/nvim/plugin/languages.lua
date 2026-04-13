@@ -20,5 +20,5 @@ Config.load.load_lazily(function()
       horizontal_rules = require("markview.presets").horizontal_rules.thick,
     },
   }
-  vim.opt.rtp:append(vim.pack.get({ "snakemake" })[1].path .. "/misc/vim")
+  vim.opt.rtp:append(Config.utils.plugin_dir("snakemake") .. "/misc/vim")
 end)

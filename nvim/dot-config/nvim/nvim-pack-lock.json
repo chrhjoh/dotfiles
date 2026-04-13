@@ -55,6 +55,11 @@
       "src": "https://github.com/m4xshen/hardtime.nvim",
       "version": "'main'"
     },
+    "lazydev.nvim": {
+      "rev": "ff2cbcba459b637ec3fd165a2be59b7bbaeedf0d",
+      "src": "https://github.com/folke/lazydev.nvim",
+      "version": "'main'"
+    },
     "lualine-pretty-path": {
       "rev": "852cb06f3562bced4776a924e56a9e44d0ce634f",
       "src": "https://github.com/bwpge/lualine-pretty-path",

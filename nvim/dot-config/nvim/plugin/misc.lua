@@ -6,6 +6,7 @@ vim.pack.add {
   { src = "https://github.com/m4xshen/hardtime.nvim", version = "main" },
   { src = "https://github.com/MagicDuck/grug-far.nvim", version = "main" },
   { src = "https://github.com/folke/flash.nvim", version = "main" },
+  { src = "https://github.com/folke/lazydev.nvim", version = "main" },
 }
 
 Config.load.load_lazily(function()
@@ -16,6 +17,15 @@ Config.load.load_lazily(function()
     },
   } }
 end)
+
+Config.load.load_on_ft(function()
+  require("lazydev").setup {
+    libraries = {
+      { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+      { path = Config.utils.plugin_dir("snacks.nvim") }, --TODO: doesnt work
+    },
+  }
+end, "lua")
 
 require("oil").setup {
   columns = {

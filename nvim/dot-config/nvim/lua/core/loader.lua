@@ -19,4 +19,12 @@ function M.load_on_event(fn, event)
   })
 end
 
+function M.load_on_ft(fn, ft)
+  vim.api.nvim_create_autocmd("FileType", {
+    pattern = ft,
+    once = true,
+    callback = fn,
+  })
+end
+
 return M
