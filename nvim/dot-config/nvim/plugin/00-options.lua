@@ -1,4 +1,3 @@
--- Leader
 vim.g.mapleader = " "
 vim.g.maplocalleader = ","
 
@@ -7,7 +6,6 @@ vim.o.mouse = "a"
 
 -- Clipboard
 vim.o.clipboard = "unnamedplus"
-vim.g.clipboard = "osc52"
 
 -- Indent
 vim.o.breakindent = true
@@ -25,9 +23,6 @@ vim.o.updatetime = 250
 -- Sessions
 vim.o.sessionoptions = "buffers,curdir,folds,tabpages,winpos,winsize"
 
--- Forces cursor into middle of page when scrolling
-vim.o.so = 0
-
 -- Statusline
 vim.o.showcmdloc = "statusline"
 vim.o.laststatus = 3
@@ -35,8 +30,7 @@ vim.o.showmode = false
 vim.o.ruler = false
 
 -- Completion
-vim.g.completion = true
-vim.o.completeopt = "menu,menuone,noinsert"
+vim.o.completeopt = "menu,menuone,noinsert,fuzzy,preview,popup"
 vim.o.pumheight = 10
 
 -- Window
@@ -60,12 +54,14 @@ local opt = vim.opt
 opt.confirm = true -- Confirm to save changes before exiting modified buffer
 opt.cursorline = true -- Enable highlighting of the current line
 opt.expandtab = true -- Use spaces instead of tabs
-opt.timeoutlen = 300
+opt.timeoutlen = 500
 opt.wildmode = "longest:full,full"
 opt.splitright = true
 opt.virtualedit = "block"
 -- Spelling
 opt.spelllang = "en_us"
 opt.diffopt = "internal,filler,closeoff,indent-heuristic,linematch:60,algorithm:histogram"
+opt.smartindent = true
+opt.smarttab = true
 
 vim.o.foldlevel = 10

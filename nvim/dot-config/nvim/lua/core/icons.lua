@@ -1,4 +1,3 @@
----@class Utils.Icons
 local M = {}
 
 M.diagnostics = {
