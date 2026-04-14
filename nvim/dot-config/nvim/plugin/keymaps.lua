@@ -389,6 +389,20 @@ Config.load.load_later(function()
     end,
     desc = "Hunks",
   }
+  nmap {
+    "<leader>gb",
+    function()
+      Snacks.git.blame_line()
+    end,
+    desc = "Blame line",
+  }
+  nmap {
+    "<leader>gB",
+    function()
+      Snacks.gitbrowse()
+    end,
+    desc = "Browser",
+  }
 
   -- session management -----------------------------------------
   nmap { "<leader>ql", "<CMD>Persisted load<CR>", desc = "Restore CWD" }
@@ -762,9 +776,26 @@ Config.load.load_later(function()
       desc = "Lazygit Current File History",
     }
   end
-  -- dashboard ------------------------------------------------------
+  -- snacks -----------------------------------------------------------
 
   nmap { "<leader>H", Snacks.dashboard.open, desc = "Dashboard" }
+  nmap { "leadercR", Snacks.rename.rename_file, desc = "Rename File" }
+  map {
+    "[[",
+    function()
+      Snacks.words.jump(-vim.v.count1)
+    end,
+    mode = { "n", "t" },
+    desc = "Reference",
+  }
+  map {
+    "]]",
+    function()
+      Snacks.words.jump(vim.v.count1)
+    end,
+    mode = { "n", "t" },
+    desc = "Reference",
+  }
 
   -- which-key ------------------------------------------------------
   nmap {
@@ -837,4 +868,47 @@ Config.load.load_later(function()
     mode = { "n", "x" },
     desc = "Sidekick Select Prompt",
   }
+
+  -- treesitter ----------------------------------------------------------
+  nmap {
+    "<leader>]",
+    function()
+      require("nvim-treesitter-textobjects.swap").swap_next("@parameter.inner")
+    end,
+    desc = "Swap Next Parameter",
+  }
+  nmap {
+    "<leader>[",
+    function()
+      require("nvim-treesitter-textobjects.swap").swap_previous("@parameter.outer")
+    end,
+    desc = "Swap Previous Parameter",
+  }
+  local moves = {
+    goto_next_start = { ["]f"] = "@function.outer", ["]c"] = "@class.outer", ["]a"] = "@parameter.inner" },
+    goto_next_end = { ["]F"] = "@function.outer", ["]C"] = "@class.outer", ["]A"] = "@parameter.inner" },
+    goto_previous_start = { ["[f"] = "@function.outer", ["[c"] = "@class.outer", ["[a"] = "@parameter.inner" },
+    goto_previous_end = { ["[F"] = "@function.outer", ["[C"] = "@class.outer", ["[A"] = "@parameter.inner" },
+  }
+  for method, keymaps in pairs(moves) do
+    for key, query in pairs(keymaps) do
+      local desc = query:gsub("@", ""):gsub("%..*", "")
+      desc = desc:sub(1, 1):upper() .. desc:sub(2)
+      desc = (key:sub(1, 1) == "[" and "Prev " or "Next ") .. desc
+      desc = desc .. (key:sub(2, 2) == key:sub(2, 2):upper() and " End" or " Start")
+      map {
+        key,
+        function()
+          -- don't use treesitter if in diff mode and the key is one of the c/C keys
+          if vim.wo.diff and key:find("[cC]") then
+            return vim.cmd("normal! " .. key)
+          end
+          require("nvim-treesitter-textobjects.move")[method](query, "textobjects")
+        end,
+        desc = desc,
+        mode = { "n", "x", "o" },
+        silent = true,
+      }
+    end
+  end
 end)
