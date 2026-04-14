@@ -5,11 +5,6 @@
       "src": "https://github.com/numToStr/Comment.nvim",
       "version": "'master'"
     },
-    "academic.nvim": {
-      "rev": "d22b713fee63f7ca92d4772872c0f2ce7e79176e",
-      "src": "https://github.com/ficcdaf/academic.nvim",
-      "version": "'main'"
-    },
     "blink.cmp": {
       "rev": "78336bc89ee5365633bcf754d93df01678b5c08f",
       "src": "https://github.com/saghen/blink.cmp",
@@ -74,10 +69,6 @@
       "rev": "02824a95a0db2c9fd1bab3adba4510bc8f9c91e4",
       "src": "https://github.com/OXY2DEV/markview.nvim",
       "version": ">=0.0.0"
-    },
-    "mini.clue": {
-      "rev": "f8a11789cf34a7bae396dc0f828d06cdb5066793",
-      "src": "https://github.com/nvim-mini/mini.clue"
     },
     "mini.icons": {
       "rev": "7fdae2443a0e2910015ca39ad74b50524ee682d3",
