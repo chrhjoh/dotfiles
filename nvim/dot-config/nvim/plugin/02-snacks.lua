@@ -51,7 +51,7 @@ require("snacks").setup {
           desc = "Config",
           action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})",
         },
-        { icon = "󰏖 ", key = "p", desc = "Plugins", action = ":lua vim.pack.update(nil, { offline = true })" },
+        { icon = "󰏖 ", key = "p", desc = "Plugins", action = ":lua vim.pack.update()" },
         { icon = " ", key = "s", desc = "Restore Session", action = ":Persisted load" },
         { icon = "󰆓 ", key = "S", desc = "Select Session", action = ":Persisted select" },
         { icon = " ", key = "q", desc = "Quit", action = ":qa" },
@@ -66,107 +66,108 @@ require("snacks").setup {
   },
 }
 
-vim._print = function(_, ...)
+vim._print = function(_, ...) ---@diagnostic disable-line: duplicate-set-field
   Snacks.debug.inspect(...)
 end
 
-local function lazy_setup()
-  Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>us")
-  Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>uw")
-  Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>uL")
-  Snacks.toggle.line_number():map("<leader>ul")
-  Snacks.toggle
-    .option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 })
-    :map("<leader>uc")
+Config.load.load_later(
+  function()
+    Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>us")
+    Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>uw")
+    Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>uL")
+    Snacks.toggle.line_number():map("<leader>ul")
+    Snacks.toggle
+        .option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 })
+        :map("<leader>uc")
 
-  -- Toogle various ui elements
-  Snacks.toggle.treesitter():map("<leader>uT")
-  Snacks.toggle.inlay_hints():map("<leader>uh")
-  Snacks.toggle.diagnostics({ bufnr = 0 }):map("<leader>uD")
-  Snacks.toggle.zen():map("<leader>uZ")
-  Snacks.toggle.dim():map("<leader>uz")
-  Snacks.toggle.indent():map("<leader>ui")
+    -- Toogle various ui elements
+    Snacks.toggle.treesitter():map("<leader>uT")
+    Snacks.toggle.inlay_hints():map("<leader>uh")
+    Snacks.toggle.diagnostics({ bufnr = 0 }):map("<leader>uD")
+    Snacks.toggle.zen():map("<leader>uZ")
+    Snacks.toggle.dim():map("<leader>uz")
+    Snacks.toggle.indent():map("<leader>ui")
 
-  Snacks.toggle({
-    name = "Buffer Diagnostics",
-    get = function()
-      return vim.diagnostic.is_enabled { bufnr = 0 }
-    end,
-    set = function(_)
-      vim.diagnostic.enable(not vim.diagnostic.is_enabled { bufnr = 0 }, { bufnr = 0 })
-    end,
-  }):map("<leader>ud")
+    Snacks.toggle({
+      name = "Buffer Diagnostics",
+      get = function()
+        return vim.diagnostic.is_enabled { bufnr = 0 }
+      end,
+      set = function(_)
+        vim.diagnostic.enable(not vim.diagnostic.is_enabled { bufnr = 0 }, { bufnr = 0 })
+      end,
+    }):map("<leader>ud")
 
-  Snacks.toggle({
-    name = "Buffer Format",
-    get = function()
-      return not vim.b[0].disable_autoformat
-    end,
-    set = function(_)
-      vim.b[0].disable_autoformat = not vim.b[0].disable_autoformat
-    end,
-  }):map("<leader>uf")
+    Snacks.toggle({
+      name = "Buffer Format",
+      get = function()
+        return not vim.b[0].disable_autoformat
+      end,
+      set = function(_)
+        vim.b[0].disable_autoformat = not vim.b[0].disable_autoformat
+      end,
+    }):map("<leader>uf")
 
-  Snacks.toggle({
-    name = "Global Format",
-    get = function()
-      return not vim.g.disable_autoformat
-    end,
-    set = function(_)
-      vim.g.disable_autoformat = not vim.g.disable_autoformat
-    end,
-  }):map("<leader>uF")
+    Snacks.toggle({
+      name = "Global Format",
+      get = function()
+        return not vim.g.disable_autoformat
+      end,
+      set = function(_)
+        vim.g.disable_autoformat = not vim.g.disable_autoformat
+      end,
+    }):map("<leader>uF")
 
-  Snacks.toggle({
-    name = "Completion Menu",
-    get = function()
-      return vim.b.completion ~= false
-    end,
-    set = function(state)
-      vim.b.completion = state
-    end,
-  }):map("<leader>um")
+    Snacks.toggle({
+      name = "Completion Menu",
+      get = function()
+        return vim.b.completion ~= false
+      end,
+      set = function(state)
+        vim.b.completion = state
+      end,
+    }):map("<leader>um")
 
-  Snacks.toggle({
-    name = "Git Blame Line",
-    get = function()
-      return require("gitsigns.config").config.current_line_blame
-    end,
-    set = function(_)
-      require("gitsigns").toggle_current_line_blame()
-    end,
-  }):map("<leader>ub")
+    Snacks.toggle({
+      name = "Git Blame Line",
+      get = function()
+        return require("gitsigns.config").config.current_line_blame
+      end,
+      set = function(_)
+        require("gitsigns").toggle_current_line_blame()
+      end,
+    }):map("<leader>ub")
 
-  Snacks.toggle({
-    name = "Git Deleted",
-    get = function()
-      return require("gitsigns.config").config.show_deleted
-    end,
-    set = function(_)
-      require("gitsigns").preview_hunk_inline()
-    end,
-  }):map("<leader>ug")
+    Snacks.toggle({
+      name = "Git Deleted",
+      get = function()
+        return require("gitsigns.config").config.show_deleted
+      end,
+      set = function(_)
+        require("gitsigns").preview_hunk_inline()
+      end,
+    }):map("<leader>ug")
 
-  Snacks.toggle({
-    name = "Hardtime",
-    get = function()
-      return vim.g.hardtime_enabled
-    end,
-    set = function()
-      vim.g.hardtime_enabled = not vim.g.hardtime_enabled
-      vim.cmd("Hardtime toggle")
-    end,
-  }):map("<leader>uH")
-  Snacks.toggle({
-    name = "Sidekick NES",
-    get = function()
-      return vim.g.sidekick_nes
-    end,
-    set = function()
-      vim.g.sidekick_nes = not vim.g.sidekick_nes
-      vim.cmd("Sidekick nes toggle")
-    end,
-  }):map("<leader>ua")
-end
+    Snacks.toggle({
+      name = "Hardtime",
+      get = function()
+        return vim.g.hardtime_enabled
+      end,
+      set = function()
+        vim.g.hardtime_enabled = not vim.g.hardtime_enabled
+        vim.cmd("Hardtime toggle")
+      end,
+    }):map("<leader>uH")
+    Snacks.toggle({
+      name = "Sidekick NES",
+      get = function()
+        return vim.g.sidekick_nes
+      end,
+      set = function()
+        vim.g.sidekick_nes = not vim.g.sidekick_nes
+        vim.cmd("Sidekick nes toggle")
+      end,
+    }):map("<leader>ua")
+  end
 
-Config.load.load_lazily(lazy_setup)
+)

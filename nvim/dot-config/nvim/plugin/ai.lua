@@ -5,12 +5,11 @@ vim.pack.add {
   { src = "https://github.com/copilotlsp-nvim/copilot-lsp", version = "main" },
 }
 
-vim.g.sidekick_nes = false
-
-local function setup()
+Config.load.load_later(function()
+  vim.g.sidekick_nes = false
   require("copilot").setup {
     suggestion = {
-      enabled = true,
+      enabled = false,
       auto_trigger = true,
       keymap = {
         accept = "<M-y>",
@@ -26,6 +25,4 @@ local function setup()
       },
     },
   }
-end
-
-Config.load.load_lazily(setup)
+end)

@@ -2,10 +2,8 @@ vim.pack.add {
   { src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
   { src = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects", version = "main" },
 }
-
 --TODO: defer update part to to a build step
-
-local function setup()
+Config.load.load_eager_if_arg(function()
   local ensure_installed = {
     "lua",
     "python",
@@ -46,6 +44,4 @@ local function setup()
       end
     end,
   })
-end
-
-Config.load.load_eager_if_arg(setup)
+end)

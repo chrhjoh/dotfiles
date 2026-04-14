@@ -1,6 +1,6 @@
 vim.pack.add { { src = "https://github.com/stevearc/conform.nvim", version = "master" } }
 
-local setup = function()
+Config.load.load_on_event({ "BufNewFile", "BufReadPost", "BufWritePre" }, function()
   require("conform").setup {
     formatters_by_ft = {
       lua = { "stylua" },
@@ -19,6 +19,4 @@ local setup = function()
     end,
   }
   vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
-end
-
-Config.load.load_on_event(setup, { "BufNewFile", "BufReadPost", "BufWritePre" })
+end)

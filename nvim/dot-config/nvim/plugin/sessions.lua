@@ -1,6 +1,6 @@
 vim.pack.add { { src = "https://github.com/olimorris/persisted.nvim", version = "main" } }
 
-Config.load.load_lazily(function()
+Config.load.load_later(function()
   require("persisted").setup {
     use_git_branch = true,
     autostart = true,

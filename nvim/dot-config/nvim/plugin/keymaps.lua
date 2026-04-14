@@ -1,7 +1,7 @@
 vim.pack.add { "https://github.com/folke/which-key.nvim" }
+vim.cmd.packadd("nvim.undotree")
 
-local function setup()
-  vim.cmd.packadd("nvim.undotree")
+Config.load.load_later(function()
   require("which-key").setup {
     preset = "helix",
     icons = { mappings = false },
@@ -228,14 +228,14 @@ local function setup()
   nmap {
     "<leader>st",
     function()
-      Snacks.picker.todo_comments()
+      Snacks.picker.todo_comments() ---@diagnostic disable-line: undefined-field
     end,
     desc = "Todo",
   }
   nmap {
     "<leader>sT",
     function()
-      Snacks.picker.todo_comments { keywords = { "TODO", "FIX", "FIXME" } }
+      Snacks.picker.todo_comments { keywords = { "TODO", "FIX", "FIXME" } } ---@diagnostic disable-line: undefined-field
     end,
     desc = "Todo/Fix/Fixme",
   }
@@ -539,11 +539,18 @@ local function setup()
     desc = "Commands",
   }
   nmap {
-    "<leader>sd",
+    "<leader>sD",
     function()
       Snacks.picker.diagnostics()
     end,
-    desc = "Document Diagnostics",
+    desc = "Diagnostics",
+  }
+  nmap {
+    "<leader>sd",
+    function()
+      Snacks.picker.diagnostics_buffer()
+    end,
+    desc = "Buffer Diagnostics",
   }
   nmap {
     "<leader>sg",
@@ -830,6 +837,4 @@ local function setup()
     mode = { "n", "x" },
     desc = "Sidekick Select Prompt",
   }
-end
-
-Config.load.load_lazily(setup)
+end)

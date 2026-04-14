@@ -5,8 +5,13 @@ vim.pack.add {
   { src = "https://github.com/brenoprata10/nvim-highlight-colors", version = "main" },
 }
 
-local setup_on_buffer = function()
-  require("Comment").setup {}
+Config.load.load_eager_if_arg(function()
+  require("todo-comments").setup {}
+end)
+
+Config.load.load_on_event({ "BufReadPost", "BufNewFile" }, function()
+  require("Comment").setup {} ---@diagnostic disable-line: missing-fields
+
   require("nvim-highlight-colors").setup {
     enable_hex = true,
     enable_short_hex = false,
@@ -16,13 +21,7 @@ local setup_on_buffer = function()
     enable_named_colors = true,
     enable_tailwind = false,
   }
-end
-
-Config.load.load_on_event(setup_on_buffer, { "BufReadPost", "BufNewFile" })
-Config.load.load_on_event(function()
+end)
+Config.load.load_on_event("InsertEnter", function()
   require("nvim-autopairs").setup {}
-end, "InsertEnter")
-
-Config.load.load_lazily(function()
-  require("todo-comments").setup {}
 end)

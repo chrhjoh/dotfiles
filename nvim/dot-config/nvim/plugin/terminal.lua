@@ -1,6 +1,6 @@
 vim.pack.add { { src = "https://github.com/akinsho/toggleterm.nvim", version = vim.version.range("*") } }
 
-local function setup()
+Config.load.load_later(function()
   require("toggleterm").setup {
     open_mapping = false, -- Register is self
     close_on_exit = true,
@@ -79,6 +79,4 @@ local function setup()
       end, 10)
     end,
   })
-end
-
-Config.load.load_lazily(setup)
+end)

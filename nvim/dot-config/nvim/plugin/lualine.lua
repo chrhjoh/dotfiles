@@ -3,7 +3,7 @@ vim.pack.add {
   { src = "https://github.com/nvim-lualine/lualine.nvim", version = "master" },
 }
 
-local setup_lualine = function()
+Config.load.load_eager_if_arg(function()
   local palette = require("catppuccin.palettes").get_palette("mocha")
   require("mini.icons").mock_nvim_web_devicons()
   require("lualine").setup {
@@ -84,6 +84,4 @@ local setup_lualine = function()
     },
     extensions = { "toggleterm", "oil", "quickfix" },
   }
-end
-
-Config.load.load_eager_if_arg(setup_lualine)
+end)

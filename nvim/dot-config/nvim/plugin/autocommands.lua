@@ -1,4 +1,4 @@
-local function setup()
+Config.load.load_eager_if_arg(function()
   -- Highlight on yank
   vim.api.nvim_create_autocmd("TextYankPost", {
     callback = function()
@@ -71,6 +71,4 @@ local function setup()
       vim.fn.mkdir(vim.fn.fnamemodify(file, ":p:h"), "p")
     end,
   })
-end
-
-Config.load.load_eager_if_arg(setup)
+end)

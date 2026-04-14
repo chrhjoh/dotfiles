@@ -1,8 +1,17 @@
-vim.pack.add { { src = "https://github.com/neovim/nvim-lspconfig", version = "master" } }
+vim.pack.add {
+  { src = "https://github.com/neovim/nvim-lspconfig", version = "master" },
+  { src = "https://github.com/folke/lazydev.nvim", version = "main" },
+}
+Config.load.load_on_ft("lua", function()
+  require("lazydev").setup {
+    library = {
+      { path = "snacks.nvim", words = { "Snacks" } },
+      { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+    },
+  }
+end)
 
-local setup = function()
-  vim.lsp.config("*", { root_markers = { ".git", ".envrc" } })
-
+Config.load.load_eager_if_arg(function()
   vim.api.nvim_create_autocmd("LspAttach", {
     group = vim.api.nvim_create_augroup("DefaultLspAttach", {}),
     callback = function(args)
@@ -15,10 +24,12 @@ local setup = function()
       mapping("K", act.hover, "Hover Documentation")
       mapping("gD", act.declaration, "Goto Declaration")
       mapping("<leader>cr", act.rename, "Code Rename")
-      mapping("<leader>ca", act.rename, "Code Action")
+      mapping("<leader>ca", act.code_action, "Code Action")
       mapping("<C-?>", act.signature_help, "Signature Documentation", "i")
     end,
   })
+
+  vim.lsp.config("*", { root_markers = { ".git", ".envrc" } })
 
   vim.lsp.enable {
     "lua_ls",
@@ -27,6 +38,4 @@ local setup = function()
     "texlab",
     "tinymist",
   }
-end
-
-Config.load.load_eager_if_arg(setup)
+end)

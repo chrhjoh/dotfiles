@@ -3,7 +3,7 @@ vim.pack.add {
   { src = "https://github.com/rafamadriz/friendly-snippets", version = "main" },
 }
 
-local function setup()
+Config.load.load_on_event({ "CmdlineEnter", "InsertEnter" }, function()
   require("blink.cmp").setup {
     signature = { enabled = true },
     appearance = { nerd_font_variant = "normal" },
@@ -63,6 +63,4 @@ local function setup()
       },
     },
   }
-end
-
-Config.load.load_on_event(setup, { "CmdlineEnter", "InsertEnter" })
+end)
