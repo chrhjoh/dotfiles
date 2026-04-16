@@ -140,12 +140,48 @@ Config.load.load_later(function()
   end
 
   nmap { "<Leader>cd", vim.diagnostic.open_float, desc = "Diagnostic Line" }
-  nmap { "]d", diagnostic_goto(1), desc = "Diagnostic" }
-  nmap { "[d", diagnostic_goto(-1), desc = "Diagnostic" }
-  nmap { "]e", diagnostic_goto(1, "ERROR"), desc = "Error" }
-  nmap { "[e", diagnostic_goto(-1, "ERROR"), desc = "Error" }
-  nmap { "]w", diagnostic_goto(true, "WARN"), desc = "Warning" }
-  nmap { "[w", diagnostic_goto(false, "WARN"), desc = "Warning" }
+  nmap {
+    "]d",
+    function()
+      diagnostic_goto(1)
+    end,
+    desc = "Diagnostic",
+  }
+  nmap {
+    "[d",
+    function()
+      diagnostic_goto(-1)
+    end,
+    desc = "Diagnostic",
+  }
+  nmap {
+    "]e",
+    function()
+      diagnostic_goto(1, "ERROR")
+    end,
+    desc = "Error",
+  }
+  nmap {
+    "[e",
+    function()
+      diagnostic_goto(-1, "ERROR")
+    end,
+    desc = "Error",
+  }
+  nmap {
+    "]w",
+    function()
+      diagnostic_goto(true, "WARN")
+    end,
+    desc = "Warning",
+  }
+  nmap {
+    "[w",
+    function()
+      diagnostic_goto(false, "WARN")
+    end,
+    desc = "Warning",
+  }
 
   -- window mappings --------------------------------------------------
   nmap { "<Leader>ww", "<C-W>p", desc = "Other", remap = true }
