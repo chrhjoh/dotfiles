@@ -66,7 +66,17 @@ Config.load.load_later(function()
   nmap { "<leader>yf", '<Cmd>let @* = expand("%:t")<Cr>', desc = "Filename" }
 
   -- buffer navigation ------------------------------------------------------
-  nmap { "<TAB>", ":bn<CR>", desc = "Buffer", silent = true }
+  nmap {
+    "<TAB>",
+    function()
+      if not require("sidekick").nes_jump_or_apply() then
+        return "<tab>"
+      end
+    end,
+    desc = "Buffer",
+    silent = true,
+    expr = true,
+  }
   nmap { "<S-TAB>", ":bp<CR>", desc = "Buffer", silent = true }
   nmap { "[b", "<cmd>bprevious<cr>", desc = "Buffer" }
   nmap { "]b", "<cmd>bnext<cr>", desc = "Buffer" }
@@ -826,8 +836,6 @@ Config.load.load_later(function()
     function()
       require("sidekick.cli").select()
     end,
-    -- Or to select only installed tools:
-    -- require("sidekick.cli").select({ filter = { installed = true } })
     desc = "Select CLI",
   }
   nmap {

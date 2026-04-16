@@ -15,27 +15,33 @@ Config.load.load_on_event({ "CmdlineEnter", "InsertEnter" }, function()
           columns = { { "label", "label_description", gap = 1 }, { "kind_icon", "kind" } },
         },
       },
+      documentation = { auto_show = true },
       trigger = {
         show_in_snippet = false,
       },
     },
     keymap = {
       preset = "none",
-      ["<C-y>"] = { "show", "accept" },
-      ["<C-e>"] = { "cancel" },
-      ["<Tab>"] = {
-        "snippet_forward",
-        function()
-          return require("sidekick").nes_jump_or_apply()
-        end,
-        "select_next",
-        "fallback",
-      },
-      ["<S-Tab>"] = { "snippet_backward", "select_prev", "fallback" },
-      ["<S-Enter>"] = { "show", "accept" },
-
+      ["<C-e>"] = { "hide", "fallback" },
+      ["<C-p>"] = { "select_prev", "fallback_to_mappings" },
+      ["<C-n>"] = { "select_next", "fallback_to_mappings" },
       ["<C-b>"] = { "scroll_documentation_up", "fallback" },
       ["<C-f>"] = { "scroll_documentation_down", "fallback" },
+      ["<Tab>"] = {
+        function(cmp)
+          if cmp.snippet_active() then
+            return cmp.accept()
+          else
+            return cmp.select_and_accept()
+          end
+        end,
+        "snippet_forward",
+        "fallback",
+      },
+      ["<S-Tab>"] = {
+        "snippet_backward",
+        "fallback",
+      },
     },
     cmdline = {
       enabled = true,

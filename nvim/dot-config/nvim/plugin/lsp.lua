@@ -25,7 +25,6 @@ Config.load.load_eager_if_arg(function()
       mapping("gD", act.declaration, "Goto Declaration")
       mapping("<leader>cr", act.rename, "Code Rename")
       mapping("<leader>ca", act.code_action, "Code Action")
-      mapping("<C-?>", act.signature_help, "Signature Documentation", "i")
     end,
   })
 

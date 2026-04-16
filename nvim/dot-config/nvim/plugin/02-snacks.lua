@@ -157,14 +157,4 @@ Config.load.load_later(function()
       vim.cmd("Hardtime toggle")
     end,
   }):map("<leader>uH")
-  Snacks.toggle({
-    name = "Sidekick NES",
-    get = function()
-      return vim.g.sidekick_nes
-    end,
-    set = function()
-      vim.g.sidekick_nes = not vim.g.sidekick_nes
-      vim.cmd("Sidekick nes toggle")
-    end,
-  }):map("<leader>ua")
 end)
