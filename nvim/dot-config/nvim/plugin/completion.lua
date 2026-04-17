@@ -21,8 +21,7 @@ Config.load.load_on_event({ "CmdlineEnter", "InsertEnter" }, function()
     },
     keymap = {
       preset = "none",
-      ["<C-h>"] = { "show", "show_documentation", "hide_documentation" },
-      ["<C-k>"] = { "show_signature", "hide_signature", "fallback" },
+      ["<C-y>"] = { "show", "show_documentation", "hide_documentation" },
       ["<C-e>"] = { "hide", "fallback" },
       ["<C-p>"] = { "select_prev", "fallback_to_mappings" },
       ["<C-n>"] = { "select_next", "fallback_to_mappings" },
