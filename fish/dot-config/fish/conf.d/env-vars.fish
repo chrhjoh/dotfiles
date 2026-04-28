@@ -22,7 +22,6 @@ set -x ANSIBLE_HOME "$XDG_DATA_HOME/ansible"
 set -x EDITOR "nvim"
 set -x DOTFILES "$HOME/.config/dotfiles"
 
-set -x PAGER "less -FRSXMK"
 set -x SYSTEMD_LESS "FRXMK"
 
 set -x HOMEBREW_NO_AUTO_UPDATE 1
