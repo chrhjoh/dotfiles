@@ -1,3 +1,3 @@
 function pod --wraps=podman
-    sudo -u podman fish -c 'cd $HOME; podman $argv' -- $argv
+    sudo -u podman bash -c 'cd $HOME; podman "$@"' -- $argv
 end
