@@ -14,6 +14,7 @@ Config.load.load_later(function()
       },
     },
   }
+  vim.g.sidekick_nes = false
   require("sidekick").setup {
     cli = {
       mux = {

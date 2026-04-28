@@ -118,6 +118,16 @@ Config.load.load_later(function()
   }):map("<leader>uF")
 
   Snacks.toggle({
+    name = "Sidekick nes",
+    get = function()
+      return vim.g.sidekick_nes
+    end,
+    set = function(_)
+      vim.g.sidekick_nes = not vim.g.sidekick_nes
+    end,
+  }):map("<leader>ua")
+
+  Snacks.toggle({
     name = "Completion Menu",
     get = function()
       return vim.b.completion ~= false
