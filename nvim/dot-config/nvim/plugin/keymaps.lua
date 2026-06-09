@@ -955,4 +955,22 @@ Config.load.load_later(function()
       }
     end
   end
+
+  ---------------------- yanky ----------------------
+  nmap { "p", "<Plug>(YankyPutAfter)", mode = { "n", "x" } }
+  nmap { "P", "<Plug>(YankyPutBefore)", mode = { "n", "x" } }
+
+  nmap { "]p", "<Plug>(YankyPutIndentAfterLinewise)" }
+  nmap { "[p", "<Plug>(YankyPutIndentBeforeLinewise)" }
+  nmap { "]P", "<Plug>(YankyPutIndentAfterLinewise)" }
+  nmap { "[P", "<Plug>(YankyPutIndentBeforeLinewise)" }
+  nmap { ">p", "<Plug>(YankyPutIndentAfterShiftRight)" }
+  nmap { "<p", "<Plug>(YankyPutIndentAfterShiftLeft)" }
+  nmap { ">P", "<Plug>(YankyPutIndentBeforeShiftRight)" }
+  nmap { "<P", "<Plug>(YankyPutIndentBeforeShiftLeft)" }
+  nmap { "=p", "<Plug>(YankyPutAfterFilter)" }
+  nmap { "=P", "<Plug>(YankyPutBeforeFilter)" }
+
+  nmap { "<c-p>", "<Plug>(YankyPreviousEntry)" }
+  nmap { "<c-n>", "<Plug>(YankyNextEntry)" }
 end)

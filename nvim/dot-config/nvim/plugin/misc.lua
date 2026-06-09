@@ -6,9 +6,11 @@ vim.pack.add {
   { src = "https://github.com/m4xshen/hardtime.nvim", version = "main" },
   { src = "https://github.com/MagicDuck/grug-far.nvim", version = "main" },
   { src = "https://github.com/stevearc/oil.nvim", version = "master" },
+  { src = "https://github.com/gbprod/yanky.nvim", version = "main" },
 }
 Config.load.load_later(function()
   require("hardtime").setup { enabled = false }
+  require("yanky").setup { ring = { update_register_on_cycle = true }, highlight = { on_put = false, on_yank = false } }
   require("flash").setup { modes = {
     char = {
       jump_labels = true,
