@@ -4,9 +4,13 @@ vim.pack.add {
 }
 
 Config.load.load_later(function()
+  vim.g.copilot_enabled = false
   require("copilot").setup {
+    filetypes = {
+      tex = false,
+    },
     suggestion = {
-      auto_trigger = false,
+      auto_trigger = true,
       keymap = {
         accept = "<M-y>",
         accept_word = "<S-Tab>",
@@ -14,7 +18,8 @@ Config.load.load_later(function()
       },
     },
   }
-  vim.g.sidekick_nes = false
+  require("copilot.command").disable()
+  vim.g.sidekick_nes_enabled = false
   require("sidekick").setup {
     cli = {
       mux = {
