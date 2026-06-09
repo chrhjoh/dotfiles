@@ -11,7 +11,7 @@
       "version": ">=0.0.0"
     },
     "conform.nvim": {
-      "rev": "086a40dc7ed8242c03be9f47fbcee68699cc2395",
+      "rev": "619363c30309d29ffa631e67c8183f2a72caa373",
       "src": "https://github.com/stevearc/conform.nvim",
       "version": "'master'"
     },
@@ -21,7 +21,7 @@
       "version": "'main'"
     },
     "copilot.lua": {
-      "rev": "aeca454727486d488a6ecbcde30db72e741e3524",
+      "rev": "7b89909d0647c89298de880255b287b01b7e5d34",
       "src": "https://github.com/zbirenbaum/copilot.lua",
       "version": "'master'"
     },
@@ -41,7 +41,7 @@
       "version": ">=0.0.0"
     },
     "grug-far.nvim": {
-      "rev": "21604255d0e8f9968322f61f2b6c09e5efe1285a",
+      "rev": "5506c2f59dc9ab2ed6c233585412b24d31d51521",
       "src": "https://github.com/MagicDuck/grug-far.nvim",
       "version": "'main'"
     },
@@ -61,17 +61,17 @@
       "version": "'main'"
     },
     "lualine.nvim": {
-      "rev": "a905eeebc4e63fdc48b5135d3bf8aea5618fb21c",
+      "rev": "131a558e13f9f28b15cd235557150ccb23f89286",
       "src": "https://github.com/nvim-lualine/lualine.nvim",
       "version": "'master'"
     },
     "markview.nvim": {
-      "rev": "02824a95a0db2c9fd1bab3adba4510bc8f9c91e4",
+      "rev": "3537eb2a9251cad5d7718253768f3772c62233fc",
       "src": "https://github.com/OXY2DEV/markview.nvim",
       "version": ">=0.0.0"
     },
     "mini.icons": {
-      "rev": "bac6317300e205335df425296570d84322730067",
+      "rev": "520995f1d75da0e4cc901ee95080b1ff2bc46b94",
       "src": "https://github.com/nvim-mini/mini.icons",
       "version": "'main'"
     },
@@ -81,17 +81,17 @@
       "version": ">=0.0.0"
     },
     "nvim-autopairs": {
-      "rev": "59bce2eef357189c3305e25bc6dd2d138c1683f5",
+      "rev": "7b9923abad60b903ece7c52940e1321d39eccc79",
       "src": "https://github.com/windwp/nvim-autopairs",
       "version": "'master'"
     },
     "nvim-highlight-colors": {
-      "rev": "e2cb22089cc2358b2b995c09578224f142de6039",
+      "rev": "e4c7af0211866162d999ce0bdd6a029302e19139",
       "src": "https://github.com/brenoprata10/nvim-highlight-colors",
       "version": "'main'"
     },
     "nvim-lspconfig": {
-      "rev": "e146efacbafed3789ac568abcc5a981c5decaa58",
+      "rev": "a4ed4e761c400849e8c9f8bda33e5083f890268c",
       "src": "https://github.com/neovim/nvim-lspconfig",
       "version": "'master'"
     },
@@ -106,7 +106,7 @@
       "version": "'main'"
     },
     "oil.nvim": {
-      "rev": "0fcc83805ad11cf714a949c98c605ed717e0b83e",
+      "rev": "b91ee5a77a6a9605d9c1aaf4fda74b66082c8297",
       "src": "https://github.com/stevearc/oil.nvim",
       "version": "'master'"
     },
@@ -116,17 +116,17 @@
       "version": "'main'"
     },
     "sidekick.nvim": {
-      "rev": "17447a05f9385e5f8372b61530f6f9329cb82421",
+      "rev": "208e1c5b8170c01fd1d07df0139322a76479b235",
       "src": "https://github.com/folke/sidekick.nvim",
       "version": "'main'"
     },
     "snacks.nvim": {
-      "rev": "ad9ede6a9cddf16cedbd31b8932d6dcdee9b716e",
+      "rev": "882c996cf28183f4d63640de0b4c02ec886d01f2",
       "src": "https://github.com/folke/snacks.nvim",
       "version": "'main'"
     },
     "snakemake": {
-      "rev": "f40c2af097998ba3cf72c80d133222bdb545a65f",
+      "rev": "d853243fa89e86c0a53e915e3968080a5c42b8b3",
       "src": "https://github.com/snakemake/snakemake",
       "version": ">=0.0.0"
     },
@@ -156,13 +156,18 @@
       "version": "'master'"
     },
     "vimtex": {
-      "rev": "0f42a5130432d4af2e6fd21fb93a76915ff1f090",
+      "rev": "182ad387e3f3107699483606c9a2b6648f8437b2",
       "src": "https://github.com/lervag/vimtex",
       "version": "'master'"
     },
     "which-key.nvim": {
       "rev": "3aab2147e74890957785941f0c1ad87d0a44c15a",
       "src": "https://github.com/folke/which-key.nvim"
+    },
+    "yanky.nvim": {
+      "rev": "020c22d0cfa60358569e49d1d7b91630f175aef0",
+      "src": "https://github.com/gbprod/yanky.nvim",
+      "version": "'main'"
     }
   }
 }
