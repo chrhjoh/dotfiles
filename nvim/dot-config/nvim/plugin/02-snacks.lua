@@ -62,6 +62,25 @@ require("snacks").setup {
       { section = "keys", gap = 1, padding = 2 },
       { icon = " ", title = "Recent Files", section = "recent_files", indent = 2, padding = 2 },
       { icon = " ", title = "Projects", section = "projects", indent = 2, padding = 2 },
+      function()
+        local all_plugins = vim.pack.get(nil, { info = false })
+        local loaded_plugins = vim.tbl_filter(function(plugin)
+          return plugin.active
+        end, all_plugins)
+        local version = vim.version()
+        return {
+          icon = "⚡",
+          align = "center",
+          text = {
+            { "⚡", hl = "icon" },
+            { "Neovim ", hl = "footer" },
+            { "v" .. version.major .. "." .. version.minor .. "." .. version.patch, hl = "special" },
+            { " loaded ", hl = "footer" },
+            { #loaded_plugins .. "/" .. #all_plugins, hl = "special" },
+            { " plugins ", hl = "footer" },
+          },
+        }
+      end,
     },
   },
 }
