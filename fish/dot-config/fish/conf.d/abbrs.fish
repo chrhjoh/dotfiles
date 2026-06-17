@@ -1,5 +1,5 @@
-abbr --add --global python-dir 'echo "layout uv" > .envrc; direnv allow'
-abbr --add --global python-uv-dir 'echo "layout python3" > .envrc; direnv allow'
+abbr --add --global python-uv-dir 'echo "layout uv" > .envrc; direnv allow'
+abbr --add --global python-dir 'echo "layout python3" > .envrc; direnv allow'
 abbr --add --global lazydots 'lazygit -p $DOTFILES'
 abbr --add --global dots '$DOTFILES'
 abbr --add --global dstow 'stow -d $DOTFILES -t $HOME --dotfiles'

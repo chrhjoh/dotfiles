@@ -21,9 +21,6 @@ style = "bold mauve"
 [git_status]
 style = "bold mauve"
 
-[package]
-disabled = true
-
 [palettes.catppuccin_mocha]
 rosewater = "#f5e0dc"
 flamingo  = "#f2cdcd"
@@ -55,9 +52,9 @@ mantle    = "#181825"
 crust     = "#11111b"
 
 [python]
-format = "[($symbol($virtualenv))]($style) "
-style = "bold yellow"
 symbol = " "
+style = "bold yellow"
+format = '[$symbol( $version) ]($style) '
 
 [rust]
 format = "[$symbol ($version)]($style) "
