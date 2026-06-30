@@ -20,6 +20,7 @@ set -x TEXMFHOME "$XDG_DATA_HOME/texmf"
 set -x ANSIBLE_HOME "$XDG_DATA_HOME/ansible"
 
 set -x EDITOR "nvim"
+set -x MANPAGER "sh -c 'col -bx | bat -l man -p'"
 set -x DOTFILES "$HOME/.config/dotfiles"
 
 set -x SYSTEMD_LESS "FRXMK"
