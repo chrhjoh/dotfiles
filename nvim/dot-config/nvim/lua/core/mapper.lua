@@ -1,3 +1,4 @@
+---@class CoreMapper
 local M = {}
 
 ---@alias KeyRhs string|fun(): string?|false

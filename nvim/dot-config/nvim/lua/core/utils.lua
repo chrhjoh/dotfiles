@@ -1,3 +1,4 @@
+---@class CoreUtils
 local M = {}
 
 function M.plugin_dir(plugin)

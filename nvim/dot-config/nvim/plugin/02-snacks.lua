@@ -89,7 +89,7 @@ vim._print = function(_, ...) ---@diagnostic disable-line: duplicate-set-field
   Snacks.debug.inspect(...)
 end
 
-Config.load.load_later(function()
+Config.loader.load_later(function()
   Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>us")
   Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>uw")
   Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>uL")

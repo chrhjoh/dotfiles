@@ -1,3 +1,4 @@
+---@class CoreIcons
 local M = {}
 
 M.diagnostics = {

@@ -1,3 +1,4 @@
+---@class CoreOptions
 local M = {}
 
 function M.setup()

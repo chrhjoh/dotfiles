@@ -1,10 +1,15 @@
+---@class Core
+---@field icons CoreIcons
+---@field loader CoreLoader
+---@field mapper CoreMapper
+---@field utils CoreUtils
 local M = {}
---TODO: metatable
-M = {
-  icons = require("core.icons"),
-  load = require("core.loader"),
-  mapper = require("core.mapper"),
-  utils = require("core.utils"),
-}
+
+setmetatable(M, {
+  __index = function(t, k)
+    t[k] = require("core." .. k)
+    return t[k]
+  end,
+})
 
 return M

@@ -1,7 +1,7 @@
 vim.pack.add { "https://github.com/folke/which-key.nvim" }
 vim.cmd.packadd("nvim.undotree")
 
-Config.load.load_later(function()
+Config.loader.load_later(function()
   require("which-key").setup {
     preset = "helix",
     icons = { mappings = false },

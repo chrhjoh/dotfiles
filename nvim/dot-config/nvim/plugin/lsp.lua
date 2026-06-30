@@ -2,7 +2,7 @@ vim.pack.add {
   { src = "https://github.com/neovim/nvim-lspconfig", version = "master" },
   { src = "https://github.com/folke/lazydev.nvim", version = "main" },
 }
-Config.load.load_on_ft("lua", function()
+Config.loader.load_on_ft("lua", function()
   require("lazydev").setup {
     library = {
       { path = "snacks.nvim", words = { "Snacks" } },
@@ -11,7 +11,7 @@ Config.load.load_on_ft("lua", function()
   }
 end)
 
-Config.load.load_eager_if_arg(function()
+Config.loader.load_eager_if_arg(function()
   vim.api.nvim_create_autocmd("LspAttach", {
     group = vim.api.nvim_create_augroup("DefaultLspAttach", {}),
     callback = function(args)

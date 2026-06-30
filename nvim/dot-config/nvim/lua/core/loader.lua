@@ -1,3 +1,4 @@
+---@class CoreLoader
 local M = {}
 
 ---@param fn function

@@ -6,7 +6,7 @@ vim.pack.add {
 vim.g.vimtex_view_method = "skim"
 vim.g.tex_conceal = "abdmg"
 
-Config.load.load_later(function()
+Config.loader.load_later(function()
   require("markview").setup {
     preview = {
       modes = { "i", "n", "no", "c" },

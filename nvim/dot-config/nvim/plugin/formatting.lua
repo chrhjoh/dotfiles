@@ -1,6 +1,6 @@
 vim.pack.add { { src = "https://github.com/stevearc/conform.nvim", version = "master" } }
 
-Config.load.load_on_event({ "BufNewFile", "BufReadPost", "BufWritePre" }, function()
+Config.loader.load_on_event({ "BufNewFile", "BufReadPost", "BufWritePre" }, function()
   require("conform").setup {
     formatters_by_ft = {
       lua = { "stylua" },
