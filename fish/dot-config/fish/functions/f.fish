@@ -1,4 +1,4 @@
-function e
+function f
     set -l editor nano
     if set -q EDITOR
         set editor $EDITOR
