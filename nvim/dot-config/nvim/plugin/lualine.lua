@@ -3,7 +3,7 @@ vim.pack.add {
   { src = "https://github.com/nvim-lualine/lualine.nvim", version = "master" },
 }
 
-Config.loader.load_eager_if_arg(function()
+Core.loader.load_eager_if_arg(function()
   local palette = require("catppuccin.palettes").get_palette("mocha")
   require("mini.icons").mock_nvim_web_devicons()
   require("lualine").setup {
@@ -76,7 +76,7 @@ Config.loader.load_eager_if_arg(function()
         {
           "diagnostics",
           sections = { "error", "warn" },
-          symbols = Config.icons.diagnostics,
+          symbols = Core.icons.diagnostics,
           separator = "",
         },
       },

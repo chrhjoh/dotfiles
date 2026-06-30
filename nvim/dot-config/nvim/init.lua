@@ -1,5 +1,6 @@
 vim.loader.enable()
-_G.Config = require("core")
+_G.Core = require("core")
+Core.options.setup()
 
 local function update_treesitter(kind)
   if kind == "delete" then

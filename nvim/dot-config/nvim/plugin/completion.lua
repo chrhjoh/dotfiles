@@ -3,7 +3,7 @@ vim.pack.add {
   { src = "https://github.com/rafamadriz/friendly-snippets", version = "main" },
 }
 
-Config.loader.load_on_event({ "CmdlineEnter", "InsertEnter" }, function()
+Core.loader.load_on_event({ "CmdlineEnter", "InsertEnter" }, function()
   require("blink.cmp").setup {
     signature = { enabled = true },
     appearance = { nerd_font_variant = "normal" },

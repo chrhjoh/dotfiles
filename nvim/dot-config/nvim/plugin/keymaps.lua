@@ -1,7 +1,7 @@
 vim.pack.add { "https://github.com/folke/which-key.nvim" }
 vim.cmd.packadd("nvim.undotree")
 
-Config.loader.load_later(function()
+Core.loader.load_later(function()
   require("which-key").setup {
     preset = "helix",
     icons = { mappings = false },
@@ -32,9 +32,9 @@ Config.loader.load_later(function()
     },
   }
 
-  local map = Config.mapper.map
-  local nmap = Config.mapper.get { mode = "n" }
-  local imap = Config.mapper.get { mode = "i" }
+  local map = Core.mapper.map
+  local nmap = Core.mapper.get { mode = "n" }
+  local imap = Core.mapper.get { mode = "i" }
 
   -- adhoc QOL mappings --------------------------------------------------------
   map { "<Space>", "<Nop>", mode = { "n", "v" }, silent = true }

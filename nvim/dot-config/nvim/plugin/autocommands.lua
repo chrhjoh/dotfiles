@@ -1,4 +1,4 @@
-Config.loader.load_eager_if_arg(function()
+Core.loader.load_eager_if_arg(function()
   -- Highlight on yank
   vim.api.nvim_create_autocmd("TextYankPost", {
     callback = function()

@@ -3,7 +3,7 @@ vim.pack.add {
   { src = "https://github.com/zbirenbaum/copilot.lua", version = "master" },
 }
 
-Config.loader.load_later(function()
+Core.loader.load_later(function()
   vim.g.copilot_enabled = false
   require("copilot").setup {
     filetypes = {

@@ -8,7 +8,7 @@ vim.pack.add {
   { src = "https://github.com/stevearc/oil.nvim", version = "master" },
   { src = "https://github.com/gbprod/yanky.nvim", version = "main" },
 }
-Config.loader.load_later(function()
+Core.loader.load_later(function()
   require("hardtime").setup { enabled = false }
   require("yanky").setup { ring = { update_register_on_cycle = true }, highlight = { on_put = false, on_yank = false } }
   require("flash").setup { modes = {
@@ -18,7 +18,7 @@ Config.loader.load_later(function()
   } }
 end)
 
-Config.loader.load_eager_if_arg(function()
+Core.loader.load_eager_if_arg(function()
   local oil_detail = false
   require("oil").setup {
     columns = {

@@ -1,4 +1,4 @@
-local icons = Config.icons
+local icons = Core.icons
 vim.diagnostic.config {
   underline = true,
   update_in_insert = false,

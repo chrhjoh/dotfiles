@@ -6,7 +6,7 @@ vim.pack.add {
 vim.g.vimtex_view_method = "skim"
 vim.g.tex_conceal = "abdmg"
 
-Config.loader.load_later(function()
+Core.loader.load_later(function()
   require("markview").setup {
     preview = {
       modes = { "i", "n", "no", "c" },
@@ -18,5 +18,5 @@ Config.loader.load_later(function()
     },
     markdown = { horizontal_rules = require("markview.presets").horizontal_rules.thick }, ---@diagnostic disable-line: missing-fields
   }
-  vim.opt.rtp:append(Config.utils.plugin_dir("snakemake") .. "/misc/vim")
+  vim.opt.rtp:append(Core.utils.plugin_dir("snakemake") .. "/misc/vim")
 end)

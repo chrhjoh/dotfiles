@@ -3,6 +3,7 @@
 ---@field loader CoreLoader
 ---@field mapper CoreMapper
 ---@field utils CoreUtils
+---@field options CoreOptions
 local M = {}
 
 setmetatable(M, {

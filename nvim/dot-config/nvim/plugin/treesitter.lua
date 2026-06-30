@@ -3,7 +3,7 @@ vim.pack.add {
   { src = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects", version = "main" },
 }
 
-Config.loader.load_eager_if_arg(function()
+Core.loader.load_eager_if_arg(function()
   vim.api.nvim_create_autocmd("FileType", {
     callback = function(ev)
       local ft = vim.bo[ev.buf].filetype
