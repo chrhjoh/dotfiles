@@ -56,13 +56,13 @@ require("snacks").setup {
           icon = " ",
           key = "s",
           desc = "Restore Current Directory Session",
-          action = ":lua require('persisted').load()",
+          action = ":lua require('core').session.load(vim.fn.getcwd())",
         },
         {
           icon = "󰆓 ",
           key = "S",
           desc = "Select Session",
-          action = ":lua require('core').utils.pick_session()",
+          action = ":lua require('core').session.pick()",
         },
         { icon = " ", key = "q", desc = "Quit", action = ":qa" },
       },
@@ -77,7 +77,11 @@ require("snacks").setup {
         section = "projects",
         indent = 2,
         padding = 2,
-        action = require("core").utils.project_action,
+        ---@param dir string
+        action = function(dir)
+          Snacks.debug(dir)
+          require("core").session.load { dir = dir }
+        end,
       },
 
       function()
@@ -223,10 +227,10 @@ Core.loader.load_later(function()
   Snacks.toggle({
     name = "Session",
     get = function()
-      return vim.g.persisting == true
+      return require("core").session.is_active()
     end,
-    set = function()
-      require("persisted").toggle()
+    set = function(_)
+      require("core").session.toggle()
     end,
   }):map("<leader>uQ")
 end)

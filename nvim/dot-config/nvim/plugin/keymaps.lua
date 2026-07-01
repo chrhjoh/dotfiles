@@ -451,22 +451,28 @@ Core.loader.load_later(function()
   }
 
   -- session management -----------------------------------------
-  nmap { "<leader>ql", require("persisted").load, desc = "Restore Session for Current Directory" }
-  nmap { "<leader>qs", require("core").utils.pick_session, desc = "Select Session" }
   nmap {
-    "<leader>qL",
+    "<leader>ql",
     function()
-      require("persisted").load { last = true }
+      require("core").session.load { dir = vim.fn.getcwd() }
     end,
-    desc = "Restore Last Session",
+    desc = "Restore Session for Current Directory",
   }
-  nmap { "<leader>qd", require("persisted").delete_current, desc = "Delete Session for Curent Directory" }
+  nmap { "<leader>qs", require("core").session.pick, desc = "Select Session" }
+  nmap { "<leader>qL", require("core").session.load, desc = "Restore Last Session" }
+  nmap {
+    "<leader>qd",
+    function()
+      require("core").session.delete(vim.fn.getcwd())
+    end,
+    desc = "Delete Session for Curent Directory",
+  }
   nmap {
     "<leader>qp",
     function()
       Snacks.picker.projects {
         confirm = function(_, item)
-          require("core").utils.project_action(item.file)
+          require("core").session.load { dir = item.file }
         end,
       }
     end,
