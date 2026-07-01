@@ -57,7 +57,6 @@ function M.find_sessions()
           branch = branch,
           session = vim.fs.basename(dir) or dir,
         }
-        Snacks.debug(items)
       end
     end
   end
