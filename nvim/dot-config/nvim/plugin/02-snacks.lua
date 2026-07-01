@@ -79,7 +79,6 @@ require("snacks").setup {
         padding = 2,
         ---@param dir string
         action = function(dir)
-          Snacks.debug(dir)
           require("core").session.load { dir = dir }
         end,
       },
