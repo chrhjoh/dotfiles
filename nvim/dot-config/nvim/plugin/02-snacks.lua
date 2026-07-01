@@ -52,8 +52,18 @@ require("snacks").setup {
           action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})",
         },
         { icon = "󰏖 ", key = "p", desc = "Plugins", action = ":lua vim.pack.update()" },
-        { icon = " ", key = "s", desc = "Restore Session", action = ":Persisted load" },
-        { icon = "󰆓 ", key = "S", desc = "Select Session", action = ":Persisted select" },
+        {
+          icon = " ",
+          key = "s",
+          desc = "Restore Current Directory Session",
+          action = ":lua require('persisted').load()",
+        },
+        {
+          icon = "󰆓 ",
+          key = "S",
+          desc = "Select Session",
+          action = ":lua require('core').utils.pick_session()",
+        },
         { icon = " ", key = "q", desc = "Quit", action = ":qa" },
       },
     },
@@ -61,7 +71,15 @@ require("snacks").setup {
       { section = "header" },
       { section = "keys", gap = 1, padding = 2 },
       { icon = " ", title = "Recent Files", section = "recent_files", indent = 2, padding = 2 },
-      { icon = " ", title = "Projects", section = "projects", indent = 2, padding = 2 },
+      {
+        icon = " ",
+        title = "Projects",
+        section = "projects",
+        indent = 2,
+        padding = 2,
+        action = require("core").utils.project_action,
+      },
+
       function()
         local all_plugins = vim.pack.get(nil, { info = false })
         local loaded_plugins = vim.tbl_filter(function(plugin)
@@ -201,4 +219,14 @@ Core.loader.load_later(function()
       vim.cmd("Hardtime toggle")
     end,
   }):map("<leader>uH")
+
+  Snacks.toggle({
+    name = "Session",
+    get = function()
+      return vim.g.persisting == true
+    end,
+    set = function()
+      require("persisted").toggle()
+    end,
+  }):map("<leader>uQ")
 end)

@@ -16,7 +16,7 @@
       "version": "'master'"
     },
     "copilot.lua": {
-      "rev": "b54c05349d406f7af11b150824efa8e4f90015c6",
+      "rev": "760912b5992e1d6437378a9c7f2b0cb950966cf5",
       "src": "https://github.com/zbirenbaum/copilot.lua",
       "version": "'master'"
     },
@@ -36,7 +36,7 @@
       "version": ">=0.0.0"
     },
     "grug-far.nvim": {
-      "rev": "c995bbacf8229dc096ec1c3d60f8531059c86c1b",
+      "rev": "c69859c1d5427ab5fc7ed12380ab521b4e336691",
       "src": "https://github.com/MagicDuck/grug-far.nvim",
       "version": "'main'"
     },
@@ -66,7 +66,7 @@
       "version": ">=0.0.0"
     },
     "mini.icons": {
-      "rev": "284509648db084c5e40a31afa9abb9887c49e04a",
+      "rev": "e56797f90192d81f1fda02e662fc3e8e3d775027",
       "src": "https://github.com/nvim-mini/mini.icons",
       "version": "'main'"
     },
@@ -86,7 +86,7 @@
       "version": "'main'"
     },
     "nvim-lspconfig": {
-      "rev": "a683e0ddf0cf64c6cd689e18ffb480ade3c162b7",
+      "rev": "dd1c9b802c943278179a5d819369cda085b79d45",
       "src": "https://github.com/neovim/nvim-lspconfig",
       "version": "'master'"
     },
@@ -121,7 +121,7 @@
       "version": "'main'"
     },
     "snakemake": {
-      "rev": "4990340a91ed077b2faf0be46ac49171be3337ae",
+      "rev": "3d933e63e8b51a520d65aac2d3f3b2c19b1b36fd",
       "src": "https://github.com/snakemake/snakemake",
       "version": ">=0.0.0"
     },
@@ -151,7 +151,7 @@
       "version": "'master'"
     },
     "vimtex": {
-      "rev": "fedb7ffc1bebf254cc74e7419c3a5930b6719065",
+      "rev": "5e6a06f5cec5ede3dc6ba045ef6eda13b6dccb1f",
       "src": "https://github.com/lervag/vimtex",
       "version": "'master'"
     },

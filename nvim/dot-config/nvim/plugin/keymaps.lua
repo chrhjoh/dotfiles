@@ -70,7 +70,7 @@ Core.loader.load_later(function()
     "<TAB>",
     function()
       if not require("sidekick").nes_jump_or_apply() then
-        return "<tab>"
+        return ":bn<CR>"
       end
     end,
     desc = "Buffer",
@@ -451,15 +451,24 @@ Core.loader.load_later(function()
   }
 
   -- session management -----------------------------------------
-  nmap { "<leader>ql", "<CMD>Persisted load<CR>", desc = "Restore CWD" }
-  nmap { "<leader>qS", "<CMD>Persisted select<CR>", desc = "Select" }
-  nmap { "<leader>qs", "<CMD>Persisted save<CR>", desc = "Save" }
-  nmap { "<leader>qL", "<CMD>Persisted load_last<CR>", desc = "Restore Last" }
-  nmap { "<leader>qd", "<CMD>Persisted delete_current<CR>", desc = "Delete Current" }
+  nmap { "<leader>ql", require("persisted").load, desc = "Restore Session for Current Directory" }
+  nmap { "<leader>qs", require("core").utils.pick_session, desc = "Select Session" }
+  nmap {
+    "<leader>qL",
+    function()
+      require("persisted").load { last = true }
+    end,
+    desc = "Restore Last Session",
+  }
+  nmap { "<leader>qd", require("persisted").delete_current, desc = "Delete Session for Curent Directory" }
   nmap {
     "<leader>qp",
     function()
-      Snacks.picker.projects()
+      Snacks.picker.projects {
+        confirm = function(_, item)
+          require("core").utils.project_action(item.file)
+        end,
+      }
     end,
     desc = "Projects",
   }
