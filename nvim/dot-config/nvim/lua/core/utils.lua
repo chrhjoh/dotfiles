@@ -7,11 +7,29 @@ function M.plugin_dir(plugin)
   return pack[1].path
 end
 
-    },
-
+M.lualine = {
+  snacks_picker = {
+    sections = {
+      lualine_a = {
+        function()
+          return "Snacks Picker: " .. (Snacks.picker.get()[1].title or "")
+        end,
       },
     },
-  }
-end
+
+    filetypes = { "snacks_picker_input" },
+  },
+  snacks_notifications = {
+    sections = {
+      lualine_a = {
+        function()
+          return "Notifications"
+        end,
+      },
+    },
+
+    filetypes = { "snacks_notif_history" },
+  },
+}
 
 return M

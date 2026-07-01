@@ -82,6 +82,12 @@ Core.loader.load_eager_if_arg(function()
       },
       lualine_z = {},
     },
-    extensions = { "toggleterm", "oil", "quickfix" },
+    extensions = {
+      "toggleterm",
+      "oil",
+      "quickfix",
+      require("core").utils.lualine.snacks_picker,
+      require("core").utils.lualine.snacks_notifications,
+    },
   }
 end)
