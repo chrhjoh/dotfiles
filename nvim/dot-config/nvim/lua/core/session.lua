@@ -1,6 +1,13 @@
 ---@class CoreSession
 local M = {}
 
+---@param msg string
+---@param level? vim.log.levels
+local notify = function(msg, level)
+  level = level or vim.log.levels.INFO
+  vim.notify(msg, level, { title = "Session" })
+end
+
 local _active = false
 
 local save_dir = vim.fn.stdpath("data") .. "/sessions/"
@@ -35,6 +42,15 @@ local function default_callback(loaded)
   if not loaded then
     Snacks.picker.files()
   end
+
+  --HACK: delete [No Name]
+  vim.schedule(function()
+    for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
+      if vim.api.nvim_buf_get_name(bufnr) == "" and vim.bo[bufnr].buftype == "" and not vim.bo[bufnr].modified then
+        pcall(vim.api.nvim_buf_delete, bufnr, {})
+      end
+    end
+  end)
 end
 
 ---@param path string
@@ -106,16 +122,50 @@ end
 function M.save()
   local current_session = resolve_session(vim.fn.getcwd())
   vim.cmd("mks! " .. e(current_session.file))
+  notify("Saved session: " .. current_session.dir)
 end
 
----@param opts {dir: string?, clean: boolean?, save: boolean?}
+---@param clean_buffer? fun(bufnr: integer): boolean
+---@return boolean
+local function clean_previous_session(clean_buffer)
+  clean_buffer = clean_buffer or function(_)
+    return true
+  end
+
+  local to_delete = vim.tbl_filter(function(bufnr)
+    return vim.api.nvim_buf_is_valid(bufnr) and vim.bo[bufnr].buflisted and clean_buffer(bufnr)
+  end, vim.api.nvim_list_bufs())
+
+  for _, bufnr in ipairs(to_delete) do
+    if vim.bo[bufnr].modified then
+      notify("Failed to switch session (" .. vim.fn.bufname(bufnr) .. " is modified)", vim.log.levels.ERROR)
+      return false
+    else
+      Snacks.bufdelete(bufnr)
+    end
+  end
+  return true
+end
+
+---@class SessionLoadOpts
+---@field dir? string
+---@field clean_buffer? false | fun(bufnr: integer): boolean
+---@field save? boolean
+
+---@param opts SessionLoadOpts?
 function M.load(opts)
   opts = opts or {}
   if opts.save ~= false and should_save() and M.is_active() then
     M.save()
   end
-  if opts.clean ~= false then
-    Snacks.bufdelete.all()
+
+  local cleaned_success = true
+  if opts.clean_buffer ~= false then
+    cleaned_success = clean_previous_session(opts.clean_buffer)
+  end
+
+  if not cleaned_success then
+    return
   end
 
   local session = resolve_session(opts.dir)
@@ -123,6 +173,7 @@ function M.load(opts)
   vim.fn.chdir(session.dir)
   if vim.fn.filereadable(session.file) ~= 0 then
     vim.cmd("silent! source " .. e(session.file))
+    notify("Loaded session: " .. session.dir)
     session_loaded = true
   end
 
