@@ -474,6 +474,14 @@ Core.loader.load_later(function()
         confirm = function(_, item)
           require("core").session.load { dir = item.file }
         end,
+        filter = {
+          filter = function(item)
+            if Core.utils.is_subdir(item.file, vim.fn.stdpath("data")) then
+              return false
+            end
+            return true
+          end,
+        },
       }
     end,
     desc = "Projects",
@@ -808,22 +816,17 @@ Core.loader.load_later(function()
   end
 
   if vim.fn.executable("lazygit") == 1 then
-    local lazygit = nil
-    local lazygit_log = nil
-    local lazygit_file = nil
     nmap {
       "<leader>gg",
       function()
-        lazygit = lazygit or toggle_terminal("lazygit", 100)
-        lazygit:toggle()
+        toggle_terminal("lazygit", 100):toggle()
       end,
       desc = "Lazygit",
     }
     nmap {
       "<leader>gl",
       function()
-        lazygit_log = lazygit_log or toggle_terminal("lazygit log", 101)
-        lazygit_log:toggle()
+        toggle_terminal("lazygit log", 101):toggle()
       end,
       desc = "Lazygit Log",
     }
@@ -831,8 +834,7 @@ Core.loader.load_later(function()
       "<leader>gf",
       function()
         local file = vim.trim(vim.api.nvim_buf_get_name(0))
-        lazygit_file = lazygit_file or toggle_terminal("lazygit log -f " .. file, 102)
-        lazygit_file:toggle()
+        toggle_terminal("lazygit log -f " .. file, 102):toggle()
       end,
       desc = "Lazygit Current File History",
     }

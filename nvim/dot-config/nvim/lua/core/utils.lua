@@ -32,4 +32,17 @@ M.lualine = {
   },
 }
 
+function M.is_subdir(dir, parent)
+  dir = vim.fs.normalize(vim.fn.fnamemodify(dir, ":p"))
+  parent = vim.fs.normalize(vim.fn.fnamemodify(parent, ":p"))
+
+  -- A directory is considered a subdirectory of itself
+  if dir == parent then
+    return true
+  end
+
+  local sep = package.config:sub(1, 1)
+  return dir:sub(1, #parent + 1) == parent .. sep
+end
+
 return M

@@ -77,6 +77,12 @@ require("snacks").setup {
         section = "projects",
         indent = 2,
         padding = 2,
+        filter = function(dir)
+          if Core.utils.is_subdir(dir, vim.fn.stdpath("data")) then
+            return false
+          end
+          return true
+        end,
         ---@param dir string
         action = function(dir)
           require("core").session.load { dir = dir }
