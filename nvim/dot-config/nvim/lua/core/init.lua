@@ -3,7 +3,6 @@
 ---@field loader CoreLoader
 ---@field mapper CoreMapper
 ---@field utils CoreUtils
----@field options CoreOptions
 ---@field session CoreSession
 local M = {}
 

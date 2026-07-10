@@ -56,7 +56,7 @@ require("snacks").setup {
           icon = " ",
           key = "s",
           desc = "Restore Current Directory Session",
-          action = ":lua require('core').session.load(vim.fn.getcwd())",
+          action = ":lua require('core').session.load({ dir = vim.fn.getcwd()})",
         },
         {
           icon = "󰆓 ",
@@ -119,18 +119,10 @@ end
 Core.loader.load_later(function()
   Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>us")
   Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>uw")
-  Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>uL")
-  Snacks.toggle.line_number():map("<leader>ul")
-  Snacks.toggle
-    .option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 })
-    :map("<leader>uc")
 
   -- Toogle various ui elements
   Snacks.toggle.treesitter():map("<leader>uT")
   Snacks.toggle.inlay_hints():map("<leader>uh")
-  Snacks.toggle.diagnostics({ bufnr = 0 }):map("<leader>uD")
-  Snacks.toggle.zen():map("<leader>uZ")
-  Snacks.toggle.dim():map("<leader>uz")
   Snacks.toggle.indent():map("<leader>ui")
 
   Snacks.toggle({
@@ -209,16 +201,6 @@ Core.loader.load_later(function()
   }):map("<leader>ub")
 
   Snacks.toggle({
-    name = "Git Deleted",
-    get = function()
-      return require("gitsigns.config").config.show_deleted
-    end,
-    set = function(_)
-      require("gitsigns").preview_hunk_inline()
-    end,
-  }):map("<leader>ug")
-
-  Snacks.toggle({
     name = "Hardtime",
     get = function()
       return vim.g.hardtime_enabled
@@ -237,5 +219,5 @@ Core.loader.load_later(function()
     set = function(_)
       require("core").session.toggle()
     end,
-  }):map("<leader>uQ")
+  }):map("<leader>uq")
 end)

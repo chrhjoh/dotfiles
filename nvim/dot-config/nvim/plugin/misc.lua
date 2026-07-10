@@ -1,5 +1,4 @@
 vim.pack.add {
-  { src = "https://github.com/tpope/vim-unimpaired", version = "master" },
   { src = "https://github.com/tpope/vim-sleuth", version = "master" },
   { src = "https://github.com/tpope/vim-surround", version = "master" },
   { src = "https://github.com/folke/flash.nvim", version = "main" },

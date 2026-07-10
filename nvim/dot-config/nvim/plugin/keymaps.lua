@@ -19,7 +19,7 @@ Core.loader.load_later(function()
           end,
         },
         { "<leader>y", group = "yank" },
-        { "<leader>f", group = "files" },
+        { "<leader>f", group = "find" },
         { "<leader>u", group = "toggle" },
         { "<leader>c", group = "code" },
         { "<leader>w", group = "window" },
@@ -64,6 +64,13 @@ Core.loader.load_later(function()
   nmap { "<leader>yP", '<Cmd>let @* = expand("%:p")<Cr>', desc = "Absolute Path" }
   nmap { "<leader>yp", '<Cmd>let @* = expand("%")<Cr>', desc = "Relative Path" }
   nmap { "<leader>yf", '<Cmd>let @* = expand("%:t")<Cr>', desc = "Filename" }
+  nmap {
+    "<leader>ys",
+    function()
+      Snacks.picker.yanky() ---@diagnostic disable-line: undefined-field
+    end,
+    desc = "Search",
+  }
 
   -- buffer navigation ------------------------------------------------------
   nmap {
@@ -120,7 +127,7 @@ Core.loader.load_later(function()
   end
 
   nmap {
-    "<Leader>uq",
+    "<Leader>ul",
     function()
       if window_is_open("quickfix") then
         vim.cmd("cclose")
@@ -203,8 +210,7 @@ Core.loader.load_later(function()
   imap { "<c-j>", "<down>", desc = "Move Down" }
   imap { "<c-h>", "<left>", desc = "Move Left" }
 
-  -- files management ----------------------------------------------------
-  nmap { "<leader>fn", "<cmd>enew<cr>", desc = "New" }
+  -- find -------------------------------------------------------------
   nmap {
     "<leader>fb",
     function()
@@ -467,24 +473,64 @@ Core.loader.load_later(function()
     end,
     desc = "Delete Session for Curent Directory",
   }
-  nmap {
-    "<leader>qp",
-    function()
-      Snacks.picker.projects {
-        confirm = function(_, item)
-          require("core").session.load { dir = item.file }
+
+  local function project_picker(opts)
+    opts = opts or {}
+
+    Snacks.picker.projects {
+      title = opts.title,
+      projects = opts.projects,
+      dev = { "~/code", "~/projects", "~/Obsidian/" },
+      confirm = function(picker, item)
+        picker:close()
+        if not item then
+          return
+        end
+        require("core").session.load { dir = item.file }
+      end,
+
+      filter = {
+        filter = function(item)
+          if Core.utils.is_subdir(item.file, vim.fn.stdpath("data")) then
+            return false
+          end
+          return true
         end,
-        filter = {
-          filter = function(item)
-            if Core.utils.is_subdir(item.file, vim.fn.stdpath("data")) then
-              return false
-            end
-            return true
-          end,
+      },
+      actions = {
+        oil = function(picker)
+          local selected = picker:selected { fallback = true }
+          picker:close()
+          require("oil").open(selected[1].file)
+        end,
+      },
+      win = {
+        input = {
+          keys = {
+            ["<C-O>"] = { "oil", mode = { "n", "i" } },
+          },
         },
-      }
+      },
+    }
+  end
+
+  nmap {
+    "<leader>fp",
+    function()
+      project_picker {}
     end,
     desc = "Projects",
+  }
+
+  nmap {
+    "<leader>fd",
+    function()
+      project_picker {
+        projects = { "/etc", "/usr/local", "~/.ssh", "~/.local/bin", "~/.config" },
+        title = "Directory",
+      }
+    end,
+    desc = "Directory",
   }
 
   -- oil directory explorer -------------------------------------
@@ -493,14 +539,14 @@ Core.loader.load_later(function()
     function()
       require("oil").open()
     end,
-    desc = "Oil Current",
+    desc = "Explorer Parent",
   }
   nmap {
     "<leader>E",
     function()
       require("oil").open(vim.fs.root(0, { ".git", "pyproject.toml" }))
     end,
-    desc = "Oil Root",
+    desc = "Explorer Root",
   }
   -- flash -----------------------------------------------
   map {
