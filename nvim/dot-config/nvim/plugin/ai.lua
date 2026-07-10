@@ -20,12 +20,5 @@ Core.loader.load_later(function()
   }
   require("copilot.command").disable()
   vim.g.sidekick_nes_enabled = false
-  require("sidekick").setup {
-    cli = {
-      mux = {
-        backend = "zellij",
-        enabled = true,
-      },
-    },
-  }
+  require("sidekick").setup {}
 end)

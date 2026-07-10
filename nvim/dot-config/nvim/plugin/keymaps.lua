@@ -211,13 +211,7 @@ Core.loader.load_later(function()
   imap { "<c-h>", "<left>", desc = "Move Left" }
 
   -- find -------------------------------------------------------------
-  nmap {
-    "<leader>fb",
-    function()
-      Snacks.picker.buffers()
-    end,
-    desc = "Buffers",
-  }
+  nmap { "<leader>fb", Snacks.picker.buffers, desc = "Buffers" }
   nmap {
     "<leader>fB",
     function()
@@ -232,13 +226,7 @@ Core.loader.load_later(function()
     end,
     desc = "Config File",
   }
-  nmap {
-    "<leader>ff",
-    function()
-      Snacks.picker.files()
-    end,
-    desc = "Files",
-  }
+  nmap { "<leader>ff", Snacks.picker.files, desc = "Files" }
   nmap {
     "<leader>fF",
     function()
@@ -246,44 +234,14 @@ Core.loader.load_later(function()
     end,
     desc = "Files (all)",
   }
-  nmap {
-    "<leader>fg",
-    function()
-      Snacks.picker.git_files()
-    end,
-    desc = "Files (git-files)",
-  }
-  nmap {
-    "<leader>fr",
-    function()
-      Snacks.picker.recent()
-    end,
-    desc = "Recent",
-  }
+  nmap { "<leader>fg", Snacks.picker.git_files, desc = "Files (git-files)" }
+  nmap { "<leader>fr", Snacks.picker.recent, desc = "Recent" }
 
   -- todo comment mappings --------------------------------------
 
-  nmap {
-    "]t",
-    function()
-      require("todo-comments").jump_next()
-    end,
-    desc = "ToDo Comment",
-  }
-  nmap {
-    "[t",
-    function()
-      require("todo-comments").jump_prev()
-    end,
-    desc = "ToDo Comment",
-  }
-  nmap {
-    "<leader>st",
-    function()
-      Snacks.picker.todo_comments() ---@diagnostic disable-line: undefined-field
-    end,
-    desc = "Todo",
-  }
+  nmap { "]t", require("todo-comments").jump_next, desc = "ToDo Comment" }
+  nmap { "[t", require("todo-comments").jump_prev, desc = "ToDo Comment" }
+  nmap { "<leader>st", Snacks.picker.todo_comments, desc = "Todo" } ---@diagnostic disable-line: undefined-field
   nmap {
     "<leader>sT",
     function()
@@ -303,17 +261,6 @@ Core.loader.load_later(function()
   }
 
   -- git ---------------------------------------------------------
-  local function toggle_diffthis(cmd)
-    for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
-      local buf = vim.api.nvim_win_get_buf(win)
-      local bufname = vim.api.nvim_buf_get_name(buf)
-      if bufname:find("^gitsigns://") then
-        vim.api.nvim_win_close(win, true)
-        return
-      end
-    end
-    require("gitsigns").diffthis(cmd)
-  end
 
   map {
     "]h",
@@ -363,98 +310,19 @@ Core.loader.load_later(function()
     desc = "Reset hunk",
     mode = "v",
   }
-  nmap {
-    "<leader>gh",
-    function()
-      require("gitsigns").stage_hunk()
-    end,
-    desc = "Stage/unstage hunk",
-  }
-  nmap {
-    "<leader>gr",
-    function()
-      require("gitsigns").reset_hunk()
-    end,
-    desc = "Reset hunk",
-  }
-  nmap {
-    "<leader>gS",
-    function()
-      require("gitsigns").stage_buffer()
-    end,
-    desc = "Stage buffer",
-  }
-  nmap {
-    "<leader>gR",
-    function()
-      require("gitsigns").reset_buffer()
-    end,
-    desc = "Reset buffer",
-  }
-  nmap {
-    "<leader>gp",
-    function()
-      require("gitsigns").preview_hunk()
-    end,
-    desc = "Preview hunk",
-  }
-  nmap {
-    "<leader>gd",
-    function()
-      require("gitsigns").preview_hunk_inline()
-    end,
-    desc = "Diff inline",
-  }
-  nmap {
-    "<leader>gD",
-    function()
-      toggle_diffthis("~")
-    end,
-    desc = "Diff last commit",
-  }
-  nmap {
-    "gh",
-    function()
-      require("gitsigns").select_hunk()
-    end,
-    desc = "Select git hunk",
-    mode = { "o", "x" },
-  }
-  nmap {
-    "<leader>gc",
-    function()
-      Snacks.picker.git_log()
-    end,
-    desc = "Commits",
-  }
-  nmap {
-    "<leader>gs",
-    function()
-      Snacks.picker.git_status()
-    end,
-    desc = "Status",
-  }
-  nmap {
-    "<leader>gH",
-    function()
-      Snacks.picker.git_diff()
-    end,
-    desc = "Hunks",
-  }
-  nmap {
-    "<leader>gb",
-    function()
-      Snacks.git.blame_line()
-    end,
-    desc = "Blame line",
-  }
-  nmap {
-    "<leader>gB",
-    function()
-      Snacks.gitbrowse()
-    end,
-    desc = "Browser",
-  }
+  nmap { "<leader>gh", require("gitsigns").stage_hunk, desc = "Stage/unstage hunk" }
+  nmap { "<leader>gr", require("gitsigns").reset_hunk, desc = "Reset hunk" }
+  nmap { "<leader>gS", require("gitsigns").stage_buffer, desc = "Stage buffer" }
+  nmap { "<leader>gR", require("gitsigns").reset_buffer, desc = "Reset buffer" }
+  nmap { "<leader>gp", require("gitsigns").preview_hunk, desc = "Preview hunk" }
+  nmap { "<leader>gd", require("gitsigns").preview_hunk_inline, desc = "Diff inline" }
+  nmap { "<leader>gD", Core.utils.toggle_gitsigns_diff, desc = "Diff last commit" }
+  nmap { "gh", require("gitsigns").select_hunk, desc = "Select git hunk", mode = { "o", "x" } }
+  nmap { "<leader>gc", Snacks.picker.git_log, desc = "Commits" }
+  nmap { "<leader>gs", Snacks.picker.git_status, desc = "Status" }
+  nmap { "<leader>gH", Snacks.picker.git_diff, desc = "Hunks" }
+  nmap { "<leader>gb", Snacks.git.blame_line, desc = "Blame line" }
+  nmap { "<leader>gB", Snacks.gitbrowse.open, desc = "Browser" }
 
   -- session management -----------------------------------------
   nmap {
@@ -469,63 +337,17 @@ Core.loader.load_later(function()
   nmap {
     "<leader>qd",
     function()
-      require("core").session.delete(vim.fn.getcwd())
+      Core.session.delete(vim.fn.getcwd())
     end,
     desc = "Delete Session for Curent Directory",
   }
 
-  local function project_picker(opts)
-    opts = opts or {}
-
-    Snacks.picker.projects {
-      title = opts.title,
-      projects = opts.projects,
-      dev = { "~/code", "~/projects", "~/Obsidian/" },
-      confirm = function(picker, item)
-        picker:close()
-        if not item then
-          return
-        end
-        require("core").session.load { dir = item.file }
-      end,
-
-      filter = {
-        filter = function(item)
-          if Core.utils.is_subdir(item.file, vim.fn.stdpath("data")) then
-            return false
-          end
-          return true
-        end,
-      },
-      actions = {
-        oil = function(picker)
-          local selected = picker:selected { fallback = true }
-          picker:close()
-          require("oil").open(selected[1].file)
-        end,
-      },
-      win = {
-        input = {
-          keys = {
-            ["<C-O>"] = { "oil", mode = { "n", "i" } },
-          },
-        },
-      },
-    }
-  end
-
-  nmap {
-    "<leader>fp",
-    function()
-      project_picker {}
-    end,
-    desc = "Projects",
-  }
+  nmap { "<leader>fp", Core.utils.project_picker, desc = "Projects" }
 
   nmap {
     "<leader>fd",
     function()
-      project_picker {
+      Core.utils.project_picker {
         projects = { "/etc", "/usr/local", "~/.ssh", "~/.local/bin", "~/.config" },
         title = "Directory",
       }
@@ -534,13 +356,7 @@ Core.loader.load_later(function()
   }
 
   -- oil directory explorer -------------------------------------
-  nmap {
-    "<leader>e",
-    function()
-      require("oil").open()
-    end,
-    desc = "Explorer Parent",
-  }
+  nmap { "<leader>e", require("oil").open, desc = "Explorer Parent" }
   nmap {
     "<leader>E",
     function()
@@ -549,30 +365,9 @@ Core.loader.load_later(function()
     desc = "Explorer Root",
   }
   -- flash -----------------------------------------------
-  map {
-    "s",
-    function()
-      require("flash").jump()
-    end,
-    mode = { "n", "x", "o" },
-    desc = "Jump",
-  }
-  map {
-    "S",
-    function()
-      require("flash").treesitter()
-    end,
-    mode = { "n", "o", "x" },
-    desc = "Treesitter",
-  }
-  map {
-    "r",
-    function()
-      require("flash").remote()
-    end,
-    mode = "o",
-    desc = "Remote",
-  }
+  map { "s", require("flash").jump, mode = { "n", "x", "o" }, desc = "Jump" }
+  map { "S", require("flash").treesitter, mode = { "n", "o", "x" }, desc = "Treesitter" }
+  map { "r", require("flash").remote, mode = "o", desc = "Remote" }
 
   -- grug-far -----------------------------------------------
 
@@ -601,157 +396,30 @@ Core.loader.load_later(function()
   }
 
   -- searching snacks shorhand -----------------------------------------------
-  nmap {
-    "<leader>,",
-    function()
-      Snacks.picker.buffers()
-    end,
-    desc = "Buffer",
-  }
-  nmap {
-    "<leader>/",
-    function()
-      Snacks.picker.grep()
-    end,
-    desc = "Grep",
-  }
-  nmap {
-    "<leader>:",
-    function()
-      Snacks.picker.command_history()
-    end,
-    desc = "Command History",
-  }
-  nmap {
-    "<leader><space>",
-    function()
-      Snacks.picker.files()
-    end,
-    desc = "Files",
-  }
+  nmap { "<leader>,", Snacks.picker.buffers, desc = "Buffer" }
+  nmap { "<leader>/", Snacks.picker.grep, desc = "Grep" }
+  nmap { "<leader>:", Snacks.picker.command_history, desc = "Command History" }
+  nmap { "<leader><space>", Snacks.picker.files, desc = "Files" }
 
   -- searching general ---------------------------------------------------------
 
-  nmap {
-    '<leader>s"',
-    function()
-      Snacks.picker.registers()
-    end,
-    desc = "Registers",
-  }
-  nmap {
-    "<leader>sb",
-    function()
-      Snacks.picker.lines()
-    end,
-    desc = "Buffer",
-  }
-  nmap {
-    "<leader>sB",
-    function()
-      Snacks.picker.grep_buffers()
-    end,
-    desc = "Buffers",
-  }
-  nmap {
-    "<leader>sc",
-    function()
-      Snacks.picker.command_history()
-    end,
-    desc = "Command History",
-  }
-  nmap {
-    "<leader>sC",
-    function()
-      Snacks.picker.commands()
-    end,
-    desc = "Commands",
-  }
-  nmap {
-    "<leader>sD",
-    function()
-      Snacks.picker.diagnostics()
-    end,
-    desc = "Diagnostics",
-  }
-  nmap {
-    "<leader>sd",
-    function()
-      Snacks.picker.diagnostics_buffer()
-    end,
-    desc = "Buffer Diagnostics",
-  }
-  nmap {
-    "<leader>sg",
-    function()
-      Snacks.picker.grep()
-    end,
-    desc = "Grep (Root Dir)",
-  }
-  nmap {
-    "<leader>sh",
-    function()
-      Snacks.picker.help()
-    end,
-    desc = "Help Pages",
-  }
-  nmap {
-    "<leader>sj",
-    function()
-      Snacks.picker.jumps()
-    end,
-    desc = "Jumplist",
-  }
-  nmap {
-    "<leader>sk",
-    function()
-      Snacks.picker.keymaps()
-    end,
-    desc = "Key Maps",
-  }
-  nmap {
-    "<leader>sM",
-    function()
-      Snacks.picker.man()
-    end,
-    desc = "Man Pages",
-  }
-  nmap {
-    "<leader>sm",
-    function()
-      Snacks.picker.marks()
-    end,
-    desc = "Jump to Mark",
-  }
-  nmap {
-    "<leader>sR",
-    function()
-      Snacks.picker.resume()
-    end,
-    desc = "Resume",
-  }
-  nmap {
-    "<leader>sq",
-    function()
-      Snacks.picker.qflist()
-    end,
-    desc = "Quickfix List",
-  }
-  nmap {
-    "<leader>sw",
-    function()
-      Snacks.picker.grep_word()
-    end,
-    desc = "Word (Root Dir)",
-    mode = { "n", "x" },
-  }
-  nmap {
-    "<leader>ss",
-    function()
-      Snacks.picker.lsp_symbols()
-    end,
-    desc = "Symbols",
-  }
+  nmap { '<leader>s"', Snacks.picker.registers, desc = "Registers" }
+  nmap { "<leader>sb", Snacks.picker.lines, desc = "Buffer" }
+  nmap { "<leader>sB", Snacks.picker.grep_buffers, desc = "Buffers" }
+  nmap { "<leader>sc", Snacks.picker.command_history, desc = "Command History" }
+  nmap { "<leader>sC", Snacks.picker.commands, desc = "Commands" }
+  nmap { "<leader>sD", Snacks.picker.diagnostics, desc = "Diagnostics" }
+  nmap { "<leader>sd", Snacks.picker.diagnostics_buffer, desc = "Buffer Diagnostics" }
+  nmap { "<leader>sg", Snacks.picker.grep, desc = "Grep (Root Dir)" }
+  nmap { "<leader>sh", Snacks.picker.help, desc = "Help Pages" }
+  nmap { "<leader>sj", Snacks.picker.jumps, desc = "Jumplist" }
+  nmap { "<leader>sk", Snacks.picker.keymaps, desc = "Key Maps" }
+  nmap { "<leader>sM", Snacks.picker.man, desc = "Man Pages" }
+  nmap { "<leader>sm", Snacks.picker.marks, desc = "Jump to Mark" }
+  nmap { "<leader>sR", Snacks.picker.resume, desc = "Resume" }
+  nmap { "<leader>sq", Snacks.picker.qflist, desc = "Quickfix List" }
+  nmap { "<leader>sw", Snacks.picker.grep_word, desc = "Word (Root Dir)", mode = { "n", "x" } }
+  nmap { "<leader>ss", Snacks.picker.lsp_symbols, desc = "Symbols" }
   nmap {
     "<leader>sS",
     function()
@@ -759,13 +427,7 @@ Core.loader.load_later(function()
     end,
     desc = "Workspace Symbols",
   }
-  nmap {
-    "<leader>su",
-    function()
-      Snacks.picker.undo()
-    end,
-    desc = "Undotree",
-  }
+  nmap { "<leader>su", Snacks.picker.undo, desc = "Undotree" }
   -- searching lsp -------------------------------------------------------------
   nmap {
     "gd",
@@ -774,28 +436,9 @@ Core.loader.load_later(function()
     end,
     desc = "LSP Definition",
   }
-  nmap {
-    "gr",
-    function()
-      Snacks.picker.lsp_references()
-    end,
-    desc = "LSP References",
-    nowait = true,
-  }
-  nmap {
-    "gI",
-    function()
-      Snacks.picker.lsp_implementations()
-    end,
-    desc = "LSP Implementations",
-  }
-  nmap {
-    "gD",
-    function()
-      Snacks.picker.lsp_type_definitions()
-    end,
-    desc = "LSP Type Definitions",
-  }
+  nmap { "gr", Snacks.picker.lsp_references, desc = "LSP References", nowait = true }
+  nmap { "gI", Snacks.picker.lsp_implementations, desc = "LSP Implementations" }
+  nmap { "gD", Snacks.picker.lsp_type_definitions, desc = "LSP Type Definitions" }
 
   -- terminal management ------------------------------------------------
   nmap {
@@ -915,21 +558,8 @@ Core.loader.load_later(function()
     desc = "Local mappings",
   }
   -- ai ---------------------------------------------------------------
-  map {
-    "<c-.>",
-    function()
-      require("sidekick.cli").focus()
-    end,
-    desc = "Sidekick Focus",
-    mode = { "n", "t", "i", "x" },
-  }
-  nmap {
-    "<leader>aa",
-    function()
-      require("sidekick.cli").toggle()
-    end,
-    desc = "Sidekick Toggle CLI",
-  }
+  map { "<c-.>", require("sidekick.cli").focus, desc = "Sidekick Focus", mode = { "n", "t", "i", "x" } }
+  nmap { "<leader>aa", require("sidekick.cli").toggle, desc = "Sidekick Toggle CLI" }
   nmap {
     "<leader>as",
     function()
@@ -937,13 +567,7 @@ Core.loader.load_later(function()
     end,
     desc = "Select CLI",
   }
-  nmap {
-    "<leader>ad",
-    function()
-      require("sidekick.cli").close()
-    end,
-    desc = "Detach a CLI Session",
-  }
+  nmap { "<leader>ad", require("sidekick.cli").close, desc = "Detach a CLI Session" }
   nmap {
     "<leader>at",
     function()
@@ -967,14 +591,7 @@ Core.loader.load_later(function()
     mode = { "x" },
     desc = "Send Visual Selection",
   }
-  nmap {
-    "<leader>ap",
-    function()
-      require("sidekick.cli").prompt()
-    end,
-    mode = { "n", "x" },
-    desc = "Sidekick Select Prompt",
-  }
+  nmap { "<leader>ap", require("sidekick.cli").prompt, mode = { "n", "x" }, desc = "Select Prompt" }
 
   -- treesitter ----------------------------------------------------------
   nmap {
