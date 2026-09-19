@@ -108,7 +108,7 @@ function M.track()
     group = vim.api.nvim_create_augroup(augroup, { clear = true }),
     callback = function()
       if should_save() and M.is_active() then
-        M.save()
+        M.save { silent = true }
       end
     end,
   })
@@ -119,10 +119,17 @@ function M.untrack()
   pcall(vim.api.nvim_del_augroup_by_name, augroup)
 end
 
-function M.save()
+---@class SaveOpts
+---@field silent? boolean
+
+---@param opts? SaveOpts
+function M.save(opts)
+  opts = opts or {}
   local current_session = resolve_session(vim.fn.getcwd())
   vim.cmd("mks! " .. e(current_session.file))
-  notify("Saved session: " .. current_session.dir)
+  if opts.silent ~= false then
+    notify("Saved session: " .. current_session.dir)
+  end
 end
 
 ---@param clean_buffer? fun(bufnr: integer): boolean
