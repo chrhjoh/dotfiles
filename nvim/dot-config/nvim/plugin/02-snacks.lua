@@ -156,31 +156,6 @@ Core.loader.load_later(function()
   }):map("<leader>uF")
 
   Snacks.toggle({
-    name = "Sidekick nes",
-    get = function()
-      return vim.g.sidekick_nes_enabled
-    end,
-    set = function(_)
-      vim.g.sidekick_nes_enabled = not vim.g.sidekick_nes_enabled
-    end,
-  }):map("<leader>uA")
-
-  Snacks.toggle({
-    name = "Copilot",
-    get = function()
-      return vim.g.copilot_enabled
-    end,
-    set = function(_)
-      vim.g.copilot_enabled = not vim.g.copilot_enabled
-      if vim.g.copilot_enabled then
-        require("copilot.command").enable()
-      else
-        require("copilot.command").disable()
-      end
-    end,
-  }):map("<leader>ua")
-
-  Snacks.toggle({
     name = "Completion Menu",
     get = function()
       return vim.b.completion ~= false

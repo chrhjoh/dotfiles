@@ -73,17 +73,7 @@ Core.loader.load_later(function()
   }
 
   -- buffer navigation ------------------------------------------------------
-  nmap {
-    "<TAB>",
-    function()
-      if not require("sidekick").nes_jump_or_apply() then
-        return ":bn<CR>"
-      end
-    end,
-    desc = "Buffer",
-    silent = true,
-    expr = true,
-  }
+  nmap { "<TAB>", ":bn<CR>", desc = "Buffer", silent = true }
   nmap { "<S-TAB>", ":bp<CR>", desc = "Buffer", silent = true }
   nmap { "[b", "<cmd>bprevious<cr>", desc = "Buffer" }
   nmap { "]b", "<cmd>bnext<cr>", desc = "Buffer" }
@@ -533,7 +523,7 @@ Core.loader.load_later(function()
   nmap { "<leader>H", Snacks.dashboard.open, desc = "Dashboard" }
   nmap { "leadercR", Snacks.rename.rename_file, desc = "Rename File" }
   map {
-    "[[",
+    "[r",
     function()
       Snacks.words.jump(-vim.v.count1)
     end,
@@ -541,7 +531,7 @@ Core.loader.load_later(function()
     desc = "Reference",
   }
   map {
-    "]]",
+    "]r",
     function()
       Snacks.words.jump(vim.v.count1)
     end,
@@ -558,20 +548,20 @@ Core.loader.load_later(function()
     desc = "Local mappings",
   }
   -- ai ---------------------------------------------------------------
-  map { "<c-.>", require("sidekick.cli").focus, desc = "Sidekick Focus", mode = { "n", "t", "i", "x" } }
-  nmap { "<leader>aa", require("sidekick.cli").toggle, desc = "Sidekick Toggle CLI" }
-  nmap {
-    "<leader>as",
+  map {
+    "<c-.>",
     function()
-      require("sidekick.cli").select()
+      require("sidekick.cli").focus { name = "opencode" }
     end,
-    desc = "Select CLI",
+    desc = "Sidekick Focus",
+    mode = { "n", "t", "i", "x" },
   }
+  nmap { "<leader>as", require("sidekick.cli").select, desc = "Select CLI" }
   nmap { "<leader>ad", require("sidekick.cli").close, desc = "Detach a CLI Session" }
   nmap {
     "<leader>at",
     function()
-      require("sidekick.cli").send { msg = "{this}" }
+      require("sidekick.cli").send { msg = "{this}", name = "opencode" }
     end,
     mode = { "x", "n" },
     desc = "Send This",
@@ -579,14 +569,14 @@ Core.loader.load_later(function()
   nmap {
     "<leader>af",
     function()
-      require("sidekick.cli").send { msg = "{file}" }
+      require("sidekick.cli").send { msg = "{file}", name = "opencode" }
     end,
     desc = "Send File",
   }
   nmap {
     "<leader>av",
     function()
-      require("sidekick.cli").send { msg = "{selection}" }
+      require("sidekick.cli").send { msg = "{selection}", name = "opencode" }
     end,
     mode = { "x" },
     desc = "Send Visual Selection",

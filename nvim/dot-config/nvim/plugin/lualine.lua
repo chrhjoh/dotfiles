@@ -88,6 +88,8 @@ Core.loader.load_eager_if_arg(function()
       "quickfix",
       require("core").utils.lualine.snacks_picker,
       require("core").utils.lualine.snacks_notifications,
+      require("core").utils.lualine.sidekick,
+      require("core").utils.lualine.pack,
     },
   }
 end)

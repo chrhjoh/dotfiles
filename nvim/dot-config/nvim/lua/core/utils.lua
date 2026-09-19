@@ -8,6 +8,31 @@ function M.plugin_dir(plugin)
 end
 
 M.lualine = {
+  sidekick = {
+    sections = {
+      lualine_a = {
+        function()
+          return "Sidekick"
+        end,
+      },
+      lualine_c = {
+        function()
+          return vim.b.sidekick_cli.name
+        end,
+      },
+    },
+    filetypes = { "sidekick_terminal" },
+  },
+  pack = {
+    sections = {
+      lualine_a = {
+        function()
+          return "Plugins"
+        end,
+      },
+    },
+    filetypes = { "nvim-pack" },
+  },
   snacks_picker = {
     sections = {
       lualine_a = {

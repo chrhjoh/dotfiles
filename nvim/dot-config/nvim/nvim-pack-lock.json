@@ -15,13 +15,8 @@
       "src": "https://github.com/stevearc/conform.nvim",
       "version": "'master'"
     },
-    "copilot.lua": {
-      "rev": "d521d3959f81f4fa58870ed329754f1dd5057511",
-      "src": "https://github.com/zbirenbaum/copilot.lua",
-      "version": "'master'"
-    },
     "flash.nvim": {
-      "rev": "fcea7ff883235d9024dc41e638f164a450c14ca2",
+      "rev": "b6346946d10d07998efee029fb0f7a593806d0cd",
       "src": "https://github.com/folke/flash.nvim",
       "version": "'main'"
     },
@@ -36,12 +31,12 @@
       "version": ">=0.0.0"
     },
     "grug-far.nvim": {
-      "rev": "c69859c1d5427ab5fc7ed12380ab521b4e336691",
+      "rev": "0f6a5d0d7a70659b11bbcd6b3673ee0fe61b6024",
       "src": "https://github.com/MagicDuck/grug-far.nvim",
       "version": "'main'"
     },
     "hardtime.nvim": {
-      "rev": "b4e431934af1fe224a3a801f632c008278cb7628",
+      "rev": "244753782b945def87472d8f4e9e6a9d4ec18689",
       "src": "https://github.com/m4xshen/hardtime.nvim",
       "version": "'main'"
     },
@@ -66,7 +61,7 @@
       "version": ">=0.0.0"
     },
     "mini.icons": {
-      "rev": "24dbea2195c477e57d581215839a6ab915f34b14",
+      "rev": "98faae31e9be1cc054ae63485e58ceb185efcad0",
       "src": "https://github.com/nvim-mini/mini.icons",
       "version": "'main'"
     },
@@ -86,17 +81,17 @@
       "version": "'main'"
     },
     "nvim-lspconfig": {
-      "rev": "d224a1920728ba129880efc700d4a0180ac4ecbb",
+      "rev": "d592c1e6ad9a0a01b3d5ed3f0345d68407167181",
       "src": "https://github.com/neovim/nvim-lspconfig",
       "version": "'master'"
     },
     "nvim-treesitter": {
-      "rev": "4916d6592ede8c07973490d9322f187e07dfefac",
+      "rev": "a45a920ec04cda5624f6dea0ff6454c81c3ad2d5",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter",
       "version": "'main'"
     },
     "nvim-treesitter-textobjects": {
-      "rev": "851e865342e5a4cb1ae23d31caf6e991e1c99f1e",
+      "rev": "898ee307df58f854d11cd7edd06472574d48014e",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter-textobjects",
       "version": "'main'"
     },
@@ -104,11 +99,6 @@
       "rev": "b73018b75affd13fa38e2fc94ef753b465f770d7",
       "src": "https://github.com/stevearc/oil.nvim",
       "version": "'master'"
-    },
-    "persisted.nvim": {
-      "rev": "1a8e9dcf277d61105619498b2002c287c50424b8",
-      "src": "https://github.com/olimorris/persisted.nvim",
-      "version": "'main'"
     },
     "sidekick.nvim": {
       "rev": "208e1c5b8170c01fd1d07df0139322a76479b235",
@@ -145,13 +135,8 @@
       "src": "https://github.com/tpope/vim-surround",
       "version": "'master'"
     },
-    "vim-unimpaired": {
-      "rev": "db65482581a28e4ccf355be297f1864a4e66985c",
-      "src": "https://github.com/tpope/vim-unimpaired",
-      "version": "'master'"
-    },
     "vimtex": {
-      "rev": "a5949d2800c1866c878956d49c51fc8d003c6b99",
+      "rev": "1d27d95258d8273d0690c7d3d4ff6e1fa2bd24af",
       "src": "https://github.com/lervag/vimtex",
       "version": "'master'"
     },
@@ -160,7 +145,7 @@
       "src": "https://github.com/folke/which-key.nvim"
     },
     "yanky.nvim": {
-      "rev": "020c22d0cfa60358569e49d1d7b91630f175aef0",
+      "rev": "dd6689fdda85f66cab7d9b1a1664625f3be0920d",
       "src": "https://github.com/gbprod/yanky.nvim",
       "version": "'main'"
     }
