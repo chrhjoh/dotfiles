@@ -33,7 +33,8 @@ keybinds clear-defaults=true {
         bind "{" { BreakPaneRight; SwitchToMode "locked"; }
         bind "b" { BreakPane; SwitchToMode "locked"; }
         
-        bind "s" { ToggleActiveSyncTab; SwitchToMode "locked"; }
+        bind "S" { ToggleActiveSyncTab; SwitchToMode "locked"; }
+        bind "s" { NewPane "stacked"; SwitchToMode "locked"; }
 
         bind "\\" { ToggleFloatingPanes; SwitchToMode "locked";}
         bind "f" { TogglePaneEmbedOrFloating; SwitchToMode "locked"; }
