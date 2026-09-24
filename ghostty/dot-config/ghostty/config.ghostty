@@ -34,9 +34,11 @@ keybind = super+alt+physical:eight=goto_tab:8
 # SSH 
 shell-integration-features = ssh-env,sudo
 
-background-opacity=0.85
+#background-opacity=0.85
 
 # Clipboard
 clipboard-read = allow
 clipboard-write = allow
 app-notifications = no-clipboard-copy,no-config-reload
+
+config-file = config.local.ghostty

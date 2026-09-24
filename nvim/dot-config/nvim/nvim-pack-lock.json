@@ -11,21 +11,17 @@
       "version": ">=0.0.0"
     },
     "conform.nvim": {
-      "rev": "619363c30309d29ffa631e67c8183f2a72caa373",
+      "rev": "016802de402556da54c36bd7359b441266b01cdd",
       "src": "https://github.com/stevearc/conform.nvim",
       "version": "'master'"
     },
-    "copilot.lua": {
-      "rev": "760912b5992e1d6437378a9c7f2b0cb950966cf5",
-      "src": "https://github.com/zbirenbaum/copilot.lua"
-    },
     "flash.nvim": {
-      "rev": "b6346946d10d07998efee029fb0f7a593806d0cd",
+      "rev": "5f0f270fdc7c5b0c21d903ee85b9cb06f2ac636a",
       "src": "https://github.com/folke/flash.nvim",
       "version": "'main'"
     },
     "friendly-snippets": {
-      "rev": "6cd7280adead7f586db6fccbd15d2cac7e2188b9",
+      "rev": "b4d01b0fdf3c9a549961c2f9ffe8dc09be166219",
       "src": "https://github.com/rafamadriz/friendly-snippets",
       "version": "'main'"
     },
@@ -35,12 +31,12 @@
       "version": ">=0.0.0"
     },
     "grug-far.nvim": {
-      "rev": "0f6a5d0d7a70659b11bbcd6b3673ee0fe61b6024",
+      "rev": "11595bf747edc270bce2069d1020502ad4ae56cf",
       "src": "https://github.com/MagicDuck/grug-far.nvim",
       "version": "'main'"
     },
     "hardtime.nvim": {
-      "rev": "244753782b945def87472d8f4e9e6a9d4ec18689",
+      "rev": "5165840fe680eab46de1fc6dbff48f148fdcf018",
       "src": "https://github.com/m4xshen/hardtime.nvim",
       "version": "'main'"
     },
@@ -65,7 +61,7 @@
       "version": ">=0.0.0"
     },
     "mini.icons": {
-      "rev": "98faae31e9be1cc054ae63485e58ceb185efcad0",
+      "rev": "f642e3ba8c12afbc8f32f6d77ef6597eac56786f",
       "src": "https://github.com/nvim-mini/mini.icons",
       "version": "'main'"
     },
@@ -75,7 +71,7 @@
       "version": ">=0.0.0"
     },
     "nvim-autopairs": {
-      "rev": "7b9923abad60b903ece7c52940e1321d39eccc79",
+      "rev": "430522f95fe4fb7c511ec64f8c1a90cc6a66c05c",
       "src": "https://github.com/windwp/nvim-autopairs",
       "version": "'master'"
     },
@@ -85,17 +81,17 @@
       "version": "'main'"
     },
     "nvim-lspconfig": {
-      "rev": "d592c1e6ad9a0a01b3d5ed3f0345d68407167181",
+      "rev": "046b1a797af1effe8e0474b9af9657a3761ec58a",
       "src": "https://github.com/neovim/nvim-lspconfig",
       "version": "'master'"
     },
     "nvim-treesitter": {
-      "rev": "a45a920ec04cda5624f6dea0ff6454c81c3ad2d5",
+      "rev": "f603a2f4da48728f80257fb5fbb90145fd1dc173",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter",
       "version": "'main'"
     },
     "nvim-treesitter-textobjects": {
-      "rev": "898ee307df58f854d11cd7edd06472574d48014e",
+      "rev": "5c7b0263797dfd1bd6202f2b219f3b53a80b2187",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter-textobjects",
       "version": "'main'"
     },
@@ -104,12 +100,8 @@
       "src": "https://github.com/stevearc/oil.nvim",
       "version": "'master'"
     },
-    "persisted.nvim": {
-      "rev": "1a8e9dcf277d61105619498b2002c287c50424b8",
-      "src": "https://github.com/olimorris/persisted.nvim"
-    },
     "sidekick.nvim": {
-      "rev": "208e1c5b8170c01fd1d07df0139322a76479b235",
+      "rev": "3d80a47e6375f6d647c9695d3afea6fa1b3275df",
       "src": "https://github.com/folke/sidekick.nvim",
       "version": "'main'"
     },
@@ -119,7 +111,7 @@
       "version": "'main'"
     },
     "snakemake": {
-      "rev": "3d933e63e8b51a520d65aac2d3f3b2c19b1b36fd",
+      "rev": "ca4a76228e1c2abed063e07cbe7af7c8ea3269f9",
       "src": "https://github.com/snakemake/snakemake",
       "version": ">=0.0.0"
     },
@@ -144,7 +136,7 @@
       "version": "'master'"
     },
     "vimtex": {
-      "rev": "1d27d95258d8273d0690c7d3d4ff6e1fa2bd24af",
+      "rev": "42dcf1699e45725bd3b366ecab2ae06f6e0f8118",
       "src": "https://github.com/lervag/vimtex",
       "version": "'master'"
     },
@@ -153,7 +145,7 @@
       "src": "https://github.com/folke/which-key.nvim"
     },
     "yanky.nvim": {
-      "rev": "dd6689fdda85f66cab7d9b1a1664625f3be0920d",
+      "rev": "4b4ddd196526fd3d6fd091d931810f9743e936d3",
       "src": "https://github.com/gbprod/yanky.nvim",
       "version": "'main'"
     }
