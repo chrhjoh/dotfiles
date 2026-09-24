@@ -20,7 +20,6 @@
   "systemTrayIconTintMode": "secondary",
   "controlCenterShowMicPercent": true,
   "showWorkspaceApps": true,
-  "workspaceAppIconSizeOffset": 1,
   "groupActiveWorkspaceApps": true,
   "workspaceColorMode": "primaryContainer",
   "workspaceUnfocusedMonitorColorMode": "primaryContainer",
