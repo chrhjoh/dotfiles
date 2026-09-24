@@ -34,8 +34,6 @@ keybind = super+alt+physical:eight=goto_tab:8
 # SSH 
 shell-integration-features = ssh-env,sudo
 
-#background-opacity=0.85
-
 # Clipboard
 clipboard-read = allow
 clipboard-write = allow
