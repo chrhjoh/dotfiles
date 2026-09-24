@@ -4,7 +4,7 @@ vim.pack.add {
 }
 
 Core.loader.load_eager_if_arg(function()
-  local palette = require("catppuccin.palettes").get_palette("mocha")
+  -- local palette = require("catppuccin.palettes").get_palette("mocha")
   require("mini.icons").mock_nvim_web_devicons()
   require("lualine").setup {
     options = {
@@ -12,33 +12,7 @@ Core.loader.load_eager_if_arg(function()
       component_separators = "|",
       disabled_filetypes = { "snacks_dashboard" },
       globalstatus = true,
-      theme = {
-        normal = {
-          a = { bg = palette.base, fg = palette.blue, gui = "bold" },
-          b = { bg = palette.base, fg = palette.lavender },
-          c = { bg = palette.base, fg = palette.text },
-        },
-        insert = {
-          a = { bg = palette.base, fg = palette.green, gui = "bold" },
-        },
-        terminal = {
-          a = { bg = palette.base, fg = palette.green, gui = "bold" },
-        },
-        command = {
-          a = { bg = palette.base, fg = palette.peach, gui = "bold" },
-        },
-        visual = {
-          a = { bg = palette.base, fg = palette.mauve, gui = "bold" },
-        },
-        replace = {
-          a = { bg = palette.base, fg = palette.red, gui = "bold" },
-        },
-        inactive = {
-          a = { bg = palette.base, fg = palette.blue },
-          b = { bg = palette.base, fg = palette.surface1, gui = "bold" },
-          c = { bg = palette.base, fg = palette.overlay0 },
-        },
-      },
+      theme = "rose-pine",
     },
     sections = {
       lualine_a = {

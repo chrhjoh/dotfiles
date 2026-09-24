@@ -15,6 +15,10 @@
       "src": "https://github.com/stevearc/conform.nvim",
       "version": "'master'"
     },
+    "copilot.lua": {
+      "rev": "760912b5992e1d6437378a9c7f2b0cb950966cf5",
+      "src": "https://github.com/zbirenbaum/copilot.lua"
+    },
     "flash.nvim": {
       "rev": "b6346946d10d07998efee029fb0f7a593806d0cd",
       "src": "https://github.com/folke/flash.nvim",
@@ -65,9 +69,9 @@
       "src": "https://github.com/nvim-mini/mini.icons",
       "version": "'main'"
     },
-    "nvim": {
-      "rev": "605b4603797de970e9f3a4238c199c850da03186",
-      "src": "https://github.com/catppuccin/nvim",
+    "neovim": {
+      "rev": "f01eac6eedf6197509dde8b66de0263207ee1877",
+      "src": "https://github.com/rose-pine/neovim",
       "version": ">=0.0.0"
     },
     "nvim-autopairs": {
@@ -99,6 +103,10 @@
       "rev": "b73018b75affd13fa38e2fc94ef753b465f770d7",
       "src": "https://github.com/stevearc/oil.nvim",
       "version": "'master'"
+    },
+    "persisted.nvim": {
+      "rev": "1a8e9dcf277d61105619498b2002c287c50424b8",
+      "src": "https://github.com/olimorris/persisted.nvim"
     },
     "sidekick.nvim": {
       "rev": "208e1c5b8170c01fd1d07df0139322a76479b235",
