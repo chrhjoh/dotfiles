@@ -2,7 +2,7 @@
 # syntax highlighting variables
 # https://fishshell.com/docs/current/interactive.html#syntax-highlighting-variables
 fish_color_normal e0def4
-fish_color_command c4a7e7
+fish_color_command 31748f
 fish_color_keyword 9ccfd8
 fish_color_quote f6c177
 fish_color_redirection 31748f
@@ -56,7 +56,7 @@ fish_color_base 191724
 # syntax highlighting variables
 # https://fishshell.com/docs/current/interactive.html#syntax-highlighting-variables
 fish_color_normal 575279
-fish_color_command 907aa9
+fish_color_command 286983
 fish_color_keyword 56949f
 fish_color_quote ea9d34
 fish_color_redirection 286983
