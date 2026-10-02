@@ -1,10 +1,10 @@
-background = #131313
-foreground = #e2e2e2
+background = #191615
+foreground =#E5DFDC
 cursor-color = #ffb59b
 selection-background = #7b2e0d
-selection-foreground = #e2e2e2
+selection-foreground = #E5DFDC
 
-palette = 0=#131313
+palette = 0=#191615
 palette = 1=#ff7772
 palette = 2=#97ff7f
 palette = 3=#ffe572
