@@ -20,8 +20,13 @@ Core.loader.load_eager_if_arg(function()
         mode = mode or "n"
         vim.keymap.set(mode, key, action, { buffer = args.buf, desc = "LSP: " .. desc })
       end
-      mapping("<leader>k", act.signature_help, "Signature Documentation")
-      mapping("K", act.hover, "Hover Documentation")
+
+      mapping("<leader>k", function()
+        act.signature_help { border = "bold" }
+      end, "Signature Documentation")
+      mapping("K", function()
+        act.hover { border = "bold" }
+      end, "Hover Documentation")
       mapping("gD", act.declaration, "Goto Declaration")
       mapping("<leader>cr", act.rename, "Code Rename")
       mapping("<leader>ca", act.code_action, "Code Action")

@@ -5,7 +5,7 @@ vim.pack.add {
 
 Core.loader.load_on_event({ "CmdlineEnter", "InsertEnter" }, function()
   require("blink.cmp").setup {
-    signature = { enabled = true },
+    signature = { enabled = true, window = { border = "bold" } },
     appearance = { nerd_font_variant = "normal" },
     completion = {
       keyword = { range = "full" },
@@ -14,9 +14,13 @@ Core.loader.load_on_event({ "CmdlineEnter", "InsertEnter" }, function()
         draw = {
           columns = { { "label", "label_description", gap = 1 }, { "kind_icon", "kind" } },
         },
+        border = "bold",
       },
       trigger = {
         show_in_snippet = false,
+      },
+      documentation = {
+        window = { border = "bold" },
       },
     },
     keymap = {

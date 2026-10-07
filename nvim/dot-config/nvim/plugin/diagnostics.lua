@@ -1,5 +1,6 @@
 local icons = Core.icons
 vim.diagnostic.config {
+  float = { border = "bold" },
   underline = true,
   update_in_insert = false,
   virtual_text = {

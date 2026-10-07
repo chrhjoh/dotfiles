@@ -30,7 +30,7 @@ vim.o.showmode = false
 vim.o.ruler = false
 
 -- Completion
-vim.o.completeopt = "menu,menuone,noinsert,fuzzy,preview,popup"
+vim.o.completeopt = "menu,menuone,noinsert,fuzzy,popup"
 vim.o.pumheight = 10
 
 -- Window

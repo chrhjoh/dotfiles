@@ -231,7 +231,7 @@ Core.loader.load_later(function()
 
   nmap { "]t", require("todo-comments").jump_next, desc = "ToDo Comment" }
   nmap { "[t", require("todo-comments").jump_prev, desc = "ToDo Comment" }
-  nmap { "<leader>st", Snacks.picker.todo_comments, desc = "Todo" } ---@diagnostic disable-line: undefined-field
+  nmap { "<leader>st", function() Snacks.picker.todo_comments() end, desc = "Todo" } ---@diagnostic disable-line: undefined-field
   nmap {
     "<leader>sT",
     function()
