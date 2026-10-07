@@ -10,7 +10,7 @@ end
 
 local _active = false
 
-local save_dir = vim.fn.stdpath("data") .. "/sessions/"
+local save_dir = vim.fn.stdpath("state") .. "/sessions/"
 local augroup = "session_tracker"
 local function should_save()
   local ignored_buftypes = { "snacks_dashboard", "gitcommit" }
