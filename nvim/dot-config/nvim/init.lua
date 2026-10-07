@@ -7,7 +7,14 @@ local function update_blink(kind)
   end
   vim.cmd.packadd("blink.cmp")
   local download = require("blink.cmp.fuzzy.download")
-  download.ensure_downloaded(function() end)
+  -- Required for bootstrap as blink is loaded on insert enter
+  download.ensure_downloaded(function(err)
+    if err then
+      print("Failed to install blink.cmp fuzzy finder:", err)
+    else
+      print("Successfully installed blink.cmp fuzzy finder")
+    end
+  end)
 end
 
 local function update_treesitter(kind)
