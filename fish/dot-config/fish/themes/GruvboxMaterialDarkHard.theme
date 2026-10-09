@@ -1,0 +1,66 @@
+# name: "GruvboxDarkHard"
+# preferred_background: 1d2021
+
+# color-palette {
+#  background: #1d2021;
+#  foreground: #d4be98;
+#  selection:  #504945;
+#  cursor:     #d4be98;
+#
+#   black:     #1d2021;
+#   red:       #ea6962;
+#   green:     #a9b665;
+#   yellow:    #d8a657;
+#   blue:      #7daea3;
+#   magenta:   #d3869b;
+#   cyan:      #89b482;
+#   white:     #a89984;
+#
+#   brblack:   #928374;
+#   brred:     #ea6962;
+#   brgreen:   #a9b665;
+#   bryellow:  #d8a657;
+#   brblue:    #7daea3;
+#   brmagenta: #d3869b;
+#   brcyan:    #89b482;
+#   brwhite:   #d4be98;
+# }
+
+fish_color_autosuggestion 555
+fish_color_cancel -r
+fish_color_command a9b665
+fish_color_comment ea6962
+fish_color_cwd a9b665
+fish_color_cwd_root ea6962
+fish_color_end a9b665
+fish_color_error ea6962
+fish_color_escape 89b482
+fish_color_history_current --bold
+fish_color_host normal
+fish_color_host_remote d8a657
+fish_color_keyword a9b665
+fish_color_match --background=7daea3
+fish_color_normal normal
+fish_color_operator 89b482
+fish_color_option 89b482
+fish_color_param 89b482
+fish_color_quote d8a657
+fish_color_redirection 89b482 --bold
+fish_color_search_match d8a657 --background=1d2021
+fish_color_selection a89984 --bold --background=1d2021
+fish_color_status ea6962
+fish_color_user a9b665
+fish_color_valid_path --underline
+fish_pager_color_background --background=1d2021
+fish_pager_color_completion normal
+fish_pager_color_description d8a657 d8a657 -i
+fish_pager_color_prefix normal --bold --underline
+fish_pager_color_progress d4be98 --background=89b482
+fish_pager_color_secondary_background
+fish_pager_color_secondary_completion
+fish_pager_color_secondary_description
+fish_pager_color_secondary_prefix
+fish_pager_color_selected_background -r
+fish_pager_color_selected_completion
+fish_pager_color_selected_description
+fish_pager_color_selected_prefix

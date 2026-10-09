@@ -5,7 +5,7 @@ font-size = 12
 
 
 # Theme
-theme = dankcolors
+theme = light:gruvbox-material-hard-light,dark:gruvbox-material-hard-dark
 
 
 # Decorations
