@@ -126,6 +126,10 @@ end
 function M.save(opts)
   opts = opts or {}
   local current_session = resolve_session(vim.fn.getcwd())
+  if not vim.fn.mkdir(vim.fs.dirname(current_session.file), "p") then
+    notify("Failed to create session directory", vim.log.levels.ERROR)
+    return
+  end
   vim.cmd("mks! " .. e(current_session.file))
   if opts.silent ~= false then
     notify("Saved session: " .. current_session.dir)
