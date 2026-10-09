@@ -410,6 +410,7 @@ Core.loader.load_later(function()
   nmap { "<leader>sq", Snacks.picker.qflist, desc = "Quickfix List" }
   nmap { "<leader>sw", Snacks.picker.grep_word, desc = "Word (Root Dir)", mode = { "n", "x" } }
   nmap { "<leader>ss", Snacks.picker.lsp_symbols, desc = "Symbols" }
+  nmap { "<leader>sH", Snacks.picker.highlights, desc = "Highlights" } 
   nmap {
     "<leader>sS",
     function()

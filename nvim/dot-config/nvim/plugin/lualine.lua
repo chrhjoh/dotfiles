@@ -11,6 +11,7 @@ Core.loader.load_eager_if_arg(function()
   gruvbox_theme.normal.c.bg = gruvbox.palette.dark0_hard
   gruvbox_theme.insert.c = nil
   gruvbox_theme.visual.c = nil
+  gruvbox_theme.command.c = nil
   require("lualine").setup {
     options = {
       section_separators = "",

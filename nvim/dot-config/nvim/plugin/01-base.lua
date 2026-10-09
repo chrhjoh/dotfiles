@@ -2,7 +2,6 @@ vim.pack.add {
   { src = "https://github.com/ellisonleao/gruvbox.nvim", version = vim.version.range("*") },
   { src = "https://github.com/nvim-mini/mini.icons", version = "main" },
 }
-
 local material_palette = {
   dark0_hard = "#1d2021",
   dark0 = "#282828",
@@ -77,11 +76,15 @@ gruvbox.setup {
   overrides = {
     StatusLine = { bg = gruvbox.palette.dark0_hard },
     NonText = { fg = gruvbox.palette.dark4 },
-    CursorLine = { bg = gruvbox.palette.dark1 },
+    CursorLineNr = { bg = gruvbox.palette.dark0_hard},
     Visual = { bg = gruvbox.palette.dark1 },
     Bold = { bold = true },
     Italic = { italic = true },
     Underline = { underline = true },
+    Function = { link = "GruvboxYellowBold" },
+    LspReferenceWrite = { bg = gruvbox.palette.dark1, underline = true },
+    LspReferenceRead = { bg = gruvbox.palette.dark1 },
+    LspReferenceText = { bg = gruvbox.palette.dark1 },
   },
   palette_overrides = material_palette,
 }
