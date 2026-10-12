@@ -36,12 +36,12 @@
       "version": "'main'"
     },
     "gruvbox.nvim": {
-      "rev": "61b0b3be2f0cfd521667403a0367298144d6c165",
+      "rev": "154eb5ff5b96d0641307113fa385eaf0d36d9796",
       "src": "https://github.com/ellisonleao/gruvbox.nvim",
-      "version": ">=0.0.0"
+      "version": "'main'"
     },
     "hardtime.nvim": {
-      "rev": "5165840fe680eab46de1fc6dbff48f148fdcf018",
+      "rev": "721a75b9a0c2eb1fb811d34507708ee315cb04eb",
       "src": "https://github.com/m4xshen/hardtime.nvim",
       "version": "'main'"
     },
@@ -61,7 +61,7 @@
       "version": "'master'"
     },
     "markview.nvim": {
-      "rev": "3537eb2a9251cad5d7718253768f3772c62233fc",
+      "rev": "49d2cf7ced872db74083a144ded1f94fe224d09a",
       "src": "https://github.com/OXY2DEV/markview.nvim",
       "version": ">=0.0.0"
     },
@@ -71,7 +71,7 @@
       "version": "'main'"
     },
     "nvim-autopairs": {
-      "rev": "430522f95fe4fb7c511ec64f8c1a90cc6a66c05c",
+      "rev": "3172f40c16563db871a58f20d205c710ad782311",
       "src": "https://github.com/windwp/nvim-autopairs",
       "version": "'master'"
     },
@@ -81,12 +81,12 @@
       "version": "'main'"
     },
     "nvim-lspconfig": {
-      "rev": "3e8d598d3b5f8338a41699c436e5fa11d2666cf0",
+      "rev": "6d27c288ff951e1e94cb5f91c800adeddf0dc0c2",
       "src": "https://github.com/neovim/nvim-lspconfig",
       "version": "'master'"
     },
     "nvim-treesitter": {
-      "rev": "910fdf6f49e9dee7e7257c7d11a76b040fdfb9de",
+      "rev": "1a4f47b03dfe92d28de7d5654c67327ef008c9e6",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter",
       "version": "'main'"
     },
@@ -96,7 +96,7 @@
       "version": "'main'"
     },
     "oil.nvim": {
-      "rev": "b73018b75affd13fa38e2fc94ef753b465f770d7",
+      "rev": "d3733d933833a0e59b813ecec99341527adf0c28",
       "src": "https://github.com/stevearc/oil.nvim",
       "version": "'master'"
     },
@@ -136,7 +136,7 @@
       "version": "'master'"
     },
     "vimtex": {
-      "rev": "16a5609d17a436db7f48046d91747fd6a9d75c74",
+      "rev": "f029f22b418530788704bec2397b880da136b31c",
       "src": "https://github.com/lervag/vimtex",
       "version": "'master'"
     },
@@ -145,7 +145,7 @@
       "src": "https://github.com/folke/which-key.nvim"
     },
     "yanky.nvim": {
-      "rev": "4b4ddd196526fd3d6fd091d931810f9743e936d3",
+      "rev": "adcabd8512bead30184916fa9277e73c021ef099",
       "src": "https://github.com/gbprod/yanky.nvim",
       "version": "'main'"
     }

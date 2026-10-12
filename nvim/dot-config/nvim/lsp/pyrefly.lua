@@ -1,10 +1,8 @@
 return {
   settings = {
-    basedpyright = {
+    python = {
       analysis = {
-        typeCheckingMode = "standard",
         autoImportCompletions = false,
-        diagnosticMode = "workspace",
       },
     },
   },

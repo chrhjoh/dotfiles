@@ -15,21 +15,31 @@ Core.loader.load_eager_if_arg(function()
   vim.api.nvim_create_autocmd("LspAttach", {
     group = vim.api.nvim_create_augroup("DefaultLspAttach", {}),
     callback = function(args)
+      local client = vim.lsp.get_client_by_id(args.data.client_id)
+
       local act = vim.lsp.buf
-      local mapping = function(key, action, desc, mode)
+      local keymap = function(key, action, desc, mode)
         mode = mode or "n"
         vim.keymap.set(mode, key, action, { buffer = args.buf, desc = "LSP: " .. desc })
       end
 
-      mapping("<leader>k", function()
+      keymap("<leader>k", function()
         act.signature_help { border = "bold" }
       end, "Signature Documentation")
-      mapping("K", function()
+      keymap("K", function()
         act.hover { border = "bold" }
       end, "Hover Documentation")
-      mapping("gD", act.declaration, "Goto Declaration")
-      mapping("<leader>cr", act.rename, "Code Rename")
-      mapping("<leader>ca", act.code_action, "Code Action")
+      keymap("gD", act.declaration, "Goto Declaration")
+      keymap("<leader>cr", act.rename, "Code Rename")
+      keymap("<leader>ca", act.code_action, "Code Action")
+
+      if not client then
+        return
+      end
+
+      if client.name == "ruff" then
+        client.server_capabilities.hoverProvider = false
+      end
     end,
   })
 
@@ -38,7 +48,8 @@ Core.loader.load_eager_if_arg(function()
   vim.lsp.enable {
     "lua_ls",
     "rust_analyzer",
-    "basedpyright",
+    "pyrefly",
+    "ruff",
     "texlab",
     "tinymist",
   }

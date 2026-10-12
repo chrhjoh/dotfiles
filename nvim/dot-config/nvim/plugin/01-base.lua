@@ -1,5 +1,5 @@
 vim.pack.add {
-  { src = "https://github.com/ellisonleao/gruvbox.nvim", version = vim.version.range("*") },
+  { src = "https://github.com/ellisonleao/gruvbox.nvim", version = "main" },
   { src = "https://github.com/nvim-mini/mini.icons", version = "main" },
 }
 local material_palette = {
@@ -75,54 +75,26 @@ gruvbox.setup {
   contrast = "hard",
   overrides = {
     StatusLine = { bg = material_palette.dark0_hard },
-    NonText = { fg = material_palette.dark4 },
     CursorLineNr = { bg = material_palette.dark0_hard },
     Visual = { bg = material_palette.dark1 },
     Bold = { bold = true },
     Italic = { italic = true },
     Delimiter = { link = "GruvboxFg0" },
     Underline = { underline = true },
+
     PmenuSel = { bg = material_palette.bright_blue, fg = material_palette.dark0_hard },
     Pmenu = { bg = material_palette.dark0_hard, fg = material_palette.light0 },
-    MiniIconsAzure = { link = "GruvboxBlue" },
-    LspReferenceWrite = { bg = material_palette.dark1, underline = true },
-    LspReferenceRead = { bg = material_palette.dark1 },
     LspReferenceText = { bg = material_palette.dark1 },
-    ["@variable.builtin"] = { fg = material_palette.bright_blue, italic = true },
+    LspReferenceWrite = { link = "LspReferenceText" },
+    LspReferenceRead = { link = "LspReferenceText" },
+    DiagnosticUnderlineHint = { link = nil },
+
     ["@lsp.typemod.function.defaultLibrary"] = { link = "@function.builtin" },
     ["@lsp.typemod.function.builtin"] = { link = "@function.builtin" },
     ["@lsp.typemod.variable.readonly"] = { link = "@constant" },
 
-    ["@string"] = { link = "String" }, -- For strings.
-    ["@string.documentation"] = { link = "GruvboxAqua" },
-
-    BlinkCmpDoc = { link = "PMenu" },
-
-    BlinkCmpKindText = { fg = material_palette.gray },
-    BlinkCmpKindMethod = { fg = material_palette.bright_green },
-    BlinkCmpKindFunction = { fg = material_palette.bright_green },
-    BlinkCmpKindConstructor = { fg = material_palette.bright_yellow },
-    BlinkCmpKindField = { fg = material_palette.bright_blue },
-    BlinkCmpKindVariable = { fg = material_palette.bright_blue },
-    BlinkCmpKindClass = { fg = material_palette.bright_yellow },
-    BlinkCmpKindInterface = { fg = material_palette.bright_aqua },
-    BlinkCmpKindModule = { fg = material_palette.bright_red },
-    BlinkCmpKindProperty = { fg = material_palette.bright_blue },
-    BlinkCmpKindUnit = { fg = material_palette.bright_green },
-    BlinkCmpKindValue = { fg = material_palette.bright_orange },
-    BlinkCmpKindEnum = { fg = material_palette.bright_yellow },
-    BlinkCmpKindKeyword = { fg = material_palette.bright_red },
-    BlinkCmpKindSnippet = { fg = material_palette.bright_orange },
-    BlinkCmpKindColor = { fg = material_palette.bright_red },
-    BlinkCmpKindFile = { fg = material_palette.bright_aqua },
-    BlinkCmpKindReference = { fg = material_palette.bright_red },
-    BlinkCmpKindFolder = { fg = material_palette.bright_aqua },
-    BlinkCmpKindEnumMember = { fg = material_palette.bright_blue },
-    BlinkCmpKindConstant = { fg = material_palette.bright_orange },
-    BlinkCmpKindStruct = { fg = material_palette.bright_blue },
-    BlinkCmpKindEvent = { fg = material_palette.bright_blue },
-    BlinkCmpKindOperator = { fg = material_palette.bright_blue },
-    BlinkCmpKindTypeParameter = { fg = material_palette.bright_red },
+    ["@string.documentation"] = { link = "GruvboxAquaBold" },
+    ["@lsp.mod.documentation"] = { link = "@string.documentation" },
   },
   palette_overrides = material_palette,
 }

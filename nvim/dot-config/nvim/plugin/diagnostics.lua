@@ -4,7 +4,7 @@ vim.diagnostic.config {
   underline = true,
   update_in_insert = false,
   virtual_text = {
-    severity = { min = vim.diagnostic.severity.WARN },
+    severity = { min = vim.diagnostic.severity.INFO },
     prefix = function(diagnostic)
       for d, icon in pairs(icons) do
         if diagnostic.severity == vim.diagnostic.severity[d:upper()] then
