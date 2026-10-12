@@ -14,6 +14,8 @@ Core.loader.load_on_event({ "CmdlineEnter", "InsertEnter" }, function()
         draw = {
           columns = { { "label", "label_description", gap = 1 }, { "kind_icon", "kind" } },
         },
+        border = "bold",
+        scrollbar = false,
       },
       trigger = {
         show_in_snippet = false,
