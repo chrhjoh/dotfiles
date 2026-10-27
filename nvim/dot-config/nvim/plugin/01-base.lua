@@ -79,8 +79,6 @@ gruvbox.setup {
     Visual = { bg = material_palette.dark1 },
     Bold = { bold = true },
     Italic = { italic = true },
-    Delimiter = { link = "GruvboxFg0" },
-    Underline = { underline = true },
 
     PmenuSel = { bg = material_palette.bright_blue, fg = material_palette.dark0_hard },
     Pmenu = { bg = material_palette.dark0_hard, fg = material_palette.light0 },

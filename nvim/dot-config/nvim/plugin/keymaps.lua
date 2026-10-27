@@ -231,7 +231,13 @@ Core.loader.load_later(function()
 
   nmap { "]t", require("todo-comments").jump_next, desc = "ToDo Comment" }
   nmap { "[t", require("todo-comments").jump_prev, desc = "ToDo Comment" }
-  nmap { "<leader>st", function() Snacks.picker.todo_comments() end, desc = "Todo" } ---@diagnostic disable-line: undefined-field
+  nmap {
+    "<leader>st",
+    function()
+      Snacks.picker.todo_comments()
+    end,
+    desc = "Todo",
+  } ---@diagnostic disable-line: undefined-field
   nmap {
     "<leader>sT",
     function()
@@ -410,7 +416,7 @@ Core.loader.load_later(function()
   nmap { "<leader>sq", Snacks.picker.qflist, desc = "Quickfix List" }
   nmap { "<leader>sw", Snacks.picker.grep_word, desc = "Word (Root Dir)", mode = { "n", "x" } }
   nmap { "<leader>ss", Snacks.picker.lsp_symbols, desc = "Symbols" }
-  nmap { "<leader>sH", Snacks.picker.highlights, desc = "Highlights" } 
+  nmap { "<leader>sH", Snacks.picker.highlights, desc = "Highlights" }
   nmap {
     "<leader>sS",
     function()
@@ -504,9 +510,23 @@ Core.loader.load_later(function()
       desc = "Lazygit",
     }
     nmap {
+      "<leader>gG",
+      function()
+        local root = vim.fs.root(0, { ".git" })
+        local path_arg
+        if root then
+          path_arg = " -p " .. root
+        else
+          path_arg = ""
+        end
+        toggle_terminal("lazygit" .. path_arg, 101):toggle()
+      end,
+      desc = "Lazygit (Current file)",
+    }
+    nmap {
       "<leader>gl",
       function()
-        toggle_terminal("lazygit log", 101):toggle()
+        toggle_terminal("lazygit log", 102):toggle()
       end,
       desc = "Lazygit Log",
     }
@@ -514,7 +534,7 @@ Core.loader.load_later(function()
       "<leader>gf",
       function()
         local file = vim.trim(vim.api.nvim_buf_get_name(0))
-        toggle_terminal("lazygit log -f " .. file, 102):toggle()
+        toggle_terminal("lazygit log -f " .. file, 103):toggle()
       end,
       desc = "Lazygit Current File History",
     }

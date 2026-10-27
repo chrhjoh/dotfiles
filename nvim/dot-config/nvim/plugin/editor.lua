@@ -6,7 +6,10 @@ vim.pack.add {
 }
 
 Core.loader.load_eager_if_arg(function()
-  require("todo-comments").setup {}
+  require("todo-comments").setup {
+    highlight = { multiline = false, keyword = "fg", after = "" },
+    gui_style = { fg = "BOLD" },
+  }
 end)
 
 Core.loader.load_on_event({ "BufReadPost", "BufNewFile" }, function()

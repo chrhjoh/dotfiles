@@ -4,7 +4,6 @@ return {
       configuration = {
         lint = {
           ["extend-select"] = { "ARG" },
-          ignore = { "F821", "F401", "F841" },
         },
       },
     },
