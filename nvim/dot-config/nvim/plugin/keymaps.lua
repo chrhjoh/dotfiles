@@ -129,57 +129,22 @@ Core.loader.load_later(function()
   }
 
   -- diagnostic movement ----------------------------------------------
-  local diagnostic_goto = function(count, severity)
+  local diagnostic_goto = function(direction, severity)
     severity = severity and vim.diagnostic.severity[severity] or nil
+    local count = direction == "]" and 1 or -1
     return function()
       vim.diagnostic.jump { severity = severity, count = count }
     end
   end
 
+  local diagnostics = { d = "Diagnostic", e = "Error", w = "Warning" }
+  for k, v in pairs(diagnostics) do
+    local diagnostic = string.lower(v) ~= "diagnostic" and string.upper(v) or nil
+    for _, d in ipairs { "[", "]" } do
+      nmap { d .. k, diagnostic_goto(d, diagnostic), desc = v }
+    end
+  end
   nmap { "<Leader>cd", vim.diagnostic.open_float, desc = "Diagnostic Line" }
-  nmap {
-    "]d",
-    function()
-      diagnostic_goto(1)
-    end,
-    desc = "Diagnostic",
-  }
-  nmap {
-    "[d",
-    function()
-      diagnostic_goto(-1)
-    end,
-    desc = "Diagnostic",
-  }
-  nmap {
-    "]e",
-    function()
-      diagnostic_goto(1, "ERROR")
-    end,
-    desc = "Error",
-  }
-  nmap {
-    "[e",
-    function()
-      diagnostic_goto(-1, "ERROR")
-    end,
-    desc = "Error",
-  }
-  nmap {
-    "]w",
-    function()
-      diagnostic_goto(true, "WARN")
-    end,
-    desc = "Warning",
-  }
-  nmap {
-    "[w",
-    function()
-      diagnostic_goto(false, "WARN")
-    end,
-    desc = "Warning",
-  }
-
   -- window mappings --------------------------------------------------
   nmap { "<Leader>ww", "<C-W>p", desc = "Other", remap = true }
   nmap { "<Leader>wd", "<C-W>c", desc = "Delete", remap = true }
