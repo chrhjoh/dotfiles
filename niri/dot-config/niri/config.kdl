@@ -321,7 +321,7 @@ window-rule {
 }
 
 window-rule {
-    match app-id=r#"^(Spotify|brave-browser|proton-pass)$"#
+    match app-id=r#"^(Spotify|brave-browser|proton-pass|thunar)$"#
 
     opacity 0.925
 

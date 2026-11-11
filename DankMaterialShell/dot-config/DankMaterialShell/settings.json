@@ -87,6 +87,7 @@
   ],
   "showWorkspaceApps": true,
   "groupActiveWorkspaceApps": true,
+  "showOccupiedWorkspacesOnly": true,
   "workspaceColorMode": "primaryContainer",
   "workspaceUnfocusedMonitorColorMode": "primaryContainer",
   "appIdSubstitutions": [
@@ -103,7 +104,7 @@
   "iconThemeDark": "Papirus-Dark",
   "iconThemeLight": "Adwaita",
   "cursorSettings": {
-    "theme": "System Default",
+    "theme": "Bibata-Modern-Classic",
     "size": 24,
     "niri": {
       "hideWhenTyping": false,
@@ -122,8 +123,9 @@
   "fontFamily": "Inter Display",
   "monoFontFamily": "JetBrains Mono",
   "fontScale": 0.95,
-  "acMonitorTimeout": 1800,
-  "acLockTimeout": 900,
+  "acMonitorTimeout": 900,
+  "acLockTimeout": 600,
+  "acSuspendTimeout": 3600,
   "dockAutoHide": true,
   "dockGroupByApp": true,
   "dockSpacing": 8,
@@ -135,16 +137,8 @@
   "notificationPopupPosition": -1,
   "notificationFocusedMonitor": true,
   "osdPowerProfileEnabled": true,
-  "powerMenuActions": [
-    "reboot",
-    "logout",
-    "poweroff",
-    "lock",
-    "suspend",
-    "restart",
-    "hibernate"
-  ],
-  "powerMenuDefaultAction": "hibernate",
+  "powerActionHoldDuration": 0.25,
+  "powerMenuDefaultAction": "poweroff",
   "updaterCheckOnStart": true,
   "updaterIntervalSeconds": 86400,
   "screenPreferences": {
@@ -202,6 +196,7 @@
           "enabled": true,
           "showBatteryPercentOnlyOnBattery": false
         },
+        "notificationButton",
         {
           "id": "controlCenterButton",
           "enabled": true,
@@ -214,8 +209,7 @@
           "showBluetoothIcon": false,
           "showNetworkIcon": false,
           "showVpnIcon": false
-        },
-        "notificationButton"
+        }
       ],
       "spacing": 0,
       "innerPadding": 4,
