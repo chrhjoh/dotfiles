@@ -8,7 +8,7 @@ Core.loader.load_eager_if_arg(function()
   local gruvbox_theme = require("lualine.themes.gruvbox")
   local gruvbox = require("gruvbox")
 
-  gruvbox_theme.normal.c.bg = gruvbox.palette.dark0_hard
+  gruvbox_theme.normal.c.bg = nil
   gruvbox_theme.normal.b.fg = gruvbox.palette.light0_hard
   gruvbox_theme.normal.c.fg = gruvbox.palette.light0_hard
   gruvbox_theme.normal.a.bg = gruvbox.palette.light0

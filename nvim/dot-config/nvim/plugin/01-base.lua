@@ -1,6 +1,6 @@
 vim.pack.add {
   { src = "https://github.com/ellisonleao/gruvbox.nvim", version = "main" },
-  { src = "https://github.com/nvim-mini/mini.icons", version = "main" },
+  { src = "https://github.com/nvim-mini/mini.icons",     version = "main" },
 }
 local material_palette = {
   dark0_hard = "#1d2021",
@@ -74,7 +74,7 @@ gruvbox.setup {
   transparent_mode = true,
   contrast = "hard",
   overrides = {
-    StatusLine = { bg = material_palette.dark0_hard },
+    StatusLine = { bg = 'NONE', ctermbg = 'NONE' },
     CursorLineNr = { bg = material_palette.dark0_hard },
     Visual = { bg = material_palette.dark1 },
     Bold = { bold = true },
